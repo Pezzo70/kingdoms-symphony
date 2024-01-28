@@ -44,6 +44,9 @@ TagManager:
   - name: Shadow
     uniqueID: 3218014737
     locked: 0
+  - name: Enemies
+    uniqueID: 1819881177
+    locked: 0
   - name: Player
     uniqueID: 912502717
     locked: 0
