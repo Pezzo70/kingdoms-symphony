@@ -53,6 +53,9 @@ TagManager:
   - name: Player
     uniqueID: 912502717
     locked: 0
+  - name: Instruments
+    uniqueID: 3772803993
+    locked: 0
   - name: Background_Overlay
     uniqueID: 69349817
     locked: 0
