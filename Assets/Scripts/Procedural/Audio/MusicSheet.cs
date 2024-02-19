@@ -5,33 +5,36 @@ using UnityEngine;
 public class MusicSheet : MonoBehaviour
 {
     [SerializeField]Instrument instrument;
-    float time = 4;
+    [SerializeField]List<KeyPlayed> keysPlayed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        keysPlayed = new List<KeyPlayed>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if(time < 6) 
-        {    return;}
-        else
-         {   time = 0;}
 
-        List<KeyPlayed> sheet = new List<KeyPlayed>();
+    }
 
-        for(int i = 0; i < 4; i++)
-        {
-            var key = new KeyPlayed();
-            key.Name = Frequencies.RandomKey();
-            key.TimePlayed = Random.value + (i * 2);
-            key.TimeReleased = Random.value + key.TimePlayed;
-            sheet.Add(key);
-        }
+    public void Clear()
+    {
+        keysPlayed.Clear();
+    }
 
-        instrument.QueueKey(sheet);
+    public void Undo()
+    {
+        if(keysPlayed.Count > 0) keysPlayed.RemoveAt(keysPlayed.Count - 1);
+    }
+
+    public void ChangeScale()
+    {
+        //Wait Pezzo create a new method with scales organized by index
+        Debug.Log("Changed!");
+    }
+
+    public void OnMouseDown(){
+        Debug.Log(gameObject.name);
     }
 }
