@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MusicSheet : MonoBehaviour
@@ -9,9 +10,21 @@ public class MusicSheet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        keysPlayed = new List<KeyPlayed>();
+        ListCreated();
     }
 
+    void ListCreated()
+    {
+        keysPlayed = new List<KeyPlayed>()
+        {
+            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4},
+            new KeyPlayed {Name = Frequencies.KeyName.A2, TimePlayed = 2, TimeReleased = 2.4},
+            new KeyPlayed {Name = Frequencies.KeyName.D2, TimePlayed = 2, TimeReleased = 2.4},
+            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4},
+            new KeyPlayed {Name = Frequencies.KeyName.B0, TimePlayed = 2, TimeReleased = 2.4},
+            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4}
+        };
+    }
     // Update is called once per frame
     void Update()
     {
@@ -34,7 +47,14 @@ public class MusicSheet : MonoBehaviour
         Debug.Log("Changed!");
     }
 
-    public void OnMouseDown(){
-        Debug.Log(gameObject.name);
+    public void Play()
+    {
+        instrument.QueueKey(keysPlayed);
+        ListCreated();
+    }
+
+    public void OnMouseDown()
+    {
+        
     }
 }

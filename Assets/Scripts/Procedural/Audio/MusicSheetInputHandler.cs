@@ -23,7 +23,8 @@ public class MusicSheetInputHandler:MonoBehaviour
                   parent.Clear();
                   break;
             case "ChangeScale":
-                  parent.ChangeScale();
+            //change parent.Play() to parent.ChangeScale()
+                  parent.Play();
                   break;
         };
     }
