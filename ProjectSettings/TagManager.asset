@@ -62,3 +62,6 @@ TagManager:
   - name: Background_Overlay
     uniqueID: 69349817
     locked: 0
+  - name: VFX
+    uniqueID: 1679795535
+    locked: 0
