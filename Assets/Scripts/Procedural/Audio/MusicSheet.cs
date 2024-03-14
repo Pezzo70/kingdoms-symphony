@@ -16,19 +16,19 @@ public class MusicSheet : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if(time < 6) 
+        if(time < 4) 
         {    return;}
         else
          {   time = 0;}
 
         List<KeyPlayed> sheet = new List<KeyPlayed>();
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 1; i++)
         {
             var key = new KeyPlayed();
-            key.Name = Frequencies.RandomKey();
+            key.Name = Frequencies.KeyName.C3;
             key.TimePlayed = Random.value + (i * 2);
-            key.TimeReleased = Random.value + key.TimePlayed;
+            key.TimeReleased = 3 + key.TimePlayed;
             sheet.Add(key);
         }
 

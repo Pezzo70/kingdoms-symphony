@@ -27,11 +27,12 @@ public class Piano : Instrument
     {
         for (int ikeys = 0; ikeys < _keysPlayed.Count; ikeys++)
         {
+            var currentTime = AudioSettings.dspTime;
             var key = _keysPlayed[ikeys];
-            if(key.TimePlayed > AudioSettings.dspTime)
+            if(key.TimePlayed > currentTime)
                 continue;
 
-            var timeElapsed = (float)(AudioSettings.dspTime - key.TimePlayed);
+            var timeElapsed = (float)(currentTime - key.TimePlayed);
 
             float volumeModifier = ADSR.Sustain;
             if (timeElapsed <= ADSR.Attack)    // It is in the Attack phase, the sound is still rising form 0 top to maximum (1) 
@@ -43,10 +44,10 @@ public class Piano : Instrument
             }
 
 
-            if (key.TimeReleased != 0 && AudioSettings.dspTime >= key.TimeReleased)              // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key! 
+            if (key.TimeReleased != 0 && currentTime >= key.TimeReleased)              // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key! 
             {
 
-                timeElapsed = (float)(AudioSettings.dspTime - key.TimeReleased);
+                timeElapsed = (float)(currentTime - key.TimeReleased);
 
                 if (timeElapsed > ADSR.Release)
                 {
