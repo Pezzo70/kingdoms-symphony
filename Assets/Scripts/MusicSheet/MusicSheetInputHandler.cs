@@ -6,6 +6,7 @@ public class MusicSheetInputHandler:MonoBehaviour
     private MusicSheet parent;
 
     private String objectTag;
+
     void Start()
     {
         parent = gameObject.GetComponentInParent<MusicSheet>();
@@ -23,8 +24,7 @@ public class MusicSheetInputHandler:MonoBehaviour
                   parent.Clear();
                   break;
             case "ChangeScale":
-            //change parent.Play() to parent.ChangeScale()
-                  parent.Play();
+                  parent.ChangeScale();
                   break;
         };
     }

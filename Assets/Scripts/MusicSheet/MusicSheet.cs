@@ -6,6 +6,7 @@ using UnityEngine;
 public class MusicSheet : MonoBehaviour
 {
     [SerializeField]Instrument instrument;
+    [SerializeField]private Sprite[] notationSprites;
     [SerializeField]List<KeyPlayed> keysPlayed;
     // Start is called before the first frame update
     void Start()
@@ -15,15 +16,7 @@ public class MusicSheet : MonoBehaviour
 
     void ListCreated()
     {
-        keysPlayed = new List<KeyPlayed>()
-        {
-            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4},
-            new KeyPlayed {Name = Frequencies.KeyName.A2, TimePlayed = 2, TimeReleased = 2.4},
-            new KeyPlayed {Name = Frequencies.KeyName.D2, TimePlayed = 2, TimeReleased = 2.4},
-            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4},
-            new KeyPlayed {Name = Frequencies.KeyName.B0, TimePlayed = 2, TimeReleased = 2.4},
-            new KeyPlayed {Name = Frequencies.RandomKey(), TimePlayed = 2, TimeReleased = 2.4}
-        };
+        
     }
     // Update is called once per frame
     void Update()
@@ -43,8 +36,8 @@ public class MusicSheet : MonoBehaviour
 
     public void ChangeScale()
     {
-        //Wait Pezzo create a new method with scales organized by index
-        Debug.Log("Changed!");
+        SpriteRenderer scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<SpriteRenderer>(); 
+        scaleSprite.sprite = scaleSprite.sprite == notationSprites[0]? notationSprites[1]: notationSprites[0];
     }
 
     public void Play()

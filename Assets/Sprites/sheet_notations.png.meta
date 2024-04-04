@@ -108,7 +108,805 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: sheet_notations_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1640
+        width: 110
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71744565ead1691449964426a39a7595
+      internalID: -1922738197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_1
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 1702
+        width: 51
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5494fefbf6e8d342af529d04fddc822
+      internalID: -1755406977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_2
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1703
+        width: 51
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ff02c466301544396a69941d141451
+      internalID: -419612686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_3
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1702
+        width: 53
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 459c8d3bc3931cc48afa00c9058ad512
+      internalID: 30165920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_4
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 1700
+        width: 53
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8175d08d6f9f25e46bd215ad9e4e5fa5
+      internalID: -98244055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_5
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1700
+        width: 83
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1516e5ca48b250c449334447419e1782
+      internalID: -113879927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_6
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 1701
+        width: 83
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5555f90d73cbe074b816b6d55d52a271
+      internalID: 189958068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_7
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 1702
+        width: 96
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1176c1054f723fb4aacc31449d92898e
+      internalID: -771605014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_8
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 1702
+        width: 97
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9be931442a2c69a4cb1da52b87bf8d35
+      internalID: -1258549117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_9
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1702
+        width: 95
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bacc4c4d32a47644eb45d682c840ebca
+      internalID: -243866314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_10
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 1707
+        width: 56
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddec75b34d42f1e45b0ee2a1a6e3d42e
+      internalID: 1288781542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_11
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 1707
+        width: 57
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9afc7ba2b1ded9e40bc778b8a952b3e5
+      internalID: -1389133868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_12
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 1699
+        width: 56
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72114ee791f501549a50d21486d00ff1
+      internalID: -458445345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_13
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 1703
+        width: 83
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 616074995bd6a284db73dd35e20b861e
+      internalID: -758078652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_15
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 1401
+        width: 146
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d77817c2236b94a9cc347c32036fe3
+      internalID: 235409946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_17
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 1385
+        width: 145
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a10c68aa3fc06d047abd10d344618f1b
+      internalID: -1304200250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_18
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 1387
+        width: 145
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b17bd051936e6244fa076cfa787b0e6f
+      internalID: -1415737334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_19
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1387
+        width: 145
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78a49ff0372e30a48a32f55e0fddf492
+      internalID: 845786576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_20
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 1386
+        width: 332
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b1a155d422cb4c41bbde55d9d7cb1fd
+      internalID: 1632382430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_22
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 1120
+        width: 332
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5112a61e959dd51418d3940ea944b8f9
+      internalID: 1986405775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_23
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 1123
+        width: 146
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e84349ee4758034a9db141f4c1f4b32
+      internalID: 1908273014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_24
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1122
+        width: 145
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e9708b47adf1f4f8f71eb0e036bc82
+      internalID: -1085081219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_25
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 1124
+        width: 145
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced09e8d2169acb4e8fae67984745e19
+      internalID: -1254525200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_26
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 1126
+        width: 57
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e9130ec2f156e44a1268783c44201e
+      internalID: -934496482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_27
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 1151
+        width: 89
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7226f2d9c7db03d42bbb9f2859f61ecc
+      internalID: 15283008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_28
+      rect:
+        serializedVersion: 2
+        x: 1601
+        y: 1176
+        width: 89
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4637a63d390b6f84aa4fbaade0d17cd1
+      internalID: 1373263283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_29
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 1167
+        width: 26
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 553e9ce0780be784f9e41898b2ddd152
+      internalID: 463228262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_30
+      rect:
+        serializedVersion: 2
+        x: 1804
+        y: 1163
+        width: 56
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c2aabd74916063489db0d369bf1e9aa
+      internalID: 1117232533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_31
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 814
+        width: 60
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22dbfba58743e24eaf66887da63a7cb
+      internalID: 670996092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_32
+      rect:
+        serializedVersion: 2
+        x: 1572
+        y: 807
+        width: 76
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aef76e1ecacf47e43a01103a2a49343c
+      internalID: 1272062067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_33
+      rect:
+        serializedVersion: 2
+        x: 1719
+        y: 807
+        width: 83
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c92cbe52b8e07284fb11213984049b20
+      internalID: 841630588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_34
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 808
+        width: 109
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66698a774d0bfae4bb1cde152642471c
+      internalID: 1963915159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_35
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 495
+        width: 175
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c11d579f195ae9418690c645451c7ab
+      internalID: -847750796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_36
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 493
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29558f33f77502b4eba71d609a2b9fc9
+      internalID: -2026763190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_37
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 493
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9bac8b353dfd6b48b933ebe9f898b2c
+      internalID: 1468835550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_38
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 494
+        width: 176
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c95161758322f4743a7622e975b77e6c
+      internalID: 725719532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_39
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 494
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76d6e33728d466c41b53d14b32d11d8b
+      internalID: 1607023079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_notations_40
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 494
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b387743ab0c42bf4f9e26a4ee107791b
+      internalID: 1375213217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +917,48 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sheet_notations_0: -1922738197
+      sheet_notations_1: -1755406977
+      sheet_notations_10: 1288781542
+      sheet_notations_11: -1389133868
+      sheet_notations_12: -458445345
+      sheet_notations_13: -758078652
+      sheet_notations_14: -1055037894
+      sheet_notations_15: 235409946
+      sheet_notations_16: -1028314863
+      sheet_notations_17: -1304200250
+      sheet_notations_18: -1415737334
+      sheet_notations_19: 845786576
+      sheet_notations_2: -419612686
+      sheet_notations_20: 1632382430
+      sheet_notations_21: -715348118
+      sheet_notations_22: 1986405775
+      sheet_notations_23: 1908273014
+      sheet_notations_24: -1085081219
+      sheet_notations_25: -1254525200
+      sheet_notations_26: -934496482
+      sheet_notations_27: 15283008
+      sheet_notations_28: 1373263283
+      sheet_notations_29: 463228262
+      sheet_notations_3: 30165920
+      sheet_notations_30: 1117232533
+      sheet_notations_31: 670996092
+      sheet_notations_32: 1272062067
+      sheet_notations_33: 841630588
+      sheet_notations_34: 1963915159
+      sheet_notations_35: -847750796
+      sheet_notations_36: -2026763190
+      sheet_notations_37: 1468835550
+      sheet_notations_38: 725719532
+      sheet_notations_39: 1607023079
+      sheet_notations_4: -98244055
+      sheet_notations_40: 1375213217
+      sheet_notations_5: -113879927
+      sheet_notations_6: 189958068
+      sheet_notations_7: -771605014
+      sheet_notations_8: -1258549117
+      sheet_notations_9: -243866314
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
