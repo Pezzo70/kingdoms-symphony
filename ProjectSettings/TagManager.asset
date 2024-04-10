@@ -7,6 +7,11 @@ TagManager:
   - Undo
   - Clear
   - ChangeScale
+  - Next
+  - Previous
+  - AddPage
+  - RemovePage
+  - Exit
   layers:
   - Default
   - TransparentFX
