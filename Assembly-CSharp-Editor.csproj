@@ -64,17 +64,17 @@
     <Analyzer Include="D:\Unity\2022.3.1f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizedTranslate.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationEditor.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\DropdownEditor.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationUtils.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\TextEditor.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationSyncEditor.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationSettingsEditor.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\EditorActions.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationEditorWindow.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizationSettingsWindow.cs" />
-    <Compile Include="Assets\Scripts\SimpleLocalization\Scripts\Editor\LocalizedTextEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationEditorWindow.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\DropdownEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationSyncEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationUtils.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationSettingsEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizedTextEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizedTranslate.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\EditorActions.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\TextEditor.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationSettingsWindow.cs" />
+    <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Editor\LocalizationEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -12,11 +12,13 @@ TagManager:
   - AddPage
   - RemovePage
   - Exit
+  - MusicSheet
+  - NotationSprite
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MusicSheetUI
   - Water
   - UI
   - 

@@ -28,4 +28,24 @@ public class MusicSheetInputHandler:MonoBehaviour
                   break;
         };
     }
+
+    void OnMouseOver()
+    {
+        switch (objectTag)
+        {
+            case "MusicSheet":
+                 parent.SetHover(true);
+                 break;
+        };
+    }
+
+    void OnMouseExit()
+    {
+        switch (objectTag)
+        {
+            case "MusicSheet":
+                 parent.SetHover(false);
+                 break;
+        };
+    }
 }
