@@ -106,9 +106,232 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: menu_items_and_logo_0
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 1816
+        width: 524
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8679710738a8d24bb4f1a603502a56f
+      internalID: -1431562159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_1
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 1826
+        width: 491
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b397fb04b53c04e9705a091895a05c
+      internalID: -1875510185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_2
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 958
+        width: 192
+        height: 1058
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 770c1edc288701a4ba1bfa9c51dd04c5
+      internalID: 994623699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_3
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 1524
+        width: 480
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a574af841879a9b45a2068356cae5e94
+      internalID: 1998296940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_4
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 1492
+        width: 429
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8995a4314c658441b832163c2d3ecf0
+      internalID: -1211371068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1219
+        width: 583
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1b6fb2e68f9f8458ff165b67986475
+      internalID: -1062726973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_6
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 1258
+        width: 293
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abbd5776e7e257d48bfb599438fc3d0a
+      internalID: 263096407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_7
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 967
+        width: 174
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbaa05368903bcc42bea0ea9fc8c8ab4
+      internalID: -1528279882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_9
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 971
+        width: 176
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6aa93c3e73e21145a960fdf04c8228e
+      internalID: -862123917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_items_and_logo_16
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 105
+        width: 2030
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30111b88920a4504d949ebc67b20eaf0
+      internalID: 541139096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +342,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      menu_items_and_logo_0: -1431562159
+      menu_items_and_logo_1: -1875510185
+      menu_items_and_logo_10: 1033142498
+      menu_items_and_logo_11: 225934208
+      menu_items_and_logo_12: -1535975152
+      menu_items_and_logo_13: -257495398
+      menu_items_and_logo_14: -220192696
+      menu_items_and_logo_15: -457998903
+      menu_items_and_logo_16: 541139096
+      menu_items_and_logo_17: -1474077189
+      menu_items_and_logo_18: -1382428282
+      menu_items_and_logo_2: 994623699
+      menu_items_and_logo_3: 1998296940
+      menu_items_and_logo_4: -1211371068
+      menu_items_and_logo_5: -1062726973
+      menu_items_and_logo_6: 263096407
+      menu_items_and_logo_7: -1528279882
+      menu_items_and_logo_8: -1995289942
+      menu_items_and_logo_9: -862123917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
