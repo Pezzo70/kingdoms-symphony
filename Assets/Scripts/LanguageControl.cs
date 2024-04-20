@@ -26,11 +26,6 @@ public class LanguageControl : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void OnLanguageSelected(Toggle toggle, int toggleID)
     {
@@ -44,10 +39,6 @@ public class LanguageControl : MonoBehaviour
                     LocalizationManager.Language = "English";
                     break;
             }
-        else
-            Debug.Log("Deselected");
-
-        Debug.Log(LocalizationManager.Language + "" + toggleID);
     }
     
 }
