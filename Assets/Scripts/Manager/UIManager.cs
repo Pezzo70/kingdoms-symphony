@@ -9,14 +9,14 @@ public class UIFadeController : MonoBehaviour
     Animator FadeController;
 
     void Start() {
-        FadeController = GetComponent<Animator>();
+        TryGetComponent(out FadeController);
     }
     void OnMouseEnter() {
-        FadeController.Play("Fade_In");
+        FadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
     void OnMouseExit() {
-        FadeController.Play("Fade_Out");
+        FadeController?.Play("Fade_Out");
         SetCursor(KingdomCursor.Default);
     }     
 
