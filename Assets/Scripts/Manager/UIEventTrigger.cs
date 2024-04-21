@@ -1,30 +1,28 @@
-using System.Collections;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static CursorManager;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class UIFadeController : MonoBehaviour
+public class UIEventTrigger : EventTrigger
 {
     Animator FadeController;
 
     void Start() {
         TryGetComponent(out FadeController);
     }
-    void OnMouseEnter() {
+    public override void OnPointerEnter(PointerEventData data) {
         FadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
-    void OnMouseExit() {
+    public override void OnPointerExit(PointerEventData data){
         FadeController?.Play("Fade_Out");
         SetCursor(KingdomCursor.Default);
     }     
 
-    void OnMouseDown() {
+    public override void OnPointerDown(PointerEventData data){
         SetCursor(KingdomCursor.Click);
     }
 
-    void OnMouseUp()
+    public override void OnPointerUp(PointerEventData data)
     {
         if(GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
