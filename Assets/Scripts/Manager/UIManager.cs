@@ -3,14 +3,12 @@ using UnityEditor;
 using UnityEngine;
 using static CursorManager;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class UIFadeController : MonoBehaviour
 {
     Animator FadeController;
 
     void Start() {
-        string hoverPath = AssetDatabase.GUIDToAssetPath("04cab998fb0f9674095ac9817239afee");
-        string clickPath = AssetDatabase.GUIDToAssetPath("0b5f125993ed66f443b755adfb5d71089");
-
         FadeController = GetComponent<Animator>();
     }
     void OnMouseEnter() {
