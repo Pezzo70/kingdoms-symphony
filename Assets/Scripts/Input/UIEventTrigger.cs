@@ -27,4 +27,8 @@ public class UIEventTrigger : EventTrigger
         if(GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
     }
+    public void OnDisable()
+    {
+        SetCursor(KingdomCursor.Default);
+    }
 }

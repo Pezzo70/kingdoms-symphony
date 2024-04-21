@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "43462b3b-be7c-45fe-affa-0e38621b225f",
+            "actions": [
+                {
+                    "name": "Return",
+                    "type": "Button",
+                    "id": "f329d083-5263-4259-9445-2349a797e48b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "956e993f-6754-4f60-8496-1c5250864faa",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
