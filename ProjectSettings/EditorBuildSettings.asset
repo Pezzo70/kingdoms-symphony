@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Stages/MenuScene.unity
+    guid: e87168c478020e74b90adffc3091aa02
+  - enabled: 1
+    path: Assets/Scenes/Stages/FlorestScene.unity
+    guid: 2388c2f7b136be44ea68751cc241174e
+  - enabled: 1
+    path: Assets/Scenes/Stages/DungeonScene.unity
+    guid: df0f116ffadd4cf4aadfc0026419b6e0
+  - enabled: 1
+    path: Assets/Scenes/Stages/CaveScene.unity
+    guid: fbe936433e5693948b146be4af31fe96
+  - enabled: 1
+    path: Assets/Scenes/Stages/UndergroundScene.unity
+    guid: 10720e9f3b51eaf4f805d935851d2ef3
   m_configObjects: {}

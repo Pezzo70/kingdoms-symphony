@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuFlow : MonoBehaviour
 {   
@@ -20,5 +21,10 @@ public class MenuFlow : MonoBehaviour
             menu.SetActive(true);
         }
         
+    }
+
+    public void RunScene()
+    {
+        SceneManager.LoadScene("FlorestScene");
     }
 }
