@@ -13,14 +13,13 @@ public class MenuFlow : MonoBehaviour
     public void ReturnFlow()
     {
         var menu = childs.First(sc => sc.name == "Menu");
-        var charSelec = childs.First(sc => sc.name == "CharacterSelection");
+        var sceneActive = childs.FirstOrDefault(go => go.name != "Menu" && go.activeInHierarchy);
 
-        if(charSelec?.activeInHierarchy ?? false)
+        if(sceneActive != null)
         {
-            charSelec.SetActive(false);
+            sceneActive.SetActive(false);
             menu.SetActive(true);
-        }
-        
+        }    
     }
 
     public void RunScene()
