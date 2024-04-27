@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b177b05eceec72242b4967c833795d8a, type: 3}
+  m_Name: Scroll_10
+  m_EditorClassIdentifier: 
+  scrollID: 10
+  levelRequired: 6
+  unlockedFor: 00000000
+  manaRequired: 3
+  cooldown: 4
+  targetMeasures: 3
+  validChords: 0000000002000000040000000500000007000000090000000b0000000c0000000e00000010000000110000001300000015000000df000000
+  validScales: 
+  validModes: 
+  xFactor: 10
+  yFactor: 2
+  zFactor: 25
+  wFactor: 0
