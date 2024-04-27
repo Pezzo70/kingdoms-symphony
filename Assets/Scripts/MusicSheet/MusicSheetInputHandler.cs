@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class MusicSheetInputHandler:MonoBehaviour 
+public class MusicSheetInputHandler:EventTrigger 
 {
     private MusicSheet parent;
 
     private String objectTag;
+
+    private bool isHovering;
 
     void Start()
     {
@@ -13,8 +16,9 @@ public class MusicSheetInputHandler:MonoBehaviour
         objectTag = gameObject.tag;
     }
 
-    void OnMouseDown()
+     public override void OnPointerClick(PointerEventData data)
     { 
+        objectTag = data.pointerCurrentRaycast.gameObject.tag;
         switch (objectTag)
         {
             case "Undo":
@@ -26,26 +30,27 @@ public class MusicSheetInputHandler:MonoBehaviour
             case "ChangeScale":
                   parent.ChangeScale();
                   break;
+            case "MusicSheet":
+                  parent.InsertSprite();
+                  break;
         };
     }
 
-    void OnMouseOver()
+    public override void OnPointerEnter(PointerEventData data)
     {
+        objectTag = data.pointerEnter.tag;
         switch (objectTag)
         {
             case "MusicSheet":
                  parent.SetHover(true);
+                 isHovering = true;
                  break;
         };
     }
 
-    void OnMouseExit()
+    public override void OnPointerExit(PointerEventData data)
     {
-        switch (objectTag)
-        {
-            case "MusicSheet":
-                 parent.SetHover(false);
-                 break;
-        };
+        isHovering = false;
+        parent.SetHover(isHovering);
     }
 }

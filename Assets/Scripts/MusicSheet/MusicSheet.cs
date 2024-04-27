@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicSheet : MonoBehaviour
 {
@@ -73,7 +75,7 @@ public class MusicSheet : MonoBehaviour
     {
         if (currentSpriteIndex >= 0 && currentSpriteIndex < notationSprites.Length)
         {
-            notationSpriteObject.GetComponent<SpriteRenderer>().sprite = notationSprites[currentSpriteIndex];
+            notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
         }
     }
 
@@ -89,7 +91,7 @@ public class MusicSheet : MonoBehaviour
 
     public void ChangeScale()
     {
-        SpriteRenderer scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<SpriteRenderer>(); 
+        Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>(); 
         scaleSprite.sprite = scaleSprite.sprite == clefSprites[0]? clefSprites[1]: clefSprites[0];
     }
 
@@ -99,8 +101,22 @@ public class MusicSheet : MonoBehaviour
         ListCreated();
     }
 
-    public void OnMouseDown()
+   public void InsertSprite()
     {
-        
+        Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        clickPos.z = 0;
+
+        GameObject newNote = new GameObject();
+        newNote.transform.SetParent(this.transform);
+        newNote.transform.position = clickPos;
+
+        Image renderer = newNote.AddComponent<Image>();
+        renderer.raycastTarget = false;
+        renderer.preserveAspect = true;
+        renderer.sprite = notationSprites[currentSpriteIndex];
+        newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(1,1);
+        newNote.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
+
+        notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
     }
 }
