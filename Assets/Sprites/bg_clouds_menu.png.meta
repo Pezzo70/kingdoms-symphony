@@ -106,9 +106,295 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: bg_clouds_menu_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 818
+        width: 347
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d20de277149e64db62ba7f370d6bd2
+      internalID: -121096696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_1
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 805
+        width: 378
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acda785272a9dc14daf24809d9c05880
+      internalID: 1436179713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 702
+        width: 158
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c2a12b23726c1e459fda326e9514811
+      internalID: -919666366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_3
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 695
+        width: 148
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c1e6ccb028aca4ab0cd9ff4e2f257f
+      internalID: 15713129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_4
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 697
+        width: 121
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33e73c0117ac1ba4fae70f65b0e50ddf
+      internalID: 1407661318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_5
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 706
+        width: 125
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 627a01d03de328f4fa0f3043154efec3
+      internalID: 1272129775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_6
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 579
+        width: 145
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d475947394a97a4dbc99d0e99e118a3
+      internalID: 63689159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_7
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 507
+        width: 366
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12559bf6e096ed749861272dcd3db574
+      internalID: 198510506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_8
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 531
+        width: 202
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd0f63995ed502d4f817f5a2eac9bc4f
+      internalID: 1371501495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_9
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 374
+        width: 31
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de6444afe26b4444907b52af9572fd0
+      internalID: -2040440796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_10
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 375
+        width: 57
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bcd6bea291f10b43ba97341e72ec412
+      internalID: -583598682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_11
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 359
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bde9e4b694ff2f4fa6622b86e27bb31
+      internalID: 115378012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bg_clouds_menu_12
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 377
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 625efd82480ce9e46b99fe087bbac82a
+      internalID: 2097328499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +405,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bg_clouds_menu_0: -121096696
+      bg_clouds_menu_1: 1436179713
+      bg_clouds_menu_10: -386269988
+      bg_clouds_menu_11: -473719166
+      bg_clouds_menu_12: 991512797
+      bg_clouds_menu_2: -919666366
+      bg_clouds_menu_3: 15713129
+      bg_clouds_menu_4: 1407661318
+      bg_clouds_menu_5: 1272129775
+      bg_clouds_menu_6: 63689159
+      bg_clouds_menu_7: 198510506
+      bg_clouds_menu_8: 1371501495
+      bg_clouds_menu_9: -1061510052
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
