@@ -10,13 +10,14 @@ public class Scroll : ScriptableObject
 
     [Range(1, 10)]
     public int levelRequired;
-    public Characters[] unlockedFor;
+    public CharacterID[] unlockedFor;
     public int manaRequired;
     public int cooldown;
     public int targetMeasures;
     public Chords[] validChords;
     public Scale[] validScales;
     public Modes[] validModes;
+    public int XP;
 
     [Header(
         "Factors (Applied on Scroll effect) - Must check GDD\nPercentage values does not use the 0-1 floating point interval."

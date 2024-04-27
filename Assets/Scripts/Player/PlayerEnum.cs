@@ -1,6 +1,6 @@
 namespace Player
 {
-    public enum Characters
+    public enum CharacterID
     {
         Roddie = 0,
     }
