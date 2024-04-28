@@ -57,6 +57,8 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
 ( ! ) Para cada ataque terá uma chance de X% para que este ocorra, aumentando a chance em Y% deste ocorrer para cada vez que ele não for escolhido.
 ( ! ) É interessante mostrar o impacto positivo e negativo sobre os valores de combate a fim de explicitar ao jogador o que fora modificado - talvez adicionar o texto com esquema de cores, por exemplo, caso seja uma modificação positiva, o dano mostrado estará em verde, caso seja algo negativo, em vermelho, caso seja o valor normal, uma cor cinza.
 ( ! ) Os ataque irão aparecer na aba de dicas contra monstros com uma descrição simplificada.
+( ! ) Todos os monstros devem fazer ações até gastarem TODAS as manas disponíveis - se o Monstro possui 4 de Mana, ele ataca gastando 2, caso tenha algum ataque de 2 de mana ele fará aquele ataque... caso possua dois ataques de 2 de mana, escolher aleatoriamente. Outro exemplo, caso o monstro possui 4 de Mana, ele ataca gastando 3, caso não tenha nenhum ataque de 1 de mana, ele termina o turno dele sobrando 1 de mana... diferente da Mana do jogador, o monstro mantém as manas não utilizadas para os próximos turnos.
+( ! ) Efeitos negativos aplicados pelos inimigos que duram no jogador por X turnos, levam em consideração apenas os turnos do JOGADOR - por exemplo, efeito de "sangramento" é aplicado ao iniciar o turno do jogador, decrementando o número de turnos restantes após aplicação.
 
 #### Floresta (1)
 
@@ -65,7 +67,7 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
         -   Lore: Ao redor do Reino Sinfônico existia uma comunidade de goblins cantores cuja cultura se baseava em cantigas afinadíssimas que contavam a história do povo goblinóide. Após a invasão dos alienígenas, estes utilizaram de mecanismos que fizeram com que os goblins perdessem as lindas vozes que tinham, causando revolta e um emergente senso de fúria. Como não compartilhavam mais suas histórias através da música, perderam sua essência e o senso social, voltando, rapidamente, à serem seres violentos e intolerantes.
         -   Ataque:
             -   Empurrão (Shove): ataque do tipo "Impacto", reduz a moral do jogador em X.
-            -   Palmas sem Ritmo (Rythmless Claps): ataque do tipo "Impacto", reduz a moral do jogador em X e o faz perder um compasso (caso o jogador só tenha um compasso, aplicar somente o dano) por Y turnos.
+            -   Palmas sem Ritmo (Rythmless Claps): ataque do tipo "Impacto", reduz a moral do jogador em X e o faz perder Y compasso (o jogador deve ter ao menos 1 compasso disponível, aplicar somente o dano) por Z turnos.
         -   Vantagens:
             -   Goblin's Will: Mitigação em X% do dano quando o jogador utiliza acordes em quaisquer compassos.
         -   Desvantagens:
@@ -86,20 +88,20 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
     -   Unshaken Bones (Ossos Paralizados):
         -   Lore: Muitas masmorras no Reino Sinfônico possuem seres misteriosos outrora cheios de vida. Algumas masmorras ecoam o som de queixos batendo, como se houvesse centenas de seres com um frio tremendo lá embaixo. Mesmo antes da chegada dos visitantes extraterrestres, os Ossos Paralizados nunca gostaram de som, afinal, sons altíssimos faziam com que eles se desmontassem devido às vibrações. Logo, os esqueletos sempre foram seres maléficos e cheios de raiva contra os musicistas.
         -   Ataque:
-            -   Luvas Descontroladas (Uncontrollable Gloves): ataque do tipo "Impacto", reduz a moral do jogador em X e possui chance de Y% de causar um efeito de _stun_ no jogador onde o número de notas afetadas será de Z.
+            -   Luvas Descontroladas (Uncontrollable Gloves): ataque do tipo "Impacto", reduz a moral do jogador em X e possui chance de Y% de causar um efeito de _stun_ no jogador onde o número de notas afetadas será de Z (se adequa a clave escolhida) durante W turnos.
                 -   ( ! ) O efeito de _stun_ funciona da seguinte maneira: após a alocação de todas as notas na partitura, ao iniciar à tocar, algumas notas não irão ser tocadas, como se a tecla estivesse emperrada, a corda desencaixada, etc.
-            -   Cabeçada Oca (Airhead Headbutt): ataque do tipo "Impacto", reduz a moral do jogador em X e possui Y% de chance de diminuir em Z% o dano causado pelo jogador no próximo turno.
+            -   Cabeçada Oca (Airhead Headbutt): ataque do tipo "Impacto", reduz a moral do jogador em X e possui Y% de chance de diminuir em Z% o dano causado pelo jogador durante W turnos (cumulativo apenas número de turnos).
         -   Vantagens:
-            -   Bones's Will: Mitigação em X% quando houver qualquer nota do acorde de Sol Maior ou Dó Maior (chance de 50%/50%) multiplicado pelo número de notas alocadas.
+            -   Bones's Will: Mitigação em X% quando houver qualquer nota do acorde de Sol Maior multiplicado pelo número de notas alocadas com máximo de Y de mitigação.
         -   Desvantagens:
-            -   Shakes Too Much: Utilização de notas do acorde de Dó Sustenido e Fá Sustenido causam X% de dano adicional - caso ocorra um Arpejo, a % do dano adicional será incrementada em Y.
+            -   Shakes Too Much: Utilização de notas do acorde de Lá Bmol causam X% de dano adicional - caso ocorra um Arpejo, a % do dano adicional será incrementada em Y.
     -   Soundless Shadows (Sombras Silenciosas):
         -   Lore: Um dia essas criaturas estranhas fizeram parte do Clã de Musicistas, entretanto, com a chegada das criaturas de outros planetas, estes se entregaram e se corromperam pelo vislumbre das tecnologias alienígenas.
         -   Ataque:
-            -   Silenciar a Mente (Silence the Mind): ataque do tipo "Mental", aumenta o custo de mana de todos os "scrolls" em X por Y turnos. Chance de Z% de obrigar a utilização de W notas de pausa no turno do jogador.
+            -   Silenciar a Mente (Silence the Mind): ataque do tipo "Mental", aumenta o custo de mana de todos os "scrolls" em X por Y turnos. Chance de Z% de obrigar a utilização de W notas de pausa por J turnos do jogador (cumulativo, número de notas e turnos).
             -   Dedos Venenosos (Poisoned Fingers): ataque do tipo "Cortante", reduz a moral do jogador em X e tem uma chance de Y% de aplicar um efeito que, em cada turno do jogador, este recebe Z de dano por W turnos (cumulativo).
         -   Vantagens:
-            -   Mind's Will: Mitigação completa de dano caso tenha ao menos X notas de pausa na partitura.
+            -   Mind's Will: Mitigação completa de dano caso tenha ao menos X notas de pausa na partitura (soma de todos os compassos).
         -   Desvantagens:
             -   Headaches: Utilização de notas da escala de Si Menor causam X% de dano adicional.
 
@@ -110,7 +112,7 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
         -   Lore: Seres horrendos que aparentam ter um passado tortuoso e obscuro visto que nenhum nativo do Reino Sinfônico havia visto criaturas assim antes. Fofocas locais dizem que tais criaturas são os bichos de estimação dos extraterrestres invasores - o que pode fazer sentido visto as bandagens que impendem estes de emitirem qualquer som cujo volume poderia vir à incomodar.
         -   Ataque:
             -   Cortando Cordas (Cutting Strings): ataque do tipo "Cortante", reduz a moral do jogador em X e impede do jogador utilizar Y linhas da partitura.
-            -   Arranhando e Controlando (Scratching and Controlling): ataque do tipo "Cortante", reduz a moral do jogador em X e tem Y% de chance de reduzir Z de mana no próximo turno do jogador.
+            -   Arranhando e Controlando (Scratching and Controlling): ataque do tipo "Cortante", reduz a moral do jogador em X e tem Y% de chance de reduzir Z de mana por W turnos.
         -   Vantagens:
             -   Claw's Will: Mitigação de dano em X% ao utilizar a Clave de Sol.
         -   Desvantagens:
@@ -132,17 +134,17 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
     -   Alien Captain (Capitã Alienígena):
         -   Lore: Determinada em acabar com toda música e som em todo o universo, a Capitã viaja para diferentes planetas em busca de instaurar sua ditadura silenciosa. Enfurecida e equipada com diferentes tecnologias, seu objetivo é silenciar todos aqueles em seu caminho.
         -   Ataque:
-            -   Esmagamento Sônico (Sonic Crush): ataque do tipo "Impacto" e "Mental", reduz a moral do jogador em X e impede qualquer tipo de cura ou proteção no próximo turno do jogador.
-            -   Anulação Harmônica (Harmonic Nullification): ataque do tipo "Impacto" e "Côsmico", reduz a moral do jogador em X e altera a posição de algumas notas ao serem tocadas.
+            -   Esmagamento Sônico (Sonic Crush): ataque do tipo "Impacto", reduz a moral do jogador em X e impede qualquer tipo de cura ou proteção no próximo turno do jogador.
+            -   Anulação Harmônica (Harmonic Nullification): ataque do tipo "Côsmico", reduz a moral do jogador em X e altera a posição de algumas notas ao serem tocadas.
         -   Vantagens:
             -   Captain's Will: A criatura mitigará o dano em X% de notas até 1/4.
         -   Desvantagens:
-            -   Hateful Modes: A criatura receberá X% de dano adicional caso o jogador siga o modo Dórico.
+            -   Hateful Modes: A criatura receberá X% de dano adicional caso o jogador toque todas as notas seguindo o modo Dórico a partir de uma nota qualquer.
     -   Abyssal Visitor (Visitante Abissal):
         -   Lore: Portais inimagináveis foram abertos após a colisão da nave extraterrestre no Mundo de Sol. O horror em algumas figuras que surgiram resultaram em um pavor inigualável em toda população do Reino Sinfônico. Tal ser, anteriormente, era considerado apenas um mito... mas sua chegada fora confirmada oficialmente pelo Clã de Musicistas. Tristeza, pavor e loucura são sinônimos deste ser maléfico e seu inevitável ódio pela alegria que a música traz, o tornou um dos grandes vilões contra o Mundo de Sol.
         -   Ataque:
-            -   Força Abissal (Abysmal Force): ataque do tipo "Cortante" e "Cósmico", reduz a moral do jogador em X, possui uma chance de Y% de aplicar um efeito que, em cada turno do jogador, este recebe Z de dano por W turnos e possui J% de chance de queimar K pergaminhos do jogador no próximo turno.
-            -   Mente Atormentada (Troubled Mind): ataque do tipo "Cósmico" e "Mental", para cada mana gasta pelo jogador reduzir a moral do jogador em X, possui chance de Y% de gastar Z manas automaticamente no próximo turno do jogador.
+            -   Força Abissal (Abysmal Force): ataque do tipo "Cósmico", reduz a moral do jogador em X, possui uma chance de Y% de aplicar um efeito que, em cada turno do jogador, este recebe Z de dano por W turnos (cumulativo turnos) e possui J% de chance de queimar K pergaminhos do jogador por L turnos.
+            -   Mente Atormentada (Troubled Mind): ataque do tipo "Mental", para cada X mana gasta pelo jogador reduzir a moral do jogador em Y, possui chance de Z% de gastar W manas automaticamente no próximo turno do jogador.
         -   Vantagens:
             -   Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn: Ao utilizar todos os compassos disponíveis, o Visitante Abissal ficará enfurecido aumentado o dano em X% por Y turnos.
         -   Desvantagens:
@@ -158,9 +160,10 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
     -   Cansaço/Fatigue: chance de Z% diminui o dano total causado em X%
     -   Explosão Mental/Mind Blowing: aumenta o custo de mana de todos os _scrolls_ em X por Y turnos - caso seja aplicado este efeito novamente, adicionar somente o número de turnos sobre o efeito.
     -   Limitação Sonora/Sound Limitation: não poder usar N linhas da partitura (em ambas claves) no próximo turno.
-    -   Extração Mental/Mental Extraction: Y% de chance de reduzir Z de mana no próximo turno do jogador.
-    -   Negação/Denial: impede qualquer tipo de cura ou proteção no próximo turno do jogador.
+    -   Extração Mental/Mental Extraction: Y% de chance de reduzir Z de mana no próximo turno da entidade.
+    -   Negação/Denial: impede qualquer tipo de cura ou proteção no próximo turno da entidade.
     -   Confusão/Confusion: altera a posição de algumas notas ao serem tocadas.
+    -   Queimar/Burning: alguns pergaminhos aleatórios não podem ser utilizados por X turnos.
 
 ### Almanaque Scrolls, Dicas Musicais e Dicas de Monstros:
 
@@ -234,7 +237,7 @@ Cada uma das _runs_ permitem o _trigger_ de eventos específicos de acordo com a
                 Custo: Z mana.
         5.  -   Ambiguidade
                 Objetivo: em compassos diferentes, adicione notas enarmônicas.
-                Efeito: cure X de moral para cada nota adicionada, máximo de Y de cura.
+                Efeito: cure X de moral para cada nota adicionada, máximo de Y de cura e impede qualquer cura do inimigo no próximo turno.
                 Tempo de Espera (Número de turnos para poder utilizar novamente): 4 turnos.
                 Custo: Z mana.
             -   Passagem e Controle
@@ -292,4 +295,3 @@ Cada uma das _runs_ permitem o _trigger_ de eventos específicos de acordo com a
         -   Mixolídio: começa no quinto grau da escala diatônica e tem um padrão de intervalos de tom-tom-semitom-tom-tom-semitom-tom.
         -   Eólio (Modo Menor Natural): Começa no sexto grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-semitom-tom-tom.
     -   Arpejo: um arpejo é uma sequência de notas de um acorde tocadas uma após a outra, em vez de simultaneamente.
-

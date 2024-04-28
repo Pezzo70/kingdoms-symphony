@@ -7,7 +7,7 @@ namespace Enemies
     {
         public EnemyID enemyID;
         public int moral;
-        public int mana;
+        public int manaPerTurn;
         public EnemyAttack[] attacks;
         public EnemyAdvantage[] advantages;
         public EnemyDisadvantage[] disadvantages;

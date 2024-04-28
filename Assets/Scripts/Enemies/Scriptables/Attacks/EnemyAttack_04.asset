@@ -9,14 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015e2b270f0c24540b74f0fc9198566f, type: 3}
-  m_Name: EnemyAdvantage
+  m_Script: {fileID: 11500000, guid: 36f91a3190fceff4699e461e8a05e482, type: 3}
+  m_Name: EnemyAttack_04
   m_EditorClassIdentifier: 
-  enemyAdvantageID: 0
-  targetMeasures: 0
-  validChords: 
-  validScales: 
-  validModes: 
-  xFactor: 0
-  yFactor: 0
-  zFactor: 0
+  enemyAttackID: 4
+  attackType: 0
+  manaRequired: 3
+  probability: 60
+  xFactor: 10
+  yFactor: 50
+  zFactor: 4
+  wFactor: 1
+  jFactor: 0
+  kFactor: 0

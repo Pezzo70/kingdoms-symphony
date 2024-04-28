@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92589e271e345c24a952a6119da2dd12, type: 3}
+  m_Name: Enemy_07
+  m_EditorClassIdentifier: 
+  enemyID: 7
+  moral: 1000
+  manaPerTurn: 9
+  attacks:
+  - {fileID: 11400000, guid: bbba6b4025b49ce47be282752ea515cd, type: 2}
+  - {fileID: 11400000, guid: 810612ee700066f44a6ad2e252ca984b, type: 2}
+  advantages:
+  - {fileID: 11400000, guid: c92e4ae6c118845499539c8740c75548, type: 2}
+  disadvantages:
+  - {fileID: 11400000, guid: 2b8ff5a9aea4da947931f3c4baa4e9a0, type: 2}
+  XP: 500

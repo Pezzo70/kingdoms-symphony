@@ -9,21 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b177b05eceec72242b4967c833795d8a, type: 3}
-  m_Name: Scroll_03
+  m_Script: {fileID: 11500000, guid: 36f91a3190fceff4699e461e8a05e482, type: 3}
+  m_Name: EnemyAttack_10
   m_EditorClassIdentifier: 
-  scrollID: 3
-  levelRequired: 2
-  unlockedFor: 00000000
-  manaRequired: 2
-  cooldown: 4
-  targetMeasures: 0
-  validClef: 01000000
-  validChords: 
-  validScales: 
-  validModes: 
-  XP: 2
-  xFactor: 2
-  yFactor: 0
+  enemyAttackID: 10
+  attackType: 3
+  manaRequired: 3
+  probability: 50
+  xFactor: 3
+  yFactor: 50
   zFactor: 0
   wFactor: 0
+  jFactor: 0
+  kFactor: 0

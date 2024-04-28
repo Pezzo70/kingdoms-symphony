@@ -9,21 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b177b05eceec72242b4967c833795d8a, type: 3}
-  m_Name: Scroll_03
+  m_Script: {fileID: 11500000, guid: 74c65a34d7507ee499ce9e56655fba08, type: 3}
+  m_Name: EnemyDisadvantage_00
   m_EditorClassIdentifier: 
-  scrollID: 3
-  levelRequired: 2
-  unlockedFor: 00000000
-  manaRequired: 2
-  cooldown: 4
+  enemyDisadvantageID: 0
   targetMeasures: 0
-  validClef: 01000000
   validChords: 
   validScales: 
   validModes: 
-  XP: 2
-  xFactor: 2
+  xFactor: 10
   yFactor: 0
   zFactor: 0
-  wFactor: 0

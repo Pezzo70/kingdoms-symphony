@@ -56,4 +56,10 @@ namespace MusicTheory
         Aeolian = 5,
         Locrian = 6
     }
+
+    public enum Clef
+    {
+        G = 0,
+        F = 1
+    }
 }

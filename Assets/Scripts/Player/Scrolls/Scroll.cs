@@ -14,6 +14,7 @@ public class Scroll : ScriptableObject
     public int manaRequired;
     public int cooldown;
     public int targetMeasures;
+    public Clef[] validClef;
     public Chords[] validChords;
     public Scale[] validScales;
     public Modes[] validModes;
