@@ -59,6 +59,7 @@ Ao selecionar para abrir a partitura, irá ser carregado na porção inferior e 
 ( ! ) Os ataque irão aparecer na aba de dicas contra monstros com uma descrição simplificada.
 ( ! ) Todos os monstros devem fazer ações até gastarem TODAS as manas disponíveis - se o Monstro possui 4 de Mana, ele ataca gastando 2, caso tenha algum ataque de 2 de mana ele fará aquele ataque... caso possua dois ataques de 2 de mana, escolher aleatoriamente. Outro exemplo, caso o monstro possui 4 de Mana, ele ataca gastando 3, caso não tenha nenhum ataque de 1 de mana, ele termina o turno dele sobrando 1 de mana... diferente da Mana do jogador, o monstro mantém as manas não utilizadas para os próximos turnos.
 ( ! ) Efeitos negativos aplicados pelos inimigos que duram no jogador por X turnos, levam em consideração apenas os turnos do JOGADOR - por exemplo, efeito de "sangramento" é aplicado ao iniciar o turno do jogador, decrementando o número de turnos restantes após aplicação.
+( ! ) Para cada nível do personagem escolhido, adicionar ao multiplicador dos status de DANO e VIDA dos monstros 0.1... ou seja, se o jogador está nível 3, multiplicar o DANO e a VIDA dos monstros em 0.3. Deixar essa variável fácil de ser alterada para que possamos cuidar do balanceamento depois.
 
 #### Floresta (1)
 
