@@ -21,6 +21,7 @@ MonoBehaviour:
   validChords: 
   validScales: 
   validModes: 
+  XP: 2
   xFactor: 10
   yFactor: 25
   zFactor: 0
