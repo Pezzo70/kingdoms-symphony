@@ -1,14 +1,24 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuFlow : MonoBehaviour
 {   
-    GameObject[] childs;public void Start()
+    GameObject[] childs;
+    [SerializeField]
+    GameObject canvas;
+    InputSystemUIInputModule inputModule;
+    public void Start()
     {
-        childs = new GameObject[transform.childCount];
-        for (int i = 0; i < transform.childCount; i++)
-            childs[i] = transform.GetChild(i).gameObject;      
+        inputModule = GetComponent<InputSystemUIInputModule>();
+
+        childs = new GameObject[canvas.transform.childCount];
+        for (int i = 0; i < childs.Length; i++)
+            childs[i] = canvas.transform.GetChild(i).gameObject; 
+
+        inputModule.cancel.action.performed += delegate{ReturnFlow();};
     }
     public void ReturnFlow()
     {
@@ -20,10 +30,5 @@ public class MenuFlow : MonoBehaviour
             sceneActive.SetActive(false);
             menu.SetActive(true);
         }    
-    }
-
-    public void RunScene()
-    {
-        SceneManager.LoadScene("FlorestScene");
     }
 }
