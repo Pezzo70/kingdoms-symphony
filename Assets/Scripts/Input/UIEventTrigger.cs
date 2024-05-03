@@ -1,10 +1,13 @@
+using System.Linq;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using static CursorManager;
 
-[RequireComponent(typeof(Selectable))]
+//[RequireComponent(typeof(Selectable))]
 public class UIEventTrigger : EventTrigger
 {
     Animator fadeController;
@@ -21,13 +24,13 @@ public class UIEventTrigger : EventTrigger
     }
 
     public override void OnPointerEnter(PointerEventData data) {
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
         fadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
     public override void OnPointerExit(PointerEventData data){
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
         if(!isSelected) 
             FadeOut();
@@ -36,7 +39,7 @@ public class UIEventTrigger : EventTrigger
     }     
 
     public override void OnPointerDown(PointerEventData data){
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
 
         SetCursor(KingdomCursor.Click);
@@ -44,7 +47,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerUp(PointerEventData data)
     {
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
 
         if(GetCursor() is KingdomCursor.Click)
@@ -53,7 +56,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left && !selectable.interactable) 
+        if(eventData.button != PointerEventData.InputButton.Left && (!selectable?.interactable ?? true)) 
             return;
 
         selectable.Select();
@@ -68,7 +71,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnDeselect(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
 
         this.FadeOut();
@@ -77,7 +80,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnSelect(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
 
         this.FadeIn();
@@ -86,7 +89,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnSubmit(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
+        if(!selectable?.interactable ?? true) 
             return;
 
         base.OnSubmit(eventData);

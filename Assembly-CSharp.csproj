@@ -66,8 +66,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MusicSheet\FollowMouse.cs" />
     <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Constants.cs" />
-    <Compile Include="Assets\Scripts\MusicSheet\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAdvantage.cs" />
+    <Compile Include="Assets\Scripts\MusicSheet\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\Scripts\Procedural\Audio\Instrument.cs" />
     <Compile Include="Assets\Scripts\Player\Scrolls\ScrollsContainer.cs" />
     <Compile Include="Assets\Scripts\Procedural\Audio\WaveAttributes.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\Sheet.cs" />
     <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\LocalizedDropdown.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Manager\StageManager.cs" />
     <Compile Include="Assets\Scripts\Procedural\Audio\Instruments\Piano.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyEnum.cs" />
     <Compile Include="Assets\Scripts\Persistence\ToOrFromJSON.cs" />
@@ -92,8 +93,8 @@
     <Compile Include="Assets\Scripts\Manager\LanguageToggleManager.cs" />
     <Compile Include="Assets\Scripts\Persistence\PathConstants.cs" />
     <Compile Include="Assets\Scripts\MusicTheory\MusicTheoryEnum.cs" />
-    <Compile Include="Assets\Scripts\MusicSheet\MusicSheet.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyDisadvantage.cs" />
+    <Compile Include="Assets\Scripts\MusicSheet\MusicSheet.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerContainer.cs" />
     <Compile Include="Assets\Scripts\Input\UIEventTrigger.cs" />
     <Compile Include="Assets\Scripts\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
@@ -1111,12 +1112,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MusicSheet : MonoBehaviour
@@ -16,7 +18,7 @@ public class MusicSheet : MonoBehaviour
 
     [SerializeField]
     private Sprite[] notationSprites;
-
+    private Stack<GameObject> actionStack;
     private GameObject notationSpriteObject;
     private int currentSpriteIndex = 0;
 
@@ -28,6 +30,7 @@ public class MusicSheet : MonoBehaviour
     {
         ListCreated();
         notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
+        actionStack = new Stack<GameObject>();
     }
 
     void ListCreated()
@@ -87,6 +90,12 @@ public class MusicSheet : MonoBehaviour
     public void Undo()
     {
         if(keysPlayed.Count > 0) keysPlayed.RemoveAt(keysPlayed.Count - 1);
+
+         if (actionStack.Count > 0)
+        {
+            GameObject lastAction = actionStack.Pop();
+            Destroy(lastAction);
+        }
     }
 
     public void ChangeScale()
@@ -118,5 +127,8 @@ public class MusicSheet : MonoBehaviour
         newNote.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
 
         notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
+
+        Debug.Log(newNote);
+        actionStack.Push(newNote.GameObject());
     }
 }
