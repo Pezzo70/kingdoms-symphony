@@ -5,29 +5,14 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerContainer : MonoBehaviour
+    public class PlayerContainer : PersistentSingleton<PlayerContainer>
     {
-        [JsonIgnore]
-        private static PlayerContainer _instance = null;
-
-        [JsonIgnore]
-        public static PlayerContainer Instance
-        {
-            get => _instance;
-        }
-
         [JsonProperty]
         public PlayerData playerData;
 
-        void Awake()
+        protected override void Awake()
         {
-            if (_instance == null)
-            {
-                _instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else if (_instance != null && _instance != this)
-                Destroy(this.gameObject);
+            base.Awake();
 
             if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerDataPath))
             {

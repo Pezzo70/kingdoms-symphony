@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,7 @@ using UnityEngine;
 /// and saves you doing it manually
 /// </summary>
 public abstract class StaticInstance<T> : MonoBehaviour where T : MonoBehaviour {
+    [JsonIgnore]
     public static T Instance { get; private set; }
     protected virtual void Awake() => Instance = this as T;
 
