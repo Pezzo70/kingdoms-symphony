@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class MusicSheetInputHandler:EventTrigger 
 {
-    private MusicSheet parent;
+    private MusicSheet musicSheet;
 
     private String objectTag;
 
@@ -12,7 +12,7 @@ public class MusicSheetInputHandler:EventTrigger
 
     void Start()
     {
-        parent = gameObject.GetComponentInParent<MusicSheet>();
+        musicSheet = gameObject.GetComponentInParent<MusicSheet>();
         objectTag = gameObject.tag;
     }
 
@@ -22,16 +22,16 @@ public class MusicSheetInputHandler:EventTrigger
         switch (objectTag)
         {
             case "Undo":
-                 parent.Undo();
+                 musicSheet.Undo();
                  break;
             case "Clear":
-                  parent.Clear();
+                  musicSheet.Clear();
                   break;
             case "ChangeScale":
-                  parent.ChangeScale();
+                  musicSheet.ChangeScale();
                   break;
             case "MusicSheet":
-                  parent.InsertSprite();
+                  musicSheet.InsertSprite();
                   break;
         };
     }
@@ -42,7 +42,7 @@ public class MusicSheetInputHandler:EventTrigger
         switch (objectTag)
         {
             case "MusicSheet":
-                 parent.SetHover(true);
+                 musicSheet.SetHover(true);
                  isHovering = true;
                  break;
         };
@@ -51,6 +51,8 @@ public class MusicSheetInputHandler:EventTrigger
     public override void OnPointerExit(PointerEventData data)
     {
         isHovering = false;
-        parent.SetHover(isHovering);
+        musicSheet.SetHover(isHovering);
     }
+
+    public void OnUndo() => musicSheet.Undo();
 }

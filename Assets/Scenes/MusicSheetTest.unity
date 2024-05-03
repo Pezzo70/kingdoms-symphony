@@ -1706,7 +1706,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
     m_ActionId: 9aea71e4-4519-4bb3-aa08-bf627eee1980
     m_ActionName: UI/Undo[/Keyboard/ctrl,/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0
