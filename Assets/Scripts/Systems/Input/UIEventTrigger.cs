@@ -23,6 +23,7 @@ public class UIEventTrigger : EventTrigger
     public override void OnPointerEnter(PointerEventData data) {
         if(!selectable.interactable) 
             return;
+
         fadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
@@ -53,10 +54,10 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left && !selectable.interactable) 
+        if(eventData.button != PointerEventData.InputButton.Left)
             return;
 
-        selectable.Select();
+        
         this.OnSubmit(eventData);
         base.OnPointerClick(eventData);
     }
@@ -68,27 +69,18 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnDeselect(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
-            return;
-
         this.FadeOut();
         isSelected = false;
     }
 
     public override void OnSelect(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
-            return;
-
         this.FadeIn();
         isSelected = true;
     }
 
     public override void OnSubmit(BaseEventData eventData)
     {
-        if(!selectable.interactable) 
-            return;
-
         base.OnSubmit(eventData);
     }
 

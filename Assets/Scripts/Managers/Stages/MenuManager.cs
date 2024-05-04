@@ -4,12 +4,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuFlow : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {   
     GameObject[] childs;
     [SerializeField]
     GameObject canvas;
     InputSystemUIInputModule inputModule;
+    
     public void Start()
     {
         inputModule = GetComponent<InputSystemUIInputModule>();
