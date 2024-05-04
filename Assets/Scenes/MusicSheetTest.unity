@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1685,10 +1685,10 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1142133049}
-        m_TargetAssemblyTypeName: MusicSheet, Assembly-CSharp
-        m_MethodName: Undo
-        m_Mode: 1
+      - m_Target: {fileID: 1142133051}
+        m_TargetAssemblyTypeName: MusicSheetInputHandler, Assembly-CSharp
+        m_MethodName: OnUndo
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
