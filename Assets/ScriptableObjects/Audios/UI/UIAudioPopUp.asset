@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: UIAudioPopUp
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 0}
-  action: 0
+  audioClip: {fileID: 8300000, guid: 6730bccb5c1343d42a0a52cd66d1a3da, type: 3}
+  action: 3

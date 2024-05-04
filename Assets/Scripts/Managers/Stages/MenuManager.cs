@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
 
         if(sceneActive != null)
         {
+            AudioSystem.Instance.Play(UIAction.Return);
             sceneActive.SetActive(false);
             menu.SetActive(true);
         }    

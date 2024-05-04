@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: UIAudioSubmit
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 0}
-  action: 0
+  audioClip: {fileID: 8300000, guid: 725d1753bc69d4f40a116c3d4b9bb7fe, type: 3}
+  action: 1

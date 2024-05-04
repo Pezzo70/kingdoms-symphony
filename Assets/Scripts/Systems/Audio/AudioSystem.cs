@@ -9,29 +9,14 @@ using UnityEngine.InputSystem.UI;
 
 public class AudioSystem : PersistentSingleton<AudioSystem>
 {
-    private const string AudioPath = "Assets/Audio";
 
     [SerializeField]
     private ScriptableContainer audioContainer;
     private AudioSource audioSource;
-    private EventSystem eventSystem;
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         audioSource = GetComponent<AudioSource>();
-        eventSystem = EventSystem.current;
-        Debug.Log(EventSystem.current);
-        this.Subscribe();
-    }
-
-    private void Subscribe()
-    {
-        ((InputSystemUIInputModule)eventSystem.currentInputModule).submit.action.performed += delegate{ this.Play(UIAction.Submit); };
-    }
-
-
-    void Update()
-    {
-
     }
 
     public void Play(UIAction action) => audioSource.PlayOneShot(audioContainer.GetByType<UIAudio>().First(a => a.Action == action).AudioClip);

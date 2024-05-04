@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: UIAudioHover
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 4fc40aae99929064eb399bacaa9f1c4e, type: 3}
   action: 0
