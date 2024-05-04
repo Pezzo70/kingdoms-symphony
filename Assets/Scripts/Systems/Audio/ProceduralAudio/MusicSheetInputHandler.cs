@@ -60,4 +60,10 @@ public class MusicSheetInputHandler:EventTrigger
         if(context.performed)
          musicSheet.Undo();
     }
+
+        public void OnClear(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+         musicSheet.Clear();
+    }
 }

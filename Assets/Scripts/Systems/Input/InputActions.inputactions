@@ -358,6 +358,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Clear",
+                    "type": "Button",
+                    "id": "2212884d-5b1d-47d3-9ea5-4263d4b6ab75",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -825,12 +834,12 @@
                 },
                 {
                     "name": "",
-                    "id": "bf6c23e5-da14-40b6-92f2-f80474eabd77",
-                    "path": "<Keyboard>/p",
+                    "id": "630c1e12-e6c2-4cc9-a8cd-5880c00804b6",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Undo",
+                    "action": "Clear",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

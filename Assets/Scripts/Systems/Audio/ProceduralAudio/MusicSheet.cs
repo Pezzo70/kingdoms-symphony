@@ -63,7 +63,8 @@ public class MusicSheet : MonoBehaviour
 
     public void Clear()
     {
-        keysPlayed.Clear();
+        while(actionStack.Count != 0)
+            Destroy(actionStack.Pop());
     }
 
     public void Undo()
