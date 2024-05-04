@@ -5,35 +5,33 @@ using UnityEngine.UI;
 using static CursorManager;
 
 [RequireComponent(typeof(Selectable))]
+[AddComponentMenu("")]
 public class UIEventTrigger : EventTrigger
 {
     Animator fadeController;
     Selectable selectable;
-    public bool isSelected;
+    [field: SerializeField]
+    public bool hasOpenBehaviour;
 
     void Start() {
         TryGetComponent(out fadeController);
         selectable = GetComponent<Selectable>();
-
-
-        if(isSelected) 
-            this.FadeIn();
     }
 
     public override void OnPointerEnter(PointerEventData data) {
         if(!selectable.interactable) 
             return;
 
+        AudioSystem.Instance.Play(UIAction.Hover);
         fadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
     public override void OnPointerExit(PointerEventData data){
         if(!selectable.interactable) 
             return;
-        if(!isSelected) 
-            FadeOut();
-
+    
         SetCursor(KingdomCursor.Default);
+        FadeOut();
     }     
 
     public override void OnPointerDown(PointerEventData data){
@@ -41,6 +39,7 @@ public class UIEventTrigger : EventTrigger
             return;
 
         SetCursor(KingdomCursor.Click);
+        AudioSystem.Instance.Play(UIAction.Submit);
     }
 
     public override void OnPointerUp(PointerEventData data)
@@ -55,35 +54,17 @@ public class UIEventTrigger : EventTrigger
     public override void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button != PointerEventData.InputButton.Left)
-            return;
-
-        
-        this.OnSubmit(eventData);
+            return;       
         base.OnPointerClick(eventData);
+        if(hasOpenBehaviour)
+            AudioSystem.Instance.Play(UIAction.PopUp);
     }
 
     public void OnDisable()
     {
         SetCursor(KingdomCursor.Default);
     }
-
-    public override void OnDeselect(BaseEventData eventData)
-    {
-        this.FadeOut();
-        isSelected = false;
-    }
-
-    public override void OnSelect(BaseEventData eventData)
-    {
-        this.FadeIn();
-        isSelected = true;
-    }
-
-    public override void OnSubmit(BaseEventData eventData)
-    {
-        base.OnSubmit(eventData);
-    }
-
+    
     public void FadeOut() => fadeController?.Play("Fade_Out");
     public void FadeIn() => fadeController?.Play("Fade_In");
 }

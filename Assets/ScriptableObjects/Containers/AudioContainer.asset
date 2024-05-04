@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: AudioContainer
   m_EditorClassIdentifier: 
   scriptableObjects:
-  - {fileID: 11400000, guid: 54a81e78fe1e75841bf2ec9072c26a94, type: 2}
+  - {fileID: 11400000, guid: 050d4cd269972cd4c9b56ba5b85dda55, type: 2}
+  - {fileID: 11400000, guid: f18bd26b464b22b4bbade8994e0bd181, type: 2}
+  - {fileID: 11400000, guid: 0ff8a6c69b7f65f43b105314907882e7, type: 2}
+  - {fileID: 11400000, guid: b260f64ee3691a94aae76468dd59106d, type: 2}
+  - {fileID: 11400000, guid: 64935e04aee24c348819a86310841c97, type: 2}
+  - {fileID: 11400000, guid: 6348f00a10047494e9c61fad767e4785, type: 2}

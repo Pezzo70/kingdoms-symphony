@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: UIAudioCancel
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 0}
-  action: 0
+  audioClip: {fileID: 8300000, guid: 8617a38a372ae1342b3c00265b72009f, type: 3}
+  action: 2

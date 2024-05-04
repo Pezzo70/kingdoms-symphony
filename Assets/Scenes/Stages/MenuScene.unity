@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  isSelected: 0
+  hasOpenBehaviour: 0
 --- !u!95 &808451420
 Animator:
   serializedVersion: 5
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 15
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2723,7 +2723,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  isSelected: 0
+  hasOpenBehaviour: 0
 --- !u!95 &1750208820
 Animator:
   serializedVersion: 5
@@ -2879,7 +2879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  isSelected: 0
+  hasOpenBehaviour: 0
 --- !u!95 &1755915347
 Animator:
   serializedVersion: 5
@@ -3047,8 +3047,8 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
   m_PointAction: {fileID: -1654692200621890270, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: 0}
+  m_MoveAction: {fileID: -8784545083839296357, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
   m_CancelAction: {fileID: 7727032971491509709, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
   m_LeftClickAction: {fileID: 3001919216989983466, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
   m_MiddleClickAction: {fileID: -2185481485913320682, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
@@ -3107,7 +3107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2, y: 115.76999}
+  m_AnchoredPosition: {x: 2, y: 115.76997}
   m_SizeDelta: {x: 232.52995, y: 80.619965}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1886507180
@@ -3443,7 +3443,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-  isSelected: 0
+  hasOpenBehaviour: 0
 --- !u!114 &1993271758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3630,7 +3630,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  isSelected: 0
+  hasOpenBehaviour: 0
 --- !u!95 &2135464203
 Animator:
   serializedVersion: 5

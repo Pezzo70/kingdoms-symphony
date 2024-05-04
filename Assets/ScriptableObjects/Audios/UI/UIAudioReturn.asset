@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: UIAudioReturn
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 0}
-  action: 0
+  audioClip: {fileID: 8300000, guid: cc4a01c7a75a32a46953210d39e6a1b8, type: 3}
+  action: 5
