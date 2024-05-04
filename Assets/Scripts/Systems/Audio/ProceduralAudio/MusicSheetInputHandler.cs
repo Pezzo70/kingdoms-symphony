@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class MusicSheetInputHandler:EventTrigger 
 {
@@ -54,5 +55,9 @@ public class MusicSheetInputHandler:EventTrigger
         musicSheet.SetHover(isHovering);
     }
 
-    public void OnUndo() => musicSheet.Undo();
+    public void OnUndo(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+         musicSheet.Undo();
+    }
 }

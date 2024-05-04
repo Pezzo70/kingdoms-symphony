@@ -1461,17 +1461,6 @@ MonoBehaviour:
   clefSprites:
   - {fileID: -1922738197, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
   - {fileID: 235409946, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
-  keysPlayed:
-  - Name: 0
-    TimePlayed: 0
-    TimeReleased: 0
-  - Name: 0
-    TimePlayed: 0
-    TimeReleased: 0
-  - Name: 0
-    TimePlayed: 0
-    TimeReleased: 0
-  _offsetPosition: {x: 0, y: 0}
   notationSprites:
   - {fileID: -1755406977, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
   - {fileID: -419612686, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
@@ -1503,6 +1492,7 @@ MonoBehaviour:
   - {fileID: 1272062067, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
   - {fileID: 841630588, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
   - {fileID: 1963915159, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
+  offsetPosition: {x: 0, y: 0}
   isHover: 0
 --- !u!224 &1142133050
 RectTransform:
@@ -1629,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 8949fc8d10a532b4bb66ac0e02cdd798, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1706,7 +1696,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
     m_ActionId: 9aea71e4-4519-4bb3-aa08-bf627eee1980
     m_ActionName: UI/Undo[/Keyboard/ctrl,/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0
