@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: UIAudioPopUp
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
   audioClip: {fileID: 8300000, guid: 6730bccb5c1343d42a0a52cd66d1a3da, type: 3}
+  weight: 1
+  volume: 1
   action: 3

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: UIAudioPause
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
   audioClip: {fileID: 8300000, guid: 4c849052a0847b942837cf280b04126f, type: 3}
+  weight: 1
+  volume: 1
   action: 4

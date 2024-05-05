@@ -1,3 +1,4 @@
+using Enums;
 using Player;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ namespace Audio
     public class PlayerAudio : ScriptableAudio
     {
         private CharacterID player;
+        [SerializeField]
+        private ActorAudioTypes audioType;
         public  CharacterID Player => player;
+        public ActorAudioTypes AudioType => audioType;
     }
 }

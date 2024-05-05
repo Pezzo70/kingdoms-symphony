@@ -55,14 +55,18 @@ public class UIEventTrigger : EventTrigger
     {
         if(eventData.button != PointerEventData.InputButton.Left)
             return;       
-        base.OnPointerClick(eventData);
         if(hasOpenBehaviour)
-            AudioSystem.Instance.Play(UIAction.PopUp);
+        {
+            AudioSystem.Instance.Play(Enemies.EnemyID.SoundWatcher, Enums.ActorAudioTypes.Attack);
+            FadeOut();
+        }
+        base.OnPointerClick(eventData);
     }
 
     public void OnDisable()
     {
         SetCursor(KingdomCursor.Default);
+        FadeOut();
     }
     
     public void FadeOut() => fadeController?.Play("Fade_Out");

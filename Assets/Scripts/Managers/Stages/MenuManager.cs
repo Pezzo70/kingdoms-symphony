@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
     {
         inputModule = GetComponent<InputSystemUIInputModule>();
 
+
         childs = new GameObject[canvas.transform.childCount];
         for (int i = 0; i < childs.Length; i++)
             childs[i] = canvas.transform.GetChild(i).gameObject; 

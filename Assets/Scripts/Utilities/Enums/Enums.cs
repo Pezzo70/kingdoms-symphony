@@ -1,9 +1,12 @@
 namespace Enums
 {
-    public enum Stages
+    public enum KingdomStage
     {
         Menu, Florest, Dungeon, Cave, Underground
     }
 
-    
+    public enum ActorAudioTypes
+    {
+        Damage, Attack
+    }
 }
