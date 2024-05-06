@@ -1,5 +1,6 @@
-Key,Portuguese,English,Spanish
-Menu.Play,Jogar,Play Teste,Jugar prueba
-Menu.Scroll,Pergaminhos,Scrolls,Pergaminos
-Menu.Tip,Dicas,Tips,Consejos
-Menu.Option,Configurações,Options,Ajustes
+Key,Portuguese,English,Spanish,Japanese
+Menu.Play,Jogar,Play,Jugar,遊ぶ
+Menu.Scroll,Pergaminhos,Scrolls,Pergaminos,巻物
+Menu.Tip,Dicas,Tips,Consejos,Советы
+Menu.Option,Configurações,Options,Ajustes,オプション
+Menu.HowTo,Como Jogar?,How to Play,¿Como Jugar?,遊び方

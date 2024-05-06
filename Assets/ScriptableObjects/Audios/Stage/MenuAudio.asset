@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15573f7604696a4468a776ebca309658, type: 3}
   m_Name: MenuAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: b907e9df8e85a52419547a0afaf80b90, type: 3}
+  audioClip: {fileID: 8300000, guid: 27b54665645945b45bc7246a359d16ec, type: 3}
   weight: 1
   volume: 1
   stage: MenuScene
