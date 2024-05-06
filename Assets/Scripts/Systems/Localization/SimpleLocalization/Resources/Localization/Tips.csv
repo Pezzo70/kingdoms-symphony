@@ -1,0 +1,49 @@
+Key,Portuguese,English
+Tips.Name.0,Notações,Notations
+Tips.Name.1,Métrica,Metre 
+Tips.Name.2,Melodia,Melody
+Tips.Name.3,Tom,Key 
+Tips.Name.4,Semitom,Semitone
+Tips.Name.5,Notas Enarmônicas,Enharmonic Notes
+Tips.Name.6,Acordes,Chords
+Tips.Name.7,Progressão de Acordes,Chords Progression
+Tips.Name.8,Tônica,Tonic
+Tips.Name.9,Subdominante,Subdominant
+Tips.Name.10,Dominante,Dominant
+Tips.Name.11,Escalas,Scales
+Tips.Name.12,Modos,Modes
+Tips.Name.13,Arpejo,Arpeggio
+Tips.Description.0,"Notações musicais são símbolos utilizados para representar sons e elementos musicais em partituras. Existem diferentes tipos de notações musicais, cada uma com sua função específica. Algumas das notações musicais mais comuns incluem:
+        -   Notas: altura e duração dos sons.
+        -   Pausas: indicam os momentos de silêncio na música, correspondendo às durações das notas.
+        -   Claves: são símbolos colocados no início de uma pauta para indicar a altura das notas, exemplos: Clave de Sol e Clave de Fá.
+        -   Sinais de alteração: alteram a altura de uma nota em um semitom para cima (sustenido) ou para baixo (bemol).","Musical notations are symbols used to represent sounds and musical elements in sheet music. There are different types of musical notations, each with its specific function. Some of the most common musical notations include:
+        -   Notes: indicating the pitch and duration of sounds.
+        -   Rests:  indicating moments of silence in the music, corresponding to the durations of the notes.
+        -   Clefs: symbols placed at the beginning of a staff to indicate the pitch of the notes, examples: G Clef and F Clef.
+        -   Accidentals: altering the pitch of a note by a half step up (sharp) or down (flat)."
+Tips.Description.1,"É o padrão de agrupamento de batidas em compassos na música. Cada compasso tem um número definido de batidas, determinado pelo denominador de uma fração de compasso (como 4/4, 3/4, 6/8, etc.)","It's the standard grouping of beats into measures in music. Each measure has a defined number of beats, determined by the denominator of a time signature fraction (such as 4/4, 3/4, 6/8, etc.)."
+Tips.Description.2,"É a parte da música que se destaca acima dos acordes e do ritmo, variando em seu tamanho, forma, altura, timbre e intensidade. Lembre-se que uma das características mais importantes da melodia é que as notas são tocadas individualmente e sequencialmente. Ao escutar uma música, tente assoviar ou cantarolar aquilo que você acha que se destaca, provavelmente, será a melodia.","It's the part of the music that stands out above the chords and rhythm, varying in its size, shape, pitch, timbre, and intensity. Remember that one of the most important characteristics of melody is that the notes are played individually and sequentially. When listening to a piece of music, try to whistle or hum what you think stands out; it's likely the melody."
+Tips.Description.3,"Um tom é uma unidade de medida que representa a altura de um som - na escala musical ocidental, um tom corresponde a uma distância de dois semitons.","A key is a unit of measurement that represents the pitch of a sound - in the Western musical scale, a key corresponds to a distance of two semitones."
+Tips.Description.4,Um semitom corresponde à menor distância entre dois sons consecutivos em uma escala cromática.,A semitone corresponds to the smallest distance between two consecutive sounds in a chromatic scale.
+Tips.Description.5,"Duas notas que possuem o mesmo som mas nomes diferentes, como Dó sustenido (C#) e Ré bemol (Db), estão separadas por um semitom.","Two notes that have the same sound but different names, such as C sharp (C#) and D flat (Db), are separated by a semitone."
+Tips.Description.6,"Um acorde é um conjunto de três ou mais notas diferentes tocadas simultaneamente, fornecem a base para a harmonia e a estrutura tonal em músicas de todos os tipos. Os acordes mais básicos são tríades, que consistem em três notas: a tônica, a terça e a quinta.","A chord is a set of three or more different notes played simultaneously, providing the foundation for harmony and tonal structure in music of all kinds. The most basic chords are triads, which consist of three notes: the tonic, the third, and the fifth."
+Tips.Description.7,"Uma progressão de acordes é uma sequência de acordes que ocorre em uma música, as progressões de acordes são uma parte fundamental da composição musical e são responsáveis por criar tensão, resolução e uma sensação de movimento na música. Existem muitas progressões de acordes comuns que são amplamente utilizadas em músicas de diversos gêneros, por exemplo, a progressão I-IV-V-I (tônica, subdominante, dominante, tônica).","A chord progression is a sequence of chords that occurs in a piece of music. Chord progressions are a fundamental part of musical composition and are responsible for creating tension, resolution, and a sense of movement in the music. There are many common chord progressions that are widely used in music of various genres. For example, the I-iv-V-I progression (tonic, subdominant, dominant, tonic)."
+Tips.Description.8,A tônica é o grau tonal principal e central em uma tonalidade ou progressão de acordes proporciona uma sensação de estabilidade e repouso.,"The tonic is the principal and central tonal degree in a key or chord progression, providing a sense of stability and rest."
+Tips.Description.9,"Possui sentido de suspensão com pouca tensão, criar uma sensação de movimento em direção à tônica e adiciona interesse harmônico sem criar a mesma tensão que a dominante.","It has a sense of suspension with little tension, creating a feeling of movement towards the tonic and adding harmonic interest without creating the same tension as the dominant."
+Tips.Description.10,"Possui sentido de suspensão com mais tensão, crucial para criar tensão e preparar a resolução de volta à tônica.","It has a sense of suspension with more tension, crucial for creating tension and preparing the resolution back to the tonic."
+Tips.Description.11,"Uma escala musical é uma sequência ordenada de notas musicais que segue um padrão específico de intervalos entre as notas - onde tais intervalos entre as notas em uma escala determinam o seu padrão tonal, por exemplo, na escala maior, o padrão de intervalos é tom-tom-semitom-tom-tom-tom-semitom.","A musical scale is an ordered sequence of musical notes that follows a specific pattern of intervals between the notes - where these intervals between the notes in a scale determine its tonal pattern, for example, in the major scale, the interval pattern is whole-whole-half-whole-whole-whole-half."
+Tips.Description.12,"Os modos musicais são escalas que derivam da escala diatônica, mas começam em diferentes graus dessa escala, resultando em padrões de intervalos únicos e sonoridades distintas
+        - Jônio (Modo Maior): é o primeiro modo da escala diatônica e começa na tônica.
+        - Dórico: começa no segundo grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-tom-semitom-tom.
+        - Frígio: começa no terceiro grau da escala diatônica e tem um padrão de intervalos de semitom-tom-tom-tom-semitom-tom-tom.
+        - Lídio: começa no quarto grau da escala diatônica e tem um padrão de intervalos de tom-tom-tom-semitom-tom-tom-semitom.
+        - Mixolídio: começa no quinto grau da escala diatônica e tem um padrão de intervalos de tom-tom-semitom-tom-tom-semitom-tom.
+        - Eólio (Modo Menor Natural): Começa no sexto grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-semitom-tom-tom.","Musical modes are scales derived from the diatonic scale, but starting on different degrees of that scale, resulting in unique interval patterns and distinct sounds.
+        - Ionian (Major Mode): It's the first mode of the diatonic scale and starts on the tonic.
+        - Dorian: It starts on the second degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-whole-half-whole.
+        - Phrygian: It starts on the third degree of the diatonic scale and has an interval pattern of half-whole-whole-whole-half-whole-whole.
+        - Lydian: It starts on the fourth degree of the diatonic scale and has an interval pattern of whole-whole-whole-half-whole-whole-half.
+        - Mixolydian: It starts on the fifth degree of the diatonic scale and has an interval pattern of whole-whole-half-whole-whole-half-whole.
+        - Aeolian (Natural Minor Mode): It starts on the sixth degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-half-whole-whole."
+Tips.Description.13,"Um arpejo é uma sequência de notas de um acorde tocadas uma após a outra, em vez de simultaneamente.","An arpeggio is a sequence of notes from a chord played one after the other, instead of simultaneously."
