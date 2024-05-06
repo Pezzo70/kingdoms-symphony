@@ -36,7 +36,7 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
     public void Play(Scene stage)
     {
         audioSource.Stop();
-        //audioSource.clip = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name).AudioClip;
+        audioSource.clip = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name).AudioClip;
         audioSource.Play();
     }
 
