@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 079b0b377dda61d41b87cf399193acad, type: 3}
   m_Name: UIAudioReturn
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 8300000, guid: cc4a01c7a75a32a46953210d39e6a1b8, type: 3}
+  audioClip: {fileID: 8300000, guid: a874d4e44f3772d4ea7d0dc09e6990bf, type: 3}
   weight: 1
   volume: 1
   action: 5

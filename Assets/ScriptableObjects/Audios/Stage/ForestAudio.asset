@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15573f7604696a4468a776ebca309658, type: 3}
-  m_Name: FlorestAudio
+  m_Name: ForestAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: ec035e1d38e3dfe4eb499edaddc833c9, type: 3}
+  audioClip: {fileID: 8300000, guid: 4b14c94b7a513dd45a8270b9cc268e8e, type: 3}
   weight: 1
   volume: 1
   stage: FlorestScene

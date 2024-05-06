@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: GoblinDamageAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 27716b1218221554581300e94c126335, type: 3}
+  audioClip: {fileID: 8300000, guid: 5137dc5d1e154574a9e92286d64bc1c1, type: 3}
   weight: 1
   volume: 1
   enemy: 0

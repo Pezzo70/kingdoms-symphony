@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: AbyssalVisitorDamageAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 5b96a37a94dcd71409bd39cc4aef8737, type: 3}
+  audioClip: {fileID: 8300000, guid: 74531a33779f1ee4dbc0ed4ede090170, type: 3}
   weight: 1
   volume: 1
   enemy: 7

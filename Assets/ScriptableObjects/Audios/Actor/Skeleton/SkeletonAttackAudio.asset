@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: SkeletonAttackAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: e85b76c79e938024d871eebe70c2fd91, type: 3}
+  audioClip: {fileID: 8300000, guid: 280818cc48aa08a4fb7096acf67e5582, type: 3}
   weight: 1
   volume: 1
   enemy: 2

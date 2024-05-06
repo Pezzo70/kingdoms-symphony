@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: SoundWatcherAttackAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: ee6c4dcf7f606794ca4e7ec8368726fd, type: 3}
+  audioClip: {fileID: 8300000, guid: 5f65d73d6128d8147ba7dffbfb5fca6d, type: 3}
   weight: 1
   volume: 1
   enemy: 5

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: SilencedClawsAttackAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: bf119a8f5720b2549b03fc19a6446536, type: 3}
+  audioClip: {fileID: 8300000, guid: 3b90b9c737519894cb5a1470a3ca45b0, type: 3}
   weight: 1
   volume: 1
   enemy: 4

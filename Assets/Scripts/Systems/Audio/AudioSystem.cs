@@ -31,12 +31,18 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
 
     private void OnSceneLoaded (Scene scene, LoadSceneMode mode) => this.Play(scene);
 
-    public void Play(UIAction action) => audioSource.PlayOneShot(audioContainer.GetByType<UIAudio>().First(a => a.Action == action).AudioClip);
+    public void Play(UIAction action) 
+ { 
+    var audio = audioContainer.GetByType<UIAudio>().First(a => a.Action == action);
+    audioSource.PlayOneShot(audio.AudioClip, audio.volume);
+ }
     
     public void Play(Scene stage)
     {
         audioSource.Stop();
-        audioSource.clip = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name).AudioClip;
+        var audio = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name);
+            audioSource.clip = audio.AudioClip;	
+            audioSource.volume = audio.volume;
         audioSource.Play();
     }
 

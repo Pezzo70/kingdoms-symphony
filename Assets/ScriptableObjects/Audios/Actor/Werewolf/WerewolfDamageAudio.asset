@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ff6ad090a3c40977bcf929193e6b, type: 3}
   m_Name: WerewolfDamageAudio
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 24a3240e0a0a9f248a5e739216700c23, type: 3}
+  audioClip: {fileID: 8300000, guid: 59b2dcd3ef5d17941b2cde8c968ecc7d, type: 3}
   weight: 1
   volume: 1
   enemy: 1
