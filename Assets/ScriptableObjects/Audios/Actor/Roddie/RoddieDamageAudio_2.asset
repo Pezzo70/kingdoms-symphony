@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoddieDamageAudio_2
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 41856c4815ea33749aa39b408a170344, type: 3}
-  weight: 1
+  weight: 0
   volume: 1
   audioType: 0
