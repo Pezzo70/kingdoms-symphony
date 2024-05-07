@@ -26,4 +26,6 @@ public class SettingsManager : MonoBehaviour
         int refreshRate = (int)Math.Ceiling(double.Parse(parts[2].Trim()));
         Screen.SetResolution(width, height, fullscreen);
     }
+
+    public void SetVolume(float volume) => AudioSystem.Instance.SetVolume(volume);
 }
