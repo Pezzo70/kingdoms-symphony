@@ -1,9 +1,34 @@
 namespace Enums
 {
-    public enum Stages
+    public enum KingdomStage
     {
-        Menu, Florest, Dungeon, Cave, Underground
+        Menu,
+        Florest,
+        Dungeon,
+        Cave,
+        Underground
     }
 
+    public enum ActorAudioTypes
+    {
+        Damage,
+        Attack
+    }
+
+    public enum EndState
+    {
+        LevelVictory = 0,
+        Defeat = 1,
+        RunVictory = 2
+    }
     
+    public enum UIAction
+    {
+        Hover,
+        Submit,
+        Cancel,
+        PopUp,
+        Pause,
+        Return
+    }
 }

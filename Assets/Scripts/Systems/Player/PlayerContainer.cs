@@ -1,7 +1,6 @@
 using System;
 using Newtonsoft.Json;
 using Persistence;
-using UnityEngine;
 
 namespace Player
 {
