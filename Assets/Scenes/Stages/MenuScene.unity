@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3321820197594439860, guid: f6e6845939c568644bcdeb0095a6f8b2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -71.399994
+      value: -71.39996
       objectReference: {fileID: 0}
     - target: {fileID: 3321820197594439860, guid: f6e6845939c568644bcdeb0095a6f8b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3235,6 +3235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954092845}
   - component: {fileID: 1954092846}
+  - component: {fileID: 1954092847}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -3267,6 +3268,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d230d7ae9a18a66458a65ceeb575365c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1954092847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954092844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360d074822606ac46a4d0dd5f6b8e510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1962169564
