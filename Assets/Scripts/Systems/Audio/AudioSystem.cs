@@ -59,9 +59,3 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
     }
 }
 
-
-
-public enum UIAction
-{
-    Hover, Submit, Cancel, PopUp, Pause, Return
-}
