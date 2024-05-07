@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Scrolls
 {
     public class ScrollsContainer : PersistentSingleton<ScrollsContainer>

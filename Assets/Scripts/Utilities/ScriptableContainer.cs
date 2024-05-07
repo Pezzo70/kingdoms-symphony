@@ -1,25 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Container/ScriptableContainer")]
 public class ScriptableContainer : ScriptableObject
 {
-
     [SerializeField]
     private ScriptableObject[] scriptableObjects;
 
-    public IEnumerable<T> GetByType<T>() where T : ScriptableObject => scriptableObjects.OfType<T>();
+    public IEnumerable<T> GetByType<T>()
+        where T : ScriptableObject => scriptableObjects.OfType<T>();
 
-    public IEnumerable<T> GetByType<T>(Func<T, bool> predicate) where T : ScriptableObject => scriptableObjects.OfType<T>().Where(predicate);
+    public IEnumerable<T> GetByType<T>(Func<T, bool> predicate)
+        where T : ScriptableObject => scriptableObjects.OfType<T>().Where(predicate);
 
-    public T GetFirstByType<T>() where T : ScriptableObject
+    public T GetFirstByType<T>()
+        where T : ScriptableObject
     {
         if (typeof(T).GetInterfaces().Contains(typeof(IWeightable)))
         {
-            var weightedItems = GetByType<T>().OfType<IWeightable>().Where(w => w.Weight > 0).ToList();
+            var weightedItems = GetByType<T>()
+                .OfType<IWeightable>()
+                .Where(w => w.Weight > 0)
+                .ToList();
             if (weightedItems.Count > 0)
             {
                 double totalWeight = weightedItems.Sum(w => w.Weight);
@@ -38,11 +42,15 @@ public class ScriptableContainer : ScriptableObject
         return GetByType<T>().FirstOrDefault();
     }
 
-    public T GetFirstByType<T>(Func<T, bool> predicate) where T : ScriptableObject
+    public T GetFirstByType<T>(Func<T, bool> predicate)
+        where T : ScriptableObject
     {
         if (typeof(T).GetInterfaces().Contains(typeof(IWeightable)))
         {
-            var weightedItems = GetByType<T>(predicate).OfType<IWeightable>().Where(w => w.Weight > 0).ToList();
+            var weightedItems = GetByType<T>(predicate)
+                .OfType<IWeightable>()
+                .Where(w => w.Weight > 0)
+                .ToList();
             if (weightedItems.Count > 0)
             {
                 double totalWeight = weightedItems.Sum(w => w.Weight);
@@ -60,6 +68,4 @@ public class ScriptableContainer : ScriptableObject
         }
         return GetByType<T>(predicate).FirstOrDefault();
     }
-
-
 }

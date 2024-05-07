@@ -1,3 +1,4 @@
+using UI;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,32 +11,38 @@ public class UIEventTrigger : EventTrigger
 {
     Animator fadeController;
     Selectable selectable;
+
     [field: SerializeField]
     public bool hasOpenBehaviour;
 
-    void Start() {
+    void Start()
+    {
         TryGetComponent(out fadeController);
         selectable = GetComponent<Selectable>();
     }
 
-    public override void OnPointerEnter(PointerEventData data) {
-        if(!selectable.interactable) 
+    public override void OnPointerEnter(PointerEventData data)
+    {
+        if (!selectable.interactable)
             return;
 
         AudioSystem.Instance.Play(UIAction.Hover);
         fadeController?.Play("Fade_In");
         SetCursor(KingdomCursor.Hover);
     }
-    public override void OnPointerExit(PointerEventData data){
-        if(!selectable.interactable) 
+
+    public override void OnPointerExit(PointerEventData data)
+    {
+        if (!selectable.interactable)
             return;
-    
+
         SetCursor(KingdomCursor.Default);
         FadeOut();
-    }     
+    }
 
-    public override void OnPointerDown(PointerEventData data){
-        if(!selectable.interactable) 
+    public override void OnPointerDown(PointerEventData data)
+    {
+        if (!selectable.interactable)
             return;
 
         SetCursor(KingdomCursor.Click);
@@ -44,22 +51,24 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerUp(PointerEventData data)
     {
-        if(!selectable.interactable) 
+        if (!selectable.interactable)
             return;
 
-        if(GetCursor() is KingdomCursor.Click)
+        if (GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left)
-            return;       
-        if(hasOpenBehaviour)
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
+        if (hasOpenBehaviour)
         {
-            AudioSystem.Instance.Play(Enemies.EnemyID.SoundWatcher, Enums.ActorAudioTypes.Attack);
+            AudioSystem.Instance.Play(UI.UIAction.PopUp);
             FadeOut();
         }
+
         base.OnPointerClick(eventData);
     }
 
@@ -68,7 +77,8 @@ public class UIEventTrigger : EventTrigger
         SetCursor(KingdomCursor.Default);
         FadeOut();
     }
-    
+
     public void FadeOut() => fadeController?.Play("Fade_Out");
+
     public void FadeIn() => fadeController?.Play("Fade_In");
 }
