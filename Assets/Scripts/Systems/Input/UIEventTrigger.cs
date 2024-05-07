@@ -1,4 +1,3 @@
-using UI;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -65,7 +64,7 @@ public class UIEventTrigger : EventTrigger
 
         if (hasOpenBehaviour)
         {
-            AudioSystem.Instance.Play(UI.UIAction.PopUp);
+            AudioSystem.Instance.Play(UIAction.PopUp);
             FadeOut();
         }
 

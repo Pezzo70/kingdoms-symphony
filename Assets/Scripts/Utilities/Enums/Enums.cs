@@ -21,4 +21,14 @@ namespace Enums
         Defeat = 1,
         RunVictory = 2
     }
+    
+    public enum UIAction
+    {
+        Hover,
+        Submit,
+        Cancel,
+        PopUp,
+        Pause,
+        Return
+    }
 }
