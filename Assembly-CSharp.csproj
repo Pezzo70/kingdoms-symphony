@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ProceduralAudio\WaveAttributes.cs" />
+    <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\EndGameAudio.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyAdvantage.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\PlayerContainer.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
     <Compile Include="Assets\Scripts\Utilities\Enums\Enums.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ProceduralAudio\MusicSheet.cs" />
+    <Compile Include="Assets\Scripts\Systems\FX\FXEnum.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\Sheet.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSync.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\UIAudio.cs" />
@@ -92,14 +94,17 @@
     <Compile Include="Assets\Scripts\Systems\Audio\ProceduralAudio\Instrument.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\PlayerAudio.cs" />
     <Compile Include="Assets\Scripts\Systems\Systems.cs" />
+    <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\FXAudio.cs" />
     <Compile Include="Assets\Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\Scrolls\Scroll.cs" />
+    <Compile Include="Assets\Scripts\Managers\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\PlayerEnum.cs" />
     <Compile Include="Assets\Scripts\Utilities\ScriptableContainer.cs" />
+    <Compile Include="Assets\Scripts\Systems\UI\UIEnum.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyEnum.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Utilities\Persistence\PathConstants.cs" />

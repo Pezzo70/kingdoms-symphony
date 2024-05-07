@@ -1,37 +1,40 @@
 using System.Linq;
+using UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
-using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
-{   
+{
     GameObject[] childs;
+
     [SerializeField]
     GameObject canvas;
     InputSystemUIInputModule inputModule;
-    
+
     public void Start()
     {
         inputModule = GetComponent<InputSystemUIInputModule>();
 
-
         childs = new GameObject[canvas.transform.childCount];
         for (int i = 0; i < childs.Length; i++)
-            childs[i] = canvas.transform.GetChild(i).gameObject; 
+            childs[i] = canvas.transform.GetChild(i).gameObject;
 
-        inputModule.cancel.action.performed += delegate{ReturnFlow();};
+        inputModule.cancel.action.performed += delegate
+        {
+            ReturnFlow();
+        };
     }
+
     public void ReturnFlow()
     {
         var menu = childs.First(sc => sc.name == "Menu");
         var sceneActive = childs.FirstOrDefault(go => go.name != "Menu" && go.activeInHierarchy);
 
-        if(sceneActive != null)
+        if (sceneActive != null)
         {
             AudioSystem.Instance.Play(UIAction.Return);
             sceneActive.SetActive(false);
             menu.SetActive(true);
-        }    
+        }
     }
 }

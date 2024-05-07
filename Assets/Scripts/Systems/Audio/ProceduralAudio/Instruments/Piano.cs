@@ -1,15 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Scripting;
 using static Frequencies;
-
 
 [System.Serializable]
 public class Piano : Instrument
 {
-
-    [SerializeField, Min(0.0001f)] private float[] harmonics = new float[12];
+    [SerializeField, Min(0.0001f)]
+    private float[] harmonics = new float[12];
 
     public void Start()
     {
@@ -18,10 +14,7 @@ public class Piano : Instrument
         _keysPlayed = new();
     }
 
-    public void Update()
-    {
-
-    }
+    public void Update() { }
 
     public void OnAudioFilterRead(float[] data, int channels)
     {
@@ -29,24 +22,26 @@ public class Piano : Instrument
         {
             var currentTime = AudioSettings.dspTime;
             var key = _keysPlayed[ikeys];
-            if(key.TimePlayed > currentTime)
+            if (key.TimePlayed > currentTime)
                 continue;
 
             var timeElapsed = (float)(currentTime - key.TimePlayed);
 
             float volumeModifier = ADSR.Sustain;
-            if (timeElapsed <= ADSR.Attack)    // It is in the Attack phase, the sound is still rising form 0 top to maximum (1) 
+            if (timeElapsed <= ADSR.Attack) // It is in the Attack phase, the sound is still rising form 0 top to maximum (1)
                 volumeModifier = Mathf.InverseLerp(0.0f, ADSR.Attack, timeElapsed);
-            else if (timeElapsed < ADSR.Decay + ADSR.Attack)   // The sound is in the decay phase meaning it is going from the maximum to the sustained level
+            else if (timeElapsed < ADSR.Decay + ADSR.Attack) // The sound is in the decay phase meaning it is going from the maximum to the sustained level
             {
-                volumeModifier = Mathf.InverseLerp(ADSR.Attack, ADSR.Attack + ADSR.Decay, timeElapsed);
+                volumeModifier = Mathf.InverseLerp(
+                    ADSR.Attack,
+                    ADSR.Attack + ADSR.Decay,
+                    timeElapsed
+                );
                 volumeModifier = Mathf.Lerp(1.0f, ADSR.Sustain, volumeModifier);
             }
 
-
-            if (key.TimeReleased != 0 && currentTime >= key.TimeReleased)              // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key! 
+            if (key.TimeReleased != 0 && currentTime >= key.TimeReleased) // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key!
             {
-
                 timeElapsed = (float)(currentTime - key.TimeReleased);
 
                 if (timeElapsed > ADSR.Release)
@@ -59,15 +54,14 @@ public class Piano : Instrument
                 volumeModifier = Mathf.Lerp(ADSR.Sustain, 0.0f, volumeModifier);
             }
 
-
             for (int i = 0; i < data.Length; i += channels)
             {
-                float value = WaveFunction(i / channels, key.TimePlayed, key.Name) * volumeModifier * _gain;
+                float value =
+                    WaveFunction(i / channels, key.TimePlayed, key.Name) * volumeModifier * _gain;
                 for (int channel = 0; channel < channels; channel++)
                     data[i + channel] += value;
             }
         }
-
     }
 
     public override float WaveFunction(int dataIndex, double time, KeyName key)
@@ -84,10 +78,10 @@ public class Piano : Instrument
 
             float exactTime = timeAtTheBeginig + dataIndex / _sampleRate;
 
-            superImposed += Mathf.Sin(exactTime * harmonicFrequency * 2f * Mathf.PI) * harmonics[i - 1];
+            superImposed +=
+                Mathf.Sin(exactTime * harmonicFrequency * 2f * Mathf.PI) * harmonics[i - 1];
         }
 
         return superImposed;
     }
-
 }
