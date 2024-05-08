@@ -34,6 +34,12 @@ public class MusicSheetInputHandler:EventTrigger
             case "MusicSheet":
                   musicSheet.InsertSprite();
                   break;
+            case "Next":
+                  musicSheet.pageNumber++;
+                  break;
+            case "Previous":
+                  musicSheet.pageNumber--;
+                  break;
         };
     }
 

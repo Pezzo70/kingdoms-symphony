@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedTextMeshProUGUI.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\EnemyAudio.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Managers\Settings\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Stages\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\StageAudio.cs" />
     <Compile Include="Assets\Scripts\Systems\Input\UIEventTrigger.cs" />
@@ -101,10 +102,9 @@
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\Scrolls\Scroll.cs" />
-    <Compile Include="Assets\Scripts\Managers\SettingsManager.cs" />
+    <Compile Include="Assets\Scripts\Systems\Audio\ProceduralAudio\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\PlayerEnum.cs" />
     <Compile Include="Assets\Scripts\Utilities\ScriptableContainer.cs" />
-    <Compile Include="Assets\Scripts\Systems\UI\UIEnum.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyEnum.cs" />
     <Compile Include="Assets\Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Utilities\Persistence\PathConstants.cs" />
