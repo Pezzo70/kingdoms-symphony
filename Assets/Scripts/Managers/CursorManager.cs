@@ -9,8 +9,8 @@ public static class CursorManager
 
     static CursorManager()
     {
-        hoverCursor = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Sprites/cursor_2.png");
-        clickCursor = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Sprites/cursor_3.png");
+        hoverCursor = Resources.Load<Texture2D>("cursor_2");
+        clickCursor = Resources.Load<Texture2D>("cursor_3");
         currentCursor = KingdomCursor.Default;
     }
 
@@ -39,4 +39,7 @@ public static class CursorManager
         Hover,
         Click
     }
+
+
+    
 }

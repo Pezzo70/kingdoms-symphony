@@ -14,7 +14,7 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
     [SerializeField]
     private ScriptableContainer audioContainer;
     private AudioSource audioSource;
-    [Range(0,1)]
+    [Range(0, 1)]
     private float globalVolume;
     protected override void Awake()
     {
@@ -23,28 +23,30 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
         globalVolume = 1.0f;
     }
 
-    void OnEnable() {
-    SceneManager.sceneLoaded += OnSceneLoaded;
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnDisable() {
-    SceneManager.sceneLoaded -= OnSceneLoaded;
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded (Scene scene, LoadSceneMode mode) => this.Play(scene);
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => this.Play(scene);
 
-    public void Play(UIAction action) 
- { 
-    var audio = audioContainer.GetByType<UIAudio>().First(a => a.Action == action);
-    audioSource.PlayOneShot(audio.AudioClip, audio.volume * globalVolume);
- }
-    
+    public void Play(UIAction action)
+    {
+        var audio = audioContainer.GetByType<UIAudio>().First(a => a.Action == action);
+        audioSource.PlayOneShot(audio.AudioClip, audio.volume * globalVolume);
+    }
+
     public void Play(Scene stage)
     {
         audioSource.Stop();
         var audio = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name);
-            audioSource.clip = audio.AudioClip;	
-            audioSource.volume *= audio.volume;
+        audioSource.clip = audio.AudioClip;
+        audioSource.volume *= audio.volume;
         audioSource.Play();
     }
 

@@ -1,20 +1,21 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SettingsManager : MonoBehaviour
+public class SettingsManager : PersistentSingleton<SettingsManager>
 {
     private bool fullscreen = true;
+
     void Start()
     {
-
+                
     }
-    
     void Update()
     {
-        foreach (var setting in Screen.resolutions)
-            SetResolution(setting.ToString());
+        SetResolution("30x50 @ 75Hz");
+        Debug.Log(Screen.width + "----" );
     }
     public IEnumerable<Resolution> GetSupportedResolutions() => Screen.resolutions;
 
@@ -28,4 +29,6 @@ public class SettingsManager : MonoBehaviour
     }
 
     public void SetVolume(float volume) => AudioSystem.Instance.SetVolume(volume);
+
+
 }
