@@ -45,8 +45,8 @@ public class AudioSystem : PersistentSingleton<AudioSystem>
     {
         audioSource.Stop();
         var audio = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name);
-        audioSource.clip = audio.AudioClip;
-        audioSource.volume *= audio.volume;
+            audioSource.clip = audio.AudioClip;	
+            audioSource.volume *= audio.volume;
         audioSource.Play();
     }
 

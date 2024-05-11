@@ -3,12 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Undo
+  - Clear
+  - ChangeScale
+  - Next
+  - Previous
+  - Add
+  - Remove
+  - Exit
+  - MusicSheet
+  - NotationSprite
+  - Page
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MusicSheetUI
   - Water
   - UI
   - 

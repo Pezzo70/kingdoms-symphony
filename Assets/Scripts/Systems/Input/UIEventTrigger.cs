@@ -1,3 +1,4 @@
+using System.Linq;
 using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,9 +11,13 @@ public class UIEventTrigger : EventTrigger
 {
     Animator fadeController;
     Selectable selectable;
+    [SerializeField]
+    private UIAction[] supportedActionsAudio = new UIAction[] { UIAction.Hover, UIAction.Submit, UIAction.Pause, UIAction.Cancel, UIAction.PopUp, UIAction.Return};
 
-    [field: SerializeField]
+
     public bool hasOpenBehaviour;
+    public bool hasAudio = true;
+
 
     void Start()
     {
@@ -25,8 +30,8 @@ public class UIEventTrigger : EventTrigger
         if (!selectable.interactable)
             return;
 
-        AudioSystem.Instance.Play(UIAction.Hover);
-        fadeController?.Play("Fade_In");
+        ExecuteUIAudio(UIAction.Hover);
+        FadeIn();
         SetCursor(KingdomCursor.Hover);
     }
 
@@ -35,23 +40,23 @@ public class UIEventTrigger : EventTrigger
         if (!selectable.interactable)
             return;
 
-        SetCursor(KingdomCursor.Default);
         FadeOut();
+        SetCursor(KingdomCursor.Default);
     }
 
     public override void OnPointerDown(PointerEventData data)
     {
         if (!selectable.interactable)
             return;
-
+         
         SetCursor(KingdomCursor.Click);
-        AudioSystem.Instance.Play(UIAction.Submit);
     }
 
     public override void OnPointerUp(PointerEventData data)
     {
         if (!selectable.interactable)
             return;
+
 
         if (GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
@@ -62,12 +67,8 @@ public class UIEventTrigger : EventTrigger
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
-        if (hasOpenBehaviour)
-        {
-            AudioSystem.Instance.Play(UIAction.PopUp);
-            FadeOut();
-        }
 
+        ExecuteUIAudio(UIAction.Submit);
         base.OnPointerClick(eventData);
     }
 
@@ -80,4 +81,25 @@ public class UIEventTrigger : EventTrigger
     public void FadeOut() => fadeController?.Play("Fade_Out");
 
     public void FadeIn() => fadeController?.Play("Fade_In");
+
+    private void ExecuteUIAudio(UIAction action)
+    {
+        if(!hasAudio || !supportedActionsAudio.Any(a => a.Equals(action))) return;
+        AudioSystem audio = AudioSystem.Instance;
+        switch (action)
+        {
+            case UIAction.Hover:
+            case UIAction.Cancel:
+            case UIAction.Pause:
+            case UIAction.Return:
+            case UIAction.PopUp:
+                audio.Play(action);
+                break;
+            case UIAction.Submit:
+                if(hasOpenBehaviour) audio.Play(UIAction.PopUp);
+                else audio.Play(action);
+                break;
+
+        }
+    }
 }
