@@ -8,12 +8,18 @@
 
     public class MusicSheet : MonoBehaviour
     {
-        [SerializeField] Instrument instrument;
-        [SerializeField] private Sprite[] clefSprites;
-        [SerializeField] private Sprite[] notationSprites;
-        [SerializeField] private Vector2 offsetPosition;
-        [SerializeField] private bool isHover = false;
-        [SerializeField] public int pageNumber;
+        [SerializeField] 
+        Instrument instrument;
+        [SerializeField] 
+        private Sprite[] clefSprites;
+        [SerializeField] 
+        private Sprite[] notationSprites;
+        [SerializeField] 
+        private Vector2 offsetPosition;
+        [SerializeField] 
+        private bool isHover = false;
+        [SerializeField] 
+        public int pageNumber;
         private List<KeyPlayed> keysPlayed = new List<KeyPlayed>();
         private GameObject notationSpriteObject;
         private Stack<GameObject> actionStack;
