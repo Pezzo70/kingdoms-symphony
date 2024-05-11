@@ -123,4 +123,17 @@
             activeGo.gameObject.SetActive(true);
             return activeGo;
         }
+
+        public void CreatePage()
+        {
+            var pageParent = GameObject.FindWithTag("Page");
+            var childCount = pageParent.transform.childCount + 1;
+
+            if(childCount == GetMaxPage()) return;
+            var page = new GameObject("Page" + childCount);
+            page.transform.SetParent(pageParent.transform);
+
+        }
+
+        private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Player.CharacterID.Roddie);
     }

@@ -9,8 +9,8 @@ TagManager:
   - ChangeScale
   - Next
   - Previous
-  - AddPage
-  - RemovePage
+  - Add
+  - Remove
   - Exit
   - MusicSheet
   - NotationSprite

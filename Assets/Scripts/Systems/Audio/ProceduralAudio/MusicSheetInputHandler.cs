@@ -40,6 +40,11 @@ public class MusicSheetInputHandler:EventTrigger
             case "Previous":
                   musicSheet.pageNumber--;
                   break;
+            case "Add":
+                musicSheet.CreatePage();
+                break;
+            case "Remove":
+            break;
         };
     }
 
