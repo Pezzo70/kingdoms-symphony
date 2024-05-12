@@ -3,12 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class MusicSheetInputHandler:EventTrigger 
+public class MusicSheetInputHandler : EventTrigger
 {
     private MusicSheet musicSheet;
 
-    private String objectTag;
-
+    private string objectTag;
     private bool isHovering;
 
     void Start()
@@ -17,34 +16,35 @@ public class MusicSheetInputHandler:EventTrigger
         objectTag = gameObject.tag;
     }
 
-     public override void OnPointerClick(PointerEventData data)
-    { 
+    public override void OnPointerClick(PointerEventData data)
+    {
         objectTag = data.pointerCurrentRaycast.gameObject.tag;
         switch (objectTag)
         {
             case "Undo":
-                 musicSheet.Undo();
-                 break;
+                musicSheet.Undo();
+                break;
             case "Clear":
-                  musicSheet.Clear();
-                  break;
+                musicSheet.Clear();
+                break;
             case "ChangeScale":
-                  musicSheet.ChangeScale();
-                  break;
+                musicSheet.ChangeScale();
+                break;
             case "MusicSheet":
-                  musicSheet.InsertSprite();
-                  break;
+                musicSheet.InsertSprite();
+                break;
             case "Next":
-                  musicSheet.pageNumber++;
-                  break;
+                musicSheet.NavigatePage(true);
+                break;
             case "Previous":
-                  musicSheet.pageNumber--;
-                  break;
+                musicSheet.NavigatePage(false);
+                break;
             case "Add":
                 musicSheet.CreatePage();
                 break;
             case "Remove":
-            break;
+                musicSheet.RemovePage();
+                break;
         };
     }
 
@@ -54,9 +54,9 @@ public class MusicSheetInputHandler:EventTrigger
         switch (objectTag)
         {
             case "MusicSheet":
-                 musicSheet.SetHover(true);
-                 isHovering = true;
-                 break;
+                musicSheet.SetHover(true);
+                isHovering = true;
+                break;
         };
     }
 
@@ -68,13 +68,13 @@ public class MusicSheetInputHandler:EventTrigger
 
     public void OnUndo(InputAction.CallbackContext context)
     {
-        if(context.performed)
-         musicSheet.Undo();
+        if (context.performed)
+            musicSheet.Undo();
     }
 
-        public void OnClear(InputAction.CallbackContext context)
+    public void OnClear(InputAction.CallbackContext context)
     {
-        if(context.performed)
-         musicSheet.Clear();
+        if (context.performed)
+            musicSheet.Clear();
     }
 }
