@@ -17,7 +17,7 @@ namespace Kingdom.Audio
         [SerializeField]
         private bool isHover = false;
         [SerializeField]
-        private Sprite[] clefSprites;
+        private ScriptableContainer clefContainer;
 
 
         private GameObject notationSpriteObject;
@@ -93,8 +93,9 @@ namespace Kingdom.Audio
 
         public void ChangeScale()
         {
+            var clefSprites = clefContainer.GetByType<ClefScriptable>().ToArray();
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
-            scaleSprite.sprite = scaleSprite.sprite == clefSprites[0] ? clefSprites[1] : clefSprites[0];
+            scaleSprite.sprite = scaleSprite.sprite == clefSprites[0].Sprite ? clefSprites[1].Sprite : clefSprites[0].Sprite;
         }
 
         public void Play()
@@ -104,7 +105,9 @@ namespace Kingdom.Audio
 
         public void InsertSprite()
         {
+            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             NotationScriptable notationSprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex];
+            var line = GetClosestLine();
 
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
@@ -123,43 +126,50 @@ namespace Kingdom.Audio
 
             notationSpriteObject.GetComponent<Image>().sprite = notationSprite.Sprite;
             newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
-            newNote.transform.position = new Vector3(newNote.transform.position.x, GetClosestLine(), newNote.transform.position.z);
+            newNote.transform.position = new Vector3(newNote.transform.position.x, line.yPos, newNote.transform.position.z);
 
             
             Note note = newNote.AddComponent<Note>();
-            note.scale = Enums.MusicTheory.Scale.MinorB;
-            note.line = 0;
+            note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+            note.line = line.index;
             note.xPos = clickPos.x;
             note.page = GetActivePageIndex();
             note.note = notationSprite;
 
-            newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Scale: {note.scale}";
+            newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
 
             actionStack.Push(note);
             this.Play();
         }
 
-        public float GetClosestLine()
+        public (float yPos, int index) GetClosestLine()
         {
             GameObject sheetLine = GameObject.Find("SheetLine");
 
             float mouseY = notationSpriteObject.transform.position.y;
             int childCount = sheetLine.transform.childCount;
             float yAux = 0;
+            int closestIndex = -1;
 
             for (int i = 0; i < childCount - 1; i++)
             {
                 GameObject line = sheetLine.transform.GetChild(i).gameObject;
                 float lineY = line.GetComponent<RectTransform>().position.y;
                 if (i == 0)
+                {
                     yAux = lineY;
+                    closestIndex = i;
+                }
                 else if (Mathf.Abs(lineY - mouseY) < Mathf.Abs(yAux - mouseY))
+                {
                     yAux = lineY;
+                    closestIndex = i;
+                }
             }
 
-
-            return yAux;
+            return (yAux, closestIndex);
         }
+
 
 
         #region Pages

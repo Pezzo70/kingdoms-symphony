@@ -1353,9 +1353,7 @@ MonoBehaviour:
   notationContainer: {fileID: 11400000, guid: c023955944d663548a0733046ee918e3, type: 2}
   offsetPosition: {x: 0, y: 0}
   isHover: 0
-  clefSprites:
-  - {fileID: -1922738197, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
-  - {fileID: 235409946, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
+  clefContainer: {fileID: 11400000, guid: a0aeb34305ea5824dae666da8f679c3d, type: 2}
 --- !u!224 &1142133050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1532,8 +1530,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MusicSheetInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 1142133057}
+        m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnUndo
         m_Mode: 0
         m_Arguments:
@@ -1548,8 +1546,8 @@ MonoBehaviour:
     m_ActionName: UI/Undo[/Keyboard/ctrl,/Keyboard/z]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MusicSheetInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 1142133057}
+        m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnClear
         m_Mode: 0
         m_Arguments:

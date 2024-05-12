@@ -4,7 +4,7 @@ using Kingdom.Enums;
 
 namespace Kingdom.Audio
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/NotationScriptable", fileName = "NotationScriptable")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Notation", fileName = "Notation")]
     public class NotationScriptable : ScriptableObject
     {
         [SerializeField] private Sprite sprite;
