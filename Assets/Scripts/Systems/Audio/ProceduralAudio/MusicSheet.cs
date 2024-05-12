@@ -114,7 +114,7 @@ using Unity.VisualScripting;
 
             GameObject newNote = new GameObject();
             newNote.transform.SetParent(SetActivePage(pageNumber).transform);
-            newNote.transform.position = new Vector3(clickPos.x, GetClosestLine(), clickPos.z);
+            newNote.transform.position = clickPos;
 
             Image renderer = newNote.AddComponent<Image>();
             renderer.raycastTarget = false;
@@ -122,6 +122,7 @@ using Unity.VisualScripting;
             renderer.sprite = notationSprites[currentSpriteIndex];
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
+            newNote.GetComponent<RectTransform>().localPosition = new Vector3(newNote.transform.position.x, GetClosestLine(), newNote.transform.position.z);
 
             notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
 
@@ -132,24 +133,37 @@ using Unity.VisualScripting;
         {
             GameObject sheetLine = GameObject.Find("SheetLine");
 
-            float mouseY =  Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+            float mouseY =  GetMousePosition().y;
             int childCount = sheetLine.transform.childCount;
             float yAux = 0;
 
             for(int i = 0; i < childCount - 1; i++){
                 GameObject line = sheetLine.transform.GetChild(i).gameObject;
-                float lineY = line.transform.position.y;
+                float lineY = line.GetComponent<RectTransform>().anchoredPosition.y;
+                Debug.Log(line.GetComponent<RectTransform>().gameObject);
                 Debug.Log(line);
                 Debug.Log(mouseY + "-" + lineY);
                 Debug.Log(lineY - mouseY);
                 if(i == 0) 
                     yAux = lineY;
-                else if((lineY - mouseY) > (yAux - mouseY)) 
+                else if((lineY - mouseY) < (yAux - mouseY)) 
                     yAux = lineY;
             }
 
+            Debug.Log(yAux);
             return yAux;
         }
+
+        private Vector2 GetMousePosition()
+        {
+            var mPos = Input.mousePosition;
+            var rect = (transform as RectTransform).rect;
+            var relX = mPos.x - rect.x;
+            var relY = mPos.y - rect.y;
+
+            return new Vector2(relX, relY);
+        }
+        
         private GameObject SetActivePage(int index)
         {
             var parentGo = GameObject.FindWithTag("Page");
