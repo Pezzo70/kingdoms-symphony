@@ -31,11 +31,11 @@ public class MenuManager : MonoBehaviour
         var menu = childs.First(sc => sc.name == "Menu");
         var sceneActive = childs.FirstOrDefault(go => go.name != "Menu" && go.activeInHierarchy);
 
-        if (sceneActive != null)
+        /*if (sceneActive != null)
         {
             AudioSystem.Instance.Play(UIAction.Return);
             sceneActive.SetActive(false);
             menu.SetActive(true);
-        }
+        }*/
     }
 }
