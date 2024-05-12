@@ -1,4 +1,9 @@
 using UnityEngine;
+using Kingdom.Audio.Procedural;
+using System.Collections.Generic;
+using Kingdom.Enums.MusicTheory;
+using System.Linq;
+using Kingdom.Enums;
 
 
 namespace Kingdom.Audio
@@ -6,12 +11,13 @@ namespace Kingdom.Audio
     public class Note : MonoBehaviour
     {
 
-        NotationScriptable note;
-        float xPos;
-        int line;
-        int page;
+        public NotationScriptable note;
+        public Scale scale;
+        public float xPos;
+        public int line;
+        public int page;
 
-        /*public static IList<KeyPlayed> ToKeysPlayed(this IList<Note> notes)
+        public static IList<KeyPlayed> ToKeysPlayed(IList<Note> notes)
         {
             IList<KeyPlayed> keysPlayed = new List<KeyPlayed>();
 
@@ -23,7 +29,7 @@ namespace Kingdom.Audio
                 KeyPlayed key = new KeyPlayed()
                 {
                     Name = Frequencies.KeyName.G2,
-                    TimePlayed = 
+                    TimePlayed = 0f 
                 };
 
                 keysPlayed.Add(key);
@@ -32,6 +38,9 @@ namespace Kingdom.Audio
             return keysPlayed;
         }
 
-        private Frequencies.KeyName GetKeyNameByChord(int line, int chord)*/
+        private static Frequencies.KeyName GetKeyNameByScale(int line, Scale scale)
+        {   
+            return Frequencies.KeyName.C0;
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace Kingdom.Audio.Procedural
             _keysPlayed.Add(key);
         }
 
-        public virtual void QueueKey(List<KeyPlayed> keys)
+        public virtual void QueueKey(IList<KeyPlayed> keys)
         {
             foreach (var key in keys)
             {

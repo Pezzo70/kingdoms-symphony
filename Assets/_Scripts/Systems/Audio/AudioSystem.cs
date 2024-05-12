@@ -4,7 +4,8 @@ using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Kingdom.Audio.Procedural;
+using System.Collections.Generic;
 
 
 namespace Kingdom.Audio
@@ -17,6 +18,11 @@ namespace Kingdom.Audio
         private AudioSource audioSource;
         [Range(0, 1)]
         private float globalVolume;
+
+        //Temp solution
+        [SerializeField]
+        private Instrument instrument;
+
         protected override void Awake()
         {
             base.Awake();
@@ -45,7 +51,7 @@ namespace Kingdom.Audio
         public void Play(Scene stage)
         {
             audioSource.Stop();
-            var audio = audioContainer.GetByType<StageAudio>().First(a => a.StageName == stage.name);
+            var audio = audioContainer.GetByType<StageAudio>().FirstOrDefault(a => a.StageName == stage.name) ?? audioContainer.GetByType<StageAudio>().First();
             audioSource.clip = audio.AudioClip;
             audioSource.volume *= audio.volume;
             audioSource.Play();
@@ -60,6 +66,14 @@ namespace Kingdom.Audio
             this.globalVolume = volume;
             this.audioSource.volume *= volume;
         }
+
+        public void PlayMusicSheet(IList<Note> notes)
+        {
+            var keys = Note.ToKeysPlayed(notes);
+            Debug.Log(notes);
+            instrument.QueueKey(keys);
+        }
+    
     }
 
 }

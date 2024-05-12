@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Container/ScriptableContainer")]
-public class ScriptableContainer : ScriptableObject
+public class ScriptableContainer : ScriptableObject, IEnumerable<ScriptableObject>
 {
     [SerializeField]
     private ScriptableObject[] scriptableObjects;
@@ -14,6 +15,11 @@ public class ScriptableContainer : ScriptableObject
 
     public IEnumerable<T> GetByType<T>(Func<T, bool> predicate)
         where T : ScriptableObject => scriptableObjects.OfType<T>().Where(predicate);
+
+    public IEnumerator<ScriptableObject> GetEnumerator()
+    {
+        return ((IEnumerable<ScriptableObject>)scriptableObjects).GetEnumerator();
+    }
 
     public T GetFirstByType<T>()
         where T : ScriptableObject
@@ -68,4 +74,8 @@ public class ScriptableContainer : ScriptableObject
         }
         return GetByType<T>(predicate).FirstOrDefault();
     }
+
+    
+    public ScriptableObject this[int i] => scriptableObjects[i];
+    IEnumerator IEnumerable.GetEnumerator() => scriptableObjects.GetEnumerator();  
 }

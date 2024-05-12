@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using Kingdom.Audio.Procedural;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,26 +11,23 @@ namespace Kingdom.Audio
     public class MusicSheet : MonoBehaviour
     {
         [SerializeField]
-        Instrument instrument;
-        [SerializeField]
-        private Sprite[] clefSprites;
-        [SerializeField]
-        private Sprite[] notationSprites;
+        private ScriptableContainer notationContainer;
         [SerializeField]
         private Vector2 offsetPosition;
         [SerializeField]
         private bool isHover = false;
+        [SerializeField]
+        private Sprite[] clefSprites;
 
 
-        private List<KeyPlayed> keysPlayed = new List<KeyPlayed>();
         private GameObject notationSpriteObject;
-        private Stack<GameObject> actionStack;
+        private Stack<Note> actionStack;
         private int currentSpriteIndex = 0;
 
         void Start()
         {
             notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
-            actionStack = new Stack<GameObject>();
+            actionStack = new Stack<Note>();
 
             GetActivePage();
         }
@@ -64,34 +63,32 @@ namespace Kingdom.Audio
 
             if (scroll > 0f)
             {
-                currentSpriteIndex = (currentSpriteIndex + 1) % notationSprites.Length;
+                currentSpriteIndex = (currentSpriteIndex + 1) % notationContainer.Count();
                 UpdateSprite();
             }
             else if (scroll < 0f)
             {
-                currentSpriteIndex = (currentSpriteIndex - 1 + notationSprites.Length) % notationSprites.Length;
+                currentSpriteIndex = (currentSpriteIndex - 1 + notationContainer.Count()) % notationContainer.Count();
                 UpdateSprite();
             }
         }
 
         void UpdateSprite()
         {
-            if (currentSpriteIndex >= 0 && currentSpriteIndex < notationSprites.Length)
-            {
-                notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
-            }
+            if (currentSpriteIndex >= 0 && currentSpriteIndex < notationContainer.Count())
+                notationSpriteObject.GetComponent<Image>().sprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex].Sprite;
         }
 
         public void Clear()
         {
             while (actionStack.Count != 0)
-                Destroy(actionStack.Pop());
+                Destroy(actionStack.Pop().gameObject);
         }
 
         public void Undo()
         {
             if (actionStack.Count > 0)
-                Destroy(actionStack.Pop());
+                Destroy(actionStack.Pop().gameObject);
         }
 
         public void ChangeScale()
@@ -102,13 +99,13 @@ namespace Kingdom.Audio
 
         public void Play()
         {
-            var key = new KeyPlayed() { Name = Frequencies.KeyName.A3, TimePlayed = 0, TimeReleased = 1 };
-            keysPlayed.Add(key);
-            instrument.QueueKey(keysPlayed);
+            AudioSystem.Instance.PlayMusicSheet(this.actionStack.AsReadOnlyList());
         }
 
         public void InsertSprite()
         {
+            NotationScriptable notationSprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex];
+
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
 
@@ -120,15 +117,26 @@ namespace Kingdom.Audio
             Image renderer = newNote.AddComponent<Image>();
             renderer.raycastTarget = false;
             renderer.preserveAspect = true;
-            renderer.sprite = notationSprites[currentSpriteIndex];
+            renderer.sprite = notationSprite.Sprite;
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
 
-            notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
+            notationSpriteObject.GetComponent<Image>().sprite = notationSprite.Sprite;
             newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
             newNote.transform.position = new Vector3(newNote.transform.position.x, GetClosestLine(), newNote.transform.position.z);
 
-            actionStack.Push(newNote);
+            
+            Note note = newNote.AddComponent<Note>();
+            note.scale = Enums.MusicTheory.Scale.MinorB;
+            note.line = 0;
+            note.xPos = clickPos.x;
+            note.page = GetActivePageIndex();
+            note.note = notationSprite;
+
+            newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Scale: {note.scale}";
+
+            actionStack.Push(note);
+            this.Play();
         }
 
         public float GetClosestLine()
@@ -177,10 +185,10 @@ namespace Kingdom.Audio
             var page = new GameObject("Page" + childCount);
             page.transform.SetParent(pageParent.transform);
             page.AddComponent<RectTransform>();
+            page.transform.localScale = Vector3.one;
 
             SetActivePage(pageParent.transform.childCount - 1);
         }
-
         public void RemovePage()
         {
             var page = GameObject.FindWithTag("Page");
@@ -228,6 +236,19 @@ namespace Kingdom.Audio
                 if (go.gameObject.activeSelf)
                     return go.gameObject;
             return null;
+        }
+
+        private int GetActivePageIndex()
+        {
+            var parentGo = GameObject.FindWithTag("Page");
+            for (int i = 0; i < parentGo.transform.childCount; i++)
+            {
+                if (parentGo.transform.GetChild(i).gameObject.activeSelf)
+                {
+                    return i;
+                }
+            }
+            return -1; // Retorna -1 se nenhum filho estiver ativo
         }
         private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Kingdom.Enums.Player.CharacterID.Roddie);
         #endregion
