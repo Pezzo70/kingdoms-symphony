@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0591171477de6ae4c88081da7d9b3580, type: 3}
+  m_Name: NoteScriptable 8
+  m_EditorClassIdentifier: 
+  sprite: {fileID: -1389133868, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
+  tempo: 16
+  noteBehaviour: 1
+  noteOrientation: 1

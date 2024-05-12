@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\AudioSystem.cs" />
+    <Compile Include="Assets\Note.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\Scripts\Managers\CursorManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\Persistence\ToOrFromJSON.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\ScriptableAudio.cs" />
+    <Compile Include="Assets\Scripts\Systems\Audio\ScriptableClasses\NoteScriptable.cs" />
     <Compile Include="Assets\Scripts\Utilities\MusicTheory\MusicTheoryEnum.cs" />
   </ItemGroup>
   <ItemGroup>
