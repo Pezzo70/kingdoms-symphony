@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
+    <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\Scrolls\Scroll.cs" />
     <Compile Include="Assets\Scripts\Systems\Audio\ProceduralAudio\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\Scripts\Systems\Player\PlayerEnum.cs" />

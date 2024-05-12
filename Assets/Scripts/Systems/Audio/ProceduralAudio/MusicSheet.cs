@@ -106,7 +106,7 @@
             renderer.raycastTarget = false;
             renderer.preserveAspect = true;
             renderer.sprite = notationSprites[currentSpriteIndex];
-            newNote.GetComponent<RectTransform>().sizeDelta = Vector2.one;
+            newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
 
             notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
