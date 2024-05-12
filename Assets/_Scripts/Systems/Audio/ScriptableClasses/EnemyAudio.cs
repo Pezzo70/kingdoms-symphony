@@ -1,6 +1,6 @@
 using Kingdom.Enums;
-using Kingdom.Enemies;
 using UnityEngine;
+using Kingdom.Enums.Enemies;
 
 namespace Kingdom.Audio
 {

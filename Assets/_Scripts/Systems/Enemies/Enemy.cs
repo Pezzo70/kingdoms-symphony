@@ -1,3 +1,4 @@
+using Kingdom.Enums.Enemies;
 using UnityEngine;
 
 namespace Kingdom.Enemies

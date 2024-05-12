@@ -1,6 +1,6 @@
 using System.Linq;
-using Kingdom.Enemies;
 using Kingdom.Enums;
+using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;

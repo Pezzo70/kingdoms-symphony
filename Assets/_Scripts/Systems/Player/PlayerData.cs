@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kingdom.Enemies;
+using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using Newtonsoft.Json;
 
