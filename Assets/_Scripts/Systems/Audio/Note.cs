@@ -18,7 +18,7 @@ namespace Kingdom.Audio
         public int line;
         public int page;
 
-        public IList<KeyPlayed> ToKeysPlayed(IList<Note> notes)
+        public static IList<KeyPlayed> ToKeysPlayed(IList<Note> notes)
         {
             IList<KeyPlayed> keysPlayed = new List<KeyPlayed>();
 
@@ -29,7 +29,7 @@ namespace Kingdom.Audio
             {
                 KeyPlayed key = new KeyPlayed()
                 {
-                    Name = FindNote(clef.Clef, note.line),
+                    Name = FindNote(note.clef.Clef, note.line),
                     TimePlayed = 0f 
                 };
 
