@@ -1,7 +1,7 @@
 using System.Linq;
 using Audio;
 using Enemies;
-using Enums;
+using KingdomEnums;
 using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;

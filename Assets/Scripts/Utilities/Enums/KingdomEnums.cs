@@ -1,4 +1,4 @@
-namespace Enums
+namespace KingdomEnums
 {
     public enum KingdomStage
     {
@@ -21,7 +21,7 @@ namespace Enums
         Defeat = 1,
         RunVictory = 2
     }
-    
+
     public enum UIAction
     {
         Hover,
@@ -30,5 +30,23 @@ namespace Enums
         PopUp,
         Pause,
         Return
+    }
+    public enum NotationBehaviour
+    {
+        Pause, Note
+    }
+
+    public enum NotationOrientation
+    {
+        Up, Down, Center
+    }
+
+    public enum Tempo
+    {
+        Whole = 1,
+        Half = 2,
+        Quarter = 4,
+        Eighth = 8,
+        Sixteenth = 16
     }
 }
