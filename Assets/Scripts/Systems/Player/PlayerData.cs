@@ -61,7 +61,7 @@ namespace Player
             var player = this._levelPerCharacter[id];
 
             player.currentXP += xpToNext;
-            while(player.currentXP < GetXPForTargetLevel(xp + 1));
+            while(player.currentXP < GetXPForTargetLevel(xp + 1))
             {
                 player.currentXP -= xpToNext;
                 player.level++;
