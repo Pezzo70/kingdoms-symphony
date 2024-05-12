@@ -33,6 +33,8 @@ public class UIEventTrigger : EventTrigger
         ExecuteUIAudio(UIAction.Hover);
         FadeIn();
         SetCursor(KingdomCursor.Hover);
+
+        base.OnPointerEnter(data);
     }
 
     public override void OnPointerExit(PointerEventData data)
@@ -42,6 +44,8 @@ public class UIEventTrigger : EventTrigger
 
         FadeOut();
         SetCursor(KingdomCursor.Default);
+
+        base.OnPointerExit(data);
     }
 
     public override void OnPointerDown(PointerEventData data)
@@ -50,6 +54,8 @@ public class UIEventTrigger : EventTrigger
             return;
          
         SetCursor(KingdomCursor.Click);
+
+        base.OnPointerDown(data);
     }
 
     public override void OnPointerUp(PointerEventData data)
@@ -60,6 +66,8 @@ public class UIEventTrigger : EventTrigger
 
         if (GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
+
+        base.OnPointerUp(data);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
@@ -76,6 +84,7 @@ public class UIEventTrigger : EventTrigger
     {
         SetCursor(KingdomCursor.Default);
         FadeOut();
+        
     }
 
     public void FadeOut() => fadeController?.Play("Fade_Out");

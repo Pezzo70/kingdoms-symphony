@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class SettingsManager : PersistentSingleton<SettingsManager>
@@ -15,7 +16,6 @@ public class SettingsManager : PersistentSingleton<SettingsManager>
     void Update()
     {
         SetResolution("30x50 @ 75Hz");
-        Debug.Log(Screen.width + "----" );
     }
     public IEnumerable<Resolution> GetSupportedResolutions() => Screen.resolutions;
 
