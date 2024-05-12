@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ScrollAnimator : MonoBehaviour
+public class ScrollAnimator : UIEventTrigger
 {
     private float originalXPosition;
     private float originalYPosition;
-
     private Animator animator;
+    public Sprite openSprite;
+    public Sprite closeSprite;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+
     public void Start()
     {
         originalXPosition = this.GetComponent<RectTransform>().anchoredPosition.x;
         originalYPosition = this.GetComponent<RectTransform>().anchoredPosition.y;
         animator = GetComponent<Animator>();
+        fadeController = animator;
         OverrideAnimator();
     }
 
-    private AnimationClip CreateExitAnimationClip()
+    private AnimationClip CreateExitAnimationClip(AnimationClip oldClip = null)
     {
-        AnimationClip clip = new AnimationClip();
+        AnimationClip clip = oldClip ?? new AnimationClip();
         clip.name = "Scroll_Close";
 
         //X Key Frames
@@ -46,11 +50,24 @@ public class ScrollAnimator : MonoBehaviour
             foreach (var a in aoc.animationClips)
             {    
                 if(a.name == "Scroll_Close")
-                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, CreateExitAnimationClip()));
+                    anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, CreateExitAnimationClip(a)));
                 else
                     anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, a));
             }
             aoc.ApplyOverrides(anims);
             animator.runtimeAnimatorController = aoc;
+    }
+
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        GetComponent<Image>().sprite = openSprite;
+        GetComponent<Animator>().Play("Scroll_Open");
+        base.OnPointerClick(eventData);
+    }
+    public override void OnCancel(BaseEventData eventData)
+    {
+        GetComponent<Image>().sprite = closeSprite;
+        GetComponent<Animator>().Play("Scroll_Close");
+        base.OnCancel(eventData);
     }
 }

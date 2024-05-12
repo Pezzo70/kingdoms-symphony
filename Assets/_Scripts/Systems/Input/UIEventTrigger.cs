@@ -7,12 +7,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static CursorManager;
 
-[RequireComponent(typeof(Selectable))]
+//[RequireComponent(typeof(Selectable))]
 [AddComponentMenu("")]
 public class UIEventTrigger : EventTrigger
 {
-    Animator fadeController;
-    Selectable selectable;
+    protected Animator fadeController;
+    protected Selectable selectable;
     [SerializeField]
     private UIAction[] supportedActionsAudio = new UIAction[] { UIAction.Hover, UIAction.Submit, UIAction.Pause, UIAction.Cancel, UIAction.PopUp, UIAction.Return};
 
@@ -24,12 +24,12 @@ public class UIEventTrigger : EventTrigger
     void Start()
     {
         TryGetComponent(out fadeController);
-        selectable = GetComponent<Selectable>();
+        TryGetComponent(out selectable);
     }
 
     public override void OnPointerEnter(PointerEventData data)
     {
-        if (!selectable.interactable)
+        if (!selectable?.interactable ?? false)
             return;
 
         ExecuteUIAudio(UIAction.Hover);
@@ -41,7 +41,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerExit(PointerEventData data)
     {
-        if (!selectable.interactable)
+        if (!selectable?.interactable ?? false)
             return;
 
         FadeOut();
@@ -52,7 +52,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerDown(PointerEventData data)
     {
-        if (!selectable.interactable)
+        if (!selectable?.interactable ?? false)
             return;
          
         SetCursor(KingdomCursor.Click);
@@ -62,7 +62,7 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerUp(PointerEventData data)
     {
-        if (!selectable.interactable)
+        if (!selectable?.interactable ?? false)
             return;
 
 
