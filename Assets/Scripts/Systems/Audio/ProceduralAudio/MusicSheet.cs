@@ -122,10 +122,11 @@ using Unity.VisualScripting;
             renderer.sprite = notationSprites[currentSpriteIndex];
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
-            newNote.GetComponent<RectTransform>().localPosition = new Vector3(newNote.transform.position.x, GetClosestLine(), newNote.transform.position.z);
 
             notationSpriteObject.GetComponent<Image>().sprite = notationSprites[currentSpriteIndex];
-
+            newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
+            newNote.transform.position = new Vector3(newNote.transform.position.x, GetClosestLine(), newNote.transform.position.z);
+            Debug.Log(newNote.transform.localPosition);
             actionStack.Push(newNote);
         }
 
@@ -133,24 +134,20 @@ using Unity.VisualScripting;
         {
             GameObject sheetLine = GameObject.Find("SheetLine");
 
-            float mouseY =  GetMousePosition().y;
+            float mouseY =  notationSpriteObject.transform.position.y;
             int childCount = sheetLine.transform.childCount;
             float yAux = 0;
 
             for(int i = 0; i < childCount - 1; i++){
                 GameObject line = sheetLine.transform.GetChild(i).gameObject;
-                float lineY = line.GetComponent<RectTransform>().anchoredPosition.y;
-                Debug.Log(line.GetComponent<RectTransform>().gameObject);
-                Debug.Log(line);
-                Debug.Log(mouseY + "-" + lineY);
-                Debug.Log(lineY - mouseY);
+                float lineY = line.GetComponent<RectTransform>().position.y;
                 if(i == 0) 
                     yAux = lineY;
-                else if((lineY - mouseY) < (yAux - mouseY)) 
+                else if(Mathf.Abs(lineY - mouseY) < Mathf.Abs(yAux - mouseY)) 
                     yAux = lineY;
             }
 
-            Debug.Log(yAux);
+
             return yAux;
         }
 
