@@ -98,9 +98,10 @@
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
 
+
             GameObject newNote = new GameObject();
             newNote.transform.SetParent(SetActivePage(pageNumber).transform);
-            newNote.transform.position = clickPos;
+            newNote.transform.position = new Vector3(clickPos.x, GetClosestLine(), clickPos.z);
 
             Image renderer = newNote.AddComponent<Image>();
             renderer.raycastTarget = false;
@@ -114,6 +115,28 @@
             actionStack.Push(newNote);
         }
 
+        public float GetClosestLine()
+        {
+            GameObject sheetLine = GameObject.Find("SheetLine");
+
+            float mouseY =  Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+            int childCount = sheetLine.transform.childCount;
+            float yAux = 0;
+
+            for(int i = 0; i < childCount - 1; i++){
+                GameObject line = sheetLine.transform.GetChild(i).gameObject;
+                float lineY = line.transform.position.y;
+                Debug.Log(line);
+                Debug.Log(mouseY + "-" + lineY);
+                Debug.Log(lineY - mouseY);
+                if(i == 0) 
+                    yAux = lineY;
+                else if((lineY - mouseY) > (yAux - mouseY)) 
+                    yAux = lineY;
+            }
+
+            return yAux;
+        }
         private GameObject SetActivePage(int index)
         {
             var parentGo = GameObject.FindWithTag("Page");
