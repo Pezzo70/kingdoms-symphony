@@ -95,6 +95,7 @@
     <Compile Include="Assets\_Scripts\Interfaces\IWeightable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instruments\Piano.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheetInputHandler.cs" />
+    <Compile Include="Assets\ScrollUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollsContainer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instrument.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\PathConstants.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAdvantage.cs" />
+    <Compile Include="Assets\ScrollContainerUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />

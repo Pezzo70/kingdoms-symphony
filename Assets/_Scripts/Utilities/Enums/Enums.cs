@@ -1,3 +1,5 @@
+using UnityEngine.WSA;
+
 namespace Kingdom.Enums
 {
     public enum KingdomStage
@@ -53,6 +55,11 @@ namespace Kingdom.Enums
     public enum Chord
     {
 
+    }
+
+    public static class MusicEnumExtensionMethods
+    {
+        public static float ToFloat(this Tempo tempo) => 1.0f / (float)tempo;
     }
 }
 
