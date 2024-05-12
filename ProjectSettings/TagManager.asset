@@ -15,6 +15,7 @@ TagManager:
   - MusicSheet
   - NotationSprite
   - Page
+  - SheetLine
   layers:
   - Default
   - TransparentFX
