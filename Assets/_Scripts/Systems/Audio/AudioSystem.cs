@@ -1,5 +1,5 @@
 using System.Linq;
-using Enemies;
+using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Player;
 using UnityEngine;

@@ -1,4 +1,4 @@
-namespace Enemies
+namespace Kingdom.Enemies
 {
     public enum EnemyID
     {

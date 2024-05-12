@@ -1,7 +1,7 @@
 using Kingdom.Enums.MusicTheory;
 using UnityEngine;
 
-namespace Enemies
+namespace Kingdom.Enemies
 {
     [CreateAssetMenu(
         fileName = "EnemyAdvantage",

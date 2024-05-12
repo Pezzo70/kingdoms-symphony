@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies
+namespace Kingdom.Enemies
 {
     [CreateAssetMenu(
         fileName = "EnemyAttack",

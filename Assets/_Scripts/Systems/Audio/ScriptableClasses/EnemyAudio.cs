@@ -1,5 +1,5 @@
-using Enemies;
 using Kingdom.Enums;
+using Kingdom.Enemies;
 using UnityEngine;
 
 namespace Kingdom.Audio

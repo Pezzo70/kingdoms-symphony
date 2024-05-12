@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies
+namespace Kingdom.Enemies
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/Enemies/Enemy", order = 1)]
     public class Enemy : ScriptableObject
