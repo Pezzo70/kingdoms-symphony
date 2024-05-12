@@ -1,6 +1,6 @@
     using System.Collections.Generic;
     using System.Linq;
-    using Unity.VisualScripting;
+using Unity.VisualScripting;
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.InputSystem;
@@ -32,7 +32,7 @@
         }
         void Update()
         {
-            notationSpriteObject.SetActive(isHover);
+            notationSpriteObject.SetActive(isHover); 
             if (isHover) 
                 SpriteFollowMouse();        
 
@@ -41,9 +41,22 @@
 
         public void SetHover(bool val) => isHover = val;
 
+    public static Vector2 GetSpriteRelativePivot(Image img)
+    {
+
+        Bounds bounds = img.sprite.bounds;
+		var pivotX = - bounds.center.x / bounds.extents.x / 2 + 0.5f;
+		var pivotY = - bounds.center.y / bounds.extents.y / 2 + 0.5f;
+        Vector2 pivotPixel = new Vector2(pivotX, pivotY);
+
+ 
+        return pivotPixel;
+    }
+
         void SpriteFollowMouse()
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            notationSpriteObject.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
             notationSpriteObject.transform.position = new Vector2(cursorPos.x + offsetPosition.x, cursorPos.y + offsetPosition.y);
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
