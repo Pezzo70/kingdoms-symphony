@@ -5,6 +5,7 @@ using Kingdom.Enums.MusicTheory;
 using System.Linq;
 using Kingdom.Enums;
 using static Kingdom.Audio.Procedural.Frequencies;
+using Unity.VisualScripting;
 
 
 namespace Kingdom.Audio
@@ -23,16 +24,18 @@ namespace Kingdom.Audio
             IList<KeyPlayed> keysPlayed = new List<KeyPlayed>();
 
 
-            var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos);
-            float beatDuration = 60.0f / 120;
+            var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
+            float beatDuration = 60.0f / 30;
 
-            foreach(var note in orderedNotes)
+            for(int i = 0; i < orderedNotes.Count; i++)
             {
+                var note = orderedNotes[i];
                 KeyPlayed key = new KeyPlayed()
                 {
                     Name = FindNote(note.clef.Clef, note.line),
-                    TimePlayed = keysPlayed.Count * beatDuration
+                    TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased,
                 };
+                key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
 
                 keysPlayed.Add(key);
             }
