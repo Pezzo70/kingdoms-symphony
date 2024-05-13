@@ -18,7 +18,8 @@ namespace Kingdom.Audio
         private bool isHover = false;
         [SerializeField]
         private ScriptableContainer clefContainer;
-
+        [SerializeField]
+        private Object pagePrefab;
 
         private GameObject notationSpriteObject;
         private Stack<Note> actionStack;
@@ -139,7 +140,7 @@ namespace Kingdom.Audio
             newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
 
             actionStack.Push(note);
-            this.Play();
+            //this.Play();
         }
 
         public (float yPos, int index) GetClosestLine()
@@ -192,10 +193,8 @@ namespace Kingdom.Audio
             var childCount = pageParent.transform.childCount + 1;
 
             if (childCount == GetMaxPage()) return;
-            var page = new GameObject("Page" + childCount);
-            page.transform.SetParent(pageParent.transform);
-            page.AddComponent<RectTransform>();
-            page.transform.localScale = Vector3.one;
+            var page = Instantiate(pagePrefab, pageParent.transform);
+           
 
             SetActivePage(pageParent.transform.childCount - 1);
         }

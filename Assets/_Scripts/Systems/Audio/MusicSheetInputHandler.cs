@@ -46,6 +46,9 @@ namespace Kingdom.Audio
                 case "Remove":
                     musicSheet.RemovePage();
                     break;
+                case "Play":
+                    musicSheet.Play();
+                    break;
             };
         }
 

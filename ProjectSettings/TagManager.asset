@@ -16,6 +16,7 @@ TagManager:
   - NotationSprite
   - Page
   - SheetLine
+  - Play
   layers:
   - Default
   - TransparentFX

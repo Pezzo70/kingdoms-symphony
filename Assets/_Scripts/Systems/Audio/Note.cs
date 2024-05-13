@@ -25,7 +25,7 @@ namespace Kingdom.Audio
 
 
             var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
-            float beatDuration = 60.0f / 30;
+            float beatDuration = 60.0f / 90;
 
             for(int i = 0; i < orderedNotes.Count; i++)
             {
