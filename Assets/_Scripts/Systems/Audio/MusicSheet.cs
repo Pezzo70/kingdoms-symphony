@@ -36,7 +36,7 @@ namespace Kingdom.Audio
 
         void Update()
         {
-            bool spriteFollow = isHover && IsClosestLineAvailable();
+            bool spriteFollow = isHover;
             notationSpriteObject.SetActive(spriteFollow);
             if (spriteFollow)
                 SpriteFollowMouse();
