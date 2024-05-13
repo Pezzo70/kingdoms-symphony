@@ -81,5 +81,28 @@ namespace Kingdom.Audio
             if (context.performed)
                 musicSheet.Clear();
         }
+
+        public void OnAdd(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                musicSheet.CreatePage();
+        }
+
+        public void OnRemove(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                musicSheet.RemovePage();
+        }
+        public void OnNext(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                musicSheet.NavigatePage(true);
+        }
+
+        public void OnPrevious(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                musicSheet.NavigatePage(false);
+        }
     }
 }
