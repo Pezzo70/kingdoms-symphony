@@ -1,7 +1,6 @@
 using System.Linq;
 using Kingdom.Audio;
 using Kingdom.Enums;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,13 +12,20 @@ public class UIEventTrigger : EventTrigger
 {
     protected Animator fadeController;
     protected Selectable selectable;
-    [SerializeField]
-    private UIAction[] supportedActionsAudio = new UIAction[] { UIAction.Hover, UIAction.Submit, UIAction.Pause, UIAction.Cancel, UIAction.PopUp, UIAction.Return};
 
+    [SerializeField]
+    private UIAction[] supportedActionsAudio = new UIAction[]
+    {
+        UIAction.Hover,
+        UIAction.Submit,
+        UIAction.Pause,
+        UIAction.Cancel,
+        UIAction.PopUp,
+        UIAction.Return
+    };
 
     public bool hasOpenBehaviour;
     public bool hasAudio = true;
-
 
     void Start()
     {
@@ -54,7 +60,7 @@ public class UIEventTrigger : EventTrigger
     {
         if (!selectable?.interactable ?? false)
             return;
-         
+
         SetCursor(KingdomCursor.Click);
 
         base.OnPointerDown(data);
@@ -64,7 +70,6 @@ public class UIEventTrigger : EventTrigger
     {
         if (!selectable?.interactable ?? false)
             return;
-
 
         if (GetCursor() is KingdomCursor.Click)
             SetCursor(KingdomCursor.Hover);
@@ -77,7 +82,6 @@ public class UIEventTrigger : EventTrigger
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
-
         ExecuteUIAudio(UIAction.Submit);
         base.OnPointerClick(eventData);
     }
@@ -86,7 +90,6 @@ public class UIEventTrigger : EventTrigger
     {
         SetCursor(KingdomCursor.Default);
         FadeOut();
-        
     }
 
     public void FadeOut() => fadeController?.Play("Fade_Out");
@@ -95,7 +98,8 @@ public class UIEventTrigger : EventTrigger
 
     private void ExecuteUIAudio(UIAction action)
     {
-        if(!hasAudio || !supportedActionsAudio.Any(a => a.Equals(action))) return;
+        if (!hasAudio || !supportedActionsAudio.Any(a => a.Equals(action)))
+            return;
         AudioSystem audio = AudioSystem.Instance;
         switch (action)
         {
@@ -107,10 +111,11 @@ public class UIEventTrigger : EventTrigger
                 audio.Play(action);
                 break;
             case UIAction.Submit:
-                if(hasOpenBehaviour) audio.Play(UIAction.PopUp);
-                else audio.Play(action);
+                if (hasOpenBehaviour)
+                    audio.Play(UIAction.PopUp);
+                else
+                    audio.Play(action);
                 break;
-
         }
     }
 }

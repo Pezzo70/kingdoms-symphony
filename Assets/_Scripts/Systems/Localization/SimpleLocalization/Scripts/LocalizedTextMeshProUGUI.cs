@@ -1,16 +1,28 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.SimpleLocalization.Scripts
 {
-	/// <summary>
-	/// Localize text component.
-	/// </summary>
+    /// <summary>
+    /// Localize text component.
+    /// </summary>
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class LocalizedTextMeshProUGUI : MonoBehaviour
     {
-        public string LocalizationKey;
+        [SerializeField]
+        private string _localizationKey;
+
+        public string LocalizationKey
+        {
+            get => _localizationKey;
+            set
+            {
+                _localizationKey = value;
+                if (!String.IsNullOrEmpty(_localizationKey))
+                    Localize();
+            }
+        }
 
         public void Start()
         {
@@ -25,7 +37,7 @@ namespace Assets.SimpleLocalization.Scripts
 
         private void Localize()
         {
-            GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(LocalizationKey);
+            GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(_localizationKey);
         }
     }
 }

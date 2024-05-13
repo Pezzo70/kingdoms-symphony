@@ -1,21 +1,20 @@
+using System.Collections.Generic;
 using System.Linq;
+using Kingdom.Audio.Procedural;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Kingdom.Audio.Procedural;
-using System.Collections.Generic;
-
 
 namespace Kingdom.Audio
 {
     public class AudioSystem : PersistentSingleton<AudioSystem>
     {
-
         [SerializeField]
         private ScriptableContainer audioContainer;
         private AudioSource audioSource;
+
         [Range(0, 1)]
         private float globalVolume;
 
@@ -51,14 +50,33 @@ namespace Kingdom.Audio
         public void Play(Scene stage)
         {
             audioSource.Stop();
-            var audio = audioContainer.GetByType<StageAudio>().FirstOrDefault(a => a.StageName == stage.name) ?? audioContainer.GetByType<StageAudio>().First();
+            var audio =
+                audioContainer
+                    .GetByType<StageAudio>()
+                    .FirstOrDefault(a => a.StageName == stage.name)
+                ?? audioContainer.GetByType<StageAudio>().First();
             audioSource.clip = audio.AudioClip;
             audioSource.volume *= audio.volume;
             audioSource.Play();
         }
 
-        public void Play(EnemyID enemy, ActorAudioTypes actorAudioType) => audioSource.PlayOneShot(audioContainer.GetFirstByType<EnemyAudio>(so => so.Enemy == enemy && so.AudioType == actorAudioType).AudioClip);
-        public void Play(CharacterID player, ActorAudioTypes actorAudioType) => audioSource.PlayOneShot(audioContainer.GetFirstByType<PlayerAudio>(so => so.Player == player && so.AudioType == actorAudioType).AudioClip);
+        public void Play(EnemyID enemy, ActorAudioTypes actorAudioType) =>
+            audioSource.PlayOneShot(
+                audioContainer
+                    .GetFirstByType<EnemyAudio>(
+                        so => so.Enemy == enemy && so.AudioType == actorAudioType
+                    )
+                    .AudioClip
+            );
+
+        public void Play(CharacterID player, ActorAudioTypes actorAudioType) =>
+            audioSource.PlayOneShot(
+                audioContainer
+                    .GetFirstByType<PlayerAudio>(
+                        so => so.Player == player && so.AudioType == actorAudioType
+                    )
+                    .AudioClip
+            );
 
         public void SetVolume(float volume)
         {
@@ -73,7 +91,5 @@ namespace Kingdom.Audio
             Debug.Log(notes);
             instrument.QueueKey(keys);
         }
-    
     }
-
 }

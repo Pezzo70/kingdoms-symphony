@@ -1,5 +1,3 @@
-using UnityEngine.WSA;
-
 namespace Kingdom.Enums
 {
     public enum KingdomStage
@@ -33,14 +31,24 @@ namespace Kingdom.Enums
         Pause,
         Return
     }
+
+    public enum UIScriptableObjectDisplayed
+    {
+        Scroll = 0,
+        Tip = 1,
+    }
+
     public enum NotationBehaviour
     {
-        Pause, Note
+        Pause,
+        Note
     }
 
     public enum NotationOrientation
     {
-        Up, Down, Center
+        Up,
+        Down,
+        Center
     }
 
     public enum Tempo
@@ -52,10 +60,7 @@ namespace Kingdom.Enums
         Sixteenth = 16
     }
 
-    public enum Chord
-    {
-
-    }
+    public enum Chord { }
 
     public static class MusicEnumExtensionMethods
     {
@@ -243,3 +248,31 @@ namespace Kingdom.Enums.Enemies
     }
 }
 
+namespace Kingdom.Enums.Tips
+{
+    public enum TipID
+    {
+        Notations = 0,
+        Metre = 1,
+        Melody = 2,
+        Key = 3,
+        Semitone = 4,
+        EnharmonicNotes = 5,
+        Chords = 6,
+        ChordsProgression = 7,
+        Tonic = 8,
+        Subdominant = 9,
+        Dominant = 10,
+        Scales = 11,
+        Modes = 12,
+        Arpeggio = 13,
+        OutOfTuneGoblin = 14,
+        SteplessWerewolf = 15,
+        UnshakenBones = 16,
+        SoundlessShadows = 17,
+        SilencedClaws = 18,
+        SoundWatcher = 19,
+        AlienCaptain = 20,
+        AbyssalVisitor = 21
+    }
+}

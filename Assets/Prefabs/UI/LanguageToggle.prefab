@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.22634, y: 0.022705078}
+  m_AnchoredPosition: {x: 0.2263403, y: 0.022705078}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4689312325225960627
@@ -112,10 +112,10 @@ RectTransform:
   m_Father: {fileID: 3321820197594439860}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.754, y: -0.00022983551}
-  m_SizeDelta: {x: 20.341, y: 20.044998}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &706461941342329453
 MonoBehaviour:
@@ -178,7 +178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  isSelected: 0
+  supportedActionsAudio: 000000000100000004000000020000000300000005000000
+  hasOpenBehaviour: 0
+  hasAudio: 1
 --- !u!95 &9104427396127634150
 Animator:
   serializedVersion: 5
@@ -388,11 +390,11 @@ RectTransform:
   m_Father: {fileID: 3321820197594439860}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.8, y: 1.5582}
-  m_SizeDelta: {x: 19.5473, y: 20.0454}
-  m_Pivot: {x: 0.50000006, y: 0.57773525}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4750554406995640563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +456,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  isSelected: 0
+  supportedActionsAudio: 000000000100000004000000020000000300000005000000
+  hasOpenBehaviour: 0
+  hasAudio: 1
 --- !u!95 &7807786603623021463
 Animator:
   serializedVersion: 5
@@ -563,6 +567,7 @@ GameObject:
   - component: {fileID: 3321820197594439860}
   - component: {fileID: 2451903297282406688}
   - component: {fileID: 5686732719814083020}
+  - component: {fileID: 2933324697425988793}
   m_Layer: 5
   m_Name: LanguageToggle
   m_TagString: Untagged
@@ -617,3 +622,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a61e18bef611f840a3c4e8dde8f3275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2933324697425988793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860890133730128888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
