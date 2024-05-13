@@ -30,9 +30,10 @@ namespace Kingdom.Audio
             for(int i = 0; i < orderedNotes.Count; i++)
             {
                 var note = orderedNotes[i];
+                KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.clef.Clef, note.line);
                 KeyPlayed key = new KeyPlayed()
                 {
-                    Name = FindNote(note.clef.Clef, note.line),
+                    Name = name,
                     TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased,
                 };
                 key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
