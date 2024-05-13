@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio.Procedural;
+using Kingdom.Enums;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -118,8 +119,12 @@ namespace Kingdom.Audio
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             NotationScriptable notationSprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex];
             var line = GetClosestLine();
+            var activePageIndex = GetActivePageIndex();
 
-            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(actionStack.Where(a => a.line == line.index && a.page == activePageIndex).Sum(a => a.note.Tempo.ToFloat()) >= 1)
+                return;
+
+            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
             clickPos.z = 0;
 
 
@@ -143,7 +148,7 @@ namespace Kingdom.Audio
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
             note.line = line.index;
             note.xPos = clickPos.x;
-            note.page = GetActivePageIndex();
+            note.page = activePageIndex;
             note.note = notationSprite;
 
             newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
