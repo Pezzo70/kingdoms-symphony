@@ -95,8 +95,17 @@ namespace Kingdom.Audio
         public void ChangeScale()
         {
             var clefSprites = clefContainer.GetByType<ClefScriptable>().ToArray();
-            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+            var scaleObject = GameObject.FindGameObjectWithTag("ChangeScale");
+            var scaleSprite = scaleObject.GetComponent<Image>();
             scaleSprite.sprite = scaleSprite.sprite == clefSprites[0].Sprite ? clefSprites[1].Sprite : clefSprites[0].Sprite;
+
+            foreach (Transform noteT in scaleObject.transform.parent)
+            {
+                Note note = null;
+                noteT.TryGetComponent<Note>(out note);
+                if(note != null)
+                  note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+            }
         }
 
         public void Play()
@@ -129,7 +138,7 @@ namespace Kingdom.Audio
             newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
             newNote.transform.position = new Vector3(newNote.transform.position.x, line.yPos, newNote.transform.position.z);
 
-            
+
             Note note = newNote.AddComponent<Note>();
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
             note.line = line.index;
@@ -194,7 +203,7 @@ namespace Kingdom.Audio
 
             if (childCount == GetMaxPage()) return;
             var page = Instantiate(pagePrefab, pageParent.transform);
-           
+
 
             SetActivePage(pageParent.transform.childCount - 1);
         }
