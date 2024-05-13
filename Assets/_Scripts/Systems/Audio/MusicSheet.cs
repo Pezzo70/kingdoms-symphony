@@ -36,8 +36,9 @@ namespace Kingdom.Audio
 
         void Update()
         {
-            notationSpriteObject.SetActive(isHover);
-            if (isHover)
+            bool spriteFollow = isHover && IsClosestLineAvailable();
+            notationSpriteObject.SetActive(spriteFollow);
+            if (spriteFollow)
                 SpriteFollowMouse();
         }
 
@@ -121,7 +122,7 @@ namespace Kingdom.Audio
             var line = GetClosestLine();
             var activePageIndex = GetActivePageIndex();
 
-            if(actionStack.Where(a => a.line == line.index && a.page == activePageIndex).Sum(a => a.note.Tempo.ToFloat()) >= 1)
+            if(!IsClosestLineAvailable())
                 return;
 
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
@@ -185,7 +186,14 @@ namespace Kingdom.Audio
             return (yAux, closestIndex);
         }
 
-
+        public bool IsClosestLineAvailable() 
+        {
+            var cLine = GetClosestLine();
+            Debug.Log(cLine.index);
+            var aPage = GetActivePageIndex();
+            return actionStack.Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) < 1;
+        }
+        
 
         #region Pages
         private GameObject SetActivePage(int index)
