@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ScrollAnimator.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Credits\CreditsTitle.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ScriptableAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Sheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedTextMeshProUGUI.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\UIAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\StageAudio.cs" />
     <Compile Include="Assets\_Scripts\Managers\PlayerManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Credits\CreditsPersona.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSync.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
     <Compile Include="Assets\_Scripts\Managers\LanguageToggleManager.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedDropdown.cs" />
     <Compile Include="Assets\_Scripts\Interfaces\IWeightable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instruments\Piano.cs" />
+    <Compile Include="Assets\_Scripts\Managers\CreditsManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Tips\TipsContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollsContainer.cs" />

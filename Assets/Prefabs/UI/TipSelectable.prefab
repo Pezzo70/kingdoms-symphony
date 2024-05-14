@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8667715182574625809}
   - component: {fileID: 2963141649368266013}
   - component: {fileID: 7333784790784417526}
+  - component: {fileID: 2923086549266095219}
   - component: {fileID: 3118800217962404549}
   m_Layer: 0
   m_Name: TipSelectable
@@ -283,6 +284,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayTarget: {fileID: 11400000, guid: d75f6557f876c924db13c46f589bcd74, type: 2}
+--- !u!114 &2923086549266095219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720725821701626792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc53142b10818042ace3df7fbac4e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  supportedActionsAudio: 000000000100000004000000020000000300000005000000
+  hasOpenBehaviour: 0
+  hasAudio: 1
+  openSprite: {fileID: 0}
+  closeSprite: {fileID: 0}
 --- !u!95 &3118800217962404549
 Animator:
   serializedVersion: 5

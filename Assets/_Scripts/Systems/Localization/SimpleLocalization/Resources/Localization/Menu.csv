@@ -1,7 +1,16 @@
-Key,Portuguese,English,Spanish,Japanese
-Menu.Play,Jogar,Play,Jugar,遊ぶ
-Menu.Scroll,Pergaminhos,Scrolls,Pergaminos,巻物
-Menu.Tip,Dicas,Tips,Consejos,Советы
-Menu.Option,Configurações,Options,Ajustes,オプション
-Menu.HowTo,Como Jogar?,How to Play,¿Como Jugar?,遊び方
-Menu.Credits,Créditos,Credits,Créditos,クレジット
+Key,Portuguese,English
+Menu.Play,Jogar,Play
+Menu.Scroll,Pergaminhos,Scrolls
+Menu.Tip,Dicas,Tips
+Menu.Option,Configurações,Options
+Menu.HowTo,Como Jogar?,How to Play
+Menu.Credits,Créditos,Credits
+Menu.Credits.Title,Kingdom's Symphony,Kingdom's Symphony
+Menu.Credits.GameDesigners,Game Designers,Game Designers
+Menu.Credits.GameProgrammers,Programadores,Programmers
+Menu.Credits.GameArtists,Artistas,Artists
+Menu.Credits.UIUXDesignersAndProgrammers,UI/UX Designers e Programadores,UX/UX Designers and Programmers
+Menu.Credits.AudioDesigners,Designers de Som,Audio Designers
+Menu.Credits.AlphaGameTesters,Game Testers do Alpha,Alpha Game Testers
+Menu.Credits.FreeAssets,Assets Gratuitos,Free Assets
+Menu.Credits.Thanks,Agradecimentos,Thanks

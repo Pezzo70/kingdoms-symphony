@@ -38,6 +38,19 @@ namespace Kingdom.Enums
         Tip = 1,
     }
 
+    public enum UICreditTitle
+    {
+        KingdomsSymphonyAlpha = 0,
+        GameDesigners = 1,
+        GameProgrammers = 2,
+        GameArtists = 3,
+        UIUXDesignersAndProgrammers = 4,
+        AudioDesigners = 5,
+        AlphaGameTesters = 6,
+        FreeAssets = 7,
+        Thanks = 8
+    }
+
     public enum NotationBehaviour
     {
         Pause,

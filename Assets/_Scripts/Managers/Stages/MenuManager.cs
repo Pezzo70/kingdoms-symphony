@@ -22,7 +22,8 @@ public class MenuManager : MonoBehaviour
 
         inputModule.cancel.action.performed += delegate
         {
-            ReturnFlow();
+            if (!childs.ToList().Find(obj => obj.name == "Credits").activeInHierarchy)
+                ReturnFlow();
         };
     }
 

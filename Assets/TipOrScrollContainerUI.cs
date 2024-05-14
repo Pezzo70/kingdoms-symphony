@@ -3,8 +3,8 @@ using Kingdom.Enums.Tips;
 using Kingdom.Scrolls;
 using UnityEngine;
 
-
-namespace Kingdom.UI {
+namespace Kingdom.UI
+{
     public class TipOrScrollContainerUI : MonoBehaviour
     {
         [Tooltip("Scroll or Tip?")]
@@ -12,16 +12,16 @@ namespace Kingdom.UI {
 
         public GameObject selectable;
 
-       
-
-        void Awake() {
-            switch (option) {
+        void Awake()
+        {
+            switch (option)
+            {
                 case UIScriptableObjectDisplayed.Tip:
-                    foreach(var tip in TipsContainer.Instance.tips) 
+                    foreach (var tip in TipsContainer.Instance.tips)
                         InstantiateChild(tip);
                     break;
                 case UIScriptableObjectDisplayed.Scroll:
-                  foreach(var scroll in ScrollsContainer.Instance.scrolls) 
+                    foreach (var scroll in ScrollsContainer.Instance.scrolls)
                         InstantiateChild(scroll);
                     break;
             }
@@ -31,12 +31,12 @@ namespace Kingdom.UI {
 
         void Update() { }
 
-        private void InstantiateChild(ScriptableObject so) {
+        private void InstantiateChild(ScriptableObject so)
+        {
             GameObject tipInstance = Instantiate(selectable);
             TipOrScrollUI content = selectable.GetComponent<TipOrScrollUI>();
             content.displayTarget = so;
             tipInstance.transform.SetParent(this.transform);
-            tipInstance.transform.SetAsFirstSibling();
         }
     }
 }
