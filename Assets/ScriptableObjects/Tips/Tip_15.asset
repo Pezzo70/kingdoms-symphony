@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aae2183d7fdbc478b12b843c41cd5d, type: 3}
   m_Name: Tip_15
   m_EditorClassIdentifier: 
-  tipID: 13
+  tipID: 15
+  isEnemy: 1
+  enemyID: 1

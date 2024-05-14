@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Tip_13
   m_EditorClassIdentifier: 
   tipID: 13
+  isEnemy: 0
+  enemyID: 0
