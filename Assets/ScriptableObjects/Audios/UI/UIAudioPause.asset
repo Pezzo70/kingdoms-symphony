@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
   audioClip: {fileID: 8300000, guid: 4ac9b0fbf39c06e48a1d2e6b3e72df5f, type: 3}
   weight: 1
-  volume: 1
+  volume: 0.305
   action: 4

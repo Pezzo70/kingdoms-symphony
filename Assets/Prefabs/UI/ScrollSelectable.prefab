@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6283748001494468746}
   - component: {fileID: 23443134706183882}
   - component: {fileID: 8339944848483877359}
-  - component: {fileID: 3442558163388037459}
   - component: {fileID: 7398113713903523755}
+  - component: {fileID: 6444874412699976177}
   m_Layer: 0
   m_Name: ScrollSelectable
   m_TagString: Untagged
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.5188679, g: 0.3450961, b: 0.3450961, a: 1}
+    m_PressedColor: {r: 0.74509805, g: 0.59607846, b: 0.37647063, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -135,24 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayTarget: {fileID: 11400000, guid: 1cd827251a667c74895e7b02c974da6e, type: 2}
---- !u!114 &3442558163388037459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810206770517265739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc53142b10818042ace3df7fbac4e6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  supportedActionsAudio: 000000000100000004000000020000000300000005000000
-  hasOpenBehaviour: 0
-  hasAudio: 1
-  openSprite: {fileID: 21300000, guid: 0259ce0526cc3e149b52a0769ab638bf, type: 3}
-  closeSprite: {fileID: 1000304268, guid: 3c1287c88c22b5041a9e096375ae49a3, type: 3}
 --- !u!95 &7398113713903523755
 Animator:
   serializedVersion: 5
@@ -163,7 +145,7 @@ Animator:
   m_GameObject: {fileID: 3810206770517265739}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b5d264e54a8615247b22bbd1d713bfd4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0ded77f977b38e444887ebd9e6801b16, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -174,6 +156,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6444874412699976177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810206770517265739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523ee081b32306d478a4ac1ee032f766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  supportedActionsAudio: 000000000100000004000000020000000300000005000000
+  hasOpenBehaviour: 0
+  hasAudio: 1
 --- !u!1 &6824347643158356499
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079b0b377dda61d41b87cf399193acad, type: 3}
   m_Name: UIAudioHover
   m_EditorClassIdentifier: Assembly-CSharp:Audio:UIAudio
-  audioClip: {fileID: 8300000, guid: 16589b1086b44564f8ebbc2b11a5f0d5, type: 3}
+  audioClip: {fileID: 8300000, guid: 327ddfabe17acb944a7ef8f151214575, type: 3}
   weight: 1
-  volume: 1
+  volume: 0.095
   action: 0

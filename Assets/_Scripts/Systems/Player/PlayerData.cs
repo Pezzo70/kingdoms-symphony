@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 
 namespace Kingdom.Player
 {
@@ -24,6 +26,18 @@ namespace Kingdom.Player
         [JsonProperty]
         private Dictionary<EnemyID, List<EnemyDisadvantageID>> _enemyDisadvangatesUnlocked;
 
+        public ReadOnlyDictionary<EnemyID, bool> EnemyInfoUnlocked
+        {
+            get => new ReadOnlyDictionary<EnemyID, bool>(_enemyInfoUnlocked);
+        }
+
+        public ReadOnlyDictionary<CharacterID, (int level, int currentXP_)> LevelPerCharacter
+        {
+            get =>
+                new ReadOnlyDictionary<CharacterID, (int level, int currentXP_)>(
+                    _levelPerCharacter
+                );
+        }
 
         public PlayerData() { }
 
@@ -54,7 +68,7 @@ namespace Kingdom.Player
 
         public void AddXP(int xp, CharacterID id)
         {
-            if(xp == 0)
+            if (xp == 0)
                 return;
 
             var xpToNext = GetXPForTargetLevel(xp + 1);
@@ -62,7 +76,7 @@ namespace Kingdom.Player
             var player = this._levelPerCharacter[id];
 
             player.currentXP += xpToNext;
-            while(player.currentXP < GetXPForTargetLevel(xp + 1))
+            while (player.currentXP < GetXPForTargetLevel(xp + 1))
             {
                 player.currentXP -= xpToNext;
                 player.level++;
@@ -74,6 +88,7 @@ namespace Kingdom.Player
         public int GetSheetPages(CharacterID id) => 2 + GetLevel(id);
 
         public int GetMoral(CharacterID id) => 4 + GetLevel(id);
+
         public int GetMana(CharacterID id) => 4 + GetLevel(id);
 
         private int GetXPForTargetLevel(int targetLevel)
@@ -89,6 +104,5 @@ namespace Kingdom.Player
 
             return (int)Math.Floor(total / 4);
         }
-        
     }
 }

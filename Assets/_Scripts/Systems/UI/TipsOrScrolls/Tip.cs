@@ -1,5 +1,6 @@
 using System;
 using Kingdom.Enemies;
+using Kingdom.Enums.Enemies;
 using UnityEngine;
 
 namespace Kingdom.Enums.Tips

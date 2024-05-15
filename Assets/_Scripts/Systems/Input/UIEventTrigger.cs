@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Kingdom.Audio;
 using Kingdom.Enums;
@@ -6,12 +7,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static CursorManager;
 
-//[RequireComponent(typeof(Selectable))]
-[AddComponentMenu("")]
 public class UIEventTrigger : EventTrigger
 {
     protected Animator fadeController;
     protected Selectable selectable;
+    private Coroutine _waitUserStayOnButton = null;
 
     [SerializeField]
     private UIAction[] supportedActionsAudio = new UIAction[]
@@ -36,11 +36,12 @@ public class UIEventTrigger : EventTrigger
     public override void OnPointerEnter(PointerEventData data)
     {
         if (!selectable?.interactable ?? false)
+        {
+            SetCursor(KingdomCursor.Locked);
             return;
+        }
 
-        ExecuteUIAudio(UIAction.Hover);
-        FadeIn();
-        SetCursor(KingdomCursor.Hover);
+        _waitUserStayOnButton = StartCoroutine(WaitUserStayOnButton());
 
         base.OnPointerEnter(data);
     }
@@ -48,10 +49,23 @@ public class UIEventTrigger : EventTrigger
     public override void OnPointerExit(PointerEventData data)
     {
         if (!selectable?.interactable ?? false)
-            return;
+        {
+            if (GetCursor() is KingdomCursor.Locked)
+                SetCursor(KingdomCursor.Default);
 
-        FadeOut();
-        SetCursor(KingdomCursor.Default);
+            return;
+        }
+
+        if (_waitUserStayOnButton == null)
+        {
+            FadeOut();
+            SetCursor(KingdomCursor.Default);
+        }
+        else
+        {
+            StopAllCoroutines();
+            _waitUserStayOnButton = null;
+        }
 
         base.OnPointerExit(data);
     }
@@ -82,6 +96,9 @@ public class UIEventTrigger : EventTrigger
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
+        if (!selectable?.interactable ?? false)
+            return;
+
         ExecuteUIAudio(UIAction.Submit);
         base.OnPointerClick(eventData);
     }
@@ -108,14 +125,18 @@ public class UIEventTrigger : EventTrigger
             case UIAction.Pause:
             case UIAction.Return:
             case UIAction.PopUp:
+            case UIAction.Submit:
                 audio.Play(action);
                 break;
-            case UIAction.Submit:
-                if (hasOpenBehaviour)
-                    audio.Play(UIAction.PopUp);
-                else
-                    audio.Play(action);
-                break;
         }
+    }
+
+    private IEnumerator WaitUserStayOnButton()
+    {
+        yield return new WaitForSeconds(0.15f);
+        ExecuteUIAudio(UIAction.Hover);
+        FadeIn();
+        SetCursor(KingdomCursor.Hover);
+        _waitUserStayOnButton = null;
     }
 }
