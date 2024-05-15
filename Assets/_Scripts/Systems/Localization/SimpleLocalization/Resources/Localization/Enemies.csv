@@ -85,3 +85,6 @@ Enemies.AttackType.Name.0,Impacto,Impact
 Enemies.AttackType.Name.1,Cortante,Sharp
 Enemies.AttackType.Name.2,Mental,Mind
 Enemies.AttackType.Name.3,Cósmico,Cosmic
+Enemies.Combat.Info.0,Ataque,Attack
+Enemies.Combat.Info.1,Vantagem,Advantage
+Enemies.Combat.Info.2,Desvantagem,Disadvantage

@@ -259,6 +259,13 @@ namespace Kingdom.Enums.Enemies
         Mind = 2,
         Cosmic = 3
     }
+
+    public enum CombatInfo
+    {
+        Attack = 0,
+        Advantage = 1,
+        Disadvantage = 2
+    }
 }
 
 namespace Kingdom.Enums.Tips

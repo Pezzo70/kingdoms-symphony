@@ -14,14 +14,14 @@ Tips.Name.11,Escalas,Scales
 Tips.Name.12,Modos,Modes
 Tips.Name.13,Arpejo,Arpeggio
 Tips.Description.0,"Notações musicais são símbolos utilizados para representar sons e elementos musicais em partituras. Existem diferentes tipos de notações musicais, cada uma com sua função específica. Algumas das notações musicais mais comuns incluem:
-        -   Notas: altura e duração dos sons.
-        -   Pausas: indicam os momentos de silêncio na música, correspondendo às durações das notas.
-        -   Claves: são símbolos colocados no início de uma pauta para indicar a altura das notas, exemplos: Clave de Sol e Clave de Fá.
-        -   Sinais de alteração: alteram a altura de uma nota em um semitom para cima (sustenido) ou para baixo (bemol).","Musical notations are symbols used to represent sounds and musical elements in sheet music. There are different types of musical notations, each with its specific function. Some of the most common musical notations include:
-        -   Notes: indicating the pitch and duration of sounds.
-        -   Rests:  indicating moments of silence in the music, corresponding to the durations of the notes.
-        -   Clefs: symbols placed at the beginning of a staff to indicate the pitch of the notes, examples: G Clef and F Clef.
-        -   Accidentals: altering the pitch of a note by a half step up (sharp) or down (flat)."
+- Notas: altura e duração dos sons.
+- Pausas: indicam os momentos de silêncio na música, correspondendo às durações das notas.
+- Claves: são símbolos colocados no início de uma pauta para indicar a altura das notas, exemplos: Clave de Sol e Clave de Fá.
+- Sinais de alteração: alteram a altura de uma nota em um semitom para cima (sustenido) ou para baixo (bemol).","Musical notations are symbols used to represent sounds and musical elements in sheet music. There are different types of musical notations, each with its specific function. Some of the most common musical notations include:
+- Notes: indicating the pitch and duration of sounds.
+- Rests:  indicating moments of silence in the music, corresponding to the durations of the notes.
+- Clefs: symbols placed at the beginning of a staff to indicate the pitch of the notes, examples: G Clef and F Clef.
+- Accidentals: altering the pitch of a note by a half step up (sharp) or down (flat)."
 Tips.Description.1,"É o padrão de agrupamento de batidas em compassos na música. Cada compasso tem um número definido de batidas, determinado pelo denominador de uma fração de compasso (como 4/4, 3/4, 6/8, etc.)","It's the standard grouping of beats into measures in music. Each measure has a defined number of beats, determined by the denominator of a time signature fraction (such as 4/4, 3/4, 6/8, etc.)."
 Tips.Description.2,"É a parte da música que se destaca acima dos acordes e do ritmo, variando em seu tamanho, forma, altura, timbre e intensidade. Lembre-se que uma das características mais importantes da melodia é que as notas são tocadas individualmente e sequencialmente. Ao escutar uma música, tente assoviar ou cantarolar aquilo que você acha que se destaca, provavelmente, será a melodia.","It's the part of the music that stands out above the chords and rhythm, varying in its size, shape, pitch, timbre, and intensity. Remember that one of the most important characteristics of melody is that the notes are played individually and sequentially. When listening to a piece of music, try to whistle or hum what you think stands out; it's likely the melody."
 Tips.Description.3,"Um tom é uma unidade de medida que representa a altura de um som - na escala musical ocidental, um tom corresponde a uma distância de dois semitons.","A key is a unit of measurement that represents the pitch of a sound - in the Western musical scale, a key corresponds to a distance of two semitones."

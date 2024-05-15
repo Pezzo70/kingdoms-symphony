@@ -82,8 +82,8 @@ public class TipOrScrollUI : MonoBehaviour
                     };
                 }
                 break;
-            case Scroll scroll:
 
+            case Scroll scroll:
                 if (
                     PlayerContainer
                         .Instance
