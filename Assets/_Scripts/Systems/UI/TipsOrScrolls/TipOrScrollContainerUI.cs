@@ -12,7 +12,7 @@ namespace Kingdom.UI
 
         public GameObject selectable;
 
-        void Awake()
+        void Start()
         {
             switch (option)
             {
@@ -26,8 +26,6 @@ namespace Kingdom.UI
                     break;
             }
         }
-
-        void Start() { }
 
         void Update() { }
 
