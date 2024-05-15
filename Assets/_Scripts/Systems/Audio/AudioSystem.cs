@@ -88,7 +88,6 @@ namespace Kingdom.Audio
         public void PlayMusicSheet(IList<Note> notes)
         {
             var keys = Note.ToKeysPlayed(notes);
-            Debug.Log(notes);
             instrument.QueueKey(keys);
         }
     }

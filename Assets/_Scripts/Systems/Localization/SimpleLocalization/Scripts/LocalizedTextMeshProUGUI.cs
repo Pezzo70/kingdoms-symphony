@@ -24,9 +24,14 @@ namespace Assets.SimpleLocalization.Scripts
             }
         }
 
+        private bool _wasReplaced = false;
+
         public void Start()
         {
-            Localize();
+            if (!_wasReplaced)
+                Localize();
+
+            _wasReplaced = false;
             LocalizationManager.OnLocalizationChanged += Localize;
         }
 
@@ -38,6 +43,17 @@ namespace Assets.SimpleLocalization.Scripts
         private void Localize()
         {
             GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(_localizationKey);
+        }
+
+        public void Replace(Tuple<string, string>[] replacements)
+        {
+            string target = GetComponent<TextMeshProUGUI>().text;
+
+            foreach (var replacement in replacements)
+                target = target.Replace(replacement.Item1, replacement.Item2);
+
+            GetComponent<TextMeshProUGUI>().text = target;
+            _wasReplaced = true;
         }
     }
 }

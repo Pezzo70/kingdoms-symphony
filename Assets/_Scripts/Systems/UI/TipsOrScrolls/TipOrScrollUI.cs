@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Assets.SimpleLocalization.Scripts;
+using Kingdom.Enemies;
 using Kingdom.Enums.Tips;
 using Kingdom.Player;
 using UnityEngine;
@@ -8,8 +10,10 @@ using UnityEngine.UI;
 public class TipOrScrollUI : MonoBehaviour
 {
     public ScriptableObject displayTarget;
+    private GameObject _targetContainer;
     private LocalizedTextMeshProUGUI _childTextMeshProUGUI;
     private Selectable _selectable;
+    private Action _handleClick = () => { };
 
     void Awake()
     {
@@ -19,6 +23,18 @@ public class TipOrScrollUI : MonoBehaviour
 
     void Start()
     {
+        GameObject tipOrScrollMenu = this.transform.parent.parent.parent.gameObject;
+
+        _handleClick += () =>
+        {
+            ScrollRect tipOrScrollMenuScrollRect = tipOrScrollMenu.GetComponent<ScrollRect>();
+            for (int i = 1; i < tipOrScrollMenu.transform.childCount; i++)
+            {
+                tipOrScrollMenu.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            tipOrScrollMenuScrollRect.enabled = false;
+        };
+
         switch (displayTarget)
         {
             case Tip tip:
@@ -28,6 +44,21 @@ public class TipOrScrollUI : MonoBehaviour
                     {
                         _childTextMeshProUGUI.LocalizationKey =
                             "Enemies.Entity.Name." + (int)tip.enemyID;
+
+                        _targetContainer = tipOrScrollMenu.transform.Find("EnemyData").gameObject;
+
+                        _handleClick += () =>
+                        {
+                            _targetContainer.SetActive(true);
+                            _targetContainer
+                                .GetComponent<DisplayEnemyData>()
+                                .SetDisplayData(
+                                    EnemiesContainer
+                                        .Instance
+                                        .enemies
+                                        .First(obj => obj.enemyID == tip.enemyID)
+                                );
+                        };
                     }
                     else
                     {
@@ -41,9 +72,18 @@ public class TipOrScrollUI : MonoBehaviour
                 {
                     _childTextMeshProUGUI.LocalizationKey =
                         _childTextMeshProUGUI.LocalizationKey + (int)tip.tipID;
+
+                    _targetContainer = tipOrScrollMenu.transform.Find("TipData").gameObject;
+
+                    _handleClick += () =>
+                    {
+                        _targetContainer.SetActive(true);
+                        _targetContainer.GetComponent<DisplayTipData>().SetDisplayData(tip);
+                    };
                 }
                 break;
             case Scroll scroll:
+
                 if (
                     PlayerContainer
                         .Instance
@@ -55,6 +95,14 @@ public class TipOrScrollUI : MonoBehaviour
                 {
                     _childTextMeshProUGUI.LocalizationKey =
                         _childTextMeshProUGUI.LocalizationKey + (int)scroll.scrollID;
+
+                    _targetContainer = tipOrScrollMenu.transform.Find("ScrollData").gameObject;
+
+                    _handleClick += () =>
+                    {
+                        _targetContainer.SetActive(true);
+                        _targetContainer.GetComponent<DisplayScrollData>().SetDisplayData(scroll);
+                    };
                 }
                 else
                 {
@@ -65,4 +113,6 @@ public class TipOrScrollUI : MonoBehaviour
                 break;
         }
     }
+
+    public void HandleClick() => _handleClick.Invoke();
 }

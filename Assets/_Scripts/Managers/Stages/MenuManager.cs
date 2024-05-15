@@ -20,22 +20,22 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < childs.Length; i++)
             childs[i] = canvas.transform.GetChild(i).gameObject;
 
-        inputModule.cancel.action.performed += delegate
-        {
-            if (!childs.ToList().Find(obj => obj.name == "Credits").activeInHierarchy)
-                ReturnFlow();
-        };
+        inputModule.cancel.action.performed += delegate { };
     }
 
     public void ReturnFlow()
     {
-        var menu = childs.First(sc => sc.name == "Menu");
-        var sceneActive = childs.FirstOrDefault(go => go.name != "Menu" && go.activeInHierarchy);
+        GameObject menu = childs.First(sc => sc.name == "Menu");
+        GameObject containerActive = childs.FirstOrDefault(
+            go => go.name != "Menu" && go.activeInHierarchy
+        );
 
-        if (sceneActive != null)
+        Debug.Log(containerActive);
+
+        if (containerActive != null)
         {
             AudioSystem.Instance.Play(UIAction.Return);
-            sceneActive.SetActive(false);
+            containerActive.SetActive(false);
             menu.SetActive(true);
         }
     }

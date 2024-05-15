@@ -18,6 +18,7 @@ MonoBehaviour:
   manaRequired: 1
   cooldown: 1
   targetMeasures: 0
+  validClef: 
   validChords: 
   validScales: 00000000010000000200000003000000040000000500000006000000
   validModes: 

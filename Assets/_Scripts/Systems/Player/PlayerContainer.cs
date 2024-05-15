@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 using Persistence;
 
@@ -26,8 +25,5 @@ namespace Kingdom.Player
                 _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
             }
         }
-
     }
-
-    
 }

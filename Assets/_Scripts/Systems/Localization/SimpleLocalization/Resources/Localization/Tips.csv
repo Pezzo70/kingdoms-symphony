@@ -33,17 +33,17 @@ Tips.Description.8,A tônica é o grau tonal principal e central em uma tonalida
 Tips.Description.9,"Possui sentido de suspensão com pouca tensão, criar uma sensação de movimento em direção à tônica e adiciona interesse harmônico sem criar a mesma tensão que a dominante.","It has a sense of suspension with little tension, creating a feeling of movement towards the tonic and adding harmonic interest without creating the same tension as the dominant."
 Tips.Description.10,"Possui sentido de suspensão com mais tensão, crucial para criar tensão e preparar a resolução de volta à tônica.","It has a sense of suspension with more tension, crucial for creating tension and preparing the resolution back to the tonic."
 Tips.Description.11,"Uma escala musical é uma sequência ordenada de notas musicais que segue um padrão específico de intervalos entre as notas - onde tais intervalos entre as notas em uma escala determinam o seu padrão tonal, por exemplo, na escala maior, o padrão de intervalos é tom-tom-semitom-tom-tom-tom-semitom.","A musical scale is an ordered sequence of musical notes that follows a specific pattern of intervals between the notes - where these intervals between the notes in a scale determine its tonal pattern, for example, in the major scale, the interval pattern is whole-whole-half-whole-whole-whole-half."
-Tips.Description.12,"Os modos musicais são escalas que derivam da escala diatônica, mas começam em diferentes graus dessa escala, resultando em padrões de intervalos únicos e sonoridades distintas
-        - Jônio (Modo Maior): é o primeiro modo da escala diatônica e começa na tônica.
-        - Dórico: começa no segundo grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-tom-semitom-tom.
-        - Frígio: começa no terceiro grau da escala diatônica e tem um padrão de intervalos de semitom-tom-tom-tom-semitom-tom-tom.
-        - Lídio: começa no quarto grau da escala diatônica e tem um padrão de intervalos de tom-tom-tom-semitom-tom-tom-semitom.
-        - Mixolídio: começa no quinto grau da escala diatônica e tem um padrão de intervalos de tom-tom-semitom-tom-tom-semitom-tom.
-        - Eólio (Modo Menor Natural): Começa no sexto grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-semitom-tom-tom.","Musical modes are scales derived from the diatonic scale, but starting on different degrees of that scale, resulting in unique interval patterns and distinct sounds.
-        - Ionian (Major Mode): It's the first mode of the diatonic scale and starts on the tonic.
-        - Dorian: It starts on the second degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-whole-half-whole.
-        - Phrygian: It starts on the third degree of the diatonic scale and has an interval pattern of half-whole-whole-whole-half-whole-whole.
-        - Lydian: It starts on the fourth degree of the diatonic scale and has an interval pattern of whole-whole-whole-half-whole-whole-half.
-        - Mixolydian: It starts on the fifth degree of the diatonic scale and has an interval pattern of whole-whole-half-whole-whole-half-whole.
-        - Aeolian (Natural Minor Mode): It starts on the sixth degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-half-whole-whole."
+Tips.Description.12,"Os modos musicais são escalas que derivam da escala diatônica, mas começam em diferentes graus dessa escala, resultando em padrões de intervalos únicos e sonoridades distintas.
+- Jônio (Modo Maior): é o primeiro modo da escala diatônica e começa na tônica;
+- Dórico: começa no segundo grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-tom-semitom-tom;
+- Frígio: começa no terceiro grau da escala diatônica e tem um padrão de intervalos de semitom-tom-tom-tom-semitom-tom-tom;
+- Lídio: começa no quarto grau da escala diatônica e tem um padrão de intervalos de tom-tom-tom-semitom-tom-tom-semitom;
+- Mixolídio: começa no quinto grau da escala diatônica e tem um padrão de intervalos de tom-tom-semitom-tom-tom-semitom-tom;
+- Eólio (Modo Menor Natural): Começa no sexto grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-semitom-tom-tom.","Musical modes are scales derived from the diatonic scale, but starting on different degrees of that scale, resulting in unique interval patterns and distinct sounds.
+- Ionian (Major Mode): It's the first mode of the diatonic scale and starts on the tonic;
+- Dorian: It starts on the second degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-whole-half-whole;
+- Phrygian: It starts on the third degree of the diatonic scale and has an interval pattern of half-whole-whole-whole-half-whole-whole;
+- Lydian: It starts on the fourth degree of the diatonic scale and has an interval pattern of whole-whole-whole-half-whole-whole-half;
+- Mixolydian: It starts on the fifth degree of the diatonic scale and has an interval pattern of whole-whole-half-whole-whole-half-whole;
+- Aeolian (Natural Minor Mode): It starts on the sixth degree of the diatonic scale and has an interval pattern of whole-half-whole-whole-half-whole-whole."
 Tips.Description.13,"Um arpejo é uma sequência de notas de um acorde tocadas uma após a outra, em vez de simultaneamente.","An arpeggio is a sequence of notes from a chord played one after the other, instead of simultaneously."

@@ -85,6 +85,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
     <Compile Include="Assets\_Scripts\Managers\CursorManager.cs" />
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Tip.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\PlayerAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\UIEventTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayEnemyData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Note.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedDropdown.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />
     <Compile Include="Assets\Animations\UI\Tips\TipsFilter.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayTipData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\FXAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Enums\Enums.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instrument.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Assets\_Scripts\Utilities\Persistence\ToOrFromJSON.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\WaveAttributes.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Enemies\EnemiesContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
