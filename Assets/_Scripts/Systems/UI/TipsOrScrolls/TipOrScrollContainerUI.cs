@@ -31,10 +31,9 @@ namespace Kingdom.UI
 
         private void InstantiateChild(ScriptableObject so)
         {
-            GameObject tipInstance = Instantiate(selectable);
-            TipOrScrollUI content = selectable.GetComponent<TipOrScrollUI>();
+            GameObject tipInstance = Instantiate(selectable, this.transform);
+            TipOrScrollUI content = tipInstance.GetComponent<TipOrScrollUI>();
             content.displayTarget = so;
-            tipInstance.transform.SetParent(this.transform);
         }
     }
 }
