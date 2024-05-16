@@ -14,21 +14,21 @@ Scrolls.Name.11,Cura entre Arpejos,Healing Through Arpeggios
 Scrolls.Name.12,Entre Escalas,Between Scales
 Scrolls.Name.13,Melódico,Melodic
 Scrolls.Name.14,Pianista com Modos,Pianist with Modes
-Scrolls.Effect.0,Aumenta a mitigação de dano do musicista em X por cada nota da escala alvo.,"Increase the damage mitigation of the musician by X for each note of the target scale."
-Scrolls.Effect.1,Aumenta o dano causado pelo musicista por nota pertencente a escala alvo em X.,Increase the damage dealt by the musician per note belonging to the target scale by X.
-Scrolls.Effect.2,Cura a moral do musicista em X%.,Heal the moral of the musician by X%
-Scrolls.Effect.3,Reduz o tempo de espera em X turnos de todos os pergaminhos do musicista.,Reduce the cooldown by X turns of all the musician's scrolls.
-Scrolls.Effect.4,"Para cada semitom, adiciona X de dano ao total no fim do turno do musicista.","For each semitone, add X damage to the total at the end of the musician's turn."
-Scrolls.Effect.5,"Para cada tom, adiciona X de dano ao total no fim do turno do musicista.","For each whole tone, add X damage to the total at the end of the musician's turn."
-Scrolls.Effect.6,"Para cada acorde adicionado pelo musicista, cause X de dano adicional por turno durante Y turnos.","For each chord added by the musician, inflict an additional X damage per turn for Y turns."
-Scrolls.Effect.7,Causa X de dano massivo nos inimigos.,Inflict X massive damage on enemies.
-Scrolls.Effect.8,Cura a moral do musicista em X para cada nota adicionada e impede qualquer cura dos inimigos no próximo turno.,Heal the musician's moral by X for each note added and prevent any healing from enemies next turn.
-Scrolls.Effect.9,"Para cada nota adicionada, o musicista recebe X de mana adicional no próximo turno.","For each note added, the musician receives an additional X mana next turn."
-Scrolls.Effect.10,"Para cada progressão realizada, diminua em X% a mitigação de dano dos inimigos por Y turnos.","For each progression performed, decrease enemy damage mitigation by X% for Y turns."
-Scrolls.Effect.11,Elimina todos os feitos negativos e cura moral em X - aplicado no musicista.,Eliminate all negative effects and morale heal by X - applied to the musician.
-Scrolls.Effect.12,Causa atordoamento nos inimigos - um dos ataques deste fica desabilitado por X turnos.,Cause enemies to be stunned - one of their attacks is disabled for X turns.
-Scrolls.Effect.13,O dano de cada nota do musicista é multiplicado em X%.,The damage of each note played by the musician is multiplied by X%.
-Scrolls.Effect.14,"Causa X de dano massivo, cura a moral em Y e por Z turnos aplica W% de migitação de dano - aplicado no musicista.","Inflict X massive damage, heal morale by Y, and for Z turns apply W% damage mitigation - applied to the musician."
+Scrolls.Effect.0,Aumenta a mitigação de dano do musicista em -X por cada nota da escala alvo.,"Increase the damage mitigation of the musician by -X for each note of the target scale."
+Scrolls.Effect.1,Aumenta o dano causado pelo musicista por nota pertencente a escala alvo em -X.,Increase the damage dealt by the musician per note belonging to the target scale by -X.
+Scrolls.Effect.2,Cura a moral do musicista em -X%.,Heal musician's morale by -X%.
+Scrolls.Effect.3,Reduz o tempo de espera em -X turnos de todos os pergaminhos do musicista.,Reduce the cooldown by -X turns of all the musician's scrolls.
+Scrolls.Effect.4,"Para cada semitom, adiciona -X de dano ao total no fim do turno do musicista.","For each semitone, add -X damage to the total at the end of the musician's turn."
+Scrolls.Effect.5,"Para cada tom, adiciona -X de dano ao total no fim do turno do musicista.","For each whole tone, add -X damage to the total at the end of the musician's turn."
+Scrolls.Effect.6,"Para cada acorde adicionado pelo musicista, cause -X de dano adicional por turno durante -Y turnos.","For each chord added by the musician, inflict an additional -X damage per turn for -Y turns."
+Scrolls.Effect.7,Causa -X de dano massivo.,Inflict -X massive damage.
+Scrolls.Effect.8,Cura a moral do musicista em -X para cada nota adicionada e impede qualquer cura dos inimigos no próximo turno.,Heal the musician's moral by -X for each note added and prevent any healing from enemies next turn.
+Scrolls.Effect.9,"Para cada nota adicionada, o musicista recebe -X de mana adicional no próximo turno.","For each note added, the musician receives an additional -X mana next turn."
+Scrolls.Effect.10,"Para cada progressão realizada, diminua em -X% a mitigação de dano dos inimigos por -Y turnos.","For each progression performed, decrease enemy damage mitigation by -X% for -Y turns."
+Scrolls.Effect.11,Elimina todos os feitos negativos e cura moral do musicista em -X. ,Eliminate all negative effects and heal musician's morale by -X .
+Scrolls.Effect.12,Causa atordoamento nos inimigos - um dos ataques deste fica desabilitado por -X turnos.,Cause enemies to be stunned - one of their attacks is disabled for -X turns.
+Scrolls.Effect.13,O dano de cada nota do musicista é multiplicado em -X%.,The damage of each note played by the musician is multiplied by -X%.
+Scrolls.Effect.14,"Causa -X de dano massivo, cura a moral em -Y e por -Z turnos aplica -W% de migitação de dano no musicista.","Inflict -X massive damage, heal morale by -Y, and for -Z turns apply -W% damage mitigation tp the musician."
 Scrolls.Objective.0,Reproduza notas de uma escala maior aleatória.,Reproduce notes from a random major scale.
 Scrolls.Objective.1,"Em um compasso, improvise uma melodia em uma escala maior aleatória.","In one measure, improvise a melody in a random major scale."
 Scrolls.Objective.2,"Para cada compasso, adicione pausas equivalentes à uma batida completa (1/4).","For each measure, add rests equivalent to a full beat (1/4)."

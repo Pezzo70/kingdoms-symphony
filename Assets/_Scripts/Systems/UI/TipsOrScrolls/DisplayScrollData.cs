@@ -34,10 +34,10 @@ public class DisplayScrollData : MonoBehaviour
         effect.Replace(
             new Tuple<string, string>[]
             {
-                new Tuple<string, string>("X", scroll.xFactor.ToString()),
-                new Tuple<string, string>("Y", scroll.yFactor.ToString()),
-                new Tuple<string, string>("Z", scroll.zFactor.ToString()),
-                new Tuple<string, string>("W", scroll.wFactor.ToString()),
+                new Tuple<string, string>("-X", scroll.xFactor.ToString()),
+                new Tuple<string, string>("-Y", scroll.yFactor.ToString()),
+                new Tuple<string, string>("-Z", scroll.zFactor.ToString()),
+                new Tuple<string, string>("-W", scroll.wFactor.ToString()),
             }
         );
 

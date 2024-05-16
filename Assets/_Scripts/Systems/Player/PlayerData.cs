@@ -39,6 +39,25 @@ namespace Kingdom.Player
                 );
         }
 
+        public ReadOnlyDictionary<EnemyID, List<EnemyAttackID>> EnemyAttacksUnlocked
+        {
+            get => new ReadOnlyDictionary<EnemyID, List<EnemyAttackID>>(_enemyAttacksUnlocked);
+        }
+
+        public ReadOnlyDictionary<EnemyID, List<EnemyAdvantageID>> EnemyAdvantagesUnlocked
+        {
+            get =>
+                new ReadOnlyDictionary<EnemyID, List<EnemyAdvantageID>>(_enemyAdvantagesUnlocked);
+        }
+
+        public ReadOnlyDictionary<EnemyID, List<EnemyDisadvantageID>> EnemyDisadvangatesUnlocked
+        {
+            get =>
+                new ReadOnlyDictionary<EnemyID, List<EnemyDisadvantageID>>(
+                    _enemyDisadvangatesUnlocked
+                );
+        }
+
         public PlayerData() { }
 
         public void CreateNewPlayerData()
