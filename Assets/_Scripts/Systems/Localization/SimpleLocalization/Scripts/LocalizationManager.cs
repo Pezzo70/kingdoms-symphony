@@ -17,7 +17,7 @@ namespace Assets.SimpleLocalization.Scripts
         public static event Action OnLocalizationChanged = () => { };
 
         public static Dictionary<string, Dictionary<string, string>> Dictionary = new();
-        private static string _language = "Portuguese";
+        private static string _language = "English";
 
         /// <summary>
         /// Get or set language.
@@ -37,7 +37,7 @@ namespace Assets.SimpleLocalization.Scripts
         /// </summary>
         public static void AutoLanguage()
         {
-            Language = "Portuguese";
+            Language = "English";
         }
 
         /// <summary>
@@ -103,8 +103,6 @@ namespace Assets.SimpleLocalization.Scripts
                     }
                 }
             }
-
-            AutoLanguage();
         }
 
         /// <summary>
@@ -137,8 +135,8 @@ namespace Assets.SimpleLocalization.Scripts
             {
                 Debug.LogWarning($"Translation not found: {localizationKey} ({Language}).");
 
-                return Dictionary["Portuguese"].ContainsKey(localizationKey)
-                    ? Dictionary["Portuguese"][localizationKey]
+                return Dictionary["English"].ContainsKey(localizationKey)
+                    ? Dictionary["English"][localizationKey]
                     : localizationKey;
             }
 

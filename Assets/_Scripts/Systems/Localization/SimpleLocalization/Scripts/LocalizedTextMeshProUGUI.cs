@@ -26,18 +26,22 @@ namespace Assets.SimpleLocalization.Scripts
 
         private bool _wasReplaced = false;
 
+        void OnEnable()
+        {
+            LocalizationManager.OnLocalizationChanged += Localize;
+        }
+
+        void OnDisable()
+        {
+            LocalizationManager.OnLocalizationChanged -= Localize;
+        }
+
         public void Start()
         {
             if (!_wasReplaced)
                 Localize();
 
             _wasReplaced = false;
-            LocalizationManager.OnLocalizationChanged += Localize;
-        }
-
-        public void OnDestroy()
-        {
-            LocalizationManager.OnLocalizationChanged -= Localize;
         }
 
         private void Localize()

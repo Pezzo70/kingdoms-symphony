@@ -21,6 +21,10 @@ public class DisclaimerHandler : MonoBehaviour
         disclaimerAnimator.SetBool("FadeOut", true);
         yield return new WaitForSeconds(1.5f);
         menu.SetActive(true);
+        var cv = menu.GetComponent<CanvasGroup>();
+        cv.blocksRaycasts = false;
         menuAnimator.SetBool("FadeIn", true);
+        yield return new WaitForSeconds(1f);
+        cv.blocksRaycasts = true;
     }
 }

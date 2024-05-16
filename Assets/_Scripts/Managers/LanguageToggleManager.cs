@@ -1,4 +1,5 @@
 using Assets.SimpleLocalization.Scripts;
+using Kingdom.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,19 @@ public class LanguageControl : MonoBehaviour
         {
             int toggleID = i;
             var toggle = togglesInGroup[i];
+
+            switch (toggleID)
+            {
+                case 0:
+                    toggle.isOn =
+                        PlayerContainer.Instance.playerConfig.LanguagePreferred == "Portuguese";
+                    break;
+                case 1:
+                    toggle.isOn =
+                        PlayerContainer.Instance.playerConfig.LanguagePreferred == "English";
+                    break;
+            }
+
             toggle
                 .onValueChanged
                 .AddListener(
@@ -24,15 +38,13 @@ public class LanguageControl : MonoBehaviour
                         OnLanguageSelected(toggle, toggleID);
                     }
                 );
-
-            if (toggle.isOn)
-                OnLanguageSelected(toggle, toggleID);
         }
     }
 
     void OnLanguageSelected(Toggle toggle, int toggleID)
     {
         if (toggle.isOn)
+        {
             switch (toggleID)
             {
                 case 0:
@@ -42,5 +54,8 @@ public class LanguageControl : MonoBehaviour
                     LocalizationManager.Language = "English";
                     break;
             }
+
+            PlayerContainer.Instance.playerConfig.SetLanguage(LocalizationManager.Language);
+        }
     }
 }

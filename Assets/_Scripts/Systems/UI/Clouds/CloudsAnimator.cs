@@ -65,7 +65,7 @@ public class CloudsAnimator : MonoBehaviour
 
     private IEnumerator CloudsAnimatorHandler()
     {
-        float intervalBetweenClouds = 0.1f;
+        float intervalBetweenClouds = 0.2f;
 
         while (true)
         {

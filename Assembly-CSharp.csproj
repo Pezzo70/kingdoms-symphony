@@ -72,6 +72,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\EndGameAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\EnemyAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\UIAudio.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Player\PlayerConfig.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\StageAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Clouds\CloudsAnimator.cs" />
     <Compile Include="Assets\_Scripts\Managers\PlayerManager.cs" />

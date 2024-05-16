@@ -25,28 +25,33 @@ namespace Kingdom.Player
         [JsonProperty]
         private Dictionary<EnemyID, List<EnemyDisadvantageID>> _enemyDisadvangatesUnlocked;
 
+        [JsonIgnore]
         public ReadOnlyDictionary<EnemyID, bool> EnemyInfoUnlocked
         {
             get => new ReadOnlyDictionary<EnemyID, bool>(_enemyInfoUnlocked);
         }
 
+        [JsonIgnore]
         public ReadOnlyDictionary<CharacterID, (int level, int currentXP)> LevelPerCharacter
         {
             get =>
                 new ReadOnlyDictionary<CharacterID, (int level, int currentXP)>(_levelPerCharacter);
         }
 
+        [JsonIgnore]
         public ReadOnlyDictionary<EnemyID, List<EnemyAttackID>> EnemyAttacksUnlocked
         {
             get => new ReadOnlyDictionary<EnemyID, List<EnemyAttackID>>(_enemyAttacksUnlocked);
         }
 
+        [JsonIgnore]
         public ReadOnlyDictionary<EnemyID, List<EnemyAdvantageID>> EnemyAdvantagesUnlocked
         {
             get =>
                 new ReadOnlyDictionary<EnemyID, List<EnemyAdvantageID>>(_enemyAdvantagesUnlocked);
         }
 
+        [JsonIgnore]
         public ReadOnlyDictionary<EnemyID, List<EnemyDisadvantageID>> EnemyDisadvangatesUnlocked
         {
             get =>
