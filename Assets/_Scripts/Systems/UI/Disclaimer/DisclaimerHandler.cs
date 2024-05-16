@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DisclaimerHandler : MonoBehaviour
@@ -10,7 +9,7 @@ public class DisclaimerHandler : MonoBehaviour
 
     void Start()
     {
-        menu.SetActive(true);
+        menu.SetActive(false);
         StartCoroutine(ShowDisclaimerAndWait());
     }
 

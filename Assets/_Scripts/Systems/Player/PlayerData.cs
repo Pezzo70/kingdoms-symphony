@@ -5,7 +5,6 @@ using System.Linq;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 
 namespace Kingdom.Player
 {
@@ -31,12 +30,10 @@ namespace Kingdom.Player
             get => new ReadOnlyDictionary<EnemyID, bool>(_enemyInfoUnlocked);
         }
 
-        public ReadOnlyDictionary<CharacterID, (int level, int currentXP_)> LevelPerCharacter
+        public ReadOnlyDictionary<CharacterID, (int level, int currentXP)> LevelPerCharacter
         {
             get =>
-                new ReadOnlyDictionary<CharacterID, (int level, int currentXP_)>(
-                    _levelPerCharacter
-                );
+                new ReadOnlyDictionary<CharacterID, (int level, int currentXP)>(_levelPerCharacter);
         }
 
         public ReadOnlyDictionary<EnemyID, List<EnemyAttackID>> EnemyAttacksUnlocked
@@ -110,7 +107,7 @@ namespace Kingdom.Player
 
         public int GetMana(CharacterID id) => 4 + GetLevel(id);
 
-        private int GetXPForTargetLevel(int targetLevel)
+        public int GetXPForTargetLevel(int targetLevel)
         {
             if (targetLevel == 10)
                 return 0;

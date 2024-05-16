@@ -6,34 +6,38 @@ using UnityEngine;
 
 namespace Assets.SimpleLocalization.Scripts
 {
-	/// <summary>
-	/// Localization manager.
-	/// </summary>
+    /// <summary>
+    /// Localization manager.
+    /// </summary>
     public static class LocalizationManager
     {
-		/// <summary>
-		/// Fired when localization changed.
-		/// </summary>
-        public static event Action OnLocalizationChanged = () => { }; 
+        /// <summary>
+        /// Fired when localization changed.
+        /// </summary>
+        public static event Action OnLocalizationChanged = () => { };
 
         public static Dictionary<string, Dictionary<string, string>> Dictionary = new();
-        private static string _language = "English";
+        private static string _language = "Portuguese";
 
-		/// <summary>
-		/// Get or set language.
-		/// </summary>
+        /// <summary>
+        /// Get or set language.
+        /// </summary>
         public static string Language
         {
             get => _language;
-            set { _language = value; OnLocalizationChanged(); }
+            set
+            {
+                _language = value;
+                OnLocalizationChanged();
+            }
         }
 
-		/// <summary>
-		/// Set default language.
-		/// </summary>
+        /// <summary>
+        /// Set default language.
+        /// </summary>
         public static void AutoLanguage()
         {
-            Language = "English";
+            Language = "Portuguese";
         }
 
         /// <summary>
@@ -41,7 +45,8 @@ namespace Assets.SimpleLocalization.Scripts
         /// </summary>
         public static void Read()
         {
-            if (Dictionary.Count > 0) return;
+            if (Dictionary.Count > 0)
+                return;
 
             var keys = new List<string>();
 
@@ -49,11 +54,13 @@ namespace Assets.SimpleLocalization.Scripts
             {
                 var textAsset = sheet.TextAsset;
                 var lines = GetLines(textAsset.text);
-				var languages = lines[0].Split(',').Select(i => i.Trim()).ToList();
+                var languages = lines[0].Split(',').Select(i => i.Trim()).ToList();
 
                 if (languages.Count != languages.Distinct().Count())
                 {
-                    Debug.LogError($"Duplicated languages found in `{sheet.Name}`. This sheet is not loaded.");
+                    Debug.LogError(
+                        $"Duplicated languages found in `{sheet.Name}`. This sheet is not loaded."
+                    );
                     continue;
                 }
 
@@ -70,11 +77,14 @@ namespace Assets.SimpleLocalization.Scripts
                     var columns = GetColumns(lines[i]);
                     var key = columns[0];
 
-                    if (key == "") continue;
+                    if (key == "")
+                        continue;
 
                     if (keys.Contains(key))
                     {
-                        Debug.LogError($"Duplicated key `{key}` found in `{sheet.Name}`. This key is not loaded.");
+                        Debug.LogError(
+                            $"Duplicated key `{key}` found in `{sheet.Name}`. This key is not loaded."
+                        );
                         continue;
                     }
 
@@ -102,7 +112,8 @@ namespace Assets.SimpleLocalization.Scripts
         /// </summary>
         public static bool HasKey(string localizationKey)
         {
-            return Dictionary.ContainsKey(Language) && Dictionary[Language].ContainsKey(localizationKey);
+            return Dictionary.ContainsKey(Language)
+                && Dictionary[Language].ContainsKey(localizationKey);
         }
 
         /// <summary>
@@ -115,24 +126,29 @@ namespace Assets.SimpleLocalization.Scripts
                 Read();
             }
 
-            if (!Dictionary.ContainsKey(Language)) throw new KeyNotFoundException("Language not found: " + Language);
+            if (!Dictionary.ContainsKey(Language))
+                throw new KeyNotFoundException("Language not found: " + Language);
 
-            var missed = !Dictionary[Language].ContainsKey(localizationKey) || Dictionary[Language][localizationKey] == "";
+            var missed =
+                !Dictionary[Language].ContainsKey(localizationKey)
+                || Dictionary[Language][localizationKey] == "";
 
             if (missed)
             {
                 Debug.LogWarning($"Translation not found: {localizationKey} ({Language}).");
 
-                return Dictionary["English"].ContainsKey(localizationKey) ? Dictionary["English"][localizationKey] : localizationKey;
+                return Dictionary["Portuguese"].ContainsKey(localizationKey)
+                    ? Dictionary["Portuguese"][localizationKey]
+                    : localizationKey;
             }
 
             return Dictionary[Language][localizationKey];
         }
 
-	    /// <summary>
-	    /// Get localized value by localization key.
-	    /// </summary>
-		public static string Localize(string localizationKey, params object[] args)
+        /// <summary>
+        /// Get localized value by localization key.
+        /// </summary>
+        public static string Localize(string localizationKey, params object[] args)
         {
             var pattern = Localize(localizationKey);
 
@@ -142,23 +158,44 @@ namespace Assets.SimpleLocalization.Scripts
         public static List<string> GetLines(string text)
         {
             text = text.Replace("\r\n", "\n").Replace("\"\"", "[_quote_]");
-            
+
             var matches = Regex.Matches(text, "\"[\\s\\S]+?\"");
 
             foreach (Match match in matches)
             {
-                text = text.Replace(match.Value, match.Value.Replace("\"", null).Replace(",", "[_comma_]").Replace("\n", "[_newline_]"));
+                text = text.Replace(
+                    match.Value,
+                    match
+                        .Value
+                        .Replace("\"", null)
+                        .Replace(",", "[_comma_]")
+                        .Replace("\n", "[_newline_]")
+                );
             }
 
             // Making uGUI line breaks to work in asian texts.
-            text = text.Replace("。", "。 ").Replace("、", "、 ").Replace("：", "： ").Replace("！", "！ ").Replace("（", " （").Replace("）", "） ").Trim();
+            text = text.Replace("。", "。 ")
+                .Replace("、", "、 ")
+                .Replace("：", "： ")
+                .Replace("！", "！ ")
+                .Replace("（", " （")
+                .Replace("）", "） ")
+                .Trim();
 
             return text.Split('\n').Where(i => i != "").ToList();
         }
 
         public static List<string> GetColumns(string line)
         {
-            return line.Split(',').Select(j => j.Trim()).Select(j => j.Replace("[_quote_]", "\"").Replace("[_comma_]", ",").Replace("[_newline_]", "\n")).ToList();
+            return line.Split(',')
+                .Select(j => j.Trim())
+                .Select(
+                    j =>
+                        j.Replace("[_quote_]", "\"")
+                            .Replace("[_comma_]", ",")
+                            .Replace("[_newline_]", "\n")
+                )
+                .ToList();
         }
     }
 }

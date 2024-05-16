@@ -114,6 +114,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instrument.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\PathConstants.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipsContainer.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\CharacterSelection\CharacterHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAdvantage.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
