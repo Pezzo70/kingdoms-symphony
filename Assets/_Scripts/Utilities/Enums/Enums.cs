@@ -48,7 +48,8 @@ namespace Kingdom.Enums
         AudioDesigners = 5,
         AlphaGameTesters = 6,
         FreeAssets = 7,
-        Thanks = 8
+        Thanks = 8,
+        Localisation = 9,
     }
 
     public enum NotationBehaviour

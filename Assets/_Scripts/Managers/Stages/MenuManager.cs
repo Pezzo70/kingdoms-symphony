@@ -30,8 +30,6 @@ public class MenuManager : MonoBehaviour
             go => go.name != "Menu" && go.activeInHierarchy
         );
 
-        Debug.Log(containerActive);
-
         if (containerActive != null)
         {
             AudioSystem.Instance.Play(UIAction.Return);
