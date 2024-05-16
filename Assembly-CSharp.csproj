@@ -84,6 +84,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ClefScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\Disclaimer\DisclaimerHandler.cs" />
     <Compile Include="Assets\_Scripts\Managers\CursorManager.cs" />
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
