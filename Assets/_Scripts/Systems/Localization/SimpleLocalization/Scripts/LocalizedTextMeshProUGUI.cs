@@ -44,7 +44,7 @@ namespace Assets.SimpleLocalization.Scripts
             _wasReplaced = false;
         }
 
-        private void Localize()
+        public void Localize()
         {
             GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(_localizationKey);
         }

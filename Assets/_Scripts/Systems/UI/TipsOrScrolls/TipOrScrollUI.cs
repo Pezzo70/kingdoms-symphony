@@ -15,6 +15,11 @@ public class TipOrScrollUI : MonoBehaviour
     private Selectable _selectable;
     private Action _handleClick = () => { };
 
+    void OnEnable()
+    {
+        _childTextMeshProUGUI.Localize();
+    }
+
     void Awake()
     {
         _childTextMeshProUGUI = GetComponentInChildren<LocalizedTextMeshProUGUI>();
