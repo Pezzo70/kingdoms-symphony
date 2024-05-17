@@ -1,4 +1,5 @@
 using System.Collections;
+using Kingdom.Player;
 using UnityEngine;
 
 public class DisclaimerHandler : MonoBehaviour
@@ -10,7 +11,14 @@ public class DisclaimerHandler : MonoBehaviour
     void Start()
     {
         menu.SetActive(false);
-        StartCoroutine(ShowDisclaimerAndWait());
+
+        if (PlayerContainer.Instance.playerConfig.SawDisclaimer)
+            StartCoroutine(DisplayMenu());
+        else
+        {
+            PlayerContainer.Instance.playerConfig.SetSawDisclaimer(true);
+            StartCoroutine(ShowDisclaimerAndWait());
+        }
     }
 
     private IEnumerator ShowDisclaimerAndWait()
@@ -20,6 +28,11 @@ public class DisclaimerHandler : MonoBehaviour
         disclaimerAnimator.SetBool("FadeIn", false);
         disclaimerAnimator.SetBool("FadeOut", true);
         yield return new WaitForSeconds(1.5f);
+        StartCoroutine(DisplayMenu());
+    }
+
+    private IEnumerator DisplayMenu()
+    {
         menu.SetActive(true);
         var cv = menu.GetComponent<CanvasGroup>();
         cv.blocksRaycasts = false;

@@ -18,7 +18,6 @@ namespace Kingdom.Audio
         [Range(0, 1)]
         private float globalVolume;
 
-        //Temp solution
         [SerializeField]
         private Instrument instrument;
 

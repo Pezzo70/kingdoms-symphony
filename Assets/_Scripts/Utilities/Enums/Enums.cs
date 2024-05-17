@@ -80,6 +80,12 @@ namespace Kingdom.Enums
     {
         public static float ToFloat(this Tempo tempo) => 1.0f / (float)tempo;
     }
+
+    public enum LevelTransitionOption
+    {
+        In = 0,
+        Out = 1
+    }
 }
 
 namespace Kingdom.Enums.FX

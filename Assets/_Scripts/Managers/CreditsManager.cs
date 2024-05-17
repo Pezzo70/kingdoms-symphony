@@ -10,6 +10,7 @@ public class CreditsManager : MonoBehaviour
 {
     public GameObject creditsTitle;
     public GameObject creditsPersona;
+    public GameObject menu;
 
     public Animator backgroundAnimator;
     public Animator logoAnimator;
@@ -75,7 +76,8 @@ public class CreditsManager : MonoBehaviour
 
         logoAnimator.SetBool("FadeOut", false);
 
-        FindObjectOfType<MenuManager>().ReturnFlow();
+        this.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
     }
 
     private void InstantiateChild(ScriptableObject so)

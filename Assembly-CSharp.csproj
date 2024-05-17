@@ -109,6 +109,7 @@
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />
     <Compile Include="Assets\Animations\UI\Tips\TipsFilter.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\LevelTransition\LevelTransitionHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayTipData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\FXAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Enums\Enums.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\WaveAttributes.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemiesContainer.cs" />
+    <Compile Include="Assets\_Scripts\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />

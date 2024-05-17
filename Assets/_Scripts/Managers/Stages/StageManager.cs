@@ -1,13 +1,20 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public void LoadScene(int sceneID) => SceneManager.LoadScene(sceneID);
-
-    public void LoadScene(Scene scene) => SceneManager.LoadScene(scene.name);
-
-    public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
+    public void LoadScene(int sceneID)
+    {
+        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        StartCoroutine(WaitToLoad(sceneID));
+    }
 
     public void GoToMenu() => SceneManager.LoadScene("Menu");
+
+    private IEnumerator WaitToLoad(int sceneID)
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(sceneID);
+    }
 }

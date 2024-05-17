@@ -7,7 +7,13 @@ public abstract class StaticInstance<T> : MonoBehaviour
     [JsonIgnore]
     public static T Instance { get; private set; }
 
-    protected virtual void Awake() => Instance = this as T;
+    protected virtual void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this as T;
+        }
+    }
 
     protected virtual void OnApplicationQuit()
     {
@@ -23,6 +29,7 @@ public abstract class Singleton<T> : StaticInstance<T>
     {
         if (Instance != null)
             Destroy(gameObject);
+
         base.Awake();
     }
 }

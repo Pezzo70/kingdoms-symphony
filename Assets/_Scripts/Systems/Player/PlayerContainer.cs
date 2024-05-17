@@ -1,8 +1,5 @@
-using Assets.SimpleLocalization.Scripts;
 using Newtonsoft.Json;
 using Persistence;
-using Unity;
-using UnityEngine;
 
 namespace Kingdom.Player
 {
@@ -17,20 +14,32 @@ namespace Kingdom.Player
         protected override void Awake()
         {
             base.Awake();
+            LoadPlayerData();
+            LoadConfig();
+        }
 
-            if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerConfigPath))
-            {
-                playerConfig = ToOrFromJSON.DeserializeFromJSON<PlayerConfig>(
-                    PathConstants.PlayerConfigPath
-                );
-            }
-            else
-            {
-                playerConfig = new PlayerConfig();
-                playerConfig.CreateNewPlayerConfig();
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
-            }
+        void Start()
+        {
+            playerConfig.ApplyConfig();
+        }
 
+        void OnEnable()
+        {
+            EventManager.Save += SavePlayerData;
+            EventManager.Save += SaveConfig;
+        }
+
+        void OnDisable()
+        {
+            EventManager.Save -= SavePlayerData;
+            EventManager.Save -= SaveConfig;
+        }
+
+        private void SaveConfig() =>
+            _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
+
+        private void LoadConfig()
+        {
             if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerDataPath))
             {
                 playerData = ToOrFromJSON.DeserializeFromJSON<PlayerData>(
@@ -41,20 +50,36 @@ namespace Kingdom.Player
             {
                 playerData = new PlayerData();
                 playerData.CreateNewPlayerData();
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
+                SaveConfig();
             }
         }
 
-        void Start()
+        private void SavePlayerData() =>
+            ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
+
+        private void LoadPlayerData()
         {
-            playerConfig.ApplyConfig();
+            if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerConfigPath))
+            {
+                playerConfig = ToOrFromJSON.DeserializeFromJSON<PlayerConfig>(
+                    PathConstants.PlayerConfigPath
+                );
+            }
+            else
+            {
+                playerConfig = new PlayerConfig();
+                playerConfig.CreateNewPlayerConfig();
+                SavePlayerData();
+            }
         }
 
         protected override void OnApplicationQuit()
         {
-            _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
-            _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
-
+            if (playerData is not null || playerConfig is not null)
+            {
+                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
+                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
+            }
             base.OnApplicationQuit();
         }
     }
