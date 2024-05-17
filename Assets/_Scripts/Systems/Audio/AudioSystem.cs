@@ -26,19 +26,12 @@ namespace Kingdom.Audio
             base.Awake();
             audioSource = GetComponent<AudioSource>();
             globalVolume = 1.0f;
+            OnSceneLoaded(SceneManager.GetActiveScene());
         }
 
-        void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
+        public void OnSceneLoaded(Scene scene) => this.Play(scene);
 
-        void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode) => this.Play(scene);
+        public void OnSceneUnloaded() => audioSource.Stop();
 
         public void Play(UIAction action)
         {

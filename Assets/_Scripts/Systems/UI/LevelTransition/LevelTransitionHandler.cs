@@ -1,4 +1,5 @@
 using System.Collections;
+using Kingdom.Audio;
 using Kingdom.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -58,6 +59,7 @@ public class LevelTransitionHandler : PersistentSingleton<LevelTransitionHandler
     private IEnumerator HandleOut()
     {
         yield return new WaitForSeconds(8f);
+        AudioSystem.Instance.OnSceneLoaded(SceneManager.GetActiveScene());
         circleBackgroundAnimator.Play("Circle_Out");
         spinnerAnimator.Play("Fade_Out");
         yield return new WaitForSeconds(2f);

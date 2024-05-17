@@ -1,4 +1,5 @@
 using System.Collections;
+using Kingdom.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,7 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator WaitToLoad(int sceneID)
     {
+        AudioSystem.Instance.OnSceneUnloaded();
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(sceneID);
     }
