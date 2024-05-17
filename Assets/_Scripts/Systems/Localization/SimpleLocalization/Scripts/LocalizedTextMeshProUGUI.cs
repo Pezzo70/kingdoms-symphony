@@ -31,7 +31,7 @@ namespace Assets.SimpleLocalization.Scripts
             LocalizationManager.OnLocalizationChanged += Localize;
         }
 
-        void OnDisable()
+        void OnDestroy()
         {
             LocalizationManager.OnLocalizationChanged -= Localize;
         }
