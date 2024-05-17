@@ -58,7 +58,7 @@ public class LevelTransitionHandler : PersistentSingleton<LevelTransitionHandler
 
     private IEnumerator HandleOut()
     {
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(6f);
         AudioSystem.Instance.OnSceneLoaded(SceneManager.GetActiveScene());
         circleBackgroundAnimator.Play("Circle_Out");
         spinnerAnimator.Play("Fade_Out");

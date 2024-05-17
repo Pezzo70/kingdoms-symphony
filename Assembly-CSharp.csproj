@@ -81,7 +81,6 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
     <Compile Include="Assets\_Scripts\Managers\LanguageToggleManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\NotationScriptable.cs" />
-    <Compile Include="Assets\_Scripts\Managers\Stages\MenuManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ClefScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
@@ -105,6 +104,7 @@
     <Compile Include="Assets\_Scripts\Managers\CreditsManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollUI.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\Pause\PauseHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollsContainer.cs" />
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />

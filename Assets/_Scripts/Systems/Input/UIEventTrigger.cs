@@ -115,9 +115,11 @@ public class UIEventTrigger : EventTrigger
 
     private void ExecuteUIAudio(UIAction action)
     {
-        if (!hasAudio || !supportedActionsAudio.Any(a => a.Equals(action)))
-            return;
         AudioSystem audio = AudioSystem.Instance;
+
+        if (!hasAudio || !supportedActionsAudio.Any(a => a.Equals(action)) || audio is null)
+            return;
+
         switch (action)
         {
             case UIAction.Hover:
