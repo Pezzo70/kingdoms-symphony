@@ -128,7 +128,7 @@ namespace Kingdom.Audio
        {
              Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             var line = GetClosestLine();
-            NotationScriptable notationSprite = line.index > 5 ? upNotations[currentSpriteIndex] : downNotations[currentSpriteIndex];
+            NotationScriptable notationSprite = line.index < 5 ? upNotations[currentSpriteIndex] : downNotations[currentSpriteIndex];
             var activePageIndex = GetActivePageIndex();
 
             if(!IsClosestLineAvailable())
