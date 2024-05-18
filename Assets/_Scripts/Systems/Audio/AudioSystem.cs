@@ -26,6 +26,9 @@ namespace Kingdom.Audio
         [SerializeField]
         private Instrument instrument;
 
+        [SerializeField]
+        private AudioSource effectSource;
+
         protected override void Awake()
         {
             base.Awake();
@@ -41,7 +44,7 @@ namespace Kingdom.Audio
         public void Play(UIAction action)
         {
             var audio = audioContainer.GetByType<UIAudio>().First(a => a.Action == action);
-            audioSource.PlayOneShot(audio.AudioClip, audio.volume * effectVolume);
+            effectSource.PlayOneShot(audio.AudioClip, audio.volume * effectVolume);
         }
 
         public void Play(Scene stage)
@@ -60,7 +63,7 @@ namespace Kingdom.Audio
         }
 
         public void Play(EnemyID enemy, ActorAudioTypes actorAudioType) =>
-            audioSource.PlayOneShot(
+            effectSource.PlayOneShot(
                 audioContainer
                     .GetFirstByType<EnemyAudio>(
                         so => so.Enemy == enemy && so.AudioType == actorAudioType
@@ -69,7 +72,7 @@ namespace Kingdom.Audio
             );
 
         public void Play(CharacterID player, ActorAudioTypes actorAudioType) =>
-            audioSource.PlayOneShot(
+            effectSource.PlayOneShot(
                 audioContainer
                     .GetFirstByType<PlayerAudio>(
                         so => so.Player == player && so.AudioType == actorAudioType
@@ -81,7 +84,7 @@ namespace Kingdom.Audio
         public void Play(IList<Note> notes) => instrument.QueueKey(Note.ToKeysPlayed(notes));
 
         public void Play(FXID effect) =>
-            audioSource.PlayOneShot(
+            effectSource.PlayOneShot(
                 audioContainer.GetFirstByType<FXAudio>(so => so.fxID == effect).AudioClip,
                 effectVolume
             );

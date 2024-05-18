@@ -41,7 +41,8 @@ namespace Kingdom.Audio.Procedural
         523.25f,  554.37f,  587.33f,  622.25f,  659.25f,  698.46f,  739.99f,  783.99f,  830.61f,  880.00f,  932.33f,  987.77f,
         1046.50f, 1108.73f, 1174.66f, 1244.51f, 1318.51f, 1396.91f, 1479.98f, 1567.98f, 1661.22f, 1760.00f, 1864.66f, 1975.53f,
         2093.00f, 2217.46f, 2349.32f, 2489.02f, 2637.02f, 2793.83f, 2959.96f, 3135.96f, 3322.44f, 3520.00f, 3729.31f, 3951.07f,
-        4186.01f, 4434.92f, 4698.63f, 4978.03f, 5274.04f, 5587.65f, 5919.91f, 6271.93f, 6648.88f, 7040.00f, 7458.62f, 7902.14f
+        4186.01f, 4434.92f, 4698.63f, 4978.03f, 5274.04f, 5587.65f, 5919.91f, 6271.93f, 6648.88f, 7040.00f, 7458.62f, 7902.14f,
+        0f
         };
 
         public enum KeyName
@@ -64,7 +65,8 @@ namespace Kingdom.Audio.Procedural
             /* 84*/
             C7, CSharp7, D7, DSharp7, E7, F7, FSharp7, G7, GSharp7, A7, ASharp7, B7, // fourth line
             /* 96*/
-            C8, CSharp8, D8, DSharp8, E8, F8, FSharp8, G8, GSharp8, A8, ASharp8, B8  // fith line
+            C8, CSharp8, D8, DSharp8, E8, F8, FSharp8, G8, GSharp8, A8, ASharp8, B8,  // fith line
+            Pause
         }
 
         public static float GetFrequency(this KeyName kn) => Frequencies.Fundamental[(int)kn];

@@ -25,14 +25,15 @@ namespace Kingdom.Audio
 
 
             var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
-            float beatDuration = 60.0f / 30;
+            float beatDuration = 60.0f / 90;
 
             for(int i = 0; i < orderedNotes.Count; i++)
             {
                 var note = orderedNotes[i];
+                KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.clef.Clef, note.line);
                 KeyPlayed key = new KeyPlayed()
                 {
-                    Name = FindNote(note.clef.Clef, note.line),
+                    Name = name,
                     TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased,
                 };
                 key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
