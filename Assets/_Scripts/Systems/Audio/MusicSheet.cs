@@ -88,7 +88,7 @@ namespace Kingdom.Audio
         void UpdateSprite()
         {
             if (currentSpriteIndex >= 0 && currentSpriteIndex < upNotations.Count())
-                notationSpriteObject.GetComponent<Image>().sprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex].Sprite;
+                notationSpriteObject.GetComponent<Image>().sprite = upNotations[currentSpriteIndex].Sprite;
         }
 
         public void Clear()
@@ -127,8 +127,8 @@ namespace Kingdom.Audio
         public void InsertSprite()
         {
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
-            NotationScriptable notationSprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex];
             var line = GetClosestLine();
+            NotationScriptable notationSprite = line.index > 5 ? upNotations[currentSpriteIndex] : downNotations[currentSpriteIndex];
             var activePageIndex = GetActivePageIndex();
 
             if(!IsClosestLineAvailable())
