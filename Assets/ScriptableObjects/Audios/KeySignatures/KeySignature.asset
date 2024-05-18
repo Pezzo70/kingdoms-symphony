@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0591171477de6ae4c88081da7d9b3580, type: 3}
-  m_Name: NoteScriptable 15
+  m_Script: {fileID: 11500000, guid: 6554742d1e3112c428dd93198d9c03a5, type: 3}
+  m_Name: KeySignature
   m_EditorClassIdentifier: 
   sprite: {fileID: 1117232533, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
-  tempo: 1
-  noteBehaviour: 1
-  noteOrientation: 2
+  keySignature: 0

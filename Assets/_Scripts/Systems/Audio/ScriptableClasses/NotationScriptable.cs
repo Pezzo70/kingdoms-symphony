@@ -15,6 +15,7 @@ namespace Kingdom.Audio
         public Sprite Sprite { get => sprite; private set => sprite = value; }
         public Tempo Tempo { get => tempo; private set => tempo = value; }
         public NotationBehaviour NoteBehaviour { get => noteBehaviour; private set => noteBehaviour = value; }
+        public NotationOrientation NoteOrientation{ get => noteOrientation;}
     }
 }
 
