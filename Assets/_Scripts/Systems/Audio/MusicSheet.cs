@@ -123,10 +123,10 @@ namespace Kingdom.Audio
         {
             AudioSystem.Instance.Play(this.actionStack.AsReadOnlyList());
         }
-
-        public void InsertSprite()
-        {
-            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+ 
+       public void InsertNote()
+       {
+             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             var line = GetClosestLine();
             NotationScriptable notationSprite = line.index > 5 ? upNotations[currentSpriteIndex] : downNotations[currentSpriteIndex];
             var activePageIndex = GetActivePageIndex();
@@ -143,7 +143,7 @@ namespace Kingdom.Audio
             newNote.transform.position = clickPos;
 
             Image renderer = newNote.AddComponent<Image>();
-            renderer.raycastTarget = false;
+            renderer.raycastTarget = true;
             renderer.preserveAspect = true;
             renderer.sprite = notationSprite.Sprite;
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
@@ -164,9 +164,11 @@ namespace Kingdom.Audio
             newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
 
             actionStack.Push(note);
-            //this.Play();
-        }
+       }
+       public void InsertKeySignature()
+       {
 
+       }
         public (float yPos, int index) GetClosestLine()
         {
             GameObject sheetLine = GameObject.Find("SheetLine");
@@ -293,4 +295,6 @@ namespace Kingdom.Audio
         private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Kingdom.Enums.Player.CharacterID.Roddie);
         #endregion
     }
+
+
 }

@@ -32,7 +32,7 @@ namespace Kingdom.Audio
                     musicSheet.ChangeScale();
                     break;
                 case "MusicSheet":
-                    musicSheet.InsertSprite();
+                    musicSheet.InsertNote();
                     break;
                 case "Next":
                     musicSheet.NavigatePage(true);
@@ -48,6 +48,12 @@ namespace Kingdom.Audio
                     break;
                 case "Play":
                     musicSheet.Play();
+                    break;
+                case "KeySignature":
+                    musicSheet.InsertKeySignature();
+                    break;
+                case "Note":
+                    //musicSheet.RemoveNote();
                     break;
             };
         }
