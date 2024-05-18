@@ -198,6 +198,11 @@ namespace Kingdom.Enums.MusicTheory
         G = 0,
         F = 1
     }
+
+    public enum KeySignature
+    {
+        Sharp, Flat 
+    }
 }
 
 namespace Kingdom.Enums.Enemies
