@@ -387,6 +387,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360d074822606ac46a4d0dd5f6b8e510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolumeSlider: {fileID: 680029350136445363}
+  instrumentVolumeSlider: {fileID: 2301407725308088386}
+  ambienceVolumeSlider: {fileID: 5484405666235344667}
+  effectVolumeSlider: {fileID: 7997855008024218488}
+  fullScreenToggle: {fileID: 2289918934463458959}
+  resolutionDropdown: {fileID: 8561431142589805292}
 --- !u!1 &652530857652005488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,7 +3503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3631014082640180651}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+        m_MethodName: SetInstrumentVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
