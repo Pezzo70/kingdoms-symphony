@@ -25,14 +25,14 @@ namespace Kingdom.Player
 
         void OnEnable()
         {
-            EventManager.Save += SavePlayerData;
-            EventManager.Save += SaveConfig;
+            EventManager.SavePlayerData += SavePlayerData;
+            EventManager.SavePlayerConfig += SaveConfig;
         }
 
         void OnDisable()
         {
-            EventManager.Save -= SavePlayerData;
-            EventManager.Save -= SaveConfig;
+            EventManager.SavePlayerData -= SavePlayerData;
+            EventManager.SavePlayerConfig -= SaveConfig;
         }
 
         private void SaveConfig() =>
