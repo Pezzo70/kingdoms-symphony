@@ -17,7 +17,7 @@ namespace Kingdom.Audio
         private AudioSource audioSource;
 
         [Range(0, 1)]
-        private float globalVolume, ambienceVolume, effectVolume, musicVolume;
+        private float globalVolume, ambienceVolume, effectVolume, musicVolume = 1.0f;
         private ScriptableAudio currentAudio;
 
         [SerializeField]
