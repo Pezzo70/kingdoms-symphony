@@ -55,7 +55,7 @@ namespace Kingdom.Audio
             currentAudio = audio;
             audioSource.clip = audio.AudioClip;
             audioSource.volume =
-                audio.volume * (audio.StageName == "Menu" ? musicVolume : ambienceVolume) * 100;
+                audio.volume * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume) * 100;
             audioSource.Play();
         }
 
