@@ -115,10 +115,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1648
-        width: 512
+        width: 485
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,10 +136,10 @@ TextureImporter:
         serializedVersion: 2
         x: 512
         y: 1648
-        width: 512
+        width: 497
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,10 +157,10 @@ TextureImporter:
         serializedVersion: 2
         x: 1024
         y: 1648
-        width: 512
+        width: 497
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 512
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,10 +199,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 1248
-        width: 512
+        width: 477
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: attack_effect_indicators_5
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1248
-        width: 512
+        x: 517
+        y: 1224
+        width: 476
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: attack_effect_indicators_6
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1248
-        width: 512
+        x: 1078
+        y: 1240
+        width: 410
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,10 +262,10 @@ TextureImporter:
         serializedVersion: 2
         x: 1536
         y: 1248
-        width: 512
+        width: 447
         height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: attack_effect_indicators_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 848
-        width: 512
-        height: 400
+        x: 53
+        y: 820
+        width: 370
+        height: 417
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
