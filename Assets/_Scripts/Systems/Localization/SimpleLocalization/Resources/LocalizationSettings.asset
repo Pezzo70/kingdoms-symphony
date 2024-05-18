@@ -16,17 +16,17 @@ MonoBehaviour:
   Sheets:
   - Name: Menu
     Id: 0
-    TextAsset: {fileID: 4900000, guid: cf55c05861a4d264a855e6349bef560e, type: 3}
+    TextAsset: {fileID: 0}
   - Name: Characters
     Id: 343064101
-    TextAsset: {fileID: 4900000, guid: ce9d99e13aa02f940be623f685862a6a, type: 3}
+    TextAsset: {fileID: 0}
   - Name: Scrolls
     Id: 1498290033
-    TextAsset: {fileID: 4900000, guid: 4cf86b400dcac2d4ebc8995ea7626ae1, type: 3}
+    TextAsset: {fileID: 0}
   - Name: Enemies
     Id: 43392522
-    TextAsset: {fileID: 4900000, guid: c4ab368829058994c9c95fa3883666e6, type: 3}
+    TextAsset: {fileID: 0}
   - Name: Tips
     Id: 1965312817
-    TextAsset: {fileID: 4900000, guid: 41829ea5d551bc742b80ac00afcd427b, type: 3}
+    TextAsset: {fileID: 0}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

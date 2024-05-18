@@ -24,6 +24,9 @@ public class PauseHandler : MonoBehaviour
             return;
 
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
-        _onPause = !_onPause;
+        _onPause = pauseMenu.activeInHierarchy;
     }
+
+    public void Unpause() => _onPause = false;
+    
 }

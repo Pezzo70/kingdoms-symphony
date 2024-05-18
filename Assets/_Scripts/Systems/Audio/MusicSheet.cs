@@ -100,7 +100,7 @@ namespace Kingdom.Audio
 
         public void Play()
         {
-            AudioSystem.Instance.PlayMusicSheet(this.actionStack.AsReadOnlyList());
+            AudioSystem.Instance.Play(this.actionStack.AsReadOnlyList());
         }
 
         public void InsertSprite()

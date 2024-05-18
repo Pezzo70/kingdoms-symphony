@@ -60,6 +60,8 @@ namespace Kingdom.Audio.Procedural
             _keysPlayed.AddRange(keys);
         }
 
+        public virtual void SetVolume(float volume) => _gain = volume / 2;
+
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
     }
 
