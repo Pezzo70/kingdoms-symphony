@@ -37,8 +37,8 @@ namespace Kingdom.Audio
             notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
             actionStack = new Stack<Note>();
 
-            upNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Down || nc.NoteOrientation is NotationOrientation.Center).ToArray();
-            downNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Up || nc.NoteOrientation is NotationOrientation.Center).ToArray();
+            upNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Up || nc.NoteOrientation is NotationOrientation.Center).ToArray();
+            downNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Down || nc.NoteOrientation is NotationOrientation.Center).ToArray();
             keySignatures = notationContainer.GetByType<KeySignatureScriptable>().ToArray();
             GetActivePage();
         }
