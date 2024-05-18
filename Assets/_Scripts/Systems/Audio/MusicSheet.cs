@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio.Procedural;
+using Kingdom.Enums;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,8 @@ namespace Kingdom.Audio
         private bool isHover = false;
         [SerializeField]
         private ScriptableContainer clefContainer;
-
+        [SerializeField]
+        private Object pagePrefab;
 
         private GameObject notationSpriteObject;
         private Stack<Note> actionStack;
@@ -34,8 +36,9 @@ namespace Kingdom.Audio
 
         void Update()
         {
-            notationSpriteObject.SetActive(isHover);
-            if (isHover)
+            bool spriteFollow = isHover;
+            notationSpriteObject.SetActive(spriteFollow);
+            if (spriteFollow)
                 SpriteFollowMouse();
         }
 
@@ -94,8 +97,17 @@ namespace Kingdom.Audio
         public void ChangeScale()
         {
             var clefSprites = clefContainer.GetByType<ClefScriptable>().ToArray();
-            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+            var scaleObject = GameObject.FindGameObjectWithTag("ChangeScale");
+            var scaleSprite = scaleObject.GetComponent<Image>();
             scaleSprite.sprite = scaleSprite.sprite == clefSprites[0].Sprite ? clefSprites[1].Sprite : clefSprites[0].Sprite;
+
+            foreach (Transform noteT in scaleObject.transform.parent)
+            {
+                Note note = null;
+                noteT.TryGetComponent<Note>(out note);
+                if(note != null)
+                  note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+            }
         }
 
         public void Play()
@@ -108,8 +120,12 @@ namespace Kingdom.Audio
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             NotationScriptable notationSprite = notationContainer.GetByType<NotationScriptable>().ToArray()[currentSpriteIndex];
             var line = GetClosestLine();
+            var activePageIndex = GetActivePageIndex();
 
-            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(!IsClosestLineAvailable())
+                return;
+
+            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
             clickPos.z = 0;
 
 
@@ -128,18 +144,18 @@ namespace Kingdom.Audio
             newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
             newNote.transform.position = new Vector3(newNote.transform.position.x, line.yPos, newNote.transform.position.z);
 
-            
+
             Note note = newNote.AddComponent<Note>();
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
             note.line = line.index;
             note.xPos = clickPos.x;
-            note.page = GetActivePageIndex();
+            note.page = activePageIndex;
             note.note = notationSprite;
 
             newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
 
             actionStack.Push(note);
-            this.Play();
+            //this.Play();
         }
 
         public (float yPos, int index) GetClosestLine()
@@ -170,7 +186,14 @@ namespace Kingdom.Audio
             return (yAux, closestIndex);
         }
 
-
+        public bool IsClosestLineAvailable() 
+        {
+            var cLine = GetClosestLine();
+            Debug.Log(cLine.index);
+            var aPage = GetActivePageIndex();
+            return actionStack.Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) < 1;
+        }
+        
 
         #region Pages
         private GameObject SetActivePage(int index)
@@ -192,10 +215,8 @@ namespace Kingdom.Audio
             var childCount = pageParent.transform.childCount + 1;
 
             if (childCount == GetMaxPage()) return;
-            var page = new GameObject("Page" + childCount);
-            page.transform.SetParent(pageParent.transform);
-            page.AddComponent<RectTransform>();
-            page.transform.localScale = Vector3.one;
+            var page = Instantiate(pagePrefab, pageParent.transform);
+
 
             SetActivePage(pageParent.transform.childCount - 1);
         }
