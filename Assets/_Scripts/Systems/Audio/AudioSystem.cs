@@ -54,6 +54,7 @@ namespace Kingdom.Audio
                 ?? audioContainer.GetByType<StageAudio>().First();
             currentAudio = audio;
             audioSource.clip = audio.AudioClip;
+            Debug.Log(stage.name);
             audioSource.volume =
                 audio.volume * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume) * 100;
             audioSource.Play();
@@ -103,13 +104,15 @@ namespace Kingdom.Audio
         public void SetAmbienceVolume(float volume)
         {
             ambienceVolume = volume;
-            audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
+            if(currentAudio.name != "MenuScene")
+                audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
         }
 
         public void SetMusicVolume(float volume)
         {
             musicVolume = volume;
-            audioSource.volume = currentAudio.volume * musicVolume * ambienceVolume;
+            if(currentAudio.name == "MenuScene")
+                audioSource.volume = currentAudio.volume * musicVolume * ambienceVolume;
         }
 
         public void SetEffectVolume(float volume) => effectVolume = volume;
