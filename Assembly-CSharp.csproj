@@ -120,6 +120,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipsContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\CharacterSelection\CharacterHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAdvantage.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ISprite.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemiesContainer.cs" />
     <Compile Include="Assets\_Scripts\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Audio\KeySignature.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
   </ItemGroup>
