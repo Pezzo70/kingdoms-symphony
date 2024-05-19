@@ -63,19 +63,28 @@ namespace Kingdom.Player
             _availableSheetBars = _maxSheetBars;
         }
 
+        public void CleanseAllEffects(CharacterID characterID)
+        {
+            PlayerData playerData = PlayerContainer.Instance.PlayerData;
+            _maxMana = playerData.GetMana(characterID);
+            _manaPerTurn = _maxMana;
+            _maxSheetBars = playerData.GetSheetBars(characterID);
+            _availableSheetBars = _maxSheetBars;
+        }
+
         public void ReduceMoral(float value)
         {
             if (_currentMoral - value <= 0f)
             {
                 _currentMoral -= value;
                 _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
-                EventManager.OnPlayerMoralChange.Invoke();
-                EventManager.EndGameDefeat.Invoke();
+                EventManager.OnPlayerMoralChange?.Invoke();
+                EventManager.EndGameDefeat?.Invoke();
             }
             else
             {
                 _currentMoral -= value;
-                EventManager.OnPlayerMoralChange.Invoke();
+                EventManager.OnPlayerMoralChange?.Invoke();
             }
         }
 
@@ -83,22 +92,40 @@ namespace Kingdom.Player
         {
             _currentMoral += value;
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
-            EventManager.OnPlayerMoralChange.Invoke();
+            EventManager.OnPlayerMoralChange?.Invoke();
         }
 
         public void SpendMana(int quantity)
         {
+            if (quantity > _currentMana)
+                return;
+
             _currentMana -= quantity;
-            _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
-            EventManager.OnPlayerManaChange.Invoke();
+
+            if (_manaPerTurn > _maxMana)
+                _currentMana = Math.Clamp(_currentMana, 0, _manaPerTurn);
+            else
+                _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
+
+            EventManager.OnPlayerManaChange?.Invoke();
         }
 
-        public void GainMana(int quantity)
+        public void GainMana(int quantity, bool add)
         {
-            _currentMana += quantity;
-            _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
-            EventManager.OnPlayerManaChange.Invoke();
+            if (add)
+                _currentMana += quantity;
+            else
+                _currentMana = quantity;
+
+            if (_manaPerTurn > _maxMana)
+                _currentMana = Math.Clamp(_currentMana, 0, _manaPerTurn);
+            else
+                _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
+
+            EventManager.OnPlayerManaChange?.Invoke();
         }
+
+        public void ChangeManaPerTurn(int value) => _manaPerTurn = value;
 
         public void ChangeAvailableSheetBars(int quantity) => _availableSheetBars = quantity;
     }

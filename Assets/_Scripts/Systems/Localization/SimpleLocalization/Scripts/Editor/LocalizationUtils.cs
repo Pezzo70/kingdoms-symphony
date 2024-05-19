@@ -15,14 +15,27 @@ namespace Assets.SimpleLocalization.Scripts.Editor
         {
             var matches = Regex.Matches(request.downloadHandler.text, @">(?<Message>.+?)<\/div>");
 
-            if (matches.Count == 0 && !request.downloadHandler.text.Contains("Google Script ERROR:")) return null;
+            if (
+                matches.Count == 0
+                && !request.downloadHandler.text.Contains("Google Script ERROR:")
+            )
+                return null;
 
-            var error = matches.Count > 0 ? matches[1].Groups["Message"].Value.Replace("quot;", "") : request.downloadHandler.text;
+            var error =
+                matches.Count > 0
+                    ? matches[1].Groups["Message"].Value.Replace("quot;", "")
+                    : request.downloadHandler.text;
 
             return error;
         }
 
-        public static IEnumerator SubmitChanges(List<Dictionary<string, string>> rows, long sheetId, string tableId, string googleScriptUrl, Action callback = null)
+        public static IEnumerator SubmitChanges(
+            List<Dictionary<string, string>> rows,
+            long sheetId,
+            string tableId,
+            string googleScriptUrl,
+            Action callback = null
+        )
         {
             if (string.IsNullOrEmpty(tableId))
             {
@@ -60,14 +73,26 @@ namespace Assets.SimpleLocalization.Scripts.Editor
                 EditorUtility.DisplayDialog("Error", $"Can't save data to table: {error}", "OK");
             }
         }
-        
-        public static Dictionary<string, string> CreateRow(string key, ActionType action, Dictionary<string, string> keys, Dictionary<string, SortedDictionary<string, string>> sheetDictionary) // OnDestroy required
+
+        public static Dictionary<string, string> CreateRow(
+            string key,
+            ActionType action,
+            Dictionary<string, string> keys,
+            Dictionary<string, SortedDictionary<string, string>> sheetDictionary
+        ) // OnDestroy required
         {
-            var dict = new Dictionary<string, string> { { "Key", action == ActionType.Add ? "" : key }, { "NewKey", action == ActionType.Delete ? "" : keys[key] } };
+            var dict = new Dictionary<string, string>
+            {
+                { "Key", action == ActionType.Add ? "" : key },
+                { "NewKey", action == ActionType.Delete ? "" : keys[key] }
+            };
 
             foreach (var language in sheetDictionary.Keys)
             {
-                dict.Add(language, action == ActionType.Delete ? "" : sheetDictionary[language][key]);
+                dict.Add(
+                    language,
+                    action == ActionType.Delete ? "" : sheetDictionary[language][key]
+                );
             }
 
             return dict;

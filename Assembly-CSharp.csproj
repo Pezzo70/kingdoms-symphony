@@ -67,6 +67,7 @@
     <Compile Include="Assets\_Scripts\Systems\Credits\CreditsTitle.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ScriptableAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Sheet.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerManaState.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedTextMeshProUGUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\Levels\EnemyPerLevelPhase.cs" />
     <Compile Include="Assets\_Scripts\Managers\Settings\SettingsManager.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Pause\PauseHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollsContainer.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMoralBar.cs" />
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />
     <Compile Include="Assets\Animations\UI\Tips\TipsFilter.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ISprite.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMana.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\ToOrFromJSON.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheet.cs" />

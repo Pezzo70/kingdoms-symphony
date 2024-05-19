@@ -108,7 +108,7 @@ namespace Kingdom.Player
 
         public int GetSheetBars(CharacterID id) => 2 + GetLevel(id);
 
-        public int GetMoral(CharacterID id) => 250 + GetLevel(id) * 25;
+        public int GetMoral(CharacterID id) => 225 + GetLevel(id) * 25;
 
         public int GetMana(CharacterID id) => 2 + GetLevel(id);
 
