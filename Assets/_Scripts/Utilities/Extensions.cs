@@ -50,9 +50,18 @@ namespace Kingdom.Extensions
                 KeyPlayed key = new KeyPlayed()
                 {
                     Name = name,
-                    TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased,
                 };
-                key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
+                
+                if(i != 0 && orderedNotes[i - 1].xPos == note.xPos)
+                {
+                    key.TimePlayed = keysPlayed[i - 1].TimePlayed;
+                    key.TimeReleased = keysPlayed[i - 1].TimeReleased;
+                }
+                else
+                {
+                    key.TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased;
+                    key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
+                }
 
                 keysPlayed.Add(key);
             }
