@@ -12,46 +12,61 @@ namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
-        [SerializeField]
-        private ScriptableContainer notationContainer;
+        [SerializeField] private Object pagePrefab;
+        private GameObject notationSpriteObject;
+        private Stack<MonoBehaviour> actionStack;
+
+        /********************Notation Arrays***************************/
+        private ISprite[] currentSpriteArray;
+        private int currentIndex;
+        [SerializeField] private ScriptableContainer notationContainer;
+        [SerializeField] private ScriptableContainer clefContainer;
         private NotationScriptable[] upNotations;
         private NotationScriptable[] downNotations;
         private KeySignatureScriptable[] keySignatures;
+        /*************************************************************/
 
-
-        [SerializeField]
-        private Vector2 offsetPosition;
-        [SerializeField]
+        [SerializeField] private Vector2 offsetPosition;
         private bool isHover = false;
-        [SerializeField]
-        private ScriptableContainer clefContainer;
-        [SerializeField]
-        private Object pagePrefab;
-
-        private GameObject notationSpriteObject;
-        private Stack<Note> actionStack;
-        private int currentSpriteIndex = 0;
+        private string currentHoverTag;
 
         void Start()
         {
-            notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
-            actionStack = new Stack<Note>();
+            actionStack = new Stack<MonoBehaviour>();
 
-            upNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Up || nc.NoteOrientation is NotationOrientation.Center).ToArray();
-            downNotations = notationContainer.GetByType<NotationScriptable>().Where( nc => nc.NoteOrientation is NotationOrientation.Down || nc.NoteOrientation is NotationOrientation.Center).ToArray();
+            notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
+            upNotations = notationContainer.GetByType<NotationScriptable>().Where(nc => nc.NoteOrientation is NotationOrientation.Up || nc.NoteOrientation is NotationOrientation.Center).ToArray();
+            downNotations = notationContainer.GetByType<NotationScriptable>().Where(nc => nc.NoteOrientation is NotationOrientation.Down || nc.NoteOrientation is NotationOrientation.Center).ToArray();
             keySignatures = notationContainer.GetByType<KeySignatureScriptable>().ToArray();
-            GetActivePage();
+
+            currentSpriteArray = upNotations;
         }
 
         void Update()
         {
-            bool spriteFollow = isHover;
-            notationSpriteObject.SetActive(spriteFollow);
-            if (spriteFollow)
+            notationSpriteObject.SetActive(isHover);
+            if (isHover)
                 SpriteFollowMouse();
         }
 
-        public void SetHover(bool val) => isHover = val;
+        public void SetHover(bool val, string tag = "MusicSheet")
+        {
+            isHover = val;
+            currentHoverTag = tag;
+
+            switch (currentHoverTag)
+            {
+                case "MusicSheet":
+                    currentSpriteArray = upNotations;
+                    break;
+                case "KeySignature":
+                    currentSpriteArray = keySignatures;
+                    break;
+            }
+            if (currentIndex >= currentSpriteArray.Length) currentIndex = 0;
+
+            notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
+        }
 
         public static Vector2 GetSpriteRelativePivot(Image img)
         {
@@ -73,22 +88,24 @@ namespace Kingdom.Audio
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
+
             if (scroll > 0f)
             {
-                currentSpriteIndex = (currentSpriteIndex + 1) % upNotations.Count();
+                currentIndex = (currentIndex + 1) % currentSpriteArray.Length;
                 UpdateSprite();
             }
             else if (scroll < 0f)
             {
-                currentSpriteIndex = (currentSpriteIndex - 1 + upNotations.Count()) % upNotations.Count();
+                currentIndex = (currentIndex - 1 + currentSpriteArray.Length) % currentSpriteArray.Length;
                 UpdateSprite();
             }
+
         }
 
         void UpdateSprite()
         {
-            if (currentSpriteIndex >= 0 && currentSpriteIndex < upNotations.Count())
-                notationSpriteObject.GetComponent<Image>().sprite = upNotations[currentSpriteIndex].Sprite;
+            if (currentIndex >= 0 && currentIndex < currentSpriteArray.Length)
+                notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
         }
 
         public void Clear()
@@ -114,27 +131,60 @@ namespace Kingdom.Audio
             {
                 Note note = null;
                 noteT.TryGetComponent<Note>(out note);
-                if(note != null)
-                  note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+                if (note != null)
+                    note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
             }
         }
 
         public void Play()
         {
-            AudioSystem.Instance.Play(this.actionStack.AsReadOnlyList());
+            AudioSystem.Instance.Play(this.actionStack.OfType<Note>().AsReadOnlyList());
         }
- 
-       public void InsertNote()
-       {
-             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+
+        public void InsertNote()
+        {
+            var cLine = GetClosestLine();
+            var aPage = GetActivePageIndex();
+            if (actionStack.OfType<Note>().Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) > 1) return;
+
+            Sprite sprite = (cLine.index > 6 ? upNotations : downNotations)[currentIndex].Sprite;
+            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+            var newNote = CreateObjectInLine(cLine.yPos, cLine.index, sprite);
+
+            Note note = newNote.AddComponent<Note>();
+            note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+            note.line = cLine.index;
+            note.xPos = newNote.transform.position.x;
+            note.page = aPage;
+            note.note = notationContainer.GetFirstByType<NotationScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
+            newNote.name = note.ToString();
+
+            actionStack.Push(note);
+        }
+        public void InsertKeySignature()
+        {
             var line = GetClosestLine();
-            NotationScriptable notationSprite = line.index < 5 ? upNotations[currentSpriteIndex] : downNotations[currentSpriteIndex];
-            var activePageIndex = GetActivePageIndex();
+            var aPage = GetActivePageIndex();
 
-            if(!IsClosestLineAvailable())
-                return;
+            if (actionStack.OfType<KeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
 
-            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+            Sprite sprite = currentSpriteArray[currentIndex].Sprite;
+            var newNote = CreateObjectInLine(line.yPos, line.index, sprite);
+            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+
+
+            KeySignature key = newNote.AddComponent<KeySignature>();
+            key.line = line.index;
+            key.page = aPage;
+            key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
+            newNote.name = key.ToString();
+
+            actionStack.Push(key);
+        }
+
+        public GameObject CreateObjectInLine(float lineY, int lineIndex, Sprite sprite)
+        {
+            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
 
 
@@ -145,30 +195,17 @@ namespace Kingdom.Audio
             Image renderer = newNote.AddComponent<Image>();
             renderer.raycastTarget = true;
             renderer.preserveAspect = true;
-            renderer.sprite = notationSprite.Sprite;
+            renderer.sprite = sprite;
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
 
-            notationSpriteObject.GetComponent<Image>().sprite = notationSprite.Sprite;
+            notationSpriteObject.GetComponent<Image>().sprite = sprite;
             newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
-            newNote.transform.position = new Vector3(newNote.transform.position.x, line.yPos, newNote.transform.position.z);
+            newNote.transform.position = new Vector3(newNote.transform.position.x, lineY, newNote.transform.position.z);
 
+            return newNote;
+        }
 
-            Note note = newNote.AddComponent<Note>();
-            note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
-            note.line = line.index;
-            note.xPos = clickPos.x;
-            note.page = activePageIndex;
-            note.note = notationSprite;
-
-            newNote.name = $"Tempo: {notationSprite.Tempo} - Line: {note.line} - Page: {note.page} - Clef: {note.clef}";
-
-            actionStack.Push(note);
-       }
-       public void InsertKeySignature()
-       {
-
-       }
         public (float yPos, int index) GetClosestLine()
         {
             GameObject sheetLine = GameObject.Find("SheetLine");
@@ -196,15 +233,6 @@ namespace Kingdom.Audio
 
             return (yAux, closestIndex);
         }
-
-        public bool IsClosestLineAvailable() 
-        {
-            var cLine = GetClosestLine();
-            Debug.Log(cLine.index);
-            var aPage = GetActivePageIndex();
-            return actionStack.Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) < 1;
-        }
-        
 
         #region Pages
         private GameObject SetActivePage(int index)

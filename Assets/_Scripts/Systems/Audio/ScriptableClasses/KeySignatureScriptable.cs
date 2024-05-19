@@ -5,7 +5,7 @@ using Kingdom.Enums.MusicTheory;
 namespace Kingdom.Audio
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/KeySignature", fileName = "KeySignature")]
-    public class KeySignatureScriptable : ScriptableObject
+    public class KeySignatureScriptable : ScriptableObject, ISprite
     {
         [SerializeField] private Sprite sprite;
         [SerializeField] private KeySignature keySignature;
