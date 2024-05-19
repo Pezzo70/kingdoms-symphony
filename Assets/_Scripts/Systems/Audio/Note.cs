@@ -46,9 +46,37 @@ namespace Kingdom.Audio
 
         public static KeyName FindNote(Clef clef, int index)
         {
+            //# -1, B +1
+            KeyName[] notes = 
             if (clef == Clef.G)
             {
-                KeyName[] notesOnLinesAndSpaces = { KeyName.F4, KeyName.G4, KeyName.A4, KeyName.B4, KeyName.C5, KeyName.D5, KeyName.E5, KeyName.F5, KeyName.G5, KeyName.A5, KeyName.B5, KeyName.C6 };
+                KeyName[] notesOnLinesAndSpaces = 
+                { 
+                    KeyName.B3,
+                    KeyName.C4,
+                    KeyName.CSharp4,
+                    KeyName.D4,
+                    KeyName.DSharp4,
+                    KeyName.E4,
+                    KeyName.F4,
+                    KeyName.FSharp4,
+                    KeyName.G4,
+                    KeyName.GSharp4,
+                    KeyName.A4,
+                    KeyName.ASharp4,
+                    KeyName.B4,
+                    KeyName.C5,
+                    KeyName.CSharp5,
+                    KeyName.D5,
+                    KeyName.DSharp5,
+                    KeyName.E5,
+                    KeyName.F5,
+                    KeyName.FSharp5,
+                    KeyName.G5,
+                    KeyName.GSharp5,
+                    KeyName.A5,
+                    KeyName.ASharp5,
+                    };
 
                 if (index >= 0 && index < notesOnLinesAndSpaces.Length)
                 {
@@ -57,7 +85,21 @@ namespace Kingdom.Audio
             }
             else if (clef == Clef.F)
             {
-                KeyName[] notesOnLinesAndSpaces = { KeyName.G2, KeyName.A2, KeyName.B2, KeyName.C3, KeyName.D3, KeyName.E3, KeyName.F3, KeyName.G3, KeyName.A3, KeyName.B3, KeyName.C4, KeyName.D4 };
+                KeyName[] notesOnLinesAndSpaces = 
+                    { 
+                        KeyName.G2, 
+                        KeyName.A2, 
+                        KeyName.B2, 
+                        KeyName.C3, 
+                        KeyName.D3, 
+                        KeyName.E3, 
+                        KeyName.F3, 
+                        KeyName.G3, 
+                        KeyName.A3, 
+                        KeyName.B3, 
+                        KeyName.C4, 
+                        KeyName.D4 
+                    };
 
                 if (index >= 0 && index < notesOnLinesAndSpaces.Length)
                 {
@@ -67,6 +109,9 @@ namespace Kingdom.Audio
             return KeyName.C3;
         }
     
-        
+        public override string ToString()
+        {
+            return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
+        }
     }
 }

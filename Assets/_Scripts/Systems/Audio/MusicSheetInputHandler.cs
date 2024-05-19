@@ -64,7 +64,8 @@ namespace Kingdom.Audio
             switch (objectTag)
             {
                 case "MusicSheet":
-                    musicSheet.SetHover(true);
+                case "KeySignature":
+                    musicSheet.SetHover(true, objectTag);
                     isHovering = true;
                     break;
             };
