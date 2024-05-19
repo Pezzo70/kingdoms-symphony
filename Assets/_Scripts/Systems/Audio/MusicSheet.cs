@@ -13,6 +13,8 @@ namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
+
+        private const float DEFAULT_SPRITE_SIZE = 70f; 
         [SerializeField] private Object pagePrefab;
         private GameObject notationSpriteObject;
         private Stack<MonoBehaviour> actionStack;
@@ -60,7 +62,7 @@ namespace Kingdom.Audio
                 case "MusicSheet":
                     currentSpriteArray = upNotations;
                     break;
-                case "KeySignature":
+                case "KeySignatureArea":
                     currentSpriteArray = keySignatures;
                     break;
             }
@@ -94,24 +96,35 @@ namespace Kingdom.Audio
         void UpdateSprite()
         {
             if (currentIndex >= 0 && currentIndex < currentSpriteArray.Length)
+            {
                 notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
+            }
         }
 
         public void Clear()
         {
             while (actionStack.Count != 0)
+               if(actionStack.Peek().IsDestroyed())
+                    actionStack.Pop();
+               else
                 Destroy(actionStack.Pop().gameObject);
             SetActivePage(0);
         }
 
         public void Undo()
         {
-             if (actionStack.Count > 0)
+            if (actionStack.Count > 0)
             {
-                var lastActionPage = actionStack.Peek().transform.parent;
-                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
 
-                Destroy(actionStack.Pop().gameObject);
+                MonoBehaviour destroyGO;
+                do
+                    destroyGO = actionStack.Pop();
+                while (destroyGO.IsDestroyed() && actionStack.Count > 0);
+                if(actionStack.Count == 0) return;
+
+                var lastActionPage = destroyGO.transform.parent;
+                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
+                Destroy(destroyGO.gameObject);
 
                 UpdateActivePageAfterUndo(lastActionPageIndex);
             }
@@ -122,14 +135,14 @@ namespace Kingdom.Audio
             var pageParent = GameObject.FindWithTag("Page");
             int childCount = pageParent.transform.childCount;
 
-            
+
             if (previousPageIndex >= 0 && previousPageIndex < childCount && pageParent.transform.GetChild(previousPageIndex).childCount > 0)
             {
                 SetActivePage(previousPageIndex);
                 return;
             }
 
-            
+
             for (int i = childCount - 1; i >= 0; i--)
             {
                 if (pageParent.transform.GetChild(i).childCount > 0)
@@ -191,9 +204,10 @@ namespace Kingdom.Audio
             var aPage = GetActivePageIndex();
             if (actionStack.OfType<Note>().Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) > 1) return;
 
-            Sprite sprite = (cLine.index > 6 ? upNotations : downNotations)[currentIndex].Sprite;
+            var spriteArray = cLine.index > 6 ? upNotations : downNotations;
+            Sprite sprite = spriteArray[currentIndex].Sprite;
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
-            var newNote = CreateObjectInLine(cLine.yPos, cLine.index, sprite);
+            var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
             Note note = newNote.AddComponent<Note>();
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
@@ -202,8 +216,24 @@ namespace Kingdom.Audio
             note.page = aPage;
             note.note = notationContainer.GetFirstByType<NotationScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
             newNote.name = note.ToString();
+            newNote.tag = "Note";
             note.ApplyInLine();
 
+
+            //@TODO: Setar size e raycast padding baseado no tamanho do sprite(de forma dinamica).
+            switch(spriteArray[currentIndex].NoteOrientation)
+            {
+                case NotationOrientation.Center:
+                    newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(newNote.GetComponent<RectTransform>().sizeDelta.x, 50);
+                break;
+                case NotationOrientation.Up:
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,3,0,68);
+                break;
+                case NotationOrientation.Down:
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,68,0,3);
+                break;
+            }
+            
             actionStack.Push(note);
         }
         public void InsertKeySignature()
@@ -214,7 +244,7 @@ namespace Kingdom.Audio
             if (actionStack.OfType<MonoKeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
 
             Sprite sprite = currentSpriteArray[currentIndex].Sprite;
-            var newNote = CreateObjectInLine(line.yPos, line.index, sprite);
+            var newNote = CreateObjectInLine(line.yPos, sprite);
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
 
 
@@ -223,11 +253,12 @@ namespace Kingdom.Audio
             key.page = aPage;
             key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
             newNote.name = key.ToString();
+            newNote.tag = "KeySignature";
 
             actionStack.Push(key);
         }
 
-        public GameObject CreateObjectInLine(float lineY, int lineIndex, Sprite sprite)
+        public GameObject CreateObjectInLine(float lineY, Sprite sprite)
         {
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
@@ -247,13 +278,14 @@ namespace Kingdom.Audio
             notationSpriteObject.GetComponent<Image>().sprite = sprite;
             newNote.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
             newNote.transform.position = new Vector3(newNote.transform.position.x, lineY, newNote.transform.position.z);
+                
 
             return newNote;
         }
 
         public (float yPos, int index) GetClosestLine()
         {
-            GameObject sheetLine = GameObject.Find("SheetLine");
+            GameObject sheetLine = GameObject.Find("SheetLines");
 
             float mouseY = notationSpriteObject.transform.position.y;
             int childCount = sheetLine.transform.childCount;
@@ -359,17 +391,33 @@ namespace Kingdom.Audio
         {
             var parentGo = GameObject.FindWithTag("Page");
             for (int i = 0; i < parentGo.transform.childCount; i++)
-            {
                 if (parentGo.transform.GetChild(i).gameObject.activeSelf)
-                {
                     return i;
-                }
-            }
-            return -1; // Retorna -1 se nenhum filho estiver ativo
+
+            return -1;
         }
         private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Kingdom.Enums.Player.CharacterID.Roddie);
+
         #endregion
+
+        public void ChangeNote(Note note)
+        {
+            var line = GetClosestLine();
+            var spriteArray = line.index > 6 ? upNotations : downNotations;
+            NotationScriptable currentNote = spriteArray[currentIndex];
+
+            if (note.note.Tempo != currentNote.Tempo || note.note.NoteBehaviour != currentNote.NoteBehaviour)
+            {
+                note.note = currentNote;
+                note.GetComponent<Image>().sprite = currentNote.Sprite;
+                note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>().GetSpriteRelativePivot();
+            }else{}
+        }
+
+        public void RemoveNote(Note note)
+        {
+            Destroy(note.gameObject);
+        }
+
     }
-
-
 }

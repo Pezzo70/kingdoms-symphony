@@ -19,7 +19,8 @@ namespace Kingdom.Audio
 
         public override void OnPointerClick(PointerEventData data)
         {
-            objectTag = data.pointerCurrentRaycast.gameObject.tag;
+            var currentObject = data.pointerCurrentRaycast.gameObject;
+            objectTag = currentObject.tag;
             switch (objectTag)
             {
                 case "Undo":
@@ -49,11 +50,14 @@ namespace Kingdom.Audio
                 case "Play":
                     musicSheet.Play();
                     break;
-                case "KeySignature":
+                case "KeySignatureArea":
                     musicSheet.InsertKeySignature();
                     break;
                 case "Note":
-                    //musicSheet.RemoveNote();
+                    if(data.button is PointerEventData.InputButton.Left)
+                        musicSheet.ChangeNote(currentObject.transform.GetComponent<Note>());
+                    else if(data.button is PointerEventData.InputButton.Right)
+                        musicSheet.RemoveNote(currentObject.transform.GetComponent<Note>());
                     break;
             };
         }
@@ -64,7 +68,7 @@ namespace Kingdom.Audio
             switch (objectTag)
             {
                 case "MusicSheet":
-                case "KeySignature":
+                case "KeySignatureArea":
                     musicSheet.SetHover(true, objectTag);
                     isHovering = true;
                     break;
