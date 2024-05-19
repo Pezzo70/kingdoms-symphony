@@ -94,7 +94,9 @@ namespace Kingdom.Audio
         void UpdateSprite()
         {
             if (currentIndex >= 0 && currentIndex < currentSpriteArray.Length)
+            {
                 notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
+            }
         }
 
         public void Clear()
@@ -264,7 +266,7 @@ namespace Kingdom.Audio
 
         public (float yPos, int index) GetClosestLine()
         {
-            GameObject sheetLine = GameObject.Find("SheetLine");
+            GameObject sheetLine = GameObject.Find("SheetLines");
 
             float mouseY = notationSpriteObject.transform.position.y;
             int childCount = sheetLine.transform.childCount;
@@ -384,13 +386,13 @@ namespace Kingdom.Audio
             var line = GetClosestLine();
             var spriteArray = line.index > 6 ? upNotations : downNotations;
             NotationScriptable currentNote = spriteArray[currentIndex];
-            
+
             if (note.note.Tempo != currentNote.Tempo || note.note.NoteBehaviour != currentNote.NoteBehaviour)
             {
                 note.note = currentNote;
                 note.GetComponent<Image>().sprite = currentNote.Sprite;
                 note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>().GetSpriteRelativePivot();
-            }
+            }else{}
         }
 
         public void RemoveNote(Note note)
