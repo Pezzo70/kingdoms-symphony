@@ -79,6 +79,7 @@
     <Compile Include="Assets\_Scripts\Systems\Credits\CreditsPersona.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSync.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\KeySignatureScriptable.cs" />
     <Compile Include="Assets\_Scripts\Managers\LanguageToggleManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\NotationScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ClefScriptable.cs" />
