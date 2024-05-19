@@ -117,8 +117,44 @@ namespace Kingdom.Audio
 
         public void Undo()
         {
-            if (actionStack.Count > 0)
+             if (actionStack.Count > 0)
+            {
+                var lastActionPage = actionStack.Peek().transform.parent;
+                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
+
                 Destroy(actionStack.Pop().gameObject);
+
+                UpdateActivePageAfterUndo(lastActionPageIndex);
+            }
+        }
+
+        private void UpdateActivePageAfterUndo(int previousPageIndex)
+        {
+            var pageParent = GameObject.FindWithTag("Page");
+            int childCount = pageParent.transform.childCount;
+
+            
+            if (previousPageIndex >= 0 && previousPageIndex < childCount && pageParent.transform.GetChild(previousPageIndex).childCount > 0)
+            {
+                SetActivePage(previousPageIndex);
+                return;
+            }
+
+            
+            for (int i = childCount - 1; i >= 0; i--)
+            {
+                if (pageParent.transform.GetChild(i).childCount > 0)
+                {
+                    SetActivePage(i);
+                    return;
+                }
+            }
+
+
+            if (childCount > 0)
+            {
+                SetActivePage(0);
+            }
         }
 
         public void ChangeScale()

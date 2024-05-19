@@ -86,18 +86,30 @@ namespace Kingdom.Audio
             {
                 KeyName[] notesOnLinesAndSpaces = 
                     { 
-                        KeyName.G2, 
-                        KeyName.A2, 
-                        KeyName.B2, 
-                        KeyName.C3, 
-                        KeyName.D3, 
-                        KeyName.E3, 
-                        KeyName.F3, 
-                        KeyName.G3, 
-                        KeyName.A3, 
-                        KeyName.B3, 
-                        KeyName.C4, 
-                        KeyName.D4 
+                        KeyName.DSharp2,
+                        KeyName.E2,
+                        KeyName.F2,
+                        KeyName.FSharp2,
+                        KeyName.G2,
+                        KeyName.GSharp2,
+                        KeyName.A2,
+                        KeyName.ASharp2,
+                        KeyName.B2,
+                        KeyName.C3,
+                        KeyName.CSharp3,
+                        KeyName.D3,
+                        KeyName.DSharp3,
+                        KeyName.E3,
+                        KeyName.F3,
+                        KeyName.FSharp3,
+                        KeyName.G3,
+                        KeyName.GSharp3,
+                        KeyName.A3,
+                        KeyName.ASharp3,
+                        KeyName.B3,
+                        KeyName.C4,
+                        KeyName.CSharp4,
+                        KeyName.D4
                     };
 
                 if (index >= 0 && index < notesOnLinesAndSpaces.Length)
