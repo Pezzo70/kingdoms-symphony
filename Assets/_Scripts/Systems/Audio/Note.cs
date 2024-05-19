@@ -6,6 +6,8 @@ using System.Linq;
 using Kingdom.Enums;
 using static Kingdom.Audio.Procedural.Frequencies;
 using Unity.VisualScripting;
+using UnityEngine.UI;
+using Kingdom.Extensions;
 
 
 namespace Kingdom.Audio
@@ -51,8 +53,8 @@ namespace Kingdom.Audio
             Debug.Log(signature);
             KeyName[] notesOnLinesAndSpaces = null;
             index++;
-            if(signature == KeySignature.Sharp) index--;
-            else if(signature == KeySignature.Flat) index++;
+            if (signature == KeySignature.Sharp) index--;
+            else if (signature == KeySignature.Flat) index++;
 
             if (clef == Clef.G)
                 notesOnLinesAndSpaces = new KeyName[]
@@ -111,7 +113,7 @@ namespace Kingdom.Audio
                     KeyName.D4
                 };
             if (index >= 0 && index < notesOnLinesAndSpaces.Length)
-                return notesOnLinesAndSpaces[index == notesOnLinesAndSpaces.Length-1 ? --index : index];
+                return notesOnLinesAndSpaces[index == notesOnLinesAndSpaces.Length - 1 ? --index : index];
 
             return KeyName.C3;
         }
@@ -121,6 +123,28 @@ namespace Kingdom.Audio
         public override string ToString()
         {
             return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
+        }
+
+        public void ApplyInLine()
+        {
+            if (this.line != 12 && this.line != 0) return;
+
+
+            GameObject linha = new GameObject("Linha");
+            linha.transform.SetParent(this.transform);
+            linha.transform.localScale = Vector3.one;
+            Image linhaImage = linha.AddComponent<Image>();
+            linhaImage.color = Color.black; 
+
+
+            RectTransform linhaRectTransform = linha.GetComponent<RectTransform>();
+            linhaRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            linhaRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            linhaRectTransform.pivot = new Vector2(0.5f, 0.5f);
+
+
+            linhaRectTransform.sizeDelta = new Vector2(1.10f, 0.05f);
+            linhaRectTransform.anchoredPosition = this.GetComponent<Image>().GetSpritePivotPosition();
         }
     }
 }

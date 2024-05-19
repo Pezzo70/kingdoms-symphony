@@ -3,6 +3,7 @@ using System.Linq;
 using Kingdom.Audio.Procedural;
 using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
+using Kingdom.Extensions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,22 +69,10 @@ namespace Kingdom.Audio
             notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
         }
 
-        public static Vector2 GetSpriteRelativePivot(Image img)
-        {
-
-            Bounds bounds = img.sprite.bounds;
-            var pivotX = -bounds.center.x / bounds.extents.x / 2 + 0.5f;
-            var pivotY = -bounds.center.y / bounds.extents.y / 2 + 0.5f;
-            Vector2 pivotPixel = new Vector2(pivotX, pivotY);
-
-
-            return pivotPixel;
-        }
-
         void SpriteFollowMouse()
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            notationSpriteObject.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
+            notationSpriteObject.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
             notationSpriteObject.transform.position = new Vector2(cursorPos.x + offsetPosition.x, cursorPos.y + offsetPosition.y);
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -213,6 +202,7 @@ namespace Kingdom.Audio
             note.page = aPage;
             note.note = notationContainer.GetFirstByType<NotationScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
             newNote.name = note.ToString();
+            note.ApplyInLine();
 
             actionStack.Push(note);
         }
@@ -255,7 +245,7 @@ namespace Kingdom.Audio
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
 
             notationSpriteObject.GetComponent<Image>().sprite = sprite;
-            newNote.GetComponent<RectTransform>().pivot = GetSpriteRelativePivot(notationSpriteObject.GetComponent<Image>());
+            newNote.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
             newNote.transform.position = new Vector3(newNote.transform.position.x, lineY, newNote.transform.position.z);
 
             return newNote;
