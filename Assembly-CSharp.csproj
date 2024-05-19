@@ -68,6 +68,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ScriptableAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Sheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedTextMeshProUGUI.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Levels\EnemyPerLevelPhase.cs" />
     <Compile Include="Assets\_Scripts\Managers\Settings\SettingsManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\EndGameAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\EnemyAudio.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSync.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\KeySignatureScriptable.cs" />
+    <Compile Include="Assets\_Scripts\Utilities\Extensions.cs" />
     <Compile Include="Assets\_Scripts\Managers\LanguageToggleManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\NotationScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ClefScriptable.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Disclaimer\DisclaimerHandler.cs" />
     <Compile Include="Assets\_Scripts\Managers\CursorManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Player\PlaythroughContainer.cs" />
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerContainer.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Tip.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\Scroll.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Player\PlayerStats.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\PlayerAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\UIEventTrigger.cs" />
@@ -101,9 +105,11 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\Note.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedDropdown.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Audio\MonoKeySignature.cs" />
     <Compile Include="Assets\_Scripts\Interfaces\IWeightable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instruments\Piano.cs" />
     <Compile Include="Assets\_Scripts\Managers\CreditsManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Levels\Level.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheetInputHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Pause\PauseHandler.cs" />
@@ -130,7 +136,6 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemiesContainer.cs" />
     <Compile Include="Assets\_Scripts\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
-    <Compile Include="Assets\_Scripts\Systems\Audio\KeySignature.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
   </ItemGroup>

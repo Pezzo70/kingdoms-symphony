@@ -6,10 +6,10 @@ namespace Kingdom.Player
     public class PlayerContainer : PersistentSingleton<PlayerContainer>
     {
         [JsonProperty]
-        public PlayerData playerData;
+        public PlayerData PlayerData;
 
         [JsonProperty]
-        public PlayerConfig playerConfig;
+        public PlayerConfig PlayerConfig;
 
         protected override void Awake()
         {
@@ -20,7 +20,7 @@ namespace Kingdom.Player
 
         void Start()
         {
-            playerConfig.ApplyConfig();
+            PlayerConfig.ApplyConfig();
         }
 
         void OnEnable()
@@ -36,49 +36,49 @@ namespace Kingdom.Player
         }
 
         private void SaveConfig() =>
-            _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
+            _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, PlayerData);
 
         private void LoadConfig()
         {
             if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerDataPath))
             {
-                playerData = ToOrFromJSON.DeserializeFromJSON<PlayerData>(
+                PlayerData = ToOrFromJSON.DeserializeFromJSON<PlayerData>(
                     PathConstants.PlayerDataPath
                 );
             }
             else
             {
-                playerData = new PlayerData();
-                playerData.CreateNewPlayerData();
+                PlayerData = new PlayerData();
+                PlayerData.CreateNewPlayerData();
                 SaveConfig();
             }
         }
 
         private void SavePlayerData() =>
-            ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
+            ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, PlayerConfig);
 
         private void LoadPlayerData()
         {
             if (ToOrFromJSON.CheckIfFileExists(PathConstants.PlayerConfigPath))
             {
-                playerConfig = ToOrFromJSON.DeserializeFromJSON<PlayerConfig>(
+                PlayerConfig = ToOrFromJSON.DeserializeFromJSON<PlayerConfig>(
                     PathConstants.PlayerConfigPath
                 );
             }
             else
             {
-                playerConfig = new PlayerConfig();
-                playerConfig.CreateNewPlayerConfig();
+                PlayerConfig = new PlayerConfig();
+                PlayerConfig.CreateNewPlayerConfig();
                 SavePlayerData();
             }
         }
 
         protected override void OnApplicationQuit()
         {
-            if (playerData is not null || playerConfig is not null)
+            if (PlayerData is not null || PlayerConfig is not null)
             {
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, playerData);
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, playerConfig);
+                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, PlayerData);
+                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, PlayerConfig);
             }
             base.OnApplicationQuit();
         }

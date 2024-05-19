@@ -45,7 +45,7 @@ public class DisplayEnemyData : MonoBehaviour
         enemyName.LocalizationKey = "Enemies.Entity.Name." + (int)enemy.enemyID;
         description.LocalizationKey = "Enemies.Entity.Description." + (int)enemy.enemyID;
 
-        var playerData = PlayerContainer.Instance.playerData;
+        var playerData = PlayerContainer.Instance.PlayerData;
         var attacksUnlocked = playerData.EnemyAttacksUnlocked;
         var advantagesUnlocked = playerData.EnemyAdvantagesUnlocked;
         var disadvantagesUnlocked = playerData.EnemyDisadvangatesUnlocked;

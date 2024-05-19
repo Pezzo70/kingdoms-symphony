@@ -12,11 +12,11 @@ public class DisclaimerHandler : MonoBehaviour
     {
         menu.SetActive(false);
 
-        if (PlayerContainer.Instance.playerConfig.SawDisclaimer)
+        if (PlayerContainer.Instance.PlayerConfig.SawDisclaimer)
             StartCoroutine(DisplayMenu());
         else
         {
-            PlayerContainer.Instance.playerConfig.SetSawDisclaimer(true);
+            PlayerContainer.Instance.PlayerConfig.SetSawDisclaimer(true);
             StartCoroutine(ShowDisclaimerAndWait());
         }
     }

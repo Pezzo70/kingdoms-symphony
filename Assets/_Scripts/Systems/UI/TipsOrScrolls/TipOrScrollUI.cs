@@ -45,7 +45,7 @@ public class TipOrScrollUI : MonoBehaviour
             case Tip tip:
                 if (tip.isEnemy)
                 {
-                    if (PlayerContainer.Instance.playerData.EnemyInfoUnlocked[tip.enemyID])
+                    if (PlayerContainer.Instance.PlayerData.EnemyInfoUnlocked[tip.enemyID])
                     {
                         _childTextMeshProUGUI.LocalizationKey =
                             "Enemies.Entity.Name." + (int)tip.enemyID;
@@ -92,7 +92,7 @@ public class TipOrScrollUI : MonoBehaviour
                 if (
                     PlayerContainer
                         .Instance
-                        .playerData
+                        .PlayerData
                         .LevelPerCharacter
                         .Where(obj => scroll.unlockedFor.Contains(obj.Key))
                         .Any(character => character.Value.level >= scroll.levelRequired)

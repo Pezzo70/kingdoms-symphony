@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f901a5b32f59c41448a7e0eab6182dc1, type: 3}
+  m_Name: EnemyPerLevelPhase_Level_2_2
+  m_EditorClassIdentifier: 
+  phase: 3
+  enemies:
+  - {fileID: 11400000, guid: d92a687d993405c479c0140e1bc698c4, type: 2}
+  - {fileID: 11400000, guid: 17dc4b0c161e11c4092042c047f56b17, type: 2}
+  maxNumberOfEnemies: 3
