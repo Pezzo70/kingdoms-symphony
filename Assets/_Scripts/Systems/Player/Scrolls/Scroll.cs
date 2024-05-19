@@ -27,4 +27,5 @@ public class Scroll : ScriptableObject
     public float yFactor;
     public float zFactor;
     public float wFactor;
+    public Sprite[] effectsSymbols;
 }
