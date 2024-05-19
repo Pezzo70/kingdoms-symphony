@@ -97,7 +97,7 @@ namespace Kingdom.Player
         {
             _currentMana += quantity;
             _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
-            EventManager.OnPlayerMoralChange.Invoke();
+            EventManager.OnPlayerManaChange.Invoke();
         }
 
         public void ChangeAvailableSheetBars(int quantity) => _availableSheetBars = quantity;
