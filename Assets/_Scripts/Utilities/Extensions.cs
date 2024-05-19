@@ -121,7 +121,6 @@ namespace Kingdom.Extensions
                         keysPlayed.Add(key);
                     }
                     i = iAux;
-                    Debug.Log(i);
                     continue;
                 }
                 else

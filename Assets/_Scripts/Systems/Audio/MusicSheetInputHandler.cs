@@ -33,7 +33,8 @@ namespace Kingdom.Audio
                     musicSheet.ChangeScale();
                     break;
                 case "MusicSheet":
-                    musicSheet.InsertNote();
+                    if(data.button is PointerEventData.InputButton.Left)
+                        musicSheet.InsertNote();
                     break;
                 case "Next":
                     musicSheet.NavigatePage(true);
@@ -51,7 +52,8 @@ namespace Kingdom.Audio
                     musicSheet.Play();
                     break;
                 case "KeySignatureArea":
-                    musicSheet.InsertKeySignature();
+                    if(data.button is PointerEventData.InputButton.Left)
+                        musicSheet.InsertKeySignature();
                     break;
                 case "Note":
                     if(data.button is PointerEventData.InputButton.Left)
