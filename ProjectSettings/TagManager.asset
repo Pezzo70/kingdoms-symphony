@@ -17,6 +17,8 @@ TagManager:
   - Page
   - SheetLine
   - Play
+  - KeySignature
+  - Note
   layers:
   - Default
   - TransparentFX
