@@ -29,4 +29,7 @@ MonoBehaviour:
   - Name: Tips
     Id: 1965312817
     TextAsset: {fileID: 4900000, guid: 41829ea5d551bc742b80ac00afcd427b, type: 3}
+  - Name: InGame
+    Id: 1547126997
+    TextAsset: {fileID: 4900000, guid: d0e358cd44c3ce14eaa9e5e7206ac39e, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}
