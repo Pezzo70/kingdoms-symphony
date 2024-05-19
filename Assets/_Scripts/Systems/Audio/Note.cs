@@ -27,7 +27,7 @@ namespace Kingdom.Audio
             var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
             float beatDuration = 60.0f / 30;
 
-            for(int i = 0; i < orderedNotes.Count; i++)
+            for (int i = 0; i < orderedNotes.Count; i++)
             {
                 var note = orderedNotes[i];
                 KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.clef.Clef, note.line);
@@ -47,10 +47,11 @@ namespace Kingdom.Audio
         public static KeyName FindNote(Clef clef, int index)
         {
             //# -1, B +1
+            KeyName[] notesOnLinesAndSpaces = null;
+
             if (clef == Clef.G)
-            {
-                KeyName[] notesOnLinesAndSpaces = 
-                { 
+                notesOnLinesAndSpaces = new KeyName[]
+                {
                     KeyName.B3,
                     KeyName.C4,
                     KeyName.CSharp4,
@@ -75,51 +76,41 @@ namespace Kingdom.Audio
                     KeyName.GSharp5,
                     KeyName.A5,
                     KeyName.ASharp5,
-                    };
-
-                if (index >= 0 && index < notesOnLinesAndSpaces.Length)
-                {
-                    return notesOnLinesAndSpaces[index];
-                }
-            }
+                };
             else if (clef == Clef.F)
-            {
-                KeyName[] notesOnLinesAndSpaces = 
-                    { 
-                        KeyName.DSharp2,
-                        KeyName.E2,
-                        KeyName.F2,
-                        KeyName.FSharp2,
-                        KeyName.G2,
-                        KeyName.GSharp2,
-                        KeyName.A2,
-                        KeyName.ASharp2,
-                        KeyName.B2,
-                        KeyName.C3,
-                        KeyName.CSharp3,
-                        KeyName.D3,
-                        KeyName.DSharp3,
-                        KeyName.E3,
-                        KeyName.F3,
-                        KeyName.FSharp3,
-                        KeyName.G3,
-                        KeyName.GSharp3,
-                        KeyName.A3,
-                        KeyName.ASharp3,
-                        KeyName.B3,
-                        KeyName.C4,
-                        KeyName.CSharp4,
-                        KeyName.D4
-                    };
-
-                if (index >= 0 && index < notesOnLinesAndSpaces.Length)
+                notesOnLinesAndSpaces = new KeyName[]
                 {
-                    return notesOnLinesAndSpaces[index];
-                }
-            }
+                    KeyName.DSharp2,
+                    KeyName.E2,
+                    KeyName.F2,
+                    KeyName.FSharp2,
+                    KeyName.G2,
+                    KeyName.GSharp2,
+                    KeyName.A2,
+                    KeyName.ASharp2,
+                    KeyName.B2,
+                    KeyName.C3,
+                    KeyName.CSharp3,
+                    KeyName.D3,
+                    KeyName.DSharp3,
+                    KeyName.E3,
+                    KeyName.F3,
+                    KeyName.FSharp3,
+                    KeyName.G3,
+                    KeyName.GSharp3,
+                    KeyName.A3,
+                    KeyName.ASharp3,
+                    KeyName.B3,
+                    KeyName.C4,
+                    KeyName.CSharp4,
+                    KeyName.D4
+                };
+            if (index >= 0 && index < notesOnLinesAndSpaces.Length)
+                return notesOnLinesAndSpaces[index];
+                
             return KeyName.C3;
         }
-    
+
         public override string ToString()
         {
             return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
