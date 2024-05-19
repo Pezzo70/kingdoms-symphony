@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 606791710}
   m_Layer: 3
   m_Name: KeySignatures
-  m_TagString: KeySignature
+  m_TagString: KeySignatureArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -808,8 +808,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -579.2351, y: -46.035522}
-  m_SizeDelta: {x: 130.1005, y: 167.6864}
+  m_AnchoredPosition: {x: -579.2351, y: -43.5072}
+  m_SizeDelta: {x: 130.1005, y: 182.8563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &606791710
 MonoBehaviour:

@@ -60,7 +60,7 @@ namespace Kingdom.Audio
                 case "MusicSheet":
                     currentSpriteArray = upNotations;
                     break;
-                case "KeySignature":
+                case "KeySignatureArea":
                     currentSpriteArray = keySignatures;
                     break;
             }
@@ -100,18 +100,27 @@ namespace Kingdom.Audio
         public void Clear()
         {
             while (actionStack.Count != 0)
+               if(actionStack.Peek().IsDestroyed())
+                    actionStack.Pop();
+               else
                 Destroy(actionStack.Pop().gameObject);
             SetActivePage(0);
         }
 
         public void Undo()
         {
-             if (actionStack.Count > 0)
+            if (actionStack.Count > 0)
             {
-                var lastActionPage = actionStack.Peek().transform.parent;
-                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
 
-                Destroy(actionStack.Pop().gameObject);
+                MonoBehaviour destroyGO;
+                do
+                    destroyGO = actionStack.Pop();
+                while (destroyGO.IsDestroyed() && actionStack.Count > 0);
+                if(actionStack.Count == 0) return;
+
+                var lastActionPage = destroyGO.transform.parent;
+                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
+                Destroy(destroyGO.gameObject);
 
                 UpdateActivePageAfterUndo(lastActionPageIndex);
             }
@@ -122,14 +131,14 @@ namespace Kingdom.Audio
             var pageParent = GameObject.FindWithTag("Page");
             int childCount = pageParent.transform.childCount;
 
-            
+
             if (previousPageIndex >= 0 && previousPageIndex < childCount && pageParent.transform.GetChild(previousPageIndex).childCount > 0)
             {
                 SetActivePage(previousPageIndex);
                 return;
             }
 
-            
+
             for (int i = childCount - 1; i >= 0; i--)
             {
                 if (pageParent.transform.GetChild(i).childCount > 0)
@@ -193,7 +202,7 @@ namespace Kingdom.Audio
 
             Sprite sprite = (cLine.index > 6 ? upNotations : downNotations)[currentIndex].Sprite;
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
-            var newNote = CreateObjectInLine(cLine.yPos, cLine.index, sprite);
+            var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
             Note note = newNote.AddComponent<Note>();
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
@@ -202,6 +211,7 @@ namespace Kingdom.Audio
             note.page = aPage;
             note.note = notationContainer.GetFirstByType<NotationScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
             newNote.name = note.ToString();
+            newNote.tag = "Note";
             note.ApplyInLine();
 
             actionStack.Push(note);
@@ -214,7 +224,7 @@ namespace Kingdom.Audio
             if (actionStack.OfType<MonoKeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
 
             Sprite sprite = currentSpriteArray[currentIndex].Sprite;
-            var newNote = CreateObjectInLine(line.yPos, line.index, sprite);
+            var newNote = CreateObjectInLine(line.yPos, sprite);
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
 
 
@@ -223,11 +233,12 @@ namespace Kingdom.Audio
             key.page = aPage;
             key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
             newNote.name = key.ToString();
+            newNote.tag = "KeySignature";
 
             actionStack.Push(key);
         }
 
-        public GameObject CreateObjectInLine(float lineY, int lineIndex, Sprite sprite)
+        public GameObject CreateObjectInLine(float lineY, Sprite sprite)
         {
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
@@ -359,17 +370,29 @@ namespace Kingdom.Audio
         {
             var parentGo = GameObject.FindWithTag("Page");
             for (int i = 0; i < parentGo.transform.childCount; i++)
-            {
                 if (parentGo.transform.GetChild(i).gameObject.activeSelf)
-                {
                     return i;
-                }
-            }
-            return -1; // Retorna -1 se nenhum filho estiver ativo
+
+            return -1;
         }
         private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Kingdom.Enums.Player.CharacterID.Roddie);
+
         #endregion
+
+        public void ChangeNote(Note note)
+        {
+            NotationScriptable currentNote = currentSpriteArray[currentIndex] as NotationScriptable;
+            if (note.note.Tempo != currentNote.Tempo || note.note.NoteBehaviour != currentNote.NoteBehaviour)
+            {
+                note.note = currentNote;
+                note.GetComponent<Image>().sprite = currentNote.Sprite;
+            }
+        }
+
+        public void RemoveNote(Note note)
+        {
+            Destroy(note.gameObject);
+        }
+
     }
-
-
 }

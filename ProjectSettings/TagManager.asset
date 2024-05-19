@@ -19,6 +19,7 @@ TagManager:
   - Play
   - KeySignature
   - Note
+  - KeySignatureArea
   layers:
   - Default
   - TransparentFX
