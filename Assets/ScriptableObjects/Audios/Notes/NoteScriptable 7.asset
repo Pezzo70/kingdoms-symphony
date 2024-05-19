@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0591171477de6ae4c88081da7d9b3580, type: 3}
   m_Name: NoteScriptable 7
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1288781542, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
-  tempo: 8
+  sprite: {fileID: -1258549117, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
+  tempo: 16
   noteBehaviour: 1
-  noteOrientation: 1
+  noteOrientation: 0
