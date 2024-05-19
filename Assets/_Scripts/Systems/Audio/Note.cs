@@ -47,7 +47,6 @@ namespace Kingdom.Audio
         public static KeyName FindNote(Clef clef, int index)
         {
             //# -1, B +1
-            KeyName[] notes = 
             if (clef == Clef.G)
             {
                 KeyName[] notesOnLinesAndSpaces = 
