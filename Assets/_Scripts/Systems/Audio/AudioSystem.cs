@@ -5,6 +5,7 @@ using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
 using Kingdom.Enums.Player;
+using Kingdom.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -78,7 +79,7 @@ namespace Kingdom.Audio
                 effectVolume
             );
 
-        public void Play(IList<Note> notes) => instrument.QueueKey(Note.ToKeysPlayed(notes));
+        public void Play(IList<Note> notes) => instrument.QueueKey(notes.ToKeysPlayed());
 
         public void Play(FXID effect) =>
             effectSource.PlayOneShot(

@@ -22,32 +22,39 @@ namespace Kingdom.Audio
         public int line;
         public int page;
 
-        public static IList<KeyPlayed> ToKeysPlayed(IList<Note> notes)
+
+        public Clef GetClef() => this.clef.Clef;
+        public KeySignature GetSignature() => this.transform.parent.GetComponentsInChildren<MonoKeySignature>()?.FirstOrDefault(sign => sign.line == this.line)?.keySignature.KeySignature ?? KeySignature.Natural;
+      
+                public void ApplyInLine()
         {
-            IList<KeyPlayed> keysPlayed = new List<KeyPlayed>();
+            if (this.line != 12 && this.line != 0) return;
 
 
-            var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
-            float beatDuration = 60.0f / 60;
+            GameObject linha = new GameObject("Linha");
+            linha.transform.SetParent(this.transform);
+            linha.transform.localScale = Vector3.one;
+            Image linhaImage = linha.AddComponent<Image>();
+            linhaImage.color = Color.black; 
 
-            for (int i = 0; i < orderedNotes.Count; i++)
-            {
-                var note = orderedNotes[i];
-                KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.GetClef(), note.line, note.GetSignature());
-                KeyPlayed key = new KeyPlayed()
-                {
-                    Name = name,
-                    TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased,
-                };
-                key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
 
-                keysPlayed.Add(key);
-            }
+            RectTransform linhaRectTransform = linha.GetComponent<RectTransform>();
+            linhaRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            linhaRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            linhaRectTransform.pivot = new Vector2(0.5f, 0.5f);
 
-            return keysPlayed;
+
+            linhaRectTransform.sizeDelta = new Vector2(1.10f, 0.05f);
+            linhaRectTransform.anchoredPosition = this.GetComponent<Image>().GetSpritePivotPosition();
         }
 
-        public static KeyName FindNote(Clef clef, int index, KeySignature signature)
+        public override string ToString()
+        {
+            return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
+        }
+
+
+                public static KeyName FindNote(Clef clef, int index, KeySignature signature)
         {
             //# -1, B +1
             Debug.Log(signature);
@@ -118,33 +125,6 @@ namespace Kingdom.Audio
             return KeyName.C3;
         }
 
-        public Clef GetClef() => this.clef.Clef;
-        public KeySignature GetSignature() => this.transform.parent.GetComponentsInChildren<MonoKeySignature>()?.FirstOrDefault(sign => sign.line == this.line)?.keySignature.KeySignature ?? KeySignature.Natural;
-        public override string ToString()
-        {
-            return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
-        }
 
-        public void ApplyInLine()
-        {
-            if (this.line != 12 && this.line != 0) return;
-
-
-            GameObject linha = new GameObject("Linha");
-            linha.transform.SetParent(this.transform);
-            linha.transform.localScale = Vector3.one;
-            Image linhaImage = linha.AddComponent<Image>();
-            linhaImage.color = Color.black; 
-
-
-            RectTransform linhaRectTransform = linha.GetComponent<RectTransform>();
-            linhaRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            linhaRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            linhaRectTransform.pivot = new Vector2(0.5f, 0.5f);
-
-
-            linhaRectTransform.sizeDelta = new Vector2(1.10f, 0.05f);
-            linhaRectTransform.anchoredPosition = this.GetComponent<Image>().GetSpritePivotPosition();
-        }
     }
 }
