@@ -1,4 +1,3 @@
-using System.Collections;
 using Kingdom.Level;
 using Kingdom.Player;
 using TMPro;

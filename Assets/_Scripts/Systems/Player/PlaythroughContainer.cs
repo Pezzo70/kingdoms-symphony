@@ -122,6 +122,8 @@ namespace Kingdom.Level
             if (currentLevel.endGame)
                 return _levels[_currentLevelIndex];
 
+            PlayerStats.CleanseAllEffects(_currentCharacterID);
+
             if (_currentLevelPhase == currentLevel.numberOfPhases)
             {
                 _currentLevelIndex++;

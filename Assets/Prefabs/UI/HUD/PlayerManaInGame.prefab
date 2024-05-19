@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8948722526886073215}
   - component: {fileID: 4278194810792485786}
   - component: {fileID: 8874672132658325572}
+  - component: {fileID: 5083031334306522414}
   m_Layer: 0
   m_Name: PlayerManaInGame
   m_TagString: Untagged
@@ -76,3 +77,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5083031334306522414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22820345849347776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bdb9dc6c560ea44a9dd835f1c0aa473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 8874672132658325572}
+  manaFill: {fileID: 236315753, guid: 4df361ec2168cf748a2d388e27f8eb0c, type: 3}
+  manaDepleted: {fileID: 1766277073, guid: 4df361ec2168cf748a2d388e27f8eb0c, type: 3}
+  isDepleted: 0
