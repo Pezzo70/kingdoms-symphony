@@ -25,5 +25,7 @@ MonoBehaviour:
   XP: 1
   xFactor: 0.5
   yFactor: 15
-  zFactor: 0
+  zFactor: 1
   wFactor: 0
+  effectsSymbols:
+  - {fileID: 496723824, guid: 5461780dce80bc44581d277e78797569, type: 3}
