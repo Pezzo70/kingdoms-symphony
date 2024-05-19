@@ -381,11 +381,15 @@ namespace Kingdom.Audio
 
         public void ChangeNote(Note note)
         {
-            NotationScriptable currentNote = currentSpriteArray[currentIndex] as NotationScriptable;
+            var line = GetClosestLine();
+            var spriteArray = line.index > 6 ? upNotations : downNotations;
+            NotationScriptable currentNote = spriteArray[currentIndex];
+            
             if (note.note.Tempo != currentNote.Tempo || note.note.NoteBehaviour != currentNote.NoteBehaviour)
             {
                 note.note = currentNote;
                 note.GetComponent<Image>().sprite = currentNote.Sprite;
+                note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>().GetSpriteRelativePivot();
             }
         }
 
