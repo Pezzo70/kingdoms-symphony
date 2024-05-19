@@ -97,6 +97,7 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Tip.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\Scroll.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Player\PlayerStats.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\PlayerAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\UIEventTrigger.cs" />

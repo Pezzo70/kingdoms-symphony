@@ -32,5 +32,9 @@ public static class EventManager
     public static UnityAction<Scroll> ScrollAccomplished;
 
     public static UnityAction<Level> LoadNewLevel;
-    public static UnityAction VerifyIfGameIsOver;
+    public static UnityAction OnPlayerMoralChange;
+    public static UnityAction OnPlayerManaChange;
+    public static UnityAction OnTurnEnded;
+    public static UnityAction EndGameVictory;
+    public static UnityAction EndGameDefeat;
 }

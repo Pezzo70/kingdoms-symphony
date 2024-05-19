@@ -12,7 +12,7 @@ public class CharacterHandler : MonoBehaviour
 
     void Start()
     {
-        PlayerData playerData = PlayerContainer.Instance.playerData;
+        PlayerData playerData = PlayerContainer.Instance.PlayerData;
         var characterInfo = playerData.LevelPerCharacter[characterID];
         level.text = characterInfo.level.ToString();
 

@@ -22,11 +22,11 @@ public class LanguageControl : MonoBehaviour
             {
                 case 0:
                     toggle.isOn =
-                        PlayerContainer.Instance.playerConfig.LanguagePreferred == "Portuguese";
+                        PlayerContainer.Instance.PlayerConfig.LanguagePreferred == "Portuguese";
                     break;
                 case 1:
                     toggle.isOn =
-                        PlayerContainer.Instance.playerConfig.LanguagePreferred == "English";
+                        PlayerContainer.Instance.PlayerConfig.LanguagePreferred == "English";
                     break;
             }
 
@@ -55,7 +55,7 @@ public class LanguageControl : MonoBehaviour
                     break;
             }
 
-            PlayerContainer.Instance.playerConfig.SetLanguage(LocalizationManager.Language);
+            PlayerContainer.Instance.PlayerConfig.SetLanguage(LocalizationManager.Language);
         }
     }
 }

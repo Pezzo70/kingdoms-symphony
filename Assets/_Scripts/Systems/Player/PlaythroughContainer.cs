@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Enemies;
 using Kingdom.Enums.Player;
+using Kingdom.Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,7 @@ namespace Kingdom.Level
         private int _currentLevelIndex;
         private int _currentLevelPhase;
         private CharacterID _currentCharacterID;
+        public PlayerStats PlayerStats;
 
         private Dictionary<Enemy, int> _enemiesBanished;
         private List<Enemy> _enemiesEncountered;
@@ -71,6 +73,11 @@ namespace Kingdom.Level
             };
         }
 
+        void Start()
+        {
+            PlayerStats = new PlayerStats();
+        }
+
         void OnEnable()
         {
             EventManager.EnemyBanished += _enemyBanishedAction;
@@ -96,6 +103,7 @@ namespace Kingdom.Level
         public void CreateNewPlaythrough(CharacterID characterID)
         {
             _currentCharacterID = characterID;
+            PlayerStats.CreateNewPlayerStats(characterID);
             _currentLevelIndex = 0;
             _currentLevelPhase = 1;
             _enemiesBanished = new Dictionary<Enemy, int>();

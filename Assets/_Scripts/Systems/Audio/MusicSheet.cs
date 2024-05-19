@@ -4,32 +4,39 @@ using Kingdom.Audio.Procedural;
 using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Extensions;
+using Kingdom.Level;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
+        private const float DEFAULT_SPRITE_SIZE = 70f;
 
-        private const float DEFAULT_SPRITE_SIZE = 70f; 
-        [SerializeField] private Object pagePrefab;
+        [SerializeField]
+        private Object pagePrefab;
         private GameObject notationSpriteObject;
         private Stack<MonoBehaviour> actionStack;
 
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
         private int currentIndex;
-        [SerializeField] private ScriptableContainer notationContainer;
-        [SerializeField] private ScriptableContainer clefContainer;
+
+        [SerializeField]
+        private ScriptableContainer notationContainer;
+
+        [SerializeField]
+        private ScriptableContainer clefContainer;
         private NotationScriptable[] upNotations;
         private NotationScriptable[] downNotations;
         private KeySignatureScriptable[] keySignatures;
+
         /*************************************************************/
 
-        [SerializeField] private Vector2 offsetPosition;
+        [SerializeField]
+        private Vector2 offsetPosition;
         private bool isHover = false;
         private string currentHoverTag;
 
@@ -38,8 +45,22 @@ namespace Kingdom.Audio
             actionStack = new Stack<MonoBehaviour>();
 
             notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
-            upNotations = notationContainer.GetByType<NotationScriptable>().Where(nc => nc.NoteOrientation is NotationOrientation.Up || nc.NoteOrientation is NotationOrientation.Center).ToArray();
-            downNotations = notationContainer.GetByType<NotationScriptable>().Where(nc => nc.NoteOrientation is NotationOrientation.Down || nc.NoteOrientation is NotationOrientation.Center).ToArray();
+            upNotations = notationContainer
+                .GetByType<NotationScriptable>()
+                .Where(
+                    nc =>
+                        nc.NoteOrientation is NotationOrientation.Up
+                        || nc.NoteOrientation is NotationOrientation.Center
+                )
+                .ToArray();
+            downNotations = notationContainer
+                .GetByType<NotationScriptable>()
+                .Where(
+                    nc =>
+                        nc.NoteOrientation is NotationOrientation.Down
+                        || nc.NoteOrientation is NotationOrientation.Center
+                )
+                .ToArray();
             keySignatures = notationContainer.GetByType<KeySignatureScriptable>().ToArray();
 
             currentSpriteArray = upNotations;
@@ -66,19 +87,26 @@ namespace Kingdom.Audio
                     currentSpriteArray = keySignatures;
                     break;
             }
-            if (currentIndex >= currentSpriteArray.Length) currentIndex = 0;
+            if (currentIndex >= currentSpriteArray.Length)
+                currentIndex = 0;
 
-            notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
+            notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[
+                currentIndex
+            ].Sprite;
         }
 
         void SpriteFollowMouse()
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            notationSpriteObject.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
-            notationSpriteObject.transform.position = new Vector2(cursorPos.x + offsetPosition.x, cursorPos.y + offsetPosition.y);
+            notationSpriteObject.GetComponent<RectTransform>().pivot = notationSpriteObject
+                .GetComponent<Image>()
+                .GetSpriteRelativePivot();
+            notationSpriteObject.transform.position = new Vector2(
+                cursorPos.x + offsetPosition.x,
+                cursorPos.y + offsetPosition.y
+            );
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-
 
             if (scroll > 0f)
             {
@@ -87,27 +115,29 @@ namespace Kingdom.Audio
             }
             else if (scroll < 0f)
             {
-                currentIndex = (currentIndex - 1 + currentSpriteArray.Length) % currentSpriteArray.Length;
+                currentIndex =
+                    (currentIndex - 1 + currentSpriteArray.Length) % currentSpriteArray.Length;
                 UpdateSprite();
             }
-
         }
 
         void UpdateSprite()
         {
             if (currentIndex >= 0 && currentIndex < currentSpriteArray.Length)
             {
-                notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[currentIndex].Sprite;
+                notationSpriteObject.GetComponent<Image>().sprite = currentSpriteArray[
+                    currentIndex
+                ].Sprite;
             }
         }
 
         public void Clear()
         {
             while (actionStack.Count != 0)
-               if(actionStack.Peek().IsDestroyed())
+                if (actionStack.Peek().IsDestroyed())
                     actionStack.Pop();
-               else
-                Destroy(actionStack.Pop().gameObject);
+                else
+                    Destroy(actionStack.Pop().gameObject);
             SetActivePage(0);
         }
 
@@ -115,12 +145,11 @@ namespace Kingdom.Audio
         {
             if (actionStack.Count > 0)
             {
-
                 MonoBehaviour destroyGO;
-                do
-                    destroyGO = actionStack.Pop();
+                do destroyGO = actionStack.Pop();
                 while (destroyGO.IsDestroyed() && actionStack.Count > 0);
-                if(actionStack.Count == 0) return;
+                if (actionStack.Count == 0)
+                    return;
 
                 var lastActionPage = destroyGO.transform.parent;
                 var lastActionPageIndex = lastActionPage.GetSiblingIndex();
@@ -135,13 +164,15 @@ namespace Kingdom.Audio
             var pageParent = GameObject.FindWithTag("Page");
             int childCount = pageParent.transform.childCount;
 
-
-            if (previousPageIndex >= 0 && previousPageIndex < childCount && pageParent.transform.GetChild(previousPageIndex).childCount > 0)
+            if (
+                previousPageIndex >= 0
+                && previousPageIndex < childCount
+                && pageParent.transform.GetChild(previousPageIndex).childCount > 0
+            )
             {
                 SetActivePage(previousPageIndex);
                 return;
             }
-
 
             for (int i = childCount - 1; i >= 0; i--)
             {
@@ -151,7 +182,6 @@ namespace Kingdom.Audio
                     return;
                 }
             }
-
 
             if (childCount > 0)
             {
@@ -164,14 +194,19 @@ namespace Kingdom.Audio
             var clefSprites = clefContainer.GetByType<ClefScriptable>().ToArray();
             var scaleObject = GameObject.FindGameObjectWithTag("ChangeScale");
             var scaleSprite = scaleObject.GetComponent<Image>();
-            scaleSprite.sprite = scaleSprite.sprite == clefSprites[0].Sprite ? clefSprites[1].Sprite : clefSprites[0].Sprite;
+            scaleSprite.sprite =
+                scaleSprite.sprite == clefSprites[0].Sprite
+                    ? clefSprites[1].Sprite
+                    : clefSprites[0].Sprite;
 
             foreach (Transform noteT in scaleObject.transform.parent)
             {
                 Note note = null;
                 noteT.TryGetComponent<Note>(out note);
                 if (note != null)
-                    note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+                    note.clef = clefContainer.GetFirstByType<ClefScriptable>(
+                        a => a.Sprite == scaleSprite.sprite
+                    );
             }
         }
 
@@ -202,56 +237,79 @@ namespace Kingdom.Audio
         {
             var cLine = GetClosestLine();
             var aPage = GetActivePageIndex();
-            if (actionStack.OfType<Note>().Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) > 1) return;
+            if (
+                actionStack
+                    .OfType<Note>()
+                    .Where(a => a.line == cLine.index && a.page == aPage)
+                    .Sum(a => a.note.Tempo.ToFloat()) > 1
+            )
+                return;
 
             var spriteArray = cLine.index > 6 ? upNotations : downNotations;
             Sprite sprite = spriteArray[currentIndex].Sprite;
-            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
+            Image scaleSprite = GameObject
+                .FindGameObjectWithTag("ChangeScale")
+                .GetComponent<Image>();
             var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
             Note note = newNote.AddComponent<Note>();
-            note.clef = clefContainer.GetFirstByType<ClefScriptable>(a => a.Sprite == scaleSprite.sprite);
+            note.clef = clefContainer.GetFirstByType<ClefScriptable>(
+                a => a.Sprite == scaleSprite.sprite
+            );
             note.line = cLine.index;
             note.xPos = newNote.transform.position.x;
             note.page = aPage;
-            note.note = notationContainer.GetFirstByType<NotationScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
+            note.note = notationContainer.GetFirstByType<NotationScriptable>(
+                n => n.Sprite == newNote.GetComponent<Image>().sprite
+            );
             newNote.name = note.ToString();
             newNote.tag = "Note";
             note.ApplyInLine();
 
-
             //@TODO: Setar size e raycast padding baseado no tamanho do sprite(de forma dinamica).
-            switch(spriteArray[currentIndex].NoteOrientation)
+            switch (spriteArray[currentIndex].NoteOrientation)
             {
                 case NotationOrientation.Center:
-                    newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(newNote.GetComponent<RectTransform>().sizeDelta.x, 50);
-                break;
+                    newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(
+                        newNote.GetComponent<RectTransform>().sizeDelta.x,
+                        50
+                    );
+                    break;
                 case NotationOrientation.Up:
-                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,3,0,68);
-                break;
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0, 3, 0, 68);
+                    break;
                 case NotationOrientation.Down:
-                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,68,0,3);
-                break;
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0, 68, 0, 3);
+                    break;
             }
-            
+
             actionStack.Push(note);
         }
+
         public void InsertKeySignature()
         {
             var line = GetClosestLine();
             var aPage = GetActivePageIndex();
 
-            if (actionStack.OfType<MonoKeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
+            if (
+                actionStack
+                    .OfType<MonoKeySignature>()
+                    .Any(a => a.line == line.index && a.page == aPage)
+            )
+                return;
 
             Sprite sprite = currentSpriteArray[currentIndex].Sprite;
             var newNote = CreateObjectInLine(line.yPos, sprite);
-            Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
-
+            Image scaleSprite = GameObject
+                .FindGameObjectWithTag("ChangeScale")
+                .GetComponent<Image>();
 
             MonoKeySignature key = newNote.AddComponent<MonoKeySignature>();
             key.line = line.index;
             key.page = aPage;
-            key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);
+            key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(
+                n => n.Sprite == newNote.GetComponent<Image>().sprite
+            );
             newNote.name = key.ToString();
             newNote.tag = "KeySignature";
 
@@ -263,7 +321,6 @@ namespace Kingdom.Audio
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickPos.z = 0;
 
-
             GameObject newNote = new GameObject();
             newNote.transform.SetParent(GetActivePage().transform);
             newNote.transform.position = clickPos;
@@ -272,13 +329,20 @@ namespace Kingdom.Audio
             renderer.raycastTarget = true;
             renderer.preserveAspect = true;
             renderer.sprite = sprite;
-            newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject.GetComponent<RectTransform>().sizeDelta;
+            newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject
+                .GetComponent<RectTransform>()
+                .sizeDelta;
             newNote.GetComponent<RectTransform>().localScale = Vector3.one;
 
             notationSpriteObject.GetComponent<Image>().sprite = sprite;
-            newNote.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
-            newNote.transform.position = new Vector3(newNote.transform.position.x, lineY, newNote.transform.position.z);
-                
+            newNote.GetComponent<RectTransform>().pivot = notationSpriteObject
+                .GetComponent<Image>()
+                .GetSpriteRelativePivot();
+            newNote.transform.position = new Vector3(
+                newNote.transform.position.x,
+                lineY,
+                newNote.transform.position.z
+            );
 
             return newNote;
         }
@@ -320,7 +384,6 @@ namespace Kingdom.Audio
             foreach (Transform childTransform in parentGo.transform)
                 childTransform.gameObject.SetActive(false);
 
-
             activeGo.SetActive(true);
             return activeGo;
         }
@@ -330,12 +393,13 @@ namespace Kingdom.Audio
             var pageParent = GameObject.FindWithTag("Page");
             var childCount = pageParent.transform.childCount + 1;
 
-            if (childCount == GetMaxPage()) return;
+            if (childCount == GetMaxPage())
+                return;
             var page = Instantiate(pagePrefab, pageParent.transform);
-
 
             SetActivePage(pageParent.transform.childCount - 1);
         }
+
         public void RemovePage()
         {
             var page = GameObject.FindWithTag("Page");
@@ -375,7 +439,6 @@ namespace Kingdom.Audio
                 activeIndex = activeIndex <= 0 ? (childCount - 1) : activeIndex - 1;
                 SetActivePage(activeIndex);
             }
-
         }
 
         private GameObject GetActivePage()
@@ -396,7 +459,8 @@ namespace Kingdom.Audio
 
             return -1;
         }
-        private int GetMaxPage() => Player.PlayerContainer.Instance.playerData.GetSheetPages(Kingdom.Enums.Player.CharacterID.Roddie);
+
+        private int GetMaxPage() => PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars;
 
         #endregion
 
@@ -406,18 +470,22 @@ namespace Kingdom.Audio
             var spriteArray = line.index > 6 ? upNotations : downNotations;
             NotationScriptable currentNote = spriteArray[currentIndex];
 
-            if (note.note.Tempo != currentNote.Tempo || note.note.NoteBehaviour != currentNote.NoteBehaviour)
+            if (
+                note.note.Tempo != currentNote.Tempo
+                || note.note.NoteBehaviour != currentNote.NoteBehaviour
+            )
             {
                 note.note = currentNote;
                 note.GetComponent<Image>().sprite = currentNote.Sprite;
-                note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>().GetSpriteRelativePivot();
-            }else{}
+                note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>()
+                    .GetSpriteRelativePivot();
+            }
+            else { }
         }
 
         public void RemoveNote(Note note)
         {
             Destroy(note.gameObject);
         }
-
     }
 }

@@ -106,11 +106,11 @@ namespace Kingdom.Player
 
         public int GetLevel(CharacterID id) => this._levelPerCharacter.GetValueOrDefault(id).level;
 
-        public int GetSheetPages(CharacterID id) => 2 + GetLevel(id);
+        public int GetSheetBars(CharacterID id) => 2 + GetLevel(id);
 
-        public int GetMoral(CharacterID id) => 4 + GetLevel(id);
+        public int GetMoral(CharacterID id) => 250 + GetLevel(id) * 25;
 
-        public int GetMana(CharacterID id) => 4 + GetLevel(id);
+        public int GetMana(CharacterID id) => 2 + GetLevel(id);
 
         public int GetXPForTargetLevel(int targetLevel)
         {

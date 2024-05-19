@@ -26,7 +26,7 @@ public class SettingsManager : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerConfig playerConfig = PlayerContainer.Instance.playerConfig;
+        PlayerConfig playerConfig = PlayerContainer.Instance.PlayerConfig;
         musicVolumeSlider.value = playerConfig.MusicVolume * 100f;
         instrumentVolumeSlider.value = playerConfig.InstrumentVolume * 100f;
         effectVolumeSlider.value = playerConfig.EffectVolume * 100f;
@@ -52,7 +52,7 @@ public class SettingsManager : MonoBehaviour
 
         resolutionDropdown.value = supportedResolution
             .ToList()
-            .FindIndex(i => i == PlayerContainer.Instance.playerConfig.Resolution.ToString());
+            .FindIndex(i => i == PlayerContainer.Instance.PlayerConfig.Resolution.ToString());
     }
 
     public IEnumerable<Resolution> GetSupportedResolutions() => Screen.resolutions;
@@ -80,9 +80,9 @@ public class SettingsManager : MonoBehaviour
         ApplyResolution(this.resolution, this.fullscreen);
         PlayerContainer
             .Instance
-            .playerConfig
+            .PlayerConfig
             .SetVolumeSettings(musicVolume, instrumentVolume, effectVolume, ambienceVolume);
-        PlayerContainer.Instance.playerConfig.SetScreenSettings(resolution, fullscreen);
+        PlayerContainer.Instance.PlayerConfig.SetScreenSettings(resolution, fullscreen);
         EventManager.SavePlayerConfig();
     }
 
