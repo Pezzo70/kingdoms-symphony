@@ -203,14 +203,14 @@ namespace Kingdom.Audio
             var line = GetClosestLine();
             var aPage = GetActivePageIndex();
 
-            if (actionStack.OfType<KeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
+            if (actionStack.OfType<MonoKeySignature>().Any(a => a.line == line.index && a.page == aPage)) return;
 
             Sprite sprite = currentSpriteArray[currentIndex].Sprite;
             var newNote = CreateObjectInLine(line.yPos, line.index, sprite);
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
 
 
-            KeySignature key = newNote.AddComponent<KeySignature>();
+            MonoKeySignature key = newNote.AddComponent<MonoKeySignature>();
             key.line = line.index;
             key.page = aPage;
             key.keySignature = notationContainer.GetFirstByType<KeySignatureScriptable>(n => n.Sprite == newNote.GetComponent<Image>().sprite);

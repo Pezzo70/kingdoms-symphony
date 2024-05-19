@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kingdom.Audio
 {
-    public class KeySignature : MonoBehaviour
+    public class MonoKeySignature : MonoBehaviour
     {
 
         public KeySignatureScriptable keySignature;

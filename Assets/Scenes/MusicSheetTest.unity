@@ -1954,6 +1954,8 @@ GameObject:
   - component: {fileID: 1664859823}
   - component: {fileID: 1664859822}
   - component: {fileID: 1664859824}
+  - component: {fileID: 1664859826}
+  - component: {fileID: 1664859825}
   m_Layer: 0
   m_Name: Instrument
   m_TagString: Untagged
@@ -1980,14 +1982,18 @@ MonoBehaviour:
     Sustain: 0.3
     Release: 1
   amplitude: 0.5
-  _gain: 0.5
+  _gain: 0.2
   _sampleRate: 0
   harmonics:
-  - 0.25
+  - 0.85
   - 0.5
-  - 0.2
+  - 0.25
   - 0.1
-  - 0.08
+  - 0.05
+  - 0.025
+  - 0.005
+  - 0.001
+  - 0.001
 --- !u!4 &1664859823
 Transform:
   m_ObjectHideFlags: 0
@@ -2099,6 +2105,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!169 &1664859825
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664859821}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.03365166
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!165 &1664859826
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664859821}
+  m_Enabled: 1
+  m_CutoffFrequency: 150
+  m_HighpassResonanceQ: 2
 --- !u!1 &1729326102
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,7 +201,7 @@ namespace Kingdom.Enums.MusicTheory
 
     public enum KeySignature
     {
-        Sharp, Flat 
+        Natural, Sharp, Flat 
     }
 }
 

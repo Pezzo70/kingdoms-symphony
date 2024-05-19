@@ -15,6 +15,7 @@ namespace Kingdom.Audio
 
         public NotationScriptable note;
         public ClefScriptable clef;
+        public KeySignatureScriptable signature;
         public float xPos;
         public int line;
         public int page;
@@ -25,12 +26,12 @@ namespace Kingdom.Audio
 
 
             var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
-            float beatDuration = 60.0f / 30;
+            float beatDuration = 60.0f / 60;
 
             for (int i = 0; i < orderedNotes.Count; i++)
             {
                 var note = orderedNotes[i];
-                KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.clef.Clef, note.line);
+                KeyName name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : FindNote(note.GetClef(), note.line, note.GetSignature());
                 KeyPlayed key = new KeyPlayed()
                 {
                     Name = name,
@@ -44,10 +45,14 @@ namespace Kingdom.Audio
             return keysPlayed;
         }
 
-        public static KeyName FindNote(Clef clef, int index)
+        public static KeyName FindNote(Clef clef, int index, KeySignature signature)
         {
             //# -1, B +1
+            Debug.Log(signature);
             KeyName[] notesOnLinesAndSpaces = null;
+            index++;
+            if(signature == KeySignature.Sharp) index--;
+            else if(signature == KeySignature.Flat) index++;
 
             if (clef == Clef.G)
                 notesOnLinesAndSpaces = new KeyName[]
@@ -106,11 +111,13 @@ namespace Kingdom.Audio
                     KeyName.D4
                 };
             if (index >= 0 && index < notesOnLinesAndSpaces.Length)
-                return notesOnLinesAndSpaces[index];
-                
+                return notesOnLinesAndSpaces[index == notesOnLinesAndSpaces.Length-1 ? --index : index];
+
             return KeyName.C3;
         }
 
+        public Clef GetClef() => this.clef.Clef;
+        public KeySignature GetSignature() => this.transform.parent.GetComponentsInChildren<MonoKeySignature>()?.FirstOrDefault(sign => sign.line == this.line)?.keySignature.KeySignature ?? KeySignature.Natural;
         public override string ToString()
         {
             return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
