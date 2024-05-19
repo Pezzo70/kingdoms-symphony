@@ -112,6 +112,7 @@ namespace Kingdom.Audio
         {
             while (actionStack.Count != 0)
                 Destroy(actionStack.Pop().gameObject);
+            SetActivePage(0);
         }
 
         public void Undo()
@@ -268,6 +269,8 @@ namespace Kingdom.Audio
                 return;
             else
                 Destroy(page.transform.GetChild(childCount - 1).gameObject);
+
+            SetActivePage(childCount - 2);
         }
 
         public void NavigatePage(bool next)
