@@ -21,4 +21,8 @@ MonoBehaviour:
   zFactor: 2
   wFactor: 0
   jFactor: 0
-  kFactor: 0
+  mFactor: 0
+  lFactor: 0
+  attackSymbol: {fileID: -20579851, guid: 5461780dce80bc44581d277e78797569, type: 3}
+  effectsSymbols:
+  - {fileID: 1415895816, guid: 5461780dce80bc44581d277e78797569, type: 3}

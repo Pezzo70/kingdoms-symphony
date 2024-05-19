@@ -27,5 +27,7 @@ namespace Kingdom.Enemies
         public float jFactor;
         public float mFactor;
         public float lFactor;
+        public Sprite attackSymbol;
+        public Sprite[] effectsSymbols;
     }
 }

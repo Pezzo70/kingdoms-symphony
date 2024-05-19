@@ -175,7 +175,25 @@ namespace Kingdom.Audio
 
         public void Play()
         {
-            AudioSystem.Instance.Play(this.actionStack.OfType<Note>().AsReadOnlyList());
+            var pageParent = GameObject.FindWithTag("Page");
+            int pagesCount = pageParent.transform.childCount;
+
+            var notesToPlay = new List<Note>();
+
+            for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++)
+            {
+                var page = pageParent.transform.GetChild(pageIndex);
+                foreach (Transform noteTransform in page)
+                {
+                    var noteComponent = noteTransform.GetComponent<Note>();
+                    if (noteComponent != null)
+                    {
+                        notesToPlay.Add(noteComponent);
+                    }
+                }
+            }
+
+            AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
         }
 
         public void InsertNote()

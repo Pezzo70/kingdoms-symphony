@@ -18,6 +18,7 @@ MonoBehaviour:
   manaRequired: 8
   cooldown: 10
   targetMeasures: 0
+  validClef: 
   validChords: 
   validScales: 
   validModes: 00000000010000000200000003000000040000000500000006000000
@@ -26,3 +27,5 @@ MonoBehaviour:
   yFactor: 300
   zFactor: 3
   wFactor: 50
+  effectsSymbols:
+  - {fileID: 496723824, guid: 5461780dce80bc44581d277e78797569, type: 3}
