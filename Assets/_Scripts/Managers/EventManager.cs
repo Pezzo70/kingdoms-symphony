@@ -1,5 +1,7 @@
 using System;
+using Kingdom.Enemies;
 using Kingdom.Enums;
+using Kingdom.Level;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,4 +22,15 @@ public static class EventManager
         Vector3 targetPosition,
         bool shouldDisplayOpacityPanel
     )> ShowPopUp;
+
+    public static UnityAction<Enemy> EnemyBanished;
+    public static UnityAction<Enemy> EnemyEncountered;
+    public static UnityAction<EnemyAttack> EnemyAttackExecuted;
+    public static UnityAction<EnemyAdvantage> EnemyAdvantageTriggered;
+    public static UnityAction<EnemyDisadvantage> EnemyDisadvantageTriggered;
+    public static UnityAction<Scroll> ScrollUsed;
+    public static UnityAction<Scroll> ScrollAccomplished;
+
+    public static UnityAction<Level> LoadNewLevel;
+    public static UnityAction VerifyIfGameIsOver;
 }

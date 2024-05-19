@@ -1,5 +1,7 @@
 using System.Collections;
 using Kingdom.Audio;
+using Kingdom.Enums.Player;
+using Kingdom.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +38,27 @@ public class StageManager : MonoBehaviour
                 true
             )
         );
+    }
+
+    public void StartNewRun(int characterID)
+    {
+        CharacterID character = (CharacterID)characterID;
+        PlaythroughContainer.Instance.CreateNewPlaythrough(character);
+        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        StartCoroutine(WaitToLoad(1));
+    }
+
+    public void GoToNextLevel()
+    {
+        Level nextLevel = PlaythroughContainer.Instance.GetNextLevel();
+        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        StartCoroutine(WaitToLoad(nextLevel.sceneID));
+    }
+
+    public void EndGame()
+    {
+        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        StartCoroutine(WaitToLoad(0));
     }
 
     private IEnumerator WaitToLoad(int sceneID)
