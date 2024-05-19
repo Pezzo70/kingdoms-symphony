@@ -112,12 +112,49 @@ namespace Kingdom.Audio
         {
             while (actionStack.Count != 0)
                 Destroy(actionStack.Pop().gameObject);
+            SetActivePage(0);
         }
 
         public void Undo()
         {
-            if (actionStack.Count > 0)
+             if (actionStack.Count > 0)
+            {
+                var lastActionPage = actionStack.Peek().transform.parent;
+                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
+
                 Destroy(actionStack.Pop().gameObject);
+
+                UpdateActivePageAfterUndo(lastActionPageIndex);
+            }
+        }
+
+        private void UpdateActivePageAfterUndo(int previousPageIndex)
+        {
+            var pageParent = GameObject.FindWithTag("Page");
+            int childCount = pageParent.transform.childCount;
+
+            
+            if (previousPageIndex >= 0 && previousPageIndex < childCount && pageParent.transform.GetChild(previousPageIndex).childCount > 0)
+            {
+                SetActivePage(previousPageIndex);
+                return;
+            }
+
+            
+            for (int i = childCount - 1; i >= 0; i--)
+            {
+                if (pageParent.transform.GetChild(i).childCount > 0)
+                {
+                    SetActivePage(i);
+                    return;
+                }
+            }
+
+
+            if (childCount > 0)
+            {
+                SetActivePage(0);
+            }
         }
 
         public void ChangeScale()
@@ -268,6 +305,8 @@ namespace Kingdom.Audio
                 return;
             else
                 Destroy(page.transform.GetChild(childCount - 1).gameObject);
+
+            SetActivePage(childCount - 2);
         }
 
         public void NavigatePage(bool next)

@@ -11,7 +11,32 @@ public class StageManager : MonoBehaviour
         StartCoroutine(WaitToLoad(sceneID));
     }
 
-    public void GoToMenu() => SceneManager.LoadScene("Menu");
+    public void SurrenderAndGoToMenu()
+    {
+        GameObject pauseGameObject = FindAnyObjectByType<PauseHandler>()
+            .gameObject
+            .transform
+            .GetChild(0)
+            .gameObject;
+        EventManager.ShowPopUp(
+            (
+                "InGame.PopUp.Message.0",
+                false,
+                true,
+                () =>
+                {
+                    pauseGameObject.SetActive(false);
+                    EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+                    StartCoroutine(WaitToLoad(0));
+                },
+                false,
+                0f,
+                false,
+                new Vector3(0f, 0f, 0f),
+                true
+            )
+        );
+    }
 
     private IEnumerator WaitToLoad(int sceneID)
     {

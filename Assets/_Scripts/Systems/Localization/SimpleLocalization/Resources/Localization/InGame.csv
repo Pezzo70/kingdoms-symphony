@@ -9,3 +9,6 @@ InGame.Details.ScrollsUsed,Pergaminhos Utilizados:,Scrolls Casted:
 InGame.Details.ScrollsAccomplished,Pergaminhos Bem-Sucedidos:,Accomplished Scrolls:
 InGame.Details.ScrollXP,Experiência de Pergaminhos:,Experience from Scrolls:
 InGame.Details.LevelUp,Subiu de Nível!,Level Up!
+InGame.PopUp.Yes,Sim,Yes
+InGame.PopUp.No,Não,No
+InGame.PopUp.Message.0,"Você tem certeza que deseja desistir? Caso sim, você perderá todo progresso atual.",Are you sure that you want to surrender? You are going to lose all your current progress.

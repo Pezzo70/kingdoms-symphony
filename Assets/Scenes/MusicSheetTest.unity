@@ -2318,7 +2318,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnUndo
         m_Mode: 0
@@ -2334,7 +2334,7 @@ MonoBehaviour:
     m_ActionName: UI/Undo[/Keyboard/ctrl,/Keyboard/z]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnClear
         m_Mode: 0
@@ -2350,7 +2350,7 @@ MonoBehaviour:
     m_ActionName: UI/Clear[/Keyboard/c]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnAdd
         m_Mode: 0
@@ -2366,7 +2366,7 @@ MonoBehaviour:
     m_ActionName: UI/Add[/Keyboard/a]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnRemove
         m_Mode: 0
@@ -2382,7 +2382,7 @@ MonoBehaviour:
     m_ActionName: UI/Remove[/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnNext
         m_Mode: 0
@@ -2398,7 +2398,7 @@ MonoBehaviour:
     m_ActionName: UI/Next[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1817352261}
         m_TargetAssemblyTypeName: Kingdom.Audio.MusicSheetInputHandler, Assembly-CSharp
         m_MethodName: OnPrevious
         m_Mode: 0
