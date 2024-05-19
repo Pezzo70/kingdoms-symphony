@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour
         StartCoroutine(WaitToLoad(sceneID));
     }
 
-    public void GoToMenu() => SceneManager.LoadScene("Menu");
+    public void GoToMenu() => SceneManager.LoadScene("MenuScene");
 
     private IEnumerator WaitToLoad(int sceneID)
     {

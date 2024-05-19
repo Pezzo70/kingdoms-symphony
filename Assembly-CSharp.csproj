@@ -90,6 +90,7 @@
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerContainer.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\PopUpMaster\PopUpMaster.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Tip.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\Scroll.cs" />
