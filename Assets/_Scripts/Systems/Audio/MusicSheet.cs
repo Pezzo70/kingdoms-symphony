@@ -252,6 +252,14 @@ namespace Kingdom.Audio
                 .GetComponent<Image>();
             var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
+            Note noteOnNearX = actionStack.OfType<Note>().FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 10f);
+            if(noteOnNearX != null)
+            {
+                newNote.transform.position = new Vector3(noteOnNearX.xPos, newNote.transform.position.y, newNote.transform.position.z);
+                newNote.GetComponent<Image>().sprite = noteOnNearX.note.Sprite;
+                newNote.GetComponent<RectTransform>().pivot = noteOnNearX.GetComponent<RectTransform>().pivot;
+            }
+
             Note note = newNote.AddComponent<Note>();
             note.clef = clefContainer.GetFirstByType<ClefScriptable>(
                 a => a.Sprite == scaleSprite.sprite
