@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: KeySignature 1
   m_EditorClassIdentifier: 
   sprite: {fileID: 463228262, guid: eaaaf53ff7b2d8e4e81465ae20089b22, type: 3}
-  keySignature: 1
+  keySignature: 2
