@@ -13,6 +13,8 @@ namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
+
+        private const float DEFAULT_SPRITE_SIZE = 70f; 
         [SerializeField] private Object pagePrefab;
         private GameObject notationSpriteObject;
         private Stack<MonoBehaviour> actionStack;
@@ -202,7 +204,8 @@ namespace Kingdom.Audio
             var aPage = GetActivePageIndex();
             if (actionStack.OfType<Note>().Where(a => a.line == cLine.index && a.page == aPage).Sum(a => a.note.Tempo.ToFloat()) > 1) return;
 
-            Sprite sprite = (cLine.index > 6 ? upNotations : downNotations)[currentIndex].Sprite;
+            var spriteArray = cLine.index > 6 ? upNotations : downNotations;
+            Sprite sprite = spriteArray[currentIndex].Sprite;
             Image scaleSprite = GameObject.FindGameObjectWithTag("ChangeScale").GetComponent<Image>();
             var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
@@ -216,6 +219,21 @@ namespace Kingdom.Audio
             newNote.tag = "Note";
             note.ApplyInLine();
 
+
+            //@TODO: Setar size e raycast padding baseado no tamanho do sprite(de forma dinamica).
+            switch(spriteArray[currentIndex].NoteOrientation)
+            {
+                case NotationOrientation.Center:
+                    newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(newNote.GetComponent<RectTransform>().sizeDelta.x, 50);
+                break;
+                case NotationOrientation.Up:
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,3,0,68);
+                break;
+                case NotationOrientation.Down:
+                    newNote.GetComponent<Image>().raycastPadding = new Vector4(0,68,0,3);
+                break;
+            }
+            
             actionStack.Push(note);
         }
         public void InsertKeySignature()
@@ -260,6 +278,7 @@ namespace Kingdom.Audio
             notationSpriteObject.GetComponent<Image>().sprite = sprite;
             newNote.GetComponent<RectTransform>().pivot = notationSpriteObject.GetComponent<Image>().GetSpriteRelativePivot();
             newNote.transform.position = new Vector3(newNote.transform.position.x, lineY, newNote.transform.position.z);
+                
 
             return newNote;
         }

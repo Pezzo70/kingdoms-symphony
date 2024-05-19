@@ -25,9 +25,10 @@ namespace Kingdom.Audio
 
         public Clef GetClef() => this.clef.Clef;
         public KeySignature GetSignature() => this.transform.parent.GetComponentsInChildren<MonoKeySignature>()?.FirstOrDefault(sign => sign.line == this.line)?.keySignature.KeySignature ?? KeySignature.Natural;
-      
-                public void ApplyInLine()
+
+        public void ApplyInLine()
         {
+            Debug.Log(this.line);
             if (this.line != 12 && this.line != 0) return;
 
 
@@ -35,7 +36,7 @@ namespace Kingdom.Audio
             linha.transform.SetParent(this.transform);
             linha.transform.localScale = Vector3.one;
             Image linhaImage = linha.AddComponent<Image>();
-            linhaImage.color = Color.black; 
+            linhaImage.color = Color.black;
 
 
             RectTransform linhaRectTransform = linha.GetComponent<RectTransform>();
@@ -44,7 +45,7 @@ namespace Kingdom.Audio
             linhaRectTransform.pivot = new Vector2(0.5f, 0.5f);
 
 
-            linhaRectTransform.sizeDelta = new Vector2(1.10f, 0.05f);
+            linhaRectTransform.sizeDelta = new Vector2(50f, 2.5f);
             linhaRectTransform.anchoredPosition = this.GetComponent<Image>().GetSpritePivotPosition();
         }
 
@@ -54,7 +55,7 @@ namespace Kingdom.Audio
         }
 
 
-                public static KeyName FindNote(Clef clef, int index, KeySignature signature)
+        public static KeyName FindNote(Clef clef, int index, KeySignature signature)
         {
             //# -1, B +1
             Debug.Log(signature);
