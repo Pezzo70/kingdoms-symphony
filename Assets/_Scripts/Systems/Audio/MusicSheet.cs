@@ -252,8 +252,8 @@ namespace Kingdom.Audio
                 .GetComponent<Image>();
             var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
-            Note noteOnNearX = actionStack.OfType<Note>().FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 10f);
-            if(noteOnNearX != null)
+            Note noteOnNearX = actionStack.OfType<Note>().FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 15f);
+            if (noteOnNearX != null)
             {
                 newNote.transform.position = new Vector3(noteOnNearX.xPos, newNote.transform.position.y, newNote.transform.position.z);
                 newNote.GetComponent<Image>().sprite = noteOnNearX.note.Sprite;
@@ -275,9 +275,10 @@ namespace Kingdom.Audio
             note.ApplyInLine();
 
             //@TODO: Setar size e raycast padding baseado no tamanho do sprite(de forma dinamica).
-            switch (spriteArray[currentIndex].NoteOrientation)
+            switch (note.note.NoteOrientation)
             {
                 case NotationOrientation.Center:
+                if(note.note.NoteBehaviour == NotationBehaviour.Pause && (note.note.Tempo == Tempo.Quarter || note.note.Tempo == Tempo.Sixteenth || note.note.Tempo == Tempo.Eighth)) break;
                     newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(
                         newNote.GetComponent<RectTransform>().sizeDelta.x,
                         50
@@ -398,11 +399,12 @@ namespace Kingdom.Audio
 
         public void CreatePage()
         {
-            var pageParent = GameObject.FindWithTag("Page");
+            var pageParent = GameObject.FindGameObjectWithTag("Page");
             var childCount = pageParent.transform.childCount + 1;
 
             if (childCount == GetMaxPage())
                 return;
+
             var page = Instantiate(pagePrefab, pageParent.transform);
 
             SetActivePage(pageParent.transform.childCount - 1);
