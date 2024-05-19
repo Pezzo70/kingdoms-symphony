@@ -119,5 +119,5 @@ public class TipOrScrollUI : MonoBehaviour
         }
     }
 
-    public void HandleClick() => _handleClick.Invoke();
+    public void HandleClick() => _handleClick?.Invoke();
 }

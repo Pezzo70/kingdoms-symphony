@@ -90,7 +90,7 @@ namespace Kingdom.UI
 
         public void InvokeCallback()
         {
-            callback.Invoke();
+            callback?.Invoke();
             callback = delegate { };
             StartCoroutine(WaitAndClose(0f));
         }

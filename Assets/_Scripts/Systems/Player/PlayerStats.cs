@@ -69,13 +69,13 @@ namespace Kingdom.Player
             {
                 _currentMoral -= value;
                 _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
-                EventManager.OnPlayerMoralChange.Invoke();
-                EventManager.EndGameDefeat.Invoke();
+                EventManager.OnPlayerMoralChange?.Invoke();
+                EventManager.EndGameDefeat?.Invoke();
             }
             else
             {
                 _currentMoral -= value;
-                EventManager.OnPlayerMoralChange.Invoke();
+                EventManager.OnPlayerMoralChange?.Invoke();
             }
         }
 
@@ -83,21 +83,21 @@ namespace Kingdom.Player
         {
             _currentMoral += value;
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
-            EventManager.OnPlayerMoralChange.Invoke();
+            EventManager.OnPlayerMoralChange?.Invoke();
         }
 
         public void SpendMana(int quantity)
         {
             _currentMana -= quantity;
             _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
-            EventManager.OnPlayerManaChange.Invoke();
+            EventManager.OnPlayerManaChange?.Invoke();
         }
 
         public void GainMana(int quantity)
         {
             _currentMana += quantity;
             _currentMana = Math.Clamp(_currentMana, 0, _maxMana);
-            EventManager.OnPlayerManaChange.Invoke();
+            EventManager.OnPlayerManaChange?.Invoke();
         }
 
         public void ChangeAvailableSheetBars(int quantity) => _availableSheetBars = quantity;

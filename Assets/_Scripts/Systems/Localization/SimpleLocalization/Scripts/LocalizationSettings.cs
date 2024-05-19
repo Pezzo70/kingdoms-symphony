@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
-
 #if UNITY_EDITOR
 
 using UnityEditor;
@@ -17,7 +16,10 @@ using Unity.EditorCoroutines.Editor;
 
 namespace Assets.SimpleLocalization.Scripts
 {
-    [CreateAssetMenu(fileName = "LocalizationSettings", menuName = "◆ Simple Localization/Settings")]
+    [CreateAssetMenu(
+        fileName = "LocalizationSettings",
+        menuName = "◆ Simple Localization/Settings"
+    )]
     public class LocalizationSettings : ScriptableObject
     {
         /// <summary>
@@ -31,7 +33,8 @@ namespace Assets.SimpleLocalization.Scripts
 
         public UnityEngine.Object SaveFolder;
 
-        public static string UrlPattern = "https://docs.google.com/spreadsheets/d/{0}/export?format=csv&gid={1}";
+        public static string UrlPattern =
+            "https://docs.google.com/spreadsheets/d/{0}/export?format=csv&gid={1}";
 
         public static DateTime Timestamp;
 
@@ -39,13 +42,14 @@ namespace Assets.SimpleLocalization.Scripts
         {
             get
             {
-                if (_instance == null) _instance = LoadSettings();
+                if (_instance == null)
+                    _instance = LoadSettings();
 
                 return _instance;
             }
         }
 
-        public static event Action OnRunEditor = () => {};
+        public static event Action OnRunEditor = () => { };
 
         private static LocalizationSettings _instance;
 
@@ -53,11 +57,14 @@ namespace Assets.SimpleLocalization.Scripts
         {
             const string path = @"Assets/SimpleLocalization/Resources/LocalizationSettings.asset";
 
-            var settings = Resources.Load<LocalizationSettings>(Path.GetFileNameWithoutExtension(path));
+            var settings = Resources.Load<LocalizationSettings>(
+                Path.GetFileNameWithoutExtension(path)
+            );
 
-            if (settings != null) return settings;
+            if (settings != null)
+                return settings;
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
 
             settings = CreateInstance<LocalizationSettings>();
 
@@ -65,16 +72,16 @@ namespace Assets.SimpleLocalization.Scripts
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            #else
+#else
 
             throw new Exception($"Localization settings not found: {path}");
 
-            #endif
+#endif
 
             return settings;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         public void Awake()
         {
@@ -88,8 +95,11 @@ namespace Assets.SimpleLocalization.Scripts
         {
             EditorCoroutineUtility.StartCoroutineOwnerless(DownloadGoogleSheetsCoroutine(callback));
         }
-        
-        public IEnumerator DownloadGoogleSheetsCoroutine(Action callback = null, bool silent = false)
+
+        public IEnumerator DownloadGoogleSheetsCoroutine(
+            Action callback = null,
+            bool silent = false
+        )
         {
             if (string.IsNullOrEmpty(TableId) || Sheets.Count == 0)
             {
@@ -111,15 +121,22 @@ namespace Assets.SimpleLocalization.Scripts
 
             if ((DateTime.UtcNow - Timestamp).TotalSeconds < 2)
             {
-                if (EditorUtility.DisplayDialog("Message", "Too many requests! Try again later.", "OK"))
+                if (
+                    EditorUtility.DisplayDialog(
+                        "Message",
+                        "Too many requests! Try again later.",
+                        "OK"
+                    )
+                )
                 {
                     yield break;
                 }
             }
-            
+
             Timestamp = DateTime.UtcNow;
 
-            if (!silent) ClearSaveFolder();
+            if (!silent)
+                ClearSaveFolder();
 
             for (var i = 0; i < Sheets.Count; i++)
             {
@@ -129,31 +146,52 @@ namespace Assets.SimpleLocalization.Scripts
                 Debug.Log($"Downloading <color=grey>{url}</color>");
 
                 var request = UnityWebRequest.Get(url);
-                var progress = (float) (i + 1) / Sheets.Count;
+                var progress = (float)(i + 1) / Sheets.Count;
 
-                if (EditorUtility.DisplayCancelableProgressBar("Downloading sheets...", $"[{(int)(100 * progress)}%] [{i + 1}/{Sheets.Count}] Downloading {sheet.Name}...", progress))
+                if (
+                    EditorUtility.DisplayCancelableProgressBar(
+                        "Downloading sheets...",
+                        $"[{(int)(100 * progress)}%] [{i + 1}/{Sheets.Count}] Downloading {sheet.Name}...",
+                        progress
+                    )
+                )
                 {
                     yield break;
                 }
 
                 yield return request.SendWebRequest();
 
-                var error = request.error ?? (request.downloadHandler.text.Contains("signin/identifier") ? "It seems that access to this document is denied." : null);
+                var error =
+                    request.error
+                    ?? (
+                        request.downloadHandler.text.Contains("signin/identifier")
+                            ? "It seems that access to this document is denied."
+                            : null
+                    );
 
                 if (string.IsNullOrEmpty(error))
                 {
-                    var path = Path.Combine(AssetDatabase.GetAssetPath(SaveFolder), sheet.Name + ".csv");
+                    var path = Path.Combine(
+                        AssetDatabase.GetAssetPath(SaveFolder),
+                        sheet.Name + ".csv"
+                    );
 
                     File.WriteAllBytes(path, request.downloadHandler.data);
                     AssetDatabase.Refresh();
                     Sheets[i].TextAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
                     EditorUtility.SetDirty(this);
-                    Debug.LogFormat($"Sheet <color=yellow>{sheet.Name}</color> ({sheet.Id}) saved to <color=grey>{path}</color>");
+                    Debug.LogFormat(
+                        $"Sheet <color=yellow>{sheet.Name}</color> ({sheet.Id}) saved to <color=grey>{path}</color>"
+                    );
                 }
                 else
                 {
                     EditorUtility.ClearProgressBar();
-                    EditorUtility.DisplayDialog("Error", error.Contains("404") ? "Table Id is wrong!" : error, "OK");
+                    EditorUtility.DisplayDialog(
+                        "Error",
+                        error.Contains("404") ? "Table Id is wrong!" : error,
+                        "OK"
+                    );
 
                     yield break;
                 }
@@ -166,7 +204,12 @@ namespace Assets.SimpleLocalization.Scripts
 
             callback?.Invoke();
 
-            if (!silent) EditorUtility.DisplayDialog("Message", $"{Sheets.Count} localization sheets downloaded!", "OK");
+            if (!silent)
+                EditorUtility.DisplayDialog(
+                    "Message",
+                    $"{Sheets.Count} localization sheets downloaded!",
+                    "OK"
+                );
 
             void ClearSaveFolder()
             {
@@ -193,14 +236,23 @@ namespace Assets.SimpleLocalization.Scripts
 
         public void LeaveReview()
         {
-            Application.OpenURL(Constants.LocalizationEditorUrl == "" ? Constants.AssetUrlFree : Constants.AssetUrlPro);
+            Application.OpenURL(
+                Constants.LocalizationEditorUrl == ""
+                    ? Constants.AssetUrlFree
+                    : Constants.AssetUrlPro
+            );
         }
 
         public void Reset()
         {
             TableId = Constants.ExampleTableId;
-            Sheets = Constants.ExampleSheets.Select(i => new Sheet { Name = i.Key, Id = i.Value }).ToList();
-            SaveFolder = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(@"Assets\SimpleLocalization\Resources\Localization");
+            Sheets = Constants
+                .ExampleSheets
+                .Select(i => new Sheet { Name = i.Key, Id = i.Value })
+                .ToList();
+            SaveFolder = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(
+                @"Assets\SimpleLocalization\Resources\Localization"
+            );
         }
 
         public void ResolveGoogleSheets()
@@ -216,9 +268,17 @@ namespace Assets.SimpleLocalization.Scripts
                     yield break;
                 }
 
-                using var request = UnityWebRequest.Get($"{Constants.SheetResolverUrl}?tableUrl={TableId}");
+                using var request = UnityWebRequest.Get(
+                    $"{Constants.SheetResolverUrl}?tableUrl={TableId}"
+                );
 
-                if (EditorUtility.DisplayCancelableProgressBar("Resolving sheets...", "Executing Google App Script...", 1))
+                if (
+                    EditorUtility.DisplayCancelableProgressBar(
+                        "Resolving sheets...",
+                        "Executing Google App Script...",
+                        1
+                    )
+                )
                 {
                     yield break;
                 }
@@ -233,14 +293,21 @@ namespace Assets.SimpleLocalization.Scripts
 
                     if (error != null)
                     {
-                        EditorUtility.DisplayDialog("Error", "Table not found or public read permission not set.", "OK");
+                        EditorUtility.DisplayDialog(
+                            "Error",
+                            "Table not found or public read permission not set.",
+                            "OK"
+                        );
 
                         yield break;
                     }
 
-                    var sheetsDict = JsonConvert.DeserializeObject<Dictionary<string, long>>(request.downloadHandler.text);
+                    var sheetsDict = JsonConvert.DeserializeObject<Dictionary<string, long>>(
+                        request.downloadHandler.text
+                    );
 
-                    if (sheetsDict == null) throw new NullReferenceException(nameof(sheetsDict));
+                    if (sheetsDict == null)
+                        throw new NullReferenceException(nameof(sheetsDict));
 
                     Sheets.Clear();
 
@@ -249,7 +316,11 @@ namespace Assets.SimpleLocalization.Scripts
                         Sheets.Add(new Sheet { Id = item.Value, Name = item.Key });
                     }
 
-                    EditorUtility.DisplayDialog("Message", $"{Sheets.Count} sheets resolved: {string.Join(", ", Sheets.Select(i => i.Name))}.", "OK");
+                    EditorUtility.DisplayDialog(
+                        "Message",
+                        $"{Sheets.Count} sheets resolved: {string.Join(", ", Sheets.Select(i => i.Name))}.",
+                        "OK"
+                    );
                 }
                 else
                 {
@@ -262,21 +333,35 @@ namespace Assets.SimpleLocalization.Scripts
         {
             var matches = Regex.Matches(request.downloadHandler.text, @">(?<Message>.+?)<\/div>");
 
-            if (matches.Count == 0 && !request.downloadHandler.text.Contains("Google Script ERROR:")) return null;
+            if (
+                matches.Count == 0
+                && !request.downloadHandler.text.Contains("Google Script ERROR:")
+            )
+                return null;
 
-            var error = matches.Count > 0 ? matches[1].Groups["Message"].Value.Replace("quot;", "") : request.downloadHandler.text;
+            var error =
+                matches.Count > 0
+                    ? matches[1].Groups["Message"].Value.Replace("quot;", "")
+                    : request.downloadHandler.text;
 
             return error;
         }
 
         public void DisplayHelp()
         {
-            EditorGUILayout.HelpBox("1. Set Table Id and Save Folder\n2. Press Resolve Sheets*\n3. Press Download Sheets\n*You can set Sheets manually: fill Name and Id, leave Text Asset empty", MessageType.None);
+            EditorGUILayout.HelpBox(
+                "1. Set Table Id and Save Folder\n2. Press Resolve Sheets*\n3. Press Download Sheets\n*You can set Sheets manually: fill Name and Id, leave Text Asset empty",
+                MessageType.None
+            );
         }
 
         public void DisplayButtons()
         {
-            var buttonStyle = new GUIStyle(GUI.skin.button) { fontStyle = FontStyle.Bold, fixedHeight = 30 };
+            var buttonStyle = new GUIStyle(GUI.skin.button)
+            {
+                fontStyle = FontStyle.Bold,
+                fixedHeight = 30
+            };
 
             if (GUILayout.Button("↺ Resolve Sheets", buttonStyle))
             {
@@ -303,7 +388,10 @@ namespace Assets.SimpleLocalization.Scripts
                 LeaveReview();
             }
 
-            if (Constants.LocalizationEditorUrl == "" && GUILayout.Button("$ Buy Simple Localization PRO", buttonStyle))
+            if (
+                Constants.LocalizationEditorUrl == ""
+                && GUILayout.Button("$ Buy Simple Localization PRO", buttonStyle)
+            )
             {
                 Application.OpenURL(Constants.AssetUrlPro);
             }
@@ -333,6 +421,6 @@ namespace Assets.SimpleLocalization.Scripts
             }
         }
 
-        #endif
+#endif
     }
 }

@@ -114,6 +114,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Pause\PauseHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollsContainer.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMoralBar.cs" />
     <Compile Include="Assets\_Scripts\Utilities\ScriptableContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerData.cs" />
     <Compile Include="Assets\Animations\UI\Tips\TipsFilter.cs" />

@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour
 {
     public void LoadScene(int sceneID)
     {
-        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(sceneID));
     }
 
@@ -28,7 +28,7 @@ public class StageManager : MonoBehaviour
                 () =>
                 {
                     pauseGameObject.SetActive(false);
-                    EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+                    EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
                     StartCoroutine(WaitToLoad(0));
                 },
                 false,
@@ -44,20 +44,20 @@ public class StageManager : MonoBehaviour
     {
         CharacterID character = (CharacterID)characterID;
         PlaythroughContainer.Instance.CreateNewPlaythrough(character);
-        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(1));
     }
 
     public void GoToNextLevel()
     {
         Level nextLevel = PlaythroughContainer.Instance.GetNextLevel();
-        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(nextLevel.sceneID));
     }
 
     public void EndGame()
     {
-        EventManager.LevelTransition.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+        EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(0));
     }
 

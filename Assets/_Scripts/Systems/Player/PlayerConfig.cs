@@ -107,13 +107,13 @@ namespace Kingdom.Player
         public void SetLanguage(string language)
         {
             _languagePreferred = language;
-            EventManager.SavePlayerConfig.Invoke();
+            EventManager.SavePlayerConfig?.Invoke();
         }
 
         public void SetSawDisclaimer(bool saw)
         {
             _sawDisclaimer = saw;
-            EventManager.SavePlayerConfig.Invoke();
+            EventManager.SavePlayerConfig?.Invoke();
         }
 
         public void SetVolumeSettings(
