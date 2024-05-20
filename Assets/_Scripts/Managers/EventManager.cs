@@ -34,9 +34,11 @@ public static class EventManager
     public static UnityAction<Level> LoadNewLevel;
     public static UnityAction OnPlayerMoralChange;
     public static UnityAction OnPlayerManaChange;
-    public static UnityAction OnTurnEnded;
     public static UnityAction EndGameVictory;
     public static UnityAction EndGameDefeat;
     public static UnityAction PauseGame;
     public static UnityAction UnpauseGame;
+
+    public static UnityAction<float> EnemiesDamaged;
+    public static UnityAction EnemiesRegainMana;
 }

@@ -14,7 +14,8 @@ namespace Kingdom.Level
         private Level[] _levels;
         private int _currentLevelIndex;
         private int _currentLevelPhase;
-        private CharacterID _currentCharacterID;
+        public CharacterID currentCharacterID;
+        public int characterLevel;
         public PlayerStats PlayerStats;
 
         private Dictionary<Enemy, int> _enemiesBanished;
@@ -102,7 +103,7 @@ namespace Kingdom.Level
 
         public void CreateNewPlaythrough(CharacterID characterID)
         {
-            _currentCharacterID = characterID;
+            currentCharacterID = characterID;
             PlayerStats.CreateNewPlayerStats(characterID);
             _currentLevelIndex = 0;
             _currentLevelPhase = 1;
@@ -122,7 +123,7 @@ namespace Kingdom.Level
             if (currentLevel.endGame)
                 return _levels[_currentLevelIndex];
 
-            PlayerStats.CleanseAllEffects(_currentCharacterID);
+            PlayerStats.CleanseAllEffects(currentCharacterID);
 
             if (_currentLevelPhase == currentLevel.numberOfPhases)
             {
