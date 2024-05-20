@@ -14,7 +14,7 @@ namespace Kingdom
     public static class TheoryHandler
     {
 
-        public static IEnumerable<EffectInfo> GetAction<TTarget>(ScrollEffectDTO effectDTO)
+        public static IEnumerable<EffectInfo> GetAction(ScrollEffectDTO effectDTO)
         {
             //@TODO: SCALE AND MODES TARGET
             KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
@@ -253,14 +253,29 @@ namespace Kingdom
 
             return effectInfos;
         }
+    
+    
+        public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyAdvantage enemyAdvantage)
+        {
+            return null;
+        }
+
+        public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyDisadvantage enemyDisadvantage)
+        {
+            return null;
+        }
     }
 
+
+    //@TODO Change struct file
     public struct EffectInfo
     {
         public EffectType EffectType { get; set; }
         public int Turns { get; set; }
         public Func<float, float> Function { get; set; }
     }
+
+    //@TODO Change dto file
     public struct ScrollEffectDTO
     {
         public IList<Note> Notes { get; set;}
@@ -280,6 +295,8 @@ namespace Kingdom
         }
     }
 
+
+    //@TODO Change enum file
     public enum EffectType
     {
         PlayerMitigation, EnemyMitigation, CooldownReduction, Damage, MassiveDamage, Heal, AdditionalMana, RemoveNegativeEffects,
