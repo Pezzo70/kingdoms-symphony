@@ -150,17 +150,21 @@ namespace Kingdom.Audio
         {
             if (actionStack.Count > 0)
             {
-                MonoBehaviour destroyGO;
-                do destroyGO = actionStack.Pop();
-                while (destroyGO.IsDestroyed() && actionStack.Count > 0);
-                if (actionStack.Count == 0)
-                    return;
+                MonoBehaviour lastAction = actionStack.Pop();
 
-                var lastActionPage = destroyGO.transform.parent;
-                var lastActionPageIndex = lastActionPage.GetSiblingIndex();
-                Destroy(destroyGO.gameObject);
+                while (lastAction.IsDestroyed() && actionStack.Count > 0)
+                {
+                    lastAction = actionStack.Pop();
+                }
 
-                UpdateActivePageAfterUndo(lastActionPageIndex);
+                if (!lastAction.IsDestroyed())
+                {
+                    var lastActionPage = lastAction.transform.parent;
+                    var lastActionPageIndex = lastActionPage.GetSiblingIndex();
+                    Destroy(lastAction.gameObject);
+
+                    UpdateActivePageAfterUndo(lastActionPageIndex);
+                }
             }
         }
 
@@ -242,6 +246,7 @@ namespace Kingdom.Audio
         {
             var cLine = GetClosestLine();
             var aPage = GetActivePageIndex();
+
             if (
                 actionStack
                     .OfType<Note>()
