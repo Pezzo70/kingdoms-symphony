@@ -77,7 +77,6 @@
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerConfig.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\StageAudio.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Clouds\CloudsAnimator.cs" />
-    <Compile Include="Assets\_Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Credits\CreditsPersona.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSync.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyDisadvantage.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerContainer.cs" />
+    <Compile Include="Assets\_Scripts\Interfaces\ISprite.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\PopUpMaster\PopUpMaster.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Tip.cs" />
@@ -128,9 +128,10 @@
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipsContainer.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\CharacterSelection\CharacterHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAdvantage.cs" />
-    <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ISprite.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyEntity.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
+    <Compile Include="Assets\_Scripts\Managers\Stages\LevelSetupManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMana.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\ToOrFromJSON.cs" />

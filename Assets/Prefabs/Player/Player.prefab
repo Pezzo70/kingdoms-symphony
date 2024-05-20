@@ -619,7 +619,7 @@ Transform:
   - {fileID: 8918705886557055657}
   - {fileID: 7810381940757421847}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8533812619858730509
 Animator:
@@ -681,6 +681,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8274698761327107264}
     m_Modifications:
+    - target: {fileID: 7323624465857864070, guid: 6558a8f3672ede043bce345e25f2db7a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7430408123191297542, guid: 6558a8f3672ede043bce345e25f2db7a, type: 3}
       propertyPath: m_Name
       value: PlayerOptions

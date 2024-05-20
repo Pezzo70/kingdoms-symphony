@@ -1908,42 +1908,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
     path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1
     classID: 4
     script: {fileID: 0}
@@ -1980,7 +1944,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1992,7 +1956,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2004,7 +1968,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2052,7 +2016,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2064,7 +2028,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2076,7 +2040,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_R_1/ARM_R_2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2124,7 +2088,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2136,7 +2100,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2148,7 +2112,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/HEAD
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2160,7 +2124,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2172,7 +2136,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2184,7 +2148,43 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2/HAND_L
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: OutOfTuneGoblin_Sprite/WAIST/CHEST/ARM_L_1/ARM_L_2
     classID: 4
     script: {fileID: 0}
     flags: 0
