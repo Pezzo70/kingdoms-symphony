@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Enemies;
+using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
+using Kingdom.Enums.Scrolls;
+using Kingdom.Extensions;
 using Kingdom.Player;
+using Kingdom.Scrolls;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,59 +22,67 @@ namespace Kingdom.Level
         public int characterLevel;
         public PlayerStats PlayerStats;
 
-        private Dictionary<Enemy, int> _enemiesBanished;
-        private List<Enemy> _enemiesEncountered;
-        private List<EnemyAttack> _enemiesAttacksExecuted;
-        private List<EnemyAdvantage> _enemiesAdvantagesTriggered;
-        private List<EnemyDisadvantage> _enemiesDisadvantagesTriggered;
-        private Dictionary<Scroll, int> _scrollsUsed;
-        private Dictionary<Scroll, int> _scrollsAccomplished;
+        private Dictionary<EnemyID, int> _enemiesBanished;
+        private List<EnemyID> _enemiesEncountered;
+        private Dictionary<EnemyID, List<EnemyAttackID>> _enemiesAttacksExecuted;
+        private Dictionary<EnemyID, List<EnemyAdvantageID>> _enemiesAdvantagesTriggered;
+        private Dictionary<EnemyID, List<EnemyDisadvantageID>> _enemiesDisadvantagesTriggered;
+        private Dictionary<ScrollID, int> _scrollsUsed;
+        private Dictionary<ScrollID, int> _scrollsAccomplished;
 
-        private UnityAction<Enemy> _enemyBanishedAction;
-        private UnityAction<Enemy> _enemyEncounteredAction;
-        private UnityAction<EnemyAttack> _enemyAttackExecutedAction;
-        private UnityAction<EnemyAdvantage> _enemyAdvantageTriggeredAction;
-        private UnityAction<EnemyDisadvantage> _enemyDisadvantageTriggeredAction;
-        private UnityAction<Scroll> _scrollUsedAction;
-        private UnityAction<Scroll> _scrollAccomplishedAction;
+        private UnityAction<EnemyID> _enemyBanishedAction;
+        private UnityAction<EnemyID> _enemyEncounteredAction;
+        private UnityAction<EnemyID, EnemyAttackID> _enemyAttackExecutedAction;
+        private UnityAction<EnemyID, EnemyAdvantageID> _enemyAdvantageTriggeredAction;
+        private UnityAction<EnemyID, EnemyDisadvantageID> _enemyDisadvantageTriggeredAction;
+        private UnityAction<ScrollID> _scrollUsedAction;
+        private UnityAction<ScrollID> _scrollAccomplishedAction;
 
         protected override void Awake()
         {
             base.Awake();
 
-            _enemyBanishedAction = (Enemy e) =>
+            _enemyBanishedAction = (EnemyID e) =>
             {
-                VerifyAndAddToDictionary(_enemiesBanished, e);
+                CollectionsHelper.VerifyAndAddToDictionary(_enemiesBanished, e);
             };
 
-            _enemyEncounteredAction = (Enemy e) =>
+            _enemyEncounteredAction = (EnemyID e) =>
             {
-                VerifyAndAddToList(_enemiesEncountered, e);
+                CollectionsHelper.VerifyAndAddToList(_enemiesEncountered, e);
             };
 
-            _enemyAttackExecutedAction = (EnemyAttack eA) =>
+            _enemyAttackExecutedAction = (EnemyID eID, EnemyAttackID eaID) =>
             {
-                VerifyAndAddToList(_enemiesAttacksExecuted, eA);
+                CollectionsHelper.VerifyAndAddToDictionaryList(_enemiesAttacksExecuted, eID, eaID);
             };
 
-            _enemyAdvantageTriggeredAction = (EnemyAdvantage eA) =>
+            _enemyAdvantageTriggeredAction = (EnemyID eID, EnemyAdvantageID eaID) =>
             {
-                VerifyAndAddToList(_enemiesAdvantagesTriggered, eA);
+                CollectionsHelper.VerifyAndAddToDictionaryList(
+                    _enemiesAdvantagesTriggered,
+                    eID,
+                    eaID
+                );
             };
 
-            _enemyDisadvantageTriggeredAction = (EnemyDisadvantage eD) =>
+            _enemyDisadvantageTriggeredAction = (EnemyID eID, EnemyDisadvantageID edID) =>
             {
-                VerifyAndAddToList(_enemiesDisadvantagesTriggered, eD);
+                CollectionsHelper.VerifyAndAddToDictionaryList(
+                    _enemiesDisadvantagesTriggered,
+                    eID,
+                    edID
+                );
             };
 
-            _scrollUsedAction = (Scroll s) =>
+            _scrollUsedAction = (ScrollID s) =>
             {
-                VerifyAndAddToDictionary(_scrollsUsed, s);
+                CollectionsHelper.VerifyAndAddToDictionary(_scrollsUsed, s);
             };
 
-            _scrollAccomplishedAction = (Scroll s) =>
+            _scrollAccomplishedAction = (ScrollID s) =>
             {
-                VerifyAndAddToDictionary(_scrollsAccomplished, s);
+                CollectionsHelper.VerifyAndAddToDictionary(_scrollsAccomplished, s);
             };
         }
 
@@ -107,13 +119,13 @@ namespace Kingdom.Level
             PlayerStats.CreateNewPlayerStats(characterID);
             _currentLevelIndex = 0;
             _currentLevelPhase = 1;
-            _enemiesBanished = new Dictionary<Enemy, int>();
-            _enemiesEncountered = new List<Enemy>();
-            _enemiesAttacksExecuted = new List<EnemyAttack>();
-            _enemiesAdvantagesTriggered = new List<EnemyAdvantage>();
-            _enemiesDisadvantagesTriggered = new List<EnemyDisadvantage>();
-            _scrollsUsed = new Dictionary<Scroll, int>();
-            _scrollsAccomplished = new Dictionary<Scroll, int>();
+            _enemiesBanished = new Dictionary<EnemyID, int>();
+            _enemiesEncountered = new List<EnemyID>();
+            _enemiesAttacksExecuted = new Dictionary<EnemyID, List<EnemyAttackID>>();
+            _enemiesAdvantagesTriggered = new Dictionary<EnemyID, List<EnemyAdvantageID>>();
+            _enemiesDisadvantagesTriggered = new Dictionary<EnemyID, List<EnemyDisadvantageID>>();
+            _scrollsUsed = new Dictionary<ScrollID, int>();
+            _scrollsAccomplished = new Dictionary<ScrollID, int>();
         }
 
         public Level GetNextLevel()
@@ -138,26 +150,98 @@ namespace Kingdom.Level
             }
         }
 
+        public Level GetCurrentLevel => _levels[_currentLevelIndex];
+
         public EnemyPerLevelPhase GetCurrentLevelEnemies() =>
             _levels[_currentLevelIndex]
                 .enemiesPerLevel
                 .ToList()
                 .Find(obj => obj.phase == _currentLevelPhase);
 
-        private void VerifyAndAddToDictionary<T>(Dictionary<T, int> dictionary, T target)
+        public (
+            int enemiesBanished,
+            int enemiesXP,
+            int scrollsUsed,
+            int scrollsAccomplished,
+            int scrollsXP,
+            bool leveledUp
+        ) GetEndGameInfoAndUpdatePlayerData(bool victory)
         {
-            if (dictionary.ContainsKey(target))
-                dictionary[target]++;
-            else
-                dictionary.Add(target, 1);
-        }
+            (
+                int enemiesBanished,
+                int enemiesXP,
+                int scrollsUsed,
+                int scrollsAccomplished,
+                int scrollsXP,
+                bool leveledUp
+            ) endGameInfo = new();
 
-        private void VerifyAndAddToList<T>(List<T> list, T target)
-        {
-            if (list.Contains(target))
-                return;
+            EnemiesContainer enemiesContainer = EnemiesContainer.Instance;
+            ScrollsContainer scrollsContainer = ScrollsContainer.Instance;
+
+            float factor = victory ? 1f : Constants.EndGameConstants.DEFEAT_XP_FACTOR;
+
+            endGameInfo.enemiesBanished = _enemiesBanished.Aggregate(
+                0,
+                (total, next) => total + next.Value
+            );
+
+            endGameInfo.enemiesXP = (int)
+                Mathf.Floor(
+                    _enemiesBanished.Aggregate(
+                        0,
+                        (total, next) =>
+                            total
+                            + (
+                                enemiesContainer.enemies.First(obj => obj.enemyID == next.Key).XP
+                                * next.Value
+                            )
+                    ) * factor
+                );
+
+            endGameInfo.scrollsUsed = _scrollsUsed.Aggregate(
+                0,
+                (total, next) => total + next.Value
+            );
+
+            endGameInfo.scrollsAccomplished = _scrollsAccomplished.Aggregate(
+                0,
+                (total, next) => total + next.Value
+            );
+
+            endGameInfo.scrollsXP = (int)
+                Mathf.Floor(
+                    _scrollsAccomplished.Aggregate(
+                        0,
+                        (total, next) =>
+                            total
+                            + (
+                                scrollsContainer.scrolls.First(obj => obj.scrollID == next.Key).XP
+                                * next.Value
+                            )
+                    ) * factor
+                );
+
+            int totalXP = endGameInfo.enemiesXP + endGameInfo.scrollsXP;
+
+            PlayerData playerData = PlayerContainer.Instance.PlayerData;
+            int previousLevel = playerData.GetLevel(currentCharacterID);
+            playerData.AddXP(100, currentCharacterID);
+            int currentLevel = playerData.GetLevel(currentCharacterID);
+
+            if (currentLevel > previousLevel)
+                endGameInfo.leveledUp = true;
             else
-                list.Add(target);
+                endGameInfo.leveledUp = false;
+
+            playerData.UpdateEnemyInfoUnlocked(_enemiesEncountered);
+            playerData.UpdateEnemyAttacksUnlocked(_enemiesAttacksExecuted);
+            playerData.UpdateEnemyAdvantagesUnlocked(_enemiesAdvantagesTriggered);
+            playerData.UpdateEnemyDisadvantagesUnlocked(_enemiesDisadvantagesTriggered);
+
+            EventManager.SavePlayerData();
+
+            return endGameInfo;
         }
     }
 }

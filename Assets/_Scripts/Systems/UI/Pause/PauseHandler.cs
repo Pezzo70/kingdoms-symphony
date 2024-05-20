@@ -8,19 +8,37 @@ public class PauseHandler : MonoBehaviour
     public CanvasGroup playerHUDCanvasGroup;
     public InputSystemUIInputModule inputModule;
     private bool _onPause = false;
+    private bool _cantPause = false;
 
     void OnEnable()
     {
         inputModule.cancel.action.performed += DisplayPauseMenu;
+        EventManager.EndGameVictory += HandleEndGame;
+        EventManager.EndGameDefeat += HandleEndGame;
+        EventManager.PhaseVictory += HandleEndGame;
     }
 
     void OnDisable()
     {
         inputModule.cancel.action.performed -= DisplayPauseMenu;
+        EventManager.EndGameVictory -= HandleEndGame;
+        EventManager.EndGameDefeat -= HandleEndGame;
+        EventManager.PhaseVictory -= HandleEndGame;
+    }
+
+    private void HandleEndGame()
+    {
+        _cantPause = true;
     }
 
     private void DisplayPauseMenu(InputAction.CallbackContext context)
     {
+        if (_cantPause)
+        {
+            pauseMenu.SetActive(false);
+            return;
+        }
+
         if (_onPause && !pauseMenu.activeInHierarchy)
             return;
 

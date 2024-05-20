@@ -11,63 +11,61 @@ using static Kingdom.Audio.Procedural.Frequencies;
 
 namespace Kingdom.Extensions
 {
-
     public static class NotationExtensions
     {
         private static KeyName[] GClefKeys = new KeyName[]
-                {
-                    KeyName.B3,
-                    KeyName.C4,
-                    KeyName.CSharp4,
-                    KeyName.D4,
-                    KeyName.DSharp4,
-                    KeyName.E4,
-                    KeyName.F4,
-                    KeyName.FSharp4,
-                    KeyName.G4,
-                    KeyName.GSharp4,
-                    KeyName.A4,
-                    KeyName.ASharp4,
-                    KeyName.B4,
-                    KeyName.C5,
-                    KeyName.CSharp5,
-                    KeyName.D5,
-                    KeyName.DSharp5,
-                    KeyName.E5,
-                    KeyName.F5,
-                    KeyName.FSharp5,
-                    KeyName.G5,
-                    KeyName.GSharp5,
-                    KeyName.A5,
-                    KeyName.ASharp5,
-                };
+        {
+            KeyName.B3,
+            KeyName.C4,
+            KeyName.CSharp4,
+            KeyName.D4,
+            KeyName.DSharp4,
+            KeyName.E4,
+            KeyName.F4,
+            KeyName.FSharp4,
+            KeyName.G4,
+            KeyName.GSharp4,
+            KeyName.A4,
+            KeyName.ASharp4,
+            KeyName.B4,
+            KeyName.C5,
+            KeyName.CSharp5,
+            KeyName.D5,
+            KeyName.DSharp5,
+            KeyName.E5,
+            KeyName.F5,
+            KeyName.FSharp5,
+            KeyName.G5,
+            KeyName.GSharp5,
+            KeyName.A5,
+            KeyName.ASharp5,
+        };
         private static KeyName[] FClefKeys = new KeyName[]
-            {
-                    KeyName.DSharp2,
-                    KeyName.E2,
-                    KeyName.F2,
-                    KeyName.FSharp2,
-                    KeyName.G2,
-                    KeyName.GSharp2,
-                    KeyName.A2,
-                    KeyName.ASharp2,
-                    KeyName.B2,
-                    KeyName.C3,
-                    KeyName.CSharp3,
-                    KeyName.D3,
-                    KeyName.DSharp3,
-                    KeyName.E3,
-                    KeyName.F3,
-                    KeyName.FSharp3,
-                    KeyName.G3,
-                    KeyName.GSharp3,
-                    KeyName.A3,
-                    KeyName.ASharp3,
-                    KeyName.B3,
-                    KeyName.C4,
-                    KeyName.D4
-            };
-
+        {
+            KeyName.DSharp2,
+            KeyName.E2,
+            KeyName.F2,
+            KeyName.FSharp2,
+            KeyName.G2,
+            KeyName.GSharp2,
+            KeyName.A2,
+            KeyName.ASharp2,
+            KeyName.B2,
+            KeyName.C3,
+            KeyName.CSharp3,
+            KeyName.D3,
+            KeyName.DSharp3,
+            KeyName.E3,
+            KeyName.F3,
+            KeyName.FSharp3,
+            KeyName.G3,
+            KeyName.GSharp3,
+            KeyName.A3,
+            KeyName.ASharp3,
+            KeyName.B3,
+            KeyName.C4,
+            KeyName.D4
+        };
 
         public static KeyName ToKey(this Note note)
         {
@@ -76,8 +74,10 @@ namespace Kingdom.Extensions
             var signature = note.GetSignature();
 
             index++;
-            if (signature == KeySignature.Sharp) index--;
-            else if (signature == KeySignature.Flat) index++;
+            if (signature == KeySignature.Sharp)
+                index--;
+            else if (signature == KeySignature.Flat)
+                index++;
 
             if (index >= 0 && index < array.Length)
                 return array[index == array.Length - 1 ? --index : index];
@@ -98,17 +98,29 @@ namespace Kingdom.Extensions
                 KeyName name;
                 KeyPlayed key;
                 var chords = note.GetChords(orderedNotes);
-                if(chords.Count > 1)
+                if (chords.Count > 1)
                 {
                     int iAux = i - 1;
-                    KeyPlayed biggestRelease = i == 0 ? new KeyPlayed(){Name = KeyName.Pause, TimePlayed = 0, TimeReleased = 0} : keysPlayed[i - 1];
-                    foreach(var chord in chords) 
+                    KeyPlayed biggestRelease =
+                        i == 0
+                            ? new KeyPlayed()
+                            {
+                                Name = KeyName.Pause,
+                                TimePlayed = 0,
+                                TimeReleased = 0
+                            }
+                            : keysPlayed[i - 1];
+                    foreach (var chord in chords)
                     {
-                        var activePause = chord.GetActivePause(orderedNotes, keysPlayed) ?? biggestRelease;
-                        biggestRelease = biggestRelease.TimeReleased > activePause.TimeReleased ? biggestRelease : activePause;
+                        var activePause =
+                            chord.GetActivePause(orderedNotes, keysPlayed) ?? biggestRelease;
+                        biggestRelease =
+                            biggestRelease.TimeReleased > activePause.TimeReleased
+                                ? biggestRelease
+                                : activePause;
                     }
 
-                    foreach(var chord in chords)
+                    foreach (var chord in chords)
                     {
                         iAux++;
                         name = chord.ToKey();
@@ -117,7 +129,8 @@ namespace Kingdom.Extensions
                             Name = name,
                             TimePlayed = biggestRelease.TimeReleased,
                         };
-                        key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
+                        key.TimeReleased =
+                            key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                         keysPlayed.Add(key);
                     }
                     i = iAux;
@@ -125,40 +138,50 @@ namespace Kingdom.Extensions
                 }
                 else
                 {
-                    name = note.note.NoteBehaviour is NotationBehaviour.Pause ? KeyName.Pause : note.ToKey();
-                    key = new KeyPlayed(){ Name = name };
+                    name =
+                        note.note.NoteBehaviour is NotationBehaviour.Pause
+                            ? KeyName.Pause
+                            : note.ToKey();
+                    key = new KeyPlayed() { Name = name };
                     key.TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased;
                     key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                     keysPlayed.Add(key);
                 }
             }
 
-
             return keysPlayed;
         }
 
-        public static KeyPlayed GetActivePause(this Note note, IList<Note> orderedNotes, IList<KeyPlayed> keysPlayed)
+        public static KeyPlayed GetActivePause(
+            this Note note,
+            IList<Note> orderedNotes,
+            IList<KeyPlayed> keysPlayed
+        )
         {
-            var key = orderedNotes.Where(x => x.note.NoteBehaviour is NotationBehaviour.Pause && x.line == note.line && note.xPos > x.xPos).OrderByDescending(x => x.xPos).FirstOrDefault();
+            var key = orderedNotes
+                .Where(
+                    x =>
+                        x.note.NoteBehaviour is NotationBehaviour.Pause
+                        && x.line == note.line
+                        && note.xPos > x.xPos
+                )
+                .OrderByDescending(x => x.xPos)
+                .FirstOrDefault();
             return key is null ? null : keysPlayed[orderedNotes.IndexOf(key)];
         }
 
-        public static IList<Note> GetChords(this Note note, IList<Note> notes) => notes.Where(x => x.xPos == note.xPos && x.page == note.page).AsReadOnlyList();
-
-
-
+        public static IList<Note> GetChords(this Note note, IList<Note> notes) =>
+            notes.Where(x => x.xPos == note.xPos && x.page == note.page).AsReadOnlyList();
     }
 
     public static class SpriteExtensions
     {
         public static Vector2 GetSpriteRelativePivot(this Image img)
         {
-
             Bounds bounds = img.sprite.bounds;
             var pivotX = -bounds.center.x / bounds.extents.x / 2 + 0.5f;
             var pivotY = -bounds.center.y / bounds.extents.y / 2 + 0.5f;
             Vector2 pivotPixel = new Vector2(pivotX, pivotY);
-
 
             return pivotPixel;
         }
@@ -172,7 +195,42 @@ namespace Kingdom.Extensions
 
             return new Vector2(xPos, yPos);
         }
+    }
 
+    public static class CollectionsHelper
+    {
+        public static void VerifyAndAddToDictionary<T>(Dictionary<T, int> dictionary, T target)
+        {
+            if (dictionary.ContainsKey(target))
+                dictionary[target]++;
+            else
+                dictionary.Add(target, 1);
+        }
 
+        public static void VerifyAndAddToDictionaryList<T, TT>(
+            Dictionary<T, List<TT>> dictionary,
+            T target,
+            TT value
+        )
+        {
+            if (dictionary.ContainsKey(target))
+            {
+                if (!dictionary[target].Contains(value))
+                    dictionary[target].Add(value);
+            }
+            else
+            {
+                dictionary.Add(target, new List<TT>());
+                dictionary[target].Add(value);
+            }
+        }
+
+        public static void VerifyAndAddToList<T>(List<T> list, T target)
+        {
+            if (list.Contains(target))
+                return;
+            else
+                list.Add(target);
+        }
     }
 }

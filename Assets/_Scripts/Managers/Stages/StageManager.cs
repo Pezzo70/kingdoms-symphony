@@ -34,7 +34,7 @@ public class StageManager : MonoBehaviour
                 false,
                 0f,
                 false,
-                new Vector3(0f, 0f, 0f),
+                Vector3.zero,
                 true
             )
         );

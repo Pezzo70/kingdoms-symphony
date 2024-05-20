@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
+using Kingdom.Extensions;
 using Newtonsoft.Json;
 
 namespace Kingdom.Player
@@ -92,15 +93,21 @@ namespace Kingdom.Player
             if (xp == 0)
                 return;
 
-            var xpToNext = GetXPForTargetLevel(xp + 1);
+            var xpToNext = GetXPForTargetLevel(_levelPerCharacter[id].level + 1);
 
-            var player = this._levelPerCharacter[id];
+            var (level, currentXP) = this._levelPerCharacter[id];
+            var xpQuantity = currentXP + xp;
 
-            player.currentXP += xpToNext;
-            while (player.currentXP < GetXPForTargetLevel(xp + 1))
+            if (xpQuantity >= xpToNext)
             {
-                player.currentXP -= xpToNext;
-                player.level++;
+                level++;
+                _levelPerCharacter[id] = (level, 0);
+                AddXP(xpQuantity % xpToNext, id);
+            }
+            else
+            {
+                currentXP += xp;
+                _levelPerCharacter[id] = (level, currentXP);
             }
         }
 
@@ -124,6 +131,54 @@ namespace Kingdom.Player
                 total += (float)Math.Floor(i + baseExperiencePerLevel * Math.Pow(2, i / 7.0));
 
             return (int)Math.Floor(total / 4);
+        }
+
+        public void UpdateEnemyInfoUnlocked(List<EnemyID> enemiesEncountered) =>
+            enemiesEncountered.ForEach(obj => _enemyInfoUnlocked[obj] = true);
+
+        public void UpdateEnemyAttacksUnlocked(
+            Dictionary<EnemyID, List<EnemyAttackID>> enemiesAttacksExecuted
+        )
+        {
+            foreach (var enemyAttack in enemiesAttacksExecuted)
+            {
+                foreach (var attack in enemyAttack.Value)
+                    CollectionsHelper.VerifyAndAddToDictionaryList(
+                        _enemyAttacksUnlocked,
+                        enemyAttack.Key,
+                        attack
+                    );
+            }
+        }
+
+        public void UpdateEnemyAdvantagesUnlocked(
+            Dictionary<EnemyID, List<EnemyAdvantageID>> enemiesAdvantagesTriggered
+        )
+        {
+            foreach (var enemyAdvantage in enemiesAdvantagesTriggered)
+            {
+                foreach (var advantage in enemyAdvantage.Value)
+                    CollectionsHelper.VerifyAndAddToDictionaryList(
+                        _enemyAdvantagesUnlocked,
+                        enemyAdvantage.Key,
+                        advantage
+                    );
+            }
+        }
+
+        public void UpdateEnemyDisadvantagesUnlocked(
+            Dictionary<EnemyID, List<EnemyDisadvantageID>> enemiesDisadvantagesTriggered
+        )
+        {
+            foreach (var enemyDisadvantage in enemiesDisadvantagesTriggered)
+            {
+                foreach (var disadvantage in enemyDisadvantage.Value)
+                    CollectionsHelper.VerifyAndAddToDictionaryList(
+                        _enemyDisadvangatesUnlocked,
+                        enemyDisadvantage.Key,
+                        disadvantage
+                    );
+            }
         }
     }
 }

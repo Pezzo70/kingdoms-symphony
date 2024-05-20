@@ -21,6 +21,7 @@ TagManager:
   - Note
   - KeySignatureArea
   - PageCounter
+  - Enemy
   layers:
   - Default
   - TransparentFX

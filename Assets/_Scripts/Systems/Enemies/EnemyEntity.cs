@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Kingdom.Constants;
 using Kingdom.Level;
@@ -10,15 +9,27 @@ namespace Kingdom.Enemies
     public class EnemyEntity : MonoBehaviour
     {
         public Enemy enemyData;
+        public GameObject enemyHUD;
+        public SpriteRenderer enemySprite;
+        public SpriteRenderer shadowSprite;
+        public Animator pftEffectAnimator;
         public RectTransform moralBarFill;
         public TextMeshProUGUI moralText;
         public GameObject enemyManaContainer;
         public GameObject enemyManaPrefab;
+
         private float _maxMoral;
         private float _currentMoral;
         private int _manaPerTurn;
         private int _currentMana;
+
         private List<GameObject> _manasInstantiated;
+        private bool _isDead;
+
+        public bool IsDead
+        {
+            get => _isDead;
+        }
 
         void Awake()
         {
@@ -33,6 +44,8 @@ namespace Kingdom.Enemies
             _manaPerTurn = enemyData.manaPerTurn;
             _currentMana = _manaPerTurn;
             _manasInstantiated = new List<GameObject>();
+            _isDead = false;
+            EventManager.EnemyEncountered.Invoke(enemyData.enemyID);
         }
 
         void Start()
@@ -62,6 +75,15 @@ namespace Kingdom.Enemies
             _currentMoral -= damage;
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
             UpdateMoral();
+            if (_currentMoral == 0f)
+            {
+                _isDead = true;
+                pftEffectAnimator.Play("Pft");
+                enemyHUD.SetActive(false);
+                enemySprite.enabled = false;
+                shadowSprite.enabled = false;
+                EventManager.EnemyBanished(enemyData.enemyID);
+            }
         }
 
         private void Heal(float quantity)
@@ -77,6 +99,7 @@ namespace Kingdom.Enemies
             //@TODO
             /*To-Do Choose Attack*/
             /*To-Do Advantages and Ongoing Effects*/
+            // EventManager.EnemyAttackExecuted(enemyAttack);
         }
 
         private void HandleEnemyRegainMana()

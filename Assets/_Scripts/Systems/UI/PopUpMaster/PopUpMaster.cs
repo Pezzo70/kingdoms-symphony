@@ -20,7 +20,7 @@ namespace Kingdom.UI
 
         private void OnEnable() => EventManager.ShowPopUp += ShowPopUpHandler;
 
-        private void OnDisable() => EventManager.ShowPopUp = ShowPopUpHandler;
+        private void OnDisable() => EventManager.ShowPopUp -= ShowPopUpHandler;
 
         private void ShowPopUpHandler(
             (
@@ -74,14 +74,24 @@ namespace Kingdom.UI
             else
                 closeButton.SetActive(false);
 
-            Vector3 desiredPosition = mainCamera.WorldToScreenPoint(options.targetPosition);
-            float xOffset = popUp.sizeDelta.x / 2;
-            float yOffset = popUp.sizeDelta.y / 2;
-            popUp.anchoredPosition = new Vector3(
-                desiredPosition.x - xOffset,
-                desiredPosition.y - yOffset,
-                desiredPosition.z
-            );
+            if (options.targetPosition != Vector3.zero)
+            {
+                Vector3 desiredPosition = mainCamera.WorldToScreenPoint(options.targetPosition);
+                //@TODO
+                //Fix for other resolutions
+                //Maybe it will only work for 1920x1080.
+                float xOffset = popUp.sizeDelta.x / 2;
+                float yOffset = popUp.sizeDelta.y / 2;
+                popUp.anchoredPosition = new Vector3(
+                    desiredPosition.x - xOffset,
+                    desiredPosition.y - yOffset,
+                    desiredPosition.z
+                );
+            }
+            else
+            {
+                popUp.anchoredPosition = Vector3.zero;
+            }
 
             popUpCanvas.SetActive(true);
 
