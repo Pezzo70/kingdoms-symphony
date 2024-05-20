@@ -16,7 +16,7 @@ namespace Kingdom
 
         public static IEnumerable<EffectInfo> GetAction(ScrollEffectDTO effectDTO)
         {
-            //@TODO: SCALE AND MODES TARGET
+            //@TODO: OBJECTIVE, SCALE AND MODES TARGET
             KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
             KeyName[] keyNameToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
             KeyName[] keyNameSemiToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
@@ -35,7 +35,7 @@ namespace Kingdom
                         {
                             EffectType = EffectType.PlayerMitigation,
                             Turns = 1,
-                            Function = (value) => value + mitigationIncrease
+                            Function = (value) => value + (value * (mitigationIncrease / 100))
                         }
                     );
                     break;
@@ -50,7 +50,7 @@ namespace Kingdom
                         {
                             EffectType = EffectType.Damage,
                             Turns = 1,
-                            Function = (damage) => damage + damageIncrease
+                            Function = (damage) => damage + (damage * (damageIncrease / 100))
                         }
                     );
                     break;
@@ -63,7 +63,7 @@ namespace Kingdom
                         {
                             EffectType = EffectType.Heal,
                             Turns = 3,
-                            Function = (value) => value + healAmount
+                            Function = (value) => value + (value * (healAmount / 100))
                         }
                     );
                     break;
@@ -81,7 +81,9 @@ namespace Kingdom
                     break;
 
                 case ScrollID.BetweenTones:
-                    float toneDamage = effectDTO.TargetSemiTone * effectDTO.Scroll.xFactor;
+
+                    int numberOfSemiTones = 0;
+                    float toneDamage = numberOfSemiTones * effectDTO.Scroll.xFactor;
                     toneDamage = Math.Min(toneDamage, effectDTO.Scroll.yFactor);
                     effectInfos.Add(
                         new EffectInfo()
@@ -94,7 +96,8 @@ namespace Kingdom
                     break;
 
                 case ScrollID.BetweenSemitones:
-                    float semitoneDamage = effectDTO.TargetKey * effectDTO.Scroll.xFactor;
+                    int numberOfTones = 0;
+                    float semitoneDamage = numberOfTones * effectDTO.Scroll.xFactor;
                     semitoneDamage = Math.Min(semitoneDamage, effectDTO.Scroll.yFactor);
                     effectInfos.Add(
                         new EffectInfo()
@@ -284,8 +287,8 @@ namespace Kingdom
         public Chords? TargetChord { get; set; }
         public Scale? TargetScale { get; set;}
         public Modes? TargetModes { get; set; }
-        public int TargetSemiTone { get;set; }
-        public int TargetKey { get; set; }
+        public bool TargetSemiTone { get;set; }
+        public bool TargetTone { get; set; }
 
 
         public ScrollEffectDTO(Scroll scroll, IList<Note> notes) : this()
