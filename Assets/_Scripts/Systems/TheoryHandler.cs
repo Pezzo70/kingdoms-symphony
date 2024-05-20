@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio;
+using Kingdom.Enemies;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
@@ -257,57 +258,117 @@ namespace Kingdom
             return effectInfos;
         }
 
-        public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyAdvantage enemyAdvantage)
+        public static IEnumerable<EffectInfo> GetAction(EnemyAdvantage enemyAdvantage)
         {
             IList<EffectInfo> effectInfos = new List<EffectInfo>();
+
             switch (enemyAdvantage.enemyAdvantageID)
             {
-                case EnemyAdvantageID.GoblinsWill:
-                    break;
                 case EnemyAdvantageID.WerewolfsWill:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.PlayerMitigation,
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                        }
+                    );
                     break;
-                case EnemyAdvantageID.BonesWill:
-                    break;
+
                 case EnemyAdvantageID.MindsWill:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.CompleteMitigation,
+                            Function = (value) => value
+                        }
+                    );
                     break;
-                case EnemyAdvantageID.ClawsWill:
-                    break;
+
                 case EnemyAdvantageID.HealingEyes:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Heal,
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                        }
+                    );
                     break;
+
                 case EnemyAdvantageID.WatchersWill:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.PlayerMitigation,
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                        }
+                    );
                     break;
-                case EnemyAdvantageID.CaptainsWill:
-                    break;
+
                 case EnemyAdvantageID.PhngluiMglwNafhCthulhuRlyehWgahNaglFhtagn:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Damage,
+                            Turns = (int)enemyAdvantage.yFactor,
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                        }
+                    );
                     break;
             }
+
             return effectInfos;
         }
 
-        public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyDisadvantage enemyDisadvantage)
+        public static IEnumerable<EffectInfo> GetAction(EnemyDisadvantage enemyDisadvantage)
         {
             IList<EffectInfo> effectInfos = new List<EffectInfo>();
+
             switch (enemyDisadvantage.enemyDisadvantageID)
             {
-                case EnemyDisadvantageID.HatefulMelodies:
-                    break;
                 case EnemyDisadvantageID.CantPauseHowls:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Damage,
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                        }
+                    );
                     break;
-                case EnemyDisadvantageID.ShakesTooMuch:
-                    break;
+
                 case EnemyDisadvantageID.Headaches:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Damage,
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                        }
+                    );
                     break;
-                case EnemyDisadvantageID.SmoothingTheClaws:
-                    break;
+
                 case EnemyDisadvantageID.RightAtTheEyes:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Damage,
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                        }
+                    );
                     break;
-                case EnemyDisadvantageID.HatefulModes:
-                    break;
+
                 case EnemyDisadvantageID.ImNotMyFather:
+                    effectInfos.Add(
+                        new EffectInfo()
+                        {
+                            EffectType = EffectType.Damage,
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                        }
+                    );
                     break;
             }
+
             return effectInfos;
         }
+    }
     }
 
 
@@ -344,7 +405,6 @@ namespace Kingdom
     public enum EffectType
     {
         PlayerMitigation, EnemyMitigation, CooldownReduction, Damage, MassiveDamage, Heal, AdditionalMana, RemoveNegativeEffects,
-        PreventEnemyHeal,
+        PreventEnemyHeal, CompleteMitigation,
         Stun,
     }
-}
