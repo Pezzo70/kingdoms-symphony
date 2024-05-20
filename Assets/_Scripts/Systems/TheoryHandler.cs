@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio;
@@ -269,7 +268,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.PlayerMitigation,
-                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -279,7 +279,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.CompleteMitigation,
-                            Function = (value) => value
+                            Function = (value) => value,
+                            Turns = 1
                         }
                     );
                     break;
@@ -289,7 +290,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.Heal,
-                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -299,7 +301,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.PlayerMitigation,
-                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
+                            Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -330,7 +333,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.Damage,
-                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                            Function = (dano) => dano + (dano * (enemyDisadvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -340,7 +344,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.Damage,
-                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                            Function = (dano) => dano + (dano * (enemyDisadvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -350,7 +355,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.Damage,
-                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -360,7 +366,8 @@ namespace Kingdom
                         new EffectInfo()
                         {
                             EffectType = EffectType.Damage,
-                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100))
+                            Function = (value) => value + (value * (enemyDisadvantage.xFactor / 100)),
+                            Turns = 1
                         }
                     );
                     break;
@@ -369,42 +376,42 @@ namespace Kingdom
             return effectInfos;
         }
     }
-    }
+}
 
 
-    //@TODO Change struct file
-    public struct EffectInfo
+//@TODO Change struct file
+public struct EffectInfo
+{
+    public EffectType EffectType { get; set; }
+    public int Turns { get; set; }
+    public Func<float, float> Function { get; set; }
+}
+
+//@TODO Change dto file
+public struct ScrollEffectDTO
+{
+    public IList<Note> Notes { get; set; }
+    public Scroll Scroll { get; set; }
+    public Clef? TargetClef { get; set; }
+    public Chords? TargetChord { get; set; }
+    public Scale? TargetScale { get; set; }
+    public Modes? TargetModes { get; set; }
+    public bool TargetSemiTone { get; set; }
+    public bool TargetTone { get; set; }
+
+
+    public ScrollEffectDTO(Scroll scroll, IList<Note> notes) : this()
     {
-        public EffectType EffectType { get; set; }
-        public int Turns { get; set; }
-        public Func<float, float> Function { get; set; }
+        Scroll = scroll;
+        Notes = notes;
     }
-
-    //@TODO Change dto file
-    public struct ScrollEffectDTO
-    {
-        public IList<Note> Notes { get; set; }
-        public Scroll Scroll { get; set; }
-        public Clef? TargetClef { get; set; }
-        public Chords? TargetChord { get; set; }
-        public Scale? TargetScale { get; set; }
-        public Modes? TargetModes { get; set; }
-        public bool TargetSemiTone { get; set; }
-        public bool TargetTone { get; set; }
+}
 
 
-        public ScrollEffectDTO(Scroll scroll, IList<Note> notes) : this()
-        {
-            Scroll = scroll;
-            Notes = notes;
-        }
-    }
-
-
-    //@TODO Change enum file
-    public enum EffectType
-    {
-        PlayerMitigation, EnemyMitigation, CooldownReduction, Damage, MassiveDamage, Heal, AdditionalMana, RemoveNegativeEffects,
-        PreventEnemyHeal, CompleteMitigation,
-        Stun,
-    }
+//@TODO Change enum file
+public enum EffectType
+{
+    PlayerMitigation, EnemyMitigation, CooldownReduction, Damage, MassiveDamage, Heal, AdditionalMana, RemoveNegativeEffects,
+    PreventEnemyHeal, CompleteMitigation,
+    Stun,
+}
