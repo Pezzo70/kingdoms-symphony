@@ -246,16 +246,17 @@ namespace Kingdom.Audio
         {
             var cLine = GetClosestLine();
             var aPage = GetActivePageIndex();
+            var spriteArray = cLine.index > 6 ? upNotations : downNotations;
 
+            float tempo = spriteArray[currentIndex].Tempo.ToFloat();
             if (
                 actionStack
                     .OfType<Note>()
                     .Where(a => a.line == cLine.index && a.page == aPage)
-                    .Sum(a => a.note.Tempo.ToFloat()) >= 1
+                    .Sum(a => a.note.Tempo.ToFloat())  > (1f - tempo)
             )
                 return;
 
-            var spriteArray = cLine.index > 6 ? upNotations : downNotations;
             Sprite sprite = spriteArray[currentIndex].Sprite;
             Image scaleSprite = GameObject
                 .FindGameObjectWithTag("ChangeScale")
