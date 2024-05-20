@@ -102,6 +102,7 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\PlayerAudio.cs" />
     <Compile Include="Assets\_Scripts\Utilities\MonobehaviourSingleton.cs" />
     <Compile Include="Assets\_Scripts\Systems\Input\UIEventTrigger.cs" />
+    <Compile Include="Assets\_Scripts\Utilities\Constants.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayEnemyData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\Note.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
