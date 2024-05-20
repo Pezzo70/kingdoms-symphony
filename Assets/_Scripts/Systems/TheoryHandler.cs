@@ -17,10 +17,10 @@ namespace Kingdom
         public static IEnumerable<EffectInfo> GetAction(ScrollEffectDTO effectDTO)
         {
             //@TODO: OBJECTIVE, SCALE AND MODES TARGET
-            KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
-            KeyName[] keyNameToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
-            KeyName[] keyNameSemiToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0};
-            
+            KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
+            KeyName[] keyNameToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
+            KeyName[] keyNameSemiToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
+
             IList<EffectInfo> effectInfos = new List<EffectInfo>();
 
             switch (effectDTO.Scroll.scrollID)
@@ -256,16 +256,57 @@ namespace Kingdom
 
             return effectInfos;
         }
-    
-    
+
         public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyAdvantage enemyAdvantage)
         {
-            return null;
+            IList<EffectInfo> effectInfos = new List<EffectInfo>();
+            switch (enemyAdvantage.enemyAdvantageID)
+            {
+                case EnemyAdvantageID.GoblinsWill:
+                    break;
+                case EnemyAdvantageID.WerewolfsWill:
+                    break;
+                case EnemyAdvantageID.BonesWill:
+                    break;
+                case EnemyAdvantageID.MindsWill:
+                    break;
+                case EnemyAdvantageID.ClawsWill:
+                    break;
+                case EnemyAdvantageID.HealingEyes:
+                    break;
+                case EnemyAdvantageID.WatchersWill:
+                    break;
+                case EnemyAdvantageID.CaptainsWill:
+                    break;
+                case EnemyAdvantageID.PhngluiMglwNafhCthulhuRlyehWgahNaglFhtagn:
+                    break;
+            }
+            return effectInfos;
         }
 
         public static IEnumerable<EffectInfo> GetAction(Enemies.EnemyDisadvantage enemyDisadvantage)
         {
-            return null;
+            IList<EffectInfo> effectInfos = new List<EffectInfo>();
+            switch (enemyDisadvantage.enemyDisadvantageID)
+            {
+                case EnemyDisadvantageID.HatefulMelodies:
+                    break;
+                case EnemyDisadvantageID.CantPauseHowls:
+                    break;
+                case EnemyDisadvantageID.ShakesTooMuch:
+                    break;
+                case EnemyDisadvantageID.Headaches:
+                    break;
+                case EnemyDisadvantageID.SmoothingTheClaws:
+                    break;
+                case EnemyDisadvantageID.RightAtTheEyes:
+                    break;
+                case EnemyDisadvantageID.HatefulModes:
+                    break;
+                case EnemyDisadvantageID.ImNotMyFather:
+                    break;
+            }
+            return effectInfos;
         }
     }
 
@@ -281,13 +322,13 @@ namespace Kingdom
     //@TODO Change dto file
     public struct ScrollEffectDTO
     {
-        public IList<Note> Notes { get; set;}
-        public Scroll Scroll { get; set;}
-        public Clef? TargetClef { get; set;}
+        public IList<Note> Notes { get; set; }
+        public Scroll Scroll { get; set; }
+        public Clef? TargetClef { get; set; }
         public Chords? TargetChord { get; set; }
-        public Scale? TargetScale { get; set;}
+        public Scale? TargetScale { get; set; }
         public Modes? TargetModes { get; set; }
-        public bool TargetSemiTone { get;set; }
+        public bool TargetSemiTone { get; set; }
         public bool TargetTone { get; set; }
 
 
