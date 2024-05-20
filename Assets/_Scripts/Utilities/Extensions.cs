@@ -171,7 +171,9 @@ namespace Kingdom.Extensions
         }
 
         public static IList<Note> GetChords(this Note note, IList<Note> notes) =>
-            notes.Where(x => x.xPos == note.xPos && x.page == note.page).AsReadOnlyList();
+            notes
+                .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 15f && x.page == note.page)
+                .AsReadOnlyList();
     }
 
     public static class SpriteExtensions
