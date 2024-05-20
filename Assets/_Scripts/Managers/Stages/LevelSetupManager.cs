@@ -53,6 +53,20 @@ namespace Kingdom.Level
 
                 _enemiesSpawnPointsToUse.Remove(enemySpawnPoint);
             }
+
+            List<Transform> sortedChild = new List<Transform>();
+
+            for (int i = 1; i < entitiesParent.transform.childCount; i++)
+                sortedChild.Add(entitiesParent.transform.GetChild(i));
+
+            sortedChild = sortedChild.OrderByDescending(obj => obj.position.y).ToList();
+
+            for (int i = 0; i < sortedChild.Count; i++)
+            {
+                GameObject spriteContainer = sortedChild[i].GetChild(0).gameObject;
+                SpriteRenderer spr = spriteContainer.GetComponent<SpriteRenderer>();
+                spr.sortingOrder = i;
+            }
         }
     }
 }
