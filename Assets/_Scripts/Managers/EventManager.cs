@@ -37,4 +37,6 @@ public static class EventManager
     public static UnityAction OnTurnEnded;
     public static UnityAction EndGameVictory;
     public static UnityAction EndGameDefeat;
+    public static UnityAction PauseGame;
+    public static UnityAction UnpauseGame;
 }

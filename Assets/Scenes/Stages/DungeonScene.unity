@@ -1236,6 +1236,10 @@ PrefabInstance:
       propertyPath: inputModule
       value: 
       objectReference: {fileID: 932910633}
+    - target: {fileID: 7362881123662540728, guid: 2aabcf307ee25564a8eb46f9269f3584, type: 3}
+      propertyPath: playerHUDCanvasGroup
+      value: 
+      objectReference: {fileID: 1555604519}
     - target: {fileID: 7682522873506813923, guid: 2aabcf307ee25564a8eb46f9269f3584, type: 3}
       propertyPath: m_Name
       value: PauseUI
@@ -1566,6 +1570,11 @@ PrefabInstance:
 --- !u!224 &1555604518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7936288268904441269, guid: 9a414883d3cbba94599a8273b01daae0, type: 3}
+  m_PrefabInstance: {fileID: 1555604517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1555604519 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 6315709631485367359, guid: 9a414883d3cbba94599a8273b01daae0, type: 3}
   m_PrefabInstance: {fileID: 1555604517}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1572285703

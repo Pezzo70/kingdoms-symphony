@@ -1402,6 +1402,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7936288268904441269, guid: 9a414883d3cbba94599a8273b01daae0, type: 3}
   m_PrefabInstance: {fileID: 1789828244}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1789828247 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 6315709631485367359, guid: 9a414883d3cbba94599a8273b01daae0, type: 3}
+  m_PrefabInstance: {fileID: 1789828244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1906111466 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3349934182207995749, guid: 2aabcf307ee25564a8eb46f9269f3584, type: 3}
@@ -1979,6 +1984,10 @@ PrefabInstance:
       propertyPath: inputModule
       value: 
       objectReference: {fileID: 1287169357}
+    - target: {fileID: 7362881123662540728, guid: 2aabcf307ee25564a8eb46f9269f3584, type: 3}
+      propertyPath: playerHUDCanvasGroup
+      value: 
+      objectReference: {fileID: 1789828247}
     - target: {fileID: 7682522873506813923, guid: 2aabcf307ee25564a8eb46f9269f3584, type: 3}
       propertyPath: m_Name
       value: PauseUI
