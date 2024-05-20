@@ -5,6 +5,7 @@ using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Extensions;
 using Kingdom.Level;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,8 @@ namespace Kingdom.Audio
         private Vector2 offsetPosition;
         private bool isHover = false;
         private string currentHoverTag;
+        public TextMeshProUGUI  pageCounterText;
+        public TMP_InputField pageLabelInput;
 
         void Start()
         {
@@ -64,6 +67,7 @@ namespace Kingdom.Audio
             keySignatures = notationContainer.GetByType<KeySignatureScriptable>().ToArray();
 
             currentSpriteArray = upNotations;
+            UpdatePageCounter();
         }
 
         void Update()
@@ -71,6 +75,7 @@ namespace Kingdom.Audio
             notationSpriteObject.SetActive(isHover);
             if (isHover)
                 SpriteFollowMouse();
+            UpdatePageCounter();
         }
 
         public void SetHover(bool val, string tag = "MusicSheet")
@@ -394,6 +399,7 @@ namespace Kingdom.Audio
                 childTransform.gameObject.SetActive(false);
 
             activeGo.SetActive(true);
+            UpdatePageCounter();
             return activeGo;
         }
 
@@ -421,6 +427,7 @@ namespace Kingdom.Audio
                 Destroy(page.transform.GetChild(childCount - 1).gameObject);
 
             SetActivePage(childCount - 2);
+            UpdatePageCounter();
         }
 
         public void NavigatePage(bool next)
@@ -471,6 +478,23 @@ namespace Kingdom.Audio
         }
 
         private int GetMaxPage() => PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars;
+
+        private void UpdatePageCounter()
+        {
+            int activePageIndex = GetActivePageIndex() + 1;
+            int totalPageCount = GameObject.FindWithTag("Page").transform.childCount;
+
+             GameObject pageCounterObject = GameObject.FindWithTag("PageCounter");
+
+            if (pageCounterObject != null)
+            {
+                TextMeshProUGUI textAux = pageCounterObject.GetComponentInChildren<TextMeshProUGUI>();
+
+                if (textAux != null)
+                    textAux.text = $"{activePageIndex}/{totalPageCount}";
+            }
+        }
+
 
         #endregion
 
