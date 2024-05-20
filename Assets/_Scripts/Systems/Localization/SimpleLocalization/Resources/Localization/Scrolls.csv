@@ -14,7 +14,8 @@ Scrolls.Name.11,Cura entre Arpejos,Healing Through Arpeggios
 Scrolls.Name.12,Entre Escalas,Between Scales
 Scrolls.Name.13,Melódico,Melodic
 Scrolls.Name.14,Pianista com Modos,Pianist with Modes
-Scrolls.Effect.0,Aumenta a mitigação de dano do musicista em -X por cada nota da escala alvo.,"Increase the damage mitigation of the musician by -X for each note of the target scale."
+Scrolls.Effect.0,Aumenta a mitigação de dano do musicista em -X por cada nota da escala alvo durante -Z turnos.,"Increase the damage mitigation of the musician by -X for each note of the target scale for -Z turns.
+"
 Scrolls.Effect.1,Aumenta o dano causado pelo musicista por nota pertencente a escala alvo em -X.,Increase the damage dealt by the musician per note belonging to the target scale by -X.
 Scrolls.Effect.2,Cura a moral do musicista em -X%.,Heal musician's morale by -X%.
 Scrolls.Effect.3,Reduz o tempo de espera em -X turnos de todos os pergaminhos do musicista.,Reduce the cooldown by -X turns of all the musician's scrolls.

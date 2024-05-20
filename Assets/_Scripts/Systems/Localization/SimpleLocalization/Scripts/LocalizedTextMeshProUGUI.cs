@@ -46,7 +46,10 @@ namespace Assets.SimpleLocalization.Scripts
 
         public void Localize()
         {
-            GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(_localizationKey);
+            if (this != null)
+                GetComponent<TextMeshProUGUI>().text = LocalizationManager.Localize(
+                    _localizationKey
+                );
         }
 
         public void Replace(Tuple<string, string>[] replacements)

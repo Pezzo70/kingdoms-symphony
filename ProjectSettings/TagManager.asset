@@ -20,6 +20,7 @@ TagManager:
   - KeySignature
   - Note
   - KeySignatureArea
+  - PageCounter
   layers:
   - Default
   - TransparentFX
@@ -60,9 +61,6 @@ TagManager:
   - name: Background
     uniqueID: 3799173823
     locked: 0
-  - name: UI
-    uniqueID: 3472980803
-    locked: 0
   - name: Shadow
     uniqueID: 3218014737
     locked: 0
@@ -80,4 +78,7 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 1679795535
+    locked: 0
+  - name: UI
+    uniqueID: 3472980803
     locked: 0

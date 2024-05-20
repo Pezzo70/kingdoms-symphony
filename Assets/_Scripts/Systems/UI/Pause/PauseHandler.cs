@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.UI;
 public class PauseHandler : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public CanvasGroup playerHUDCanvasGroup;
     public InputSystemUIInputModule inputModule;
     private bool _onPause = false;
 
@@ -25,8 +26,22 @@ public class PauseHandler : MonoBehaviour
 
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
         _onPause = pauseMenu.activeInHierarchy;
+        if (_onPause)
+        {
+            playerHUDCanvasGroup.alpha = 0;
+            EventManager.PauseGame?.Invoke();
+        }
+        else
+        {
+            playerHUDCanvasGroup.alpha = 1;
+            EventManager.UnpauseGame?.Invoke();
+        }
     }
 
-    public void Unpause() => _onPause = false;
-    
+    public void Unpause()
+    {
+        _onPause = false;
+        EventManager.UnpauseGame?.Invoke();
+        playerHUDCanvasGroup.alpha = 1;
+    }
 }

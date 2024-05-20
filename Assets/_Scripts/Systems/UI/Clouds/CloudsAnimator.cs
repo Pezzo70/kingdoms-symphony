@@ -98,13 +98,13 @@ public class CloudsAnimator : MonoBehaviour
             .Where(cloud => !_currentCloudsBeingAnimated.Contains(cloud))
             .ToList();
 
-        GameObject cloud = validClouds[UnityEngine.Random.Range(0, validClouds.Count - 1)];
+        GameObject cloud = validClouds[UnityEngine.Random.Range(0, validClouds.Count)];
         _currentCloudsBeingAnimated.Add(cloud);
 
         RectTransform cloudRT = cloud.GetComponent<RectTransform>();
         Image cloudImage = cloud.GetComponent<Image>();
         Vector2 nextInitialPos = _cloudsInitialPos[
-            UnityEngine.Random.Range(0, _cloudsInitialPos.Count - 1)
+            UnityEngine.Random.Range(0, _cloudsInitialPos.Count)
         ].Item2;
 
         float interval = 0.025f;
