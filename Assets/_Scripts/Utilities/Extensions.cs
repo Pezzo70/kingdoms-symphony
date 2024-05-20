@@ -143,7 +143,7 @@ namespace Kingdom.Extensions
             return key is null ? null : keysPlayed[orderedNotes.IndexOf(key)];
         }
 
-        public static IList<Note> GetChords(this Note note, IList<Note> notes) => notes.Where(x => x.xPos == note.xPos && x.page == note.page).AsReadOnlyList();
+        public static IList<Note> GetChords(this Note note, IList<Note> notes) => notes.Where(x => Mathf.Abs(x.xPos - note.xPos) <= 15f && x.page == note.page).AsReadOnlyList();
 
 
 
