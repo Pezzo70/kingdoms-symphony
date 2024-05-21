@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio.Procedural;
+using Kingdom.Effects;
 using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Extensions;
@@ -264,6 +265,8 @@ namespace Kingdom.Audio
 
             var notesToPlay = new List<Note>();
 
+            EffectsAndScrollsManager.Instance.playedNotes.Clear();
+
             for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++)
             {
                 var page = pageParent.transform.GetChild(pageIndex);
@@ -273,6 +276,7 @@ namespace Kingdom.Audio
                     if (noteComponent != null)
                     {
                         notesToPlay.Add(noteComponent);
+                        EffectsAndScrollsManager.Instance.playedNotes.Add(noteComponent);
                     }
                 }
             }

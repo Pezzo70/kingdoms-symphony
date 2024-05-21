@@ -316,3 +316,28 @@ namespace Kingdom.Enums.Tips
         AbyssalVisitor = 21
     }
 }
+
+namespace Kingdom.Effects
+{
+    public enum EffectTarget
+    {
+        Player = 0,
+        Enemy = 1
+    }
+
+    public enum EffectType
+    {
+        PlayerMitigation,
+        EnemyMitigation,
+        CooldownReduction,
+        Damage,
+        DamageModifier,
+        MassiveDamage,
+        Heal,
+        AdditionalMana,
+        RemoveNegativeEffects,
+        PreventEnemyHeal,
+        CompleteMitigation,
+        Stun,
+    }
+}

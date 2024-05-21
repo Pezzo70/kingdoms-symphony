@@ -1,4 +1,5 @@
 using System;
+using Kingdom.Effects;
 using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
@@ -53,4 +54,9 @@ public static class EventManager
     public static UnityAction<Turn> TurnChanged;
     public static UnityAction NextEnemy;
     public static UnityAction NextEnemyTakesDamage;
+
+    public static UnityAction<(Scroll scroll, string[] randomTargets)> AddScroll;
+    public static UnityAction<ScrollID> ScrollObjectiveAccomplished;
+    public static UnityAction<Scroll> BurnScroll;
+    public static UnityAction<(EffectDTO effect, GameObject target)> AddEffect;
 }

@@ -26,7 +26,7 @@ Scrolls.Effect.7,Causa -X de dano massivo.,Inflict -X massive damage.
 Scrolls.Effect.8,Cura a moral do musicista em -X para cada nota adicionada e impede qualquer cura dos inimigos no próximo turno.,Heal the musician's moral by -X for each note added and prevent any healing from enemies next turn.
 Scrolls.Effect.9,"Para cada nota adicionada, o musicista recebe -X de mana adicional no próximo turno.","For each note added, the musician receives an additional -X mana next turn."
 Scrolls.Effect.10,"Para cada progressão realizada, diminua em -X% a mitigação de dano dos inimigos por -Y turnos.","For each progression performed, decrease enemy damage mitigation by -X% for -Y turns."
-Scrolls.Effect.11,Elimina todos os feitos negativos e cura moral do musicista em -X. ,Eliminate all negative effects and heal musician's morale by -X .
+Scrolls.Effect.11,Elimina todos os efeitos aplicados no musicista e cura a moral em -X. ,Eliminate all musician's effects and heal morale by -X .
 Scrolls.Effect.12,Causa atordoamento nos inimigos - um dos ataques deste fica desabilitado por -X turnos.,Cause enemies to be stunned - one of their attacks is disabled for -X turns.
 Scrolls.Effect.13,O dano de cada nota do musicista é multiplicado em -X%.,The damage of each note played by the musician is multiplied by -X%.
 Scrolls.Effect.14,"Causa -X de dano massivo, cura a moral em -Y e por -Z turnos aplica -W% de migitação de dano no musicista.","Inflict -X massive damage, heal morale by -Y, and for -Z turns apply -W% damage mitigation tp the musician."
@@ -45,3 +45,6 @@ Scrolls.Objective.11,Realize o arpejo de três acordes acordes aleatórios em tr
 Scrolls.Objective.12,"Em quatro compassos distintos, adicione somente notas de quatro escalas maiores aleatórias.","In four distinct measures, add only notes from four random major scales."
 Scrolls.Objective.13,Utilize metade de seus compassos disponíveis para compor uma melodia - não pode haver sobreposição de notas e a soma da duração de todas as notas devem equivaler ao tempo do compasso.,"Use half of your available measures to compose a melody - ensure that there are no overlapping notes, and the total duration of all notes equals the measure's duration."
 Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota musical aleatória.","In all available measures, compose using only notes following a random Mode from a random musical note."
+Scrolls.Menu.Cooldown,Tempo de Espera: -X.,Cooldown: -X.
+Scrolls.Menu.Available,Disponível em -X turnos.,Available in -X turns.
+Scrolls.Menu.Cast,Usar Pergaminho,Cast Scroll

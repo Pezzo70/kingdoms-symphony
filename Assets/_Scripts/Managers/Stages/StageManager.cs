@@ -1,5 +1,6 @@
 using System.Collections;
 using Kingdom.Audio;
+using Kingdom.Effects;
 using Kingdom.Enums.Player;
 using Kingdom.Level;
 using UnityEngine;
@@ -30,6 +31,7 @@ public class StageManager : MonoBehaviour
                     () =>
                     {
                         pauseGameObject.SetActive(false);
+                        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
                         EventManager
                             .LevelTransition
                             ?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
@@ -48,6 +50,7 @@ public class StageManager : MonoBehaviour
     {
         CharacterID character = (CharacterID)characterID;
         PlaythroughContainer.Instance.CreateNewPlaythrough(character);
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(1));
     }
@@ -55,12 +58,14 @@ public class StageManager : MonoBehaviour
     public void GoToNextLevel()
     {
         Level nextLevel = PlaythroughContainer.Instance.GetNextLevel();
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(nextLevel.sceneID));
     }
 
     public void EndGame()
     {
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(0));
     }
