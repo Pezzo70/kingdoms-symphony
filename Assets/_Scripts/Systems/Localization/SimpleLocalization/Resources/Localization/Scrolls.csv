@@ -45,6 +45,6 @@ Scrolls.Objective.11,Realize o arpejo de três acordes acordes aleatórios em tr
 Scrolls.Objective.12,"Em quatro compassos distintos, adicione somente notas de quatro escalas maiores aleatórias.","In four distinct measures, add only notes from four random major scales."
 Scrolls.Objective.13,Utilize metade de seus compassos disponíveis para compor uma melodia - não pode haver sobreposição de notas e a soma da duração de todas as notas devem equivaler ao tempo do compasso.,"Use half of your available measures to compose a melody - ensure that there are no overlapping notes, and the total duration of all notes equals the measure's duration."
 Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota musical aleatória.","In all available measures, compose using only notes following a random Mode from a random musical note."
-Scrolls.Menu.Cooldown,Tempo de Espera: -X.,Cooldown: -X.
+Scrolls.Menu.Cooldown,Tempo de Espera: -X turnos.,Cooldown: -X turns.
 Scrolls.Menu.Available,Disponível em -X turnos.,Available in -X turns.
 Scrolls.Menu.Cast,Usar Pergaminho,Cast Scroll

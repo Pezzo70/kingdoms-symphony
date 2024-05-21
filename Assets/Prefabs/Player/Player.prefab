@@ -1405,6 +1405,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7979152117025663123, guid: 469852ff5e5cd9244abf54686e998b8f, type: 3}
+      propertyPath: displayCastButton
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3321186713647827154, guid: 469852ff5e5cd9244abf54686e998b8f, type: 3}

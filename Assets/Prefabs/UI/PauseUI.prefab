@@ -109,8 +109,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6433635969429332116}
   - {fileID: 5297750314417775065}
+  - {fileID: 6433635969429332116}
   m_Father: {fileID: 7679546277614131686}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -427,8 +427,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4989888259827409400}
   - {fileID: 1387002917247627922}
+  - {fileID: 4989888259827409400}
   m_Father: {fileID: 7679546277614131686}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1466,8 +1466,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2233172759332084692}
   - {fileID: 5736799475015281026}
+  - {fileID: 2233172759332084692}
   m_Father: {fileID: 7679546277614131686}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1711,8 +1711,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2311113318974241320}
   - {fileID: 1635800264421915020}
+  - {fileID: 2311113318974241320}
   m_Father: {fileID: 7679546277614131686}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2272,6 +2272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 9202799153359772030}
+  playerHUDCanvasGroup: {fileID: 0}
   inputModule: {fileID: 0}
 --- !u!223 &6650233667778206644
 Canvas:

@@ -14,7 +14,7 @@ namespace Kingdom.Effects
         public List<Note> playedNotes;
         public List<EffectDTO> onGoingEffects;
         public List<ScrollDTO> onGoingScrolls;
-        public List<BurnedScrollsDTO> burnedScrolls;
+        public List<BurnedScrollDTO> burnedScrolls;
 
         protected override void Awake()
         {
@@ -22,7 +22,7 @@ namespace Kingdom.Effects
             playedNotes = new List<Note>();
             onGoingEffects = new List<EffectDTO>();
             onGoingScrolls = new List<ScrollDTO>();
-            burnedScrolls = new List<BurnedScrollsDTO>();
+            burnedScrolls = new List<BurnedScrollDTO>();
         }
 
         public void ClearAllEffectsAndScrolls()
@@ -156,7 +156,7 @@ namespace Kingdom.Effects
         }
     }
 
-    public class BurnedScrollsDTO
+    public class BurnedScrollDTO
     {
         private ScrollID _scroll;
         private int _canBeUsedOnTurn;
@@ -171,7 +171,7 @@ namespace Kingdom.Effects
             get => _canBeUsedOnTurn;
         }
 
-        public BurnedScrollsDTO(ScrollID scroll, int canBeUsedOnTurn)
+        public BurnedScrollDTO(ScrollID scroll, int canBeUsedOnTurn)
         {
             _scroll = scroll;
             _canBeUsedOnTurn = canBeUsedOnTurn;
