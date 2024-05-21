@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Kingdom.Audio;
 using Kingdom.Constants;
 using Kingdom.Enums.Enemies;
 using Kingdom.Level;
@@ -178,7 +179,6 @@ namespace Kingdom.Enemies
             /*To-Do Advantages and Ongoing Effects*/
             EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
             HandleEnemySpendMana(attack.manaRequired);
-            Debug.Log(attack.enemyAttackID.ToString());
             EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
             /*Attack Handler Event here*/
         }
@@ -247,6 +247,7 @@ namespace Kingdom.Enemies
                     yield return new WaitForSeconds(0.05f);
 
                 Attack(enemyAttackID);
+                AudioSystem.Instance.Play(this.enemyData.enemyID, Enums.ActorAudioTypes.Attack);
                 enemyAnimator.Play("Idle");
                 _isAttacking = enemyData.attacks.Any(attack => attack.manaRequired <= _currentMana);
                 _endCurrentAttackAnimation = false;

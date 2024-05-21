@@ -20,6 +20,9 @@ namespace Kingdom.Audio
         private Object pagePrefab;
         private GameObject notationSpriteObject;
         private Stack<MonoBehaviour> actionStack;
+        public GameObject musicSheetCanvas;
+        public GameObject playerOptions;
+        public bool wasOpen = false;
 
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
@@ -40,11 +43,23 @@ namespace Kingdom.Audio
         private Vector2 offsetPosition;
         private bool isHover = false;
         private string currentHoverTag;
-        public TextMeshProUGUI  pageCounterText;
+        public TextMeshProUGUI pageCounterText;
         public TMP_InputField pageLabelInput;
+
+        void Awake()
+        {
+            EventManager.PauseGame += HandlePause;
+            EventManager.UnpauseGame += HandleUnpause;
+        }
 
         void Start()
         {
+            Canvas parentCanvas = transform.parent.gameObject.GetComponent<Canvas>();
+            parentCanvas.worldCamera = Camera.main;
+            parentCanvas.planeDistance = 15;
+            parentCanvas.sortingLayerName = "UI";
+            parentCanvas.sortingOrder = 100;
+
             actionStack = new Stack<MonoBehaviour>();
 
             notationSpriteObject = GameObject.FindGameObjectWithTag("NotationSprite");
@@ -68,6 +83,29 @@ namespace Kingdom.Audio
 
             currentSpriteArray = upNotations;
             UpdatePageCounter();
+        }
+
+        void OnEnable()
+        {
+            wasOpen = true;
+        }
+
+        void OnDestroy()
+        {
+            EventManager.PauseGame -= HandlePause;
+            EventManager.UnpauseGame -= HandleUnpause;
+        }
+
+        private void HandlePause()
+        {
+            if (wasOpen)
+                musicSheetCanvas.SetActive(false);
+        }
+
+        private void HandleUnpause()
+        {
+            if (wasOpen)
+                musicSheetCanvas.SetActive(true);
         }
 
         void Update()
@@ -253,7 +291,7 @@ namespace Kingdom.Audio
                 actionStack
                     .OfType<Note>()
                     .Where(a => a.line == cLine.index && a.page == aPage)
-                    .Sum(a => a.note.Tempo.ToFloat())  > (1f - tempo)
+                    .Sum(a => a.note.Tempo.ToFloat()) > (1f - tempo)
             )
                 return;
 
@@ -263,12 +301,20 @@ namespace Kingdom.Audio
                 .GetComponent<Image>();
             var newNote = CreateObjectInLine(cLine.yPos, sprite);
 
-            Note noteOnNearX = actionStack.OfType<Note>().FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 15f);
+            Note noteOnNearX = actionStack
+                .OfType<Note>()
+                .FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 1f);
             if (noteOnNearX != null)
             {
-                newNote.transform.position = new Vector3(noteOnNearX.xPos, newNote.transform.position.y, newNote.transform.position.z);
+                newNote.transform.position = new Vector3(
+                    noteOnNearX.xPos,
+                    newNote.transform.position.y,
+                    newNote.transform.position.z
+                );
                 newNote.GetComponent<Image>().sprite = noteOnNearX.note.Sprite;
-                newNote.GetComponent<RectTransform>().pivot = noteOnNearX.GetComponent<RectTransform>().pivot;
+                newNote.GetComponent<RectTransform>().pivot = noteOnNearX
+                    .GetComponent<RectTransform>()
+                    .pivot;
             }
 
             Note note = newNote.AddComponent<Note>();
@@ -289,7 +335,15 @@ namespace Kingdom.Audio
             switch (note.note.NoteOrientation)
             {
                 case NotationOrientation.Center:
-                if(note.note.NoteBehaviour == NotationBehaviour.Pause && (note.note.Tempo == Tempo.Quarter || note.note.Tempo == Tempo.Sixteenth || note.note.Tempo == Tempo.Eighth)) break;
+                    if (
+                        note.note.NoteBehaviour == NotationBehaviour.Pause
+                        && (
+                            note.note.Tempo == Tempo.Quarter
+                            || note.note.Tempo == Tempo.Sixteenth
+                            || note.note.Tempo == Tempo.Eighth
+                        )
+                    )
+                        break;
                     newNote.GetComponent<RectTransform>().sizeDelta = new Vector2(
                         newNote.GetComponent<RectTransform>().sizeDelta.x,
                         50
@@ -490,17 +544,16 @@ namespace Kingdom.Audio
             int activePageIndex = GetActivePageIndex() + 1;
             int totalPageCount = GameObject.FindWithTag("Page").transform.childCount;
 
-             GameObject pageCounterObject = GameObject.FindWithTag("PageCounter");
+            GameObject pageCounterObject = GameObject.FindWithTag("PageCounter");
 
             if (pageCounterObject != null)
             {
-                TextMeshProUGUI textAux = pageCounterObject.GetComponentInChildren<TextMeshProUGUI>();
+                TextMeshProUGUI textAux = pageCounterObject.GetComponent<TextMeshProUGUI>();
 
                 if (textAux != null)
-                    textAux.text = $"{activePageIndex}/{totalPageCount}";
+                    textAux.text = $"{activePageIndex}-{totalPageCount}";
             }
         }
-
 
         #endregion
 

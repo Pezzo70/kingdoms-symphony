@@ -86,13 +86,13 @@ public class SettingsManager : MonoBehaviour
         EventManager.SavePlayerConfig();
     }
 
-    public void SetEffectVolume(float volume) => this.effectVolume = volume / 100;
+    public void SetEffectVolume(float volume) => this.effectVolume = volume / 100f;
 
-    public void SetMusicVolume(float volume) => this.musicVolume = volume / 100;
+    public void SetMusicVolume(float volume) => this.musicVolume = volume / 100f;
 
-    public void SetAmbienceVolume(float volume) => this.ambienceVolume = volume / 100;
+    public void SetAmbienceVolume(float volume) => this.ambienceVolume = volume / 100f;
 
-    public void SetInstrumentVolume(float volume) => this.instrumentVolume = volume / 100;
+    public void SetInstrumentVolume(float volume) => this.instrumentVolume = volume / 100f;
 
     public void SetFullscreen(bool fullscreen) => this.fullscreen = fullscreen;
 

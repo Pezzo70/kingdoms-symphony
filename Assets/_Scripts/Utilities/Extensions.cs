@@ -172,7 +172,7 @@ namespace Kingdom.Extensions
 
         public static IList<Note> GetChords(this Note note, IList<Note> notes) =>
             notes
-                .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 15f && x.page == note.page)
+                .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 1f && x.page == note.page)
                 .AsReadOnlyList();
     }
 

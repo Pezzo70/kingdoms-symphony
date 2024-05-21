@@ -18,7 +18,10 @@ namespace Kingdom.Audio
         private AudioSource audioSource;
 
         [Range(0, 1)]
-        private float globalVolume, ambienceVolume, effectVolume, musicVolume = 1.0f;
+        private float globalVolume,
+            ambienceVolume,
+            effectVolume,
+            musicVolume = 1.0f;
         private ScriptableAudio currentAudio;
 
         [SerializeField]
@@ -56,7 +59,9 @@ namespace Kingdom.Audio
             currentAudio = audio;
             audioSource.clip = audio.AudioClip;
             audioSource.volume =
-                audio.volume * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume) * 100;
+                audio.volume
+                * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume)
+                * 100;
             audioSource.Play();
         }
 
@@ -104,14 +109,14 @@ namespace Kingdom.Audio
         public void SetAmbienceVolume(float volume)
         {
             ambienceVolume = volume;
-            if((currentAudio is StageAudio stage) && stage.StageName != "MenuScene")
-                audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
+            if ((currentAudio is StageAudio stage) && stage.StageName != "MenuScene") { }
+            audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
         }
 
         public void SetMusicVolume(float volume)
         {
             musicVolume = volume;
-            if((currentAudio is StageAudio stage) && stage.StageName == "MenuScene")
+            if ((currentAudio is StageAudio stage) && stage.StageName == "MenuScene")
                 audioSource.volume = currentAudio.volume * musicVolume * ambienceVolume;
         }
 
