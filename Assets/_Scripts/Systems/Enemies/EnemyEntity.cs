@@ -251,7 +251,7 @@ namespace Kingdom.Enemies
                 enemyAnimator.Play("Idle");
                 _isAttacking = enemyData.attacks.Any(attack => attack.manaRequired <= _currentMana);
                 _endCurrentAttackAnimation = false;
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(2.5f);
             }
 
             callbackPosAttack?.Invoke();
