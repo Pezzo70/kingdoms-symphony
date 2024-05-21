@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
@@ -16,7 +18,10 @@ public class PauseHandler : MonoBehaviour
         EventManager.EndGameVictory += HandleEndGame;
         EventManager.EndGameDefeat += HandleEndGame;
         EventManager.PhaseVictory += HandleEndGame;
+        EventManager.CantPause += HandleCanPause;
     }
+
+    private void HandleCanPause(bool cantPause) => _cantPause = cantPause;
 
     void OnDisable()
     {
@@ -24,6 +29,7 @@ public class PauseHandler : MonoBehaviour
         EventManager.EndGameVictory -= HandleEndGame;
         EventManager.EndGameDefeat -= HandleEndGame;
         EventManager.PhaseVictory -= HandleEndGame;
+        EventManager.CantPause -= HandleCanPause;
     }
 
     private void HandleEndGame()

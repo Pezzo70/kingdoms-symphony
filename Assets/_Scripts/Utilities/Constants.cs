@@ -7,6 +7,6 @@ namespace Kingdom.Constants
 
     public static class EndGameConstants
     {
-        public const float DEFEAT_XP_FACTOR = 0.8f;
+        public const float DEFEAT_XP_FACTOR = 0.5f;
     }
 }

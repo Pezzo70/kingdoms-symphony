@@ -86,9 +86,19 @@ namespace Kingdom.Audio
 
         public void Play(IList<Note> notes) => instrument.QueueKey(notes.ToKeysPlayed());
 
-        public void Play(FXID effect) =>
+        public void Play(FXID effect, FXState state) =>
             effectSource.PlayOneShot(
-                audioContainer.GetFirstByType<FXAudio>(so => so.fxID == effect).AudioClip,
+                audioContainer
+                    .GetFirstByType<FXAudio>(so => so.fxID == effect && so.fxState == state)
+                    .AudioClip,
+                effectVolume
+            );
+
+        public void Play(EndState endState) =>
+            effectSource.PlayOneShot(
+                audioContainer
+                    .GetFirstByType<EndGameAudio>(so => so.endState == endState)
+                    .AudioClip,
                 effectVolume
             );
 

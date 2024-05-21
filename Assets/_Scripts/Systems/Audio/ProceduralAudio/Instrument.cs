@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Kingdom.Audio.Procedural;
 using UnityEngine;
 using static Kingdom.Audio.Procedural.Frequencies;
-
 
 namespace Kingdom.Audio.Procedural
 {
@@ -24,16 +24,24 @@ namespace Kingdom.Audio.Procedural
         [SerializeField]
         protected float _sampleRate;
 
+        public ReadOnlyCollection<KeyPlayed> KeysPlayed
+        {
+            get => _keysPlayed.AsReadOnly();
+        }
+
         public virtual void KeyDown(KeyName keyName)
         {
             var key = _keysPlayed.FirstOrDefault(
-                k => k.Name == keyName && k.TimeReleased != 0 && k.TimePlayed < AudioSettings.dspTime
+                k =>
+                    k.Name == keyName && k.TimeReleased != 0 && k.TimePlayed < AudioSettings.dspTime
             );
 
             if (key != null)
                 key.TimePlayed = AudioSettings.dspTime;
             else
-                _keysPlayed.Add(new KeyPlayed { Name = keyName, TimePlayed = AudioSettings.dspTime });
+                _keysPlayed.Add(
+                    new KeyPlayed { Name = keyName, TimePlayed = AudioSettings.dspTime }
+                );
         }
 
         public virtual void KeyUp(KeyName keyName)

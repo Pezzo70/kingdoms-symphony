@@ -22,7 +22,7 @@ namespace Kingdom.Audio
         private Stack<MonoBehaviour> actionStack;
         public GameObject musicSheetCanvas;
         public GameObject playerOptions;
-        public bool wasOpen = false;
+        public bool wasOpen;
 
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
@@ -85,11 +85,6 @@ namespace Kingdom.Audio
             UpdatePageCounter();
         }
 
-        void OnEnable()
-        {
-            wasOpen = true;
-        }
-
         void OnDestroy()
         {
             EventManager.PauseGame -= HandlePause;
@@ -99,13 +94,17 @@ namespace Kingdom.Audio
         private void HandlePause()
         {
             if (wasOpen)
+            {
                 musicSheetCanvas.SetActive(false);
+            }
         }
 
         private void HandleUnpause()
         {
             if (wasOpen)
+            {
                 musicSheetCanvas.SetActive(true);
+            }
         }
 
         void Update()
@@ -257,6 +256,7 @@ namespace Kingdom.Audio
             }
         }
 
+        //Also using this method on PlayerTurnManager
         public void Play()
         {
             var pageParent = GameObject.FindWithTag("Page");

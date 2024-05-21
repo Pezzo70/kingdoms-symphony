@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ public class TurnManager : MonoBehaviour
 {
     private List<EnemyEntity> aliveEnemies;
     private int _currentEnemyIndex;
+    private int _currentEnemyTakingDamageIndex;
 
     void Start()
     {
@@ -23,15 +25,21 @@ public class TurnManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.TurnChanged += OnTurnChanged;
-        EventManager.EnemyBanished += OnEnemyBanished;
         EventManager.NextEnemy += OnNextEnemy;
+        EventManager.NextEnemyTakesDamage += OnNextEnemyTakesDamage;
+        EventManager.EnemiesDamaged += HandleEnemiesDamaged;
+        EventManager.EnemiesRegainMana += HandleEnemiesRegainMana;
     }
+
+    private void OnNextEnemyTakesDamage() => _currentEnemyTakingDamageIndex++;
 
     void OnDisable()
     {
         EventManager.TurnChanged -= OnTurnChanged;
-        EventManager.EnemyBanished -= OnEnemyBanished;
         EventManager.NextEnemy -= OnNextEnemy;
+        EventManager.NextEnemyTakesDamage -= OnNextEnemyTakesDamage;
+        EventManager.EnemiesDamaged -= HandleEnemiesDamaged;
+        EventManager.EnemiesRegainMana -= HandleEnemiesRegainMana;
     }
 
     private void OnTurnChanged(Turn turn)
@@ -47,28 +55,41 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    private void OnPlayerTurn() { }
+    private void OnPlayerTurn()
+    {
+        _currentEnemyTakingDamageIndex = 0;
+    }
 
     private void OnEnemyTurn()
     {
         _currentEnemyIndex = 0;
+        EventManager.CantPause?.Invoke(false);
         StartCoroutine(WaitTillEachEnemyIsDone());
     }
 
-    private void OnNextEnemy() => _currentEnemyIndex++;
-
-    void OnEnemyBanished(EnemyID _)
+    private void HandleEnemiesRegainMana()
     {
-        if (PlaythroughContainer.Instance.currentTurn.Item1 == Turn.PlayersTurn)
-            aliveEnemies = aliveEnemies.Where(obj => !obj.IsDead).ToList();
+        for (int i = 0; i < aliveEnemies.Count; i++)
+            aliveEnemies[i].RegainMana();
     }
+
+    private void HandleEnemiesDamaged(float damage) =>
+        StartCoroutine(WaitTillEachEnemyTakeDamage(damage));
+
+    private void OnNextEnemy() => _currentEnemyIndex++;
 
     void EndEnemiesTurn() => EventManager.TurnChanged?.Invoke(Turn.PlayersTurn);
 
     private IEnumerator WaitTillEachEnemyIsDone()
     {
+        EventManager.CantPause?.Invoke(true);
+
         for (int i = 0; i < aliveEnemies.Count; i++)
         {
+            if (PlaythroughContainer.Instance.PlayerStats.CurrentMoral == 0)
+                break;
+
+            aliveEnemies[_currentEnemyIndex].RegainMana();
             aliveEnemies[_currentEnemyIndex].ExecuteTurn();
             while (i == _currentEnemyIndex)
                 yield return new WaitForSeconds(1f);
@@ -77,5 +98,18 @@ public class TurnManager : MonoBehaviour
         aliveEnemies = aliveEnemies.Where(obj => !obj.IsDead).ToList();
         yield return new WaitForSeconds(1f);
         EndEnemiesTurn();
+    }
+
+    private IEnumerator WaitTillEachEnemyTakeDamage(float damage)
+    {
+        for (int i = 0; i < aliveEnemies.Count; i++)
+        {
+            aliveEnemies[_currentEnemyTakingDamageIndex].ReduceMoral(damage);
+            while (i == _currentEnemyTakingDamageIndex)
+                yield return new WaitForSeconds(1f);
+        }
+
+        aliveEnemies = aliveEnemies.Where(obj => !obj.IsDead).ToList();
+        EventManager.EnemiesEndTakingDamage?.Invoke();
     }
 }
