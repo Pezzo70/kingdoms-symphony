@@ -21,9 +21,8 @@ namespace Kingdom.Level
         {
             _enemiesSpawnPointsToUse = new List<Transform>();
             _enemiesSpawnPointsToUse.AddRange(enemySpawnPoints);
+            SpawnEntities();
         }
-
-        void Start() => SpawnEntities();
 
         private void SpawnEntities()
         {
@@ -38,11 +37,14 @@ namespace Kingdom.Level
 
             for (int i = 0; i < phaseInfo.maxNumberOfEnemies; i++)
             {
+                Debug.Log(phaseInfo.enemies.Length);
                 Enemy enemy = phaseInfo.enemies[Random.Range(0, phaseInfo.enemies.Length)];
-
+                Debug.Log(enemy.enemyID);
                 GameObject enemyGameObject = enemiesPrefab.First(
                     obj => obj.GetComponent<EnemyEntity>().enemyData.enemyID == enemy.enemyID
                 );
+
+                enemyGameObject.name += i.ToString();
 
                 Transform enemySpawnPoint = _enemiesSpawnPointsToUse[
                     Random.Range(0, _enemiesSpawnPointsToUse.Count)

@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Kingdom.Constants;
+using Kingdom.Enums.Enemies;
 using Kingdom.Level;
 using TMPro;
 using UnityEngine;
@@ -10,8 +14,10 @@ namespace Kingdom.Enemies
     {
         public Enemy enemyData;
         public GameObject enemyHUD;
+        public GameObject enemyActiveIndicator;
         public SpriteRenderer enemySprite;
         public SpriteRenderer shadowSprite;
+        public Animator enemyAnimator;
         public Animator pftEffectAnimator;
         public RectTransform moralBarFill;
         public TextMeshProUGUI moralText;
@@ -25,6 +31,9 @@ namespace Kingdom.Enemies
 
         private List<GameObject> _manasInstantiated;
         private bool _isDead;
+        private bool _isOnTurn;
+        private bool _isAttacking;
+        private bool _endCurrentAttackAnimation;
 
         public bool IsDead
         {
@@ -42,10 +51,13 @@ namespace Kingdom.Enemies
                     );
             _currentMoral = _maxMoral;
             _manaPerTurn = enemyData.manaPerTurn;
-            _currentMana = _manaPerTurn;
+            _currentMana = 0;
             _manasInstantiated = new List<GameObject>();
             _isDead = false;
-            EventManager.EnemyEncountered.Invoke(enemyData.enemyID);
+            _isOnTurn = false;
+            _isAttacking = true;
+            enemyActiveIndicator.SetActive(false);
+            EventManager.EnemyEncountered?.Invoke(enemyData.enemyID);
         }
 
         void Start()
@@ -53,8 +65,6 @@ namespace Kingdom.Enemies
             UpdateMoral();
             UpdateMana();
         }
-
-        void Update() { }
 
         void OnEnable()
         {
@@ -66,6 +76,40 @@ namespace Kingdom.Enemies
         {
             EventManager.EnemiesDamaged -= HandleEnemyDamaged;
             EventManager.EnemiesRegainMana -= HandleEnemyRegainMana;
+        }
+
+        public void ExecuteTurn()
+        {
+            _isOnTurn = true;
+            enemyActiveIndicator.SetActive(true);
+            Action endTurnAction = () =>
+            {
+                _isOnTurn = false;
+                enemyActiveIndicator.SetActive(false);
+                EventManager.NextEnemy?.Invoke();
+            };
+
+            HandleTurnBasedEffects();
+            if (_isDead)
+            {
+                endTurnAction?.Invoke();
+                return;
+            }
+
+            HandleEnemyRegainMana();
+
+            StartCoroutine(
+                AttackRoutine(() =>
+                {
+                    endTurnAction?.Invoke();
+                })
+            );
+        }
+
+        public void HandleEndCurrentAttackAnimation()
+        {
+            if (_isOnTurn)
+                _endCurrentAttackAnimation = true;
         }
 
         private void HandleEnemyDamaged(float damage)
@@ -94,12 +138,64 @@ namespace Kingdom.Enemies
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
         }
 
-        private void Attack()
+        private EnemyAttackID SelectAttack()
+        {
+            Tuple<EnemyAttackID, float>[] chances = enemyData
+                .attacks
+                .Where(obj => obj.manaRequired <= _currentMana)
+                .Select(
+                    obj =>
+                        new Tuple<EnemyAttackID, float>(obj.enemyAttackID, obj.probability / 100f)
+                )
+                .OrderByDescending(obj => obj.Item2)
+                .ToArray();
+
+            if (chances.Length == 1)
+                return chances[0].Item1;
+
+            List<Tuple<EnemyAttackID, Tuple<float, float>>> chancesRange =
+                new List<Tuple<EnemyAttackID, Tuple<float, float>>>();
+
+            for (int i = 0; i < chances.Length; i++)
+            {
+                float minFactor = i == 0 ? 0 : chancesRange[i - 1].Item2.Item2;
+                float maxFactor = minFactor + chances[i].Item2;
+                chancesRange.Add(
+                    new(chances[i].Item1, new Tuple<float, float>(minFactor, maxFactor))
+                );
+            }
+
+            float randomFactor = UnityEngine.Random.Range(0f, 1f);
+
+            return chancesRange
+                .First(obj => randomFactor > obj.Item2.Item1 && randomFactor <= obj.Item2.Item2)
+                .Item1;
+        }
+
+        private void Attack(EnemyAttackID attackID)
         {
             //@TODO
-            /*To-Do Choose Attack*/
             /*To-Do Advantages and Ongoing Effects*/
-            // EventManager.EnemyAttackExecuted(enemyAttack);
+            EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
+            HandleEnemySpendMana(attack.manaRequired);
+            Debug.Log(attack.enemyAttackID.ToString());
+            EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
+            /*Attack Handler Event here*/
+        }
+
+        private void HandleTurnBasedEffects()
+        {
+            //@TODO
+            /*To- Do Handle effects like bleeding here*/
+        }
+
+        private void HandleEnemySpendMana(int value)
+        {
+            if (_currentMana - value < 0)
+                return;
+
+            _currentMana -= value;
+            UpdateMana();
         }
 
         private void HandleEnemyRegainMana()
@@ -136,6 +232,28 @@ namespace Kingdom.Enemies
             );
 
             moralText.text = $"{_currentMoral}/{_maxMoral}";
+        }
+
+        private IEnumerator AttackRoutine(Action callbackPosAttack)
+        {
+            _isAttacking = true;
+            while (_isAttacking)
+            {
+                EnemyAttackID enemyAttackID = SelectAttack();
+
+                enemyAnimator.Play("Attack");
+
+                while (!_endCurrentAttackAnimation)
+                    yield return new WaitForSeconds(0.05f);
+
+                Attack(enemyAttackID);
+                enemyAnimator.Play("Idle");
+                _isAttacking = enemyData.attacks.Any(attack => attack.manaRequired <= _currentMana);
+                _endCurrentAttackAnimation = false;
+                yield return new WaitForSeconds(2f);
+            }
+
+            callbackPosAttack?.Invoke();
         }
     }
 }

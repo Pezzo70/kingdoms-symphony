@@ -29,6 +29,7 @@ public class PauseHandler : MonoBehaviour
     private void HandleEndGame()
     {
         _cantPause = true;
+        pauseMenu.SetActive(false);
     }
 
     private void DisplayPauseMenu(InputAction.CallbackContext context)

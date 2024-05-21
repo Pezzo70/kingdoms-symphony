@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Enemies;
+using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Player;
 using Kingdom.Enums.Scrolls;
@@ -21,6 +23,7 @@ namespace Kingdom.Level
         public CharacterID currentCharacterID;
         public int characterLevel;
         public PlayerStats PlayerStats;
+        public ValueTuple<Turn, int> currentTurn;
 
         private Dictionary<EnemyID, int> _enemiesBanished;
         private List<EnemyID> _enemiesEncountered;
@@ -84,6 +87,12 @@ namespace Kingdom.Level
             {
                 CollectionsHelper.VerifyAndAddToDictionary(_scrollsAccomplished, s);
             };
+
+            EventManager.TurnChanged += (Turn turn) =>
+            {
+                currentTurn.Item1 = turn;
+                currentTurn.Item2++;
+            };
         }
 
         void Start()
@@ -126,6 +135,7 @@ namespace Kingdom.Level
             _enemiesDisadvantagesTriggered = new Dictionary<EnemyID, List<EnemyDisadvantageID>>();
             _scrollsUsed = new Dictionary<ScrollID, int>();
             _scrollsAccomplished = new Dictionary<ScrollID, int>();
+            currentTurn = new ValueTuple<Turn, int>(Turn.PlayersTurn, 0);
         }
 
         public Level GetNextLevel()
@@ -239,7 +249,7 @@ namespace Kingdom.Level
             playerData.UpdateEnemyAdvantagesUnlocked(_enemiesAdvantagesTriggered);
             playerData.UpdateEnemyDisadvantagesUnlocked(_enemiesDisadvantagesTriggered);
 
-            EventManager.SavePlayerData();
+            EventManager.SavePlayerData?.Invoke();
 
             return endGameInfo;
         }

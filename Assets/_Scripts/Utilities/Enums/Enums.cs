@@ -86,6 +86,12 @@ namespace Kingdom.Enums
         In = 0,
         Out = 1
     }
+
+    public enum Turn
+    {
+        PlayersTurn = 0,
+        EnemiesTurn = 1
+    }
 }
 
 namespace Kingdom.Enums.FX
@@ -201,7 +207,9 @@ namespace Kingdom.Enums.MusicTheory
 
     public enum KeySignature
     {
-        Natural, Sharp, Flat 
+        Natural,
+        Sharp,
+        Flat
     }
 }
 

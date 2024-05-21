@@ -20,24 +20,28 @@ public class StageManager : MonoBehaviour
             .transform
             .GetChild(0)
             .gameObject;
-        EventManager.ShowPopUp(
-            (
-                "InGame.PopUp.Message.0",
-                false,
-                true,
-                () =>
-                {
-                    pauseGameObject.SetActive(false);
-                    EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
-                    StartCoroutine(WaitToLoad(0));
-                },
-                false,
-                0f,
-                false,
-                Vector3.zero,
-                true
-            )
-        );
+        EventManager
+            .ShowPopUp
+            ?.Invoke(
+                (
+                    "InGame.PopUp.Message.0",
+                    false,
+                    true,
+                    () =>
+                    {
+                        pauseGameObject.SetActive(false);
+                        EventManager
+                            .LevelTransition
+                            ?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+                        StartCoroutine(WaitToLoad(0));
+                    },
+                    false,
+                    0f,
+                    false,
+                    Vector3.zero,
+                    true
+                )
+            );
     }
 
     public void StartNewRun(int characterID)

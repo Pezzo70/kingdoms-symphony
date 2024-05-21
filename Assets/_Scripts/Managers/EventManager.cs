@@ -45,4 +45,7 @@ public static class EventManager
 
     public static UnityAction<float> EnemiesDamaged;
     public static UnityAction EnemiesRegainMana;
+
+    public static UnityAction<Turn> TurnChanged;
+    public static UnityAction NextEnemy;
 }

@@ -260,8 +260,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: d60829237dacdc0479a6259075d73931, type: 2}
   enemyHUD: {fileID: 577595669145182254}
+  enemyActiveIndicator: {fileID: 4873295623913616188}
   enemySprite: {fileID: 2557718156838200347}
   shadowSprite: {fileID: 3392406546914744119}
+  enemyAnimator: {fileID: 1287810900167074291}
   pftEffectAnimator: {fileID: 7360893392662330915}
   moralBarFill: {fileID: 8733646955790524702}
   moralText: {fileID: 6461033060225396229}
@@ -1098,6 +1100,11 @@ GameObject:
 --- !u!224 &3246610069290611618 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3700744198727158838, guid: 27cfeab3bdfafdb4ca92c60f27f57f09, type: 3}
+  m_PrefabInstance: {fileID: 2185910024243363732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4873295623913616188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6770182483291638952, guid: 27cfeab3bdfafdb4ca92c60f27f57f09, type: 3}
   m_PrefabInstance: {fileID: 2185910024243363732}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5839987726334388831 stripped
