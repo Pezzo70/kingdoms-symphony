@@ -97,7 +97,7 @@ namespace Kingdom.Extensions
                 var note = orderedNotes[i];
                 KeyName name;
                 KeyPlayed key;
-                var chords = note.GetChords(orderedNotes);
+                var chords = note.GetChord(orderedNotes);
                 if (chords.Count > 1)
                 {
                     int iAux = i - 1;
@@ -170,10 +170,18 @@ namespace Kingdom.Extensions
             return key is null ? null : keysPlayed[orderedNotes.IndexOf(key)];
         }
 
-        public static IList<Note> GetChords(this Note note, IList<Note> notes) =>
+        public static IList<Note> GetChord(this Note note, IList<Note> notes) =>
             notes
                 .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 1f && x.page == note.page)
                 .AsReadOnlyList();
+    
+        public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) => note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());
+    
+        public static int GetKeyIndexInClef(this KeyName key, Clef clef)
+        {
+            KeyName[] keys = clef is Clef.G ? GClefKeys : FClefKeys;
+            return keys.AsReadOnlyList().IndexOf(key);
+        }
     }
 
     public static class SpriteExtensions
