@@ -108,6 +108,17 @@ namespace Kingdom.Effects
             if (turn == Turn.PlayersTurn)
             {
                 burnedScrolls.ForEach(obj => obj.internalCounter++);
+                onGoingEffects
+                    .Where(obj => obj.EffectTarget == EffectTarget.Player)
+                    .ToList()
+                    .ForEach(obj => obj.internalCounter++);
+            }
+            else
+            {
+                onGoingEffects
+                    .Where(obj => obj.EffectTarget == EffectTarget.Enemy)
+                    .ToList()
+                    .ForEach(obj => obj.internalCounter++);
             }
 
             burnedScrolls = burnedScrolls
@@ -153,18 +164,24 @@ namespace Kingdom.Effects
     public class EffectDTO
     {
         private string _gameObjectName;
+        private string _displayText;
         private GameObject _target;
         private EffectTarget _effectTarget;
         private bool _triggerOnTurnStart;
         private EffectType _effectType;
         private bool _shouldAppearOnHUD;
-        private int _effectStartedOnTurn;
         private int _effectExpireOnTurn;
         private float _modifier;
+        public int internalCounter;
 
         public string GameObjectName
         {
             get => _gameObjectName;
+        }
+
+        public string DisplayText
+        {
+            get => _displayText;
         }
 
         public GameObject Target
@@ -188,10 +205,6 @@ namespace Kingdom.Effects
         {
             get => _shouldAppearOnHUD;
         }
-        public int EffectStartedOnTurn
-        {
-            get => _effectStartedOnTurn;
-        }
         public int EffectExpireOnTurn
         {
             get => _effectExpireOnTurn;
@@ -203,6 +216,7 @@ namespace Kingdom.Effects
 
         public EffectDTO(
             string gameObjectName,
+            string displayText,
             GameObject target,
             EffectTarget effectTarget,
             bool triggerOnTurnStart,
@@ -214,13 +228,14 @@ namespace Kingdom.Effects
         )
         {
             _gameObjectName = gameObjectName;
+            _displayText = displayText;
             _target = target;
             _effectTarget = effectTarget;
             _triggerOnTurnStart = triggerOnTurnStart;
             _effectType = effectType;
+            internalCounter = effectStartedOnTurn;
             _shouldAppearOnHUD = shouldAppearOnHUD;
-            _effectStartedOnTurn = effectStartedOnTurn;
-            _effectExpireOnTurn = effectExpireOnTurn;
+            _effectExpireOnTurn = effectExpireOnTurn + 1;
             _modifier = modifier;
         }
     }

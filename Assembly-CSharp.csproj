@@ -112,6 +112,7 @@
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationSettings.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\InGame\PlayerTurnManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedDropdown.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\EffectAppliedHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MonoKeySignature.cs" />
     <Compile Include="Assets\_Scripts\Interfaces\IWeightable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\Instruments\Piano.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMana.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerPauseHandler.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Player\Scrolls\ScrollValidator.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\ToOrFromJSON.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\WaveAttributes.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HUD\EffectApplied.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
