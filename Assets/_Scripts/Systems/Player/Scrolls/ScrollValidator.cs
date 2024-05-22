@@ -10,7 +10,7 @@ using Kingdom.Enums.Scrolls;
 using Kingdom.Extensions;
 using Unity.VisualScripting;
 using static Kingdom.Audio.Procedural.Frequencies;
-namespace Kingdom.Scroll
+namespace Kingdom
 {
     public static class ScrollValidator
     {
@@ -72,9 +72,17 @@ namespace Kingdom.Scroll
         }
 
         //7
+        public static ValidatorResult CheckWholeTonic(IEnumerable<Note> notes)
+        {
+            return new ValidatorResult(false, 0);
+        }
+
         //8
+
         //9
+
         //10
+        
         //11
         public static bool CheckArpeggioByCompass(IEnumerable<Note> notes, KeyName[,] chords)
         {
@@ -104,6 +112,7 @@ namespace Kingdom.Scroll
             return true;
         }
 
+        //12
         public static bool CheckBetweenScales(IEnumerable<Note> notes, KeyName[,] keys)
         {
             return false;
@@ -127,5 +136,14 @@ namespace Kingdom.Scroll
         public static bool CheckKeys(IEnumerable<Note> notes, KeyName[] keys) => notes.All(n => keys.Contains(n.ToKey()));
     }
 
-    public record ValidatorResult(bool result, float factor);
+    public struct ValidatorResult
+    {
+        bool Result {get;set;}
+        float Factor{get;set;}
+        public ValidatorResult(bool result, float factor) : this()
+        {
+            Result = result;
+            Factor = factor;
+        }
+    }
 }
