@@ -62,7 +62,7 @@ namespace Kingdom.Scroll
                         {
                             result = false;
                             factor= 0;
-                        };
+                        }
                     else
                         factor++;
                 }
@@ -71,7 +71,10 @@ namespace Kingdom.Scroll
             return new ValidatorResult(result, factor);
         }
 
-
+        //7
+        //8
+        //9
+        //10
         //11
         public static bool CheckArpeggioByCompass(IEnumerable<Note> notes, KeyName[,] chords)
         {
@@ -105,10 +108,11 @@ namespace Kingdom.Scroll
         {
             return false;
         }
-        
+
         //13
         public static bool CheckMelodyComposition(IEnumerable<Note> notes, int totalCompasses)
         {
+            var notesList = notes.ToList();
             int compasses = notes.Select(n => n.page).Distinct().Count();
             if (compasses > (totalCompasses / 2.0f))
                 return false;
@@ -117,8 +121,7 @@ namespace Kingdom.Scroll
             if (sumTempoPerCompass > compasses)
                 return false;
 
-            return true;
-            //@TODO Sobreposicao
+            return !notesList.Any(n => n.GetChord(notesList).Count() > 1);
         }
         //14
         public static bool CheckKeys(IEnumerable<Note> notes, KeyName[] keys) => notes.All(n => keys.Contains(n.ToKey()));
