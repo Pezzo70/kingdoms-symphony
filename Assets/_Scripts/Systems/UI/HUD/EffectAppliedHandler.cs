@@ -31,7 +31,7 @@ public class EffectAppliedHandler : MonoBehaviour
 
     private void HandleAddEffect(EffectDTO dto)
     {
-        if (dto.EffectTarget != effectTarget)
+        if (dto.EffectTarget != effectTarget || !dto.ShouldAppearOnHUD)
             return;
 
         GameObject prefab = Instantiate(effectPrefab, effectTargetContainer.transform);

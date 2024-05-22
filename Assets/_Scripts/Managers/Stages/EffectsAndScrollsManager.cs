@@ -6,6 +6,7 @@ using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
 using Kingdom.Level;
+using TMPro;
 using UnityEngine;
 
 namespace Kingdom.Effects
@@ -99,7 +100,7 @@ namespace Kingdom.Effects
             burnedScrolls.Add(burnedScrollDTO);
         }
 
-        private void HandleAddEffect(EffectDTO effect) { }
+        private void HandleAddEffect(EffectDTO effect) => onGoingEffects.Add(effect);
 
         private void HandleTurnChanged(Turn turn)
         {
@@ -108,22 +109,34 @@ namespace Kingdom.Effects
             if (turn == Turn.PlayersTurn)
             {
                 burnedScrolls.ForEach(obj => obj.internalCounter++);
-                onGoingEffects
-                    .Where(obj => obj.EffectTarget == EffectTarget.Player)
-                    .ToList()
-                    .ForEach(obj => obj.internalCounter++);
+                onGoingEffects.ForEach(
+                    obj => obj.internalCounter += obj.EffectTarget == EffectTarget.Player ? 1 : 0
+                );
             }
             else
             {
-                onGoingEffects
-                    .Where(obj => obj.EffectTarget == EffectTarget.Enemy)
-                    .ToList()
-                    .ForEach(obj => obj.internalCounter++);
+                onGoingEffects.ForEach(
+                    obj => obj.internalCounter += obj.EffectTarget == EffectTarget.Enemy ? 1 : 0
+                );
             }
 
             burnedScrolls = burnedScrolls
                 .Where(obj => obj.CanBeUsedOnTurn > obj.internalCounter)
                 .ToList();
+
+            List<EffectDTO> stillOnGoing = onGoingEffects
+                .Where(obj => obj.EffectExpireOnTurn > obj.internalCounter)
+                .ToList();
+
+            onGoingEffects.ForEach(obj =>
+            {
+                if (!stillOnGoing.Contains(obj))
+                {
+                    EventManager.RemoveEffect(obj);
+                }
+            });
+
+            onGoingEffects = stillOnGoing;
 
             onGoingScrolls.Clear();
         }
@@ -166,6 +179,7 @@ namespace Kingdom.Effects
         private string _gameObjectName;
         private string _displayText;
         private GameObject _target;
+        private Sprite _effectIcon;
         private EffectTarget _effectTarget;
         private bool _triggerOnTurnStart;
         private EffectType _effectType;
@@ -187,6 +201,11 @@ namespace Kingdom.Effects
         public GameObject Target
         {
             get => _target;
+        }
+
+        public Sprite EffectIcon
+        {
+            get => _effectIcon;
         }
 
         public EffectTarget EffectTarget
@@ -218,6 +237,7 @@ namespace Kingdom.Effects
             string gameObjectName,
             string displayText,
             GameObject target,
+            Sprite effectIcon,
             EffectTarget effectTarget,
             bool triggerOnTurnStart,
             EffectType effectType,
@@ -231,6 +251,7 @@ namespace Kingdom.Effects
             _displayText = displayText;
             _target = target;
             _effectTarget = effectTarget;
+            _effectIcon = effectIcon;
             _triggerOnTurnStart = triggerOnTurnStart;
             _effectType = effectType;
             internalCounter = effectStartedOnTurn;

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Assets.SimpleLocalization.Scripts;
 using Kingdom.Effects;
 using UnityEngine;

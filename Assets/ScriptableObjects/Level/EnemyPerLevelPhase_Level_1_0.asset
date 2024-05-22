@@ -15,5 +15,4 @@ MonoBehaviour:
   phase: 1
   enemies:
   - {fileID: 11400000, guid: cb57985fbd919584fb10f95708604e82, type: 2}
-  - {fileID: 11400000, guid: 55591b1b5e27f8641bb2bb8480ad920c, type: 2}
   maxNumberOfEnemies: 1
