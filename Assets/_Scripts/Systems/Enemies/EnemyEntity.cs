@@ -230,7 +230,7 @@ namespace Kingdom.Enemies
         private void Attack(EnemyAttackID attackID)
         {
             EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
-            float damage = TheoryHandler.ExecuteEnemyAttack(attack);
+            float damage = TheoryHandler.SpawnEnemyAttackEffectsAndGetDamage(attack);
             EffectsAndScrollsManager
                 .Instance
                 .onGoingEffects

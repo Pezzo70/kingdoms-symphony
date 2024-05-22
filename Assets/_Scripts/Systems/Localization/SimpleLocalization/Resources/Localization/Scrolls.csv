@@ -18,7 +18,7 @@ Scrolls.Effect.0,Aumenta a mitigação de dano do musicista em -X por cada nota 
 "
 Scrolls.Effect.1,Aumenta o dano causado pelo musicista por nota pertencente a escala alvo em -X.,Increase the damage dealt by the musician per note belonging to the target scale by -X.
 Scrolls.Effect.2,Cura a moral do musicista em -X%.,Heal musician's morale by -X%.
-Scrolls.Effect.3,Reduz o tempo de espera em -X turnos de todos os pergaminhos do musicista.,Reduce the cooldown by -X turns of all the musician's scrolls.
+Scrolls.Effect.3,Reduz o tempo de espera em -X turnos de todos os pergaminhos queimados do musicista.,Reduce the cooldown by -X turns of all the musician's burned scrolls.
 Scrolls.Effect.4,"Para cada semitom, adiciona -X de dano ao total no fim do turno do musicista.","For each semitone, add -X damage to the total at the end of the musician's turn."
 Scrolls.Effect.5,"Para cada tom, adiciona -X de dano ao total no fim do turno do musicista.","For each whole tone, add -X damage to the total at the end of the musician's turn."
 Scrolls.Effect.6,"Para cada acorde adicionado pelo musicista, cause -X de dano adicional por turno durante -Y turnos.","For each chord added by the musician, inflict an additional -X damage per turn for -Y turns."

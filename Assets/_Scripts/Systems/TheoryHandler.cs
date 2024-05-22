@@ -383,7 +383,53 @@ namespace Kingdom
             //     return effectInfos;
         }
 
-        public static void ValidateAndExecuteEffectAction(EffectDTO effectDTO, ref float damage) { }
+        public static void ValidateAndExecuteEffectAction(EffectDTO effectDTO, ref float damage)
+        {
+            //EXECUTE EFFECT ACTION, IF IS A DAMAGE MODIFIER OR SOMETHING
+            switch (effectDTO.EffectType)
+            {
+                case EffectType.PlayerMitigation:
+                    //APPLIED HERE
+                    break;
+                case EffectType.EnemyMitigation:
+                    //APPLIED HERE
+                    break;
+                case EffectType.CooldownReduction:
+                    //NOT APPLIED HERE, APPLIED ON CAST BY MODIFYING burnedScrolls.internalCounter += VALUE
+                    break;
+                case EffectType.Damage:
+                    //APPLIED HERE FOR DMG P/ TURN AND THINGS LIKE THAT
+                    break;
+                case EffectType.DamageModifier:
+                    //APPLIED HERE
+                    break;
+                case EffectType.MassiveDamage:
+                    //NOT APPLIED HERE, MASSIVE DAMAGE IS NOT A PERSISTED EFFECT
+                    break;
+                case EffectType.Heal:
+                    //VERIFY IF THERE IS ANY HEAL PER TURN, IF SO, THEN DEAL WITH IT HERE
+                    break;
+                case EffectType.AdditionalMana:
+                    //NOT APPLIED HERE, ADDED ELSEWHERE
+                    break;
+                case EffectType.AdditionalManaScrollCost:
+                    //NOT APPLIED HERE, VERIFIED ELSEWHERE
+                    break;
+                case EffectType.RemoveNegativeEffects:
+                    //NOT APPLIED HERE, APPLIED ON CAST BY CALLING
+                    break;
+                case EffectType.PreventEnemyHeal:
+                    //NOT APPLIED HERE, ALREADY HANDLING IT ON ENEMY ENTITY
+                    break;
+                case EffectType.CompleteMitigation:
+                    //NOT APPLIED HERE
+                    break;
+                case EffectType.Stun:
+                    //NOT APPLIED HERE, ALTER ON MUSIC SHEET OR WHEN NOTES ARE PLAYER
+                    //IN CASE OF ENEMIES, ALREADY VERIFYING IT ON ENEMY ENTITY
+                    break;
+            }
+        }
 
         public static void ValidateAndExecuteAdvantageDisadvantageAction(
             EnemyEntity enemyEntity,
@@ -394,6 +440,7 @@ namespace Kingdom
         {
             //IF IS IS ADVANTAGE, DEAL WITH ADVANTAGE STUFF, IF IT IS DISADVANTAGE, DEAL WITH DISADVANTAGE STUFF
             //IN ORDER TO GET THE NOTES EffectsAndScrollsManager.Instance.playedNotes
+            //MODIFY DAMAGE VALUE FOR EACH ADVANTAGE AND FOR EACH DISADVANTAGE
 
             switch (enemyID)
             {
@@ -416,7 +463,7 @@ namespace Kingdom
             }
         }
 
-        public static float ExecuteEnemyAttack(EnemyAttack enemyAttack)
+        public static float SpawnEnemyAttackEffectsAndGetDamage(EnemyAttack enemyAttack)
         {
             float damage = 0f;
             //DOES NOT NEED TO UPDATE ENEMIES MANA, JUST SPAWN EFFECTS AND RETURN DAMAGE

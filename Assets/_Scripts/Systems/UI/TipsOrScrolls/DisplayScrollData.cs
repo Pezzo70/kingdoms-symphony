@@ -40,7 +40,7 @@ public class DisplayScrollData : MonoBehaviour
             .Where(
                 obj =>
                     obj.EffectTarget == EffectTarget.Player
-                    && obj.EffectType == EffectType.AdditionalManaCost
+                    && obj.EffectType == EffectType.AdditionalManaScrollCost
             )
             .Aggregate(0, (total, next) => total + (int)next.Modifier);
 

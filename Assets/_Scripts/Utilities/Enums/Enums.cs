@@ -336,7 +336,7 @@ namespace Kingdom.Effects
         Heal,
         AdditionalMana /*SET PLAYER'S MANA PER TURN*/
         ,
-        AdditionalManaCost,
+        AdditionalManaScrollCost,
         RemoveNegativeEffects,
         PreventEnemyHeal,
         CompleteMitigation,
