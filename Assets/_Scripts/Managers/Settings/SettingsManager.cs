@@ -83,7 +83,7 @@ public class SettingsManager : MonoBehaviour
             .PlayerConfig
             .SetVolumeSettings(musicVolume, instrumentVolume, effectVolume, ambienceVolume);
         PlayerContainer.Instance.PlayerConfig.SetScreenSettings(resolution, fullscreen);
-        EventManager.SavePlayerConfig();
+        EventManager.SavePlayerConfig?.Invoke();
     }
 
     public void SetEffectVolume(float volume) => this.effectVolume = volume / 100f;

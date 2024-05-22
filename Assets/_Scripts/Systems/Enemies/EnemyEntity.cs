@@ -246,7 +246,7 @@ namespace Kingdom.Enemies
 
             PlaythroughContainer.Instance.PlayerStats.ReduceMoral(damage);
             HandleEnemySpendMana(attack.manaRequired);
-            EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
+            EventManager.EnemyAttackExecuted?.Invoke(enemyData.enemyID, attackID);
         }
 
         private void HandleTurnBasedEffects()
@@ -364,7 +364,7 @@ namespace Kingdom.Enemies
                 enemyHUD.SetActive(false);
                 enemySprite.enabled = false;
                 shadowSprite.enabled = false;
-                EventManager.EnemyBanished(enemyData.enemyID);
+                EventManager.EnemyBanished?.Invoke(enemyData.enemyID);
             }
 
             yield return new WaitForSeconds(1f);

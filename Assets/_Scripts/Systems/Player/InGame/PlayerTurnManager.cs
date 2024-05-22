@@ -30,7 +30,7 @@ public class PlayerTurnManager : MonoBehaviour
     void Start()
     {
         PlaythroughContainer.Instance.currentTurn.Item2 = 0;
-        EventManager.TurnChanged(Turn.PlayersTurn);
+        EventManager.TurnChanged?.Invoke(Turn.PlayersTurn);
     }
 
     void OnEnable()
@@ -88,7 +88,8 @@ public class PlayerTurnManager : MonoBehaviour
     public void CastScroll()
     {
         PlaythroughContainer.Instance.PlayerStats.SpendMana(_scrollOpen.manaRequired);
-        EventManager.CastScroll(_scrollOpen);
+        EventManager.ScrollUsed?.Invoke(_scrollOpen.scrollID);
+        EventManager.CastScroll?.Invoke(_scrollOpen);
     }
 
     private void OnEnemyTurn()
@@ -111,7 +112,7 @@ public class PlayerTurnManager : MonoBehaviour
         EffectsAndScrollsManager
             .Instance
             .onGoingScrolls
-            .ForEach(obj => EventManager.BurnScroll(obj.Scroll));
+            .ForEach(obj => EventManager.BurnScroll?.Invoke(obj.Scroll));
         return (damage, massiveDamage);
     }
 
@@ -176,7 +177,7 @@ public class PlayerTurnManager : MonoBehaviour
 
         (float damage, float massiveDamage) = GetAttackDamage();
 
-        EventManager.EnemiesDamaged(damage, massiveDamage);
+        EventManager.EnemiesDamaged?.Invoke(damage, massiveDamage);
 
         _enemiesTakingDamage = true;
         while (_enemiesTakingDamage)

@@ -103,7 +103,7 @@ namespace Kingdom.Effects
 
         private void HandleTurnChanged(Turn turn)
         {
-            onGoingScrolls.ForEach(obj => EventManager.ScrollRemoved(obj));
+            onGoingScrolls.ForEach(obj => EventManager.ScrollRemoved?.Invoke(obj));
 
             if (turn == Turn.PlayersTurn)
             {
@@ -131,7 +131,7 @@ namespace Kingdom.Effects
             {
                 if (!stillOnGoing.Contains(obj))
                 {
-                    EventManager.RemoveEffect(obj);
+                    EventManager.RemoveEffect?.Invoke(obj);
                 }
             });
 

@@ -20,6 +20,8 @@ namespace Kingdom
             ref float massiveDamage
         )
         {
+            //IF A SCROLL OBJECTIVE WAS ACCOMPLISHED
+
             //@TODO: OBJECTIVE, SCALE AND MODES TARGET
             KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
             KeyName[] keyNameToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
@@ -441,6 +443,9 @@ namespace Kingdom
             //IF IS IS ADVANTAGE, DEAL WITH ADVANTAGE STUFF, IF IT IS DISADVANTAGE, DEAL WITH DISADVANTAGE STUFF
             //IN ORDER TO GET THE NOTES EffectsAndScrollsManager.Instance.playedNotes
             //MODIFY DAMAGE VALUE FOR EACH ADVANTAGE AND FOR EACH DISADVANTAGE
+            //INVOKE THE FOLLOWING EVENTS WHEN THE ADVANTAGE OR DISADVANTAGE TRIGGER
+            //public static UnityAction<EnemyID, EnemyAdvantageID> EnemyAdvantageTriggered;
+            //public static UnityAction<EnemyID, EnemyDisadvantageID> EnemyDisadvantageTriggered;
 
             switch (enemyID)
             {
