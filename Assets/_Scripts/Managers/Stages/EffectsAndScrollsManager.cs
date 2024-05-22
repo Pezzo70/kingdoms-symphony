@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.SimpleLocalization.Scripts;
@@ -6,6 +5,7 @@ using Kingdom.Audio;
 using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
+using Kingdom.Level;
 using UnityEngine;
 
 namespace Kingdom.Effects
@@ -89,11 +89,33 @@ namespace Kingdom.Effects
             EventManager.AddScroll?.Invoke(scrollDTO);
         }
 
-        private void HandleBurnScroll(Scroll scroll) { }
+        private void HandleBurnScroll(Scroll scroll)
+        {
+            BurnedScrollDTO burnedScrollDTO = new BurnedScrollDTO(
+                scroll.scrollID,
+                PlaythroughContainer.Instance.currentTurn.Item2,
+                PlaythroughContainer.Instance.currentTurn.Item2 + scroll.cooldown + 1
+            );
+            burnedScrolls.Add(burnedScrollDTO);
+        }
 
         private void HandleAddEffect(EffectDTO effect) { }
 
-        private void HandleTurnChanged(Turn turn) { }
+        private void HandleTurnChanged(Turn turn)
+        {
+            onGoingScrolls.ForEach(obj => EventManager.ScrollRemoved(obj));
+
+            if (turn == Turn.PlayersTurn)
+            {
+                burnedScrolls.ForEach(obj => obj.internalCounter++);
+            }
+
+            burnedScrolls = burnedScrolls
+                .Where(obj => obj.CanBeUsedOnTurn > obj.internalCounter)
+                .ToList();
+
+            onGoingScrolls.Clear();
+        }
 
         public void ClearAllEffectsAndScrolls()
         {
@@ -264,6 +286,7 @@ namespace Kingdom.Effects
     {
         private ScrollID _scroll;
         private int _canBeUsedOnTurn;
+        public int internalCounter;
 
         public ScrollID Scroll
         {
@@ -275,9 +298,10 @@ namespace Kingdom.Effects
             get => _canBeUsedOnTurn;
         }
 
-        public BurnedScrollDTO(ScrollID scroll, int canBeUsedOnTurn)
+        public BurnedScrollDTO(ScrollID scroll, int internalCounterStartAt, int canBeUsedOnTurn)
         {
             _scroll = scroll;
+            internalCounter = internalCounterStartAt;
             _canBeUsedOnTurn = canBeUsedOnTurn;
         }
     }

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Linq;
 using Kingdom.Audio;
 using Kingdom.Audio.Procedural;
+using Kingdom.Effects;
 using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
 using Kingdom.Level;
+using Kingdom.Player;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
@@ -79,6 +81,8 @@ public class PlayerTurnManager : MonoBehaviour
             return;
 
         EventManager.CantPause?.Invoke(false);
+        PlayerStats ps = PlaythroughContainer.Instance.PlayerStats;
+        ps.GainMana(ps.ManaPerTurn, false);
         playersOptions.SetActive(true);
     }
 
@@ -101,9 +105,13 @@ public class PlayerTurnManager : MonoBehaviour
 
     private float GetAttackDamage()
     {
-        float damage = 150f;
+        float damage = 10f;
         //@TODO
         /*To-Do Advantages and Ongoing Effects*/
+        EffectsAndScrollsManager
+            .Instance
+            .onGoingScrolls
+            .ForEach(obj => EventManager.BurnScroll(obj.Scroll));
         return damage;
     }
 

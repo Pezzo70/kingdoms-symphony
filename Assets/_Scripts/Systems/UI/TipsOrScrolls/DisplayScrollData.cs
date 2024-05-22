@@ -76,11 +76,13 @@ public class DisplayScrollData : MonoBehaviour
             }
             else if (burned != null)
             {
+                cooldown.gameObject.SetActive(true);
                 cooldown.LocalizationKey = "Scrolls.Menu.Available";
-                int turn = burned.CanBeUsedOnTurn - PlaythroughContainer.Instance.currentTurn.Item2;
+                int turn = burned.CanBeUsedOnTurn - burned.internalCounter;
                 cooldown.Replace(
                     new Tuple<string, string>[] { new Tuple<string, string>("-X", turn.ToString()) }
                 );
+                castButton.GetComponent<Selectable>().interactable = false;
             }
             else if (notEnoughManaToCast == false)
             {
