@@ -342,6 +342,7 @@ namespace Kingdom.Effects
         PreventEnemyHeal,
         PreventPlayerHeal,
         CompleteMitigation,
+        ReduceAvailableSheetBars,
         Stun, /*FOR ENEMIES MODIFIER == ATTACK ID*/
     }
 }

@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Assets.SimpleLocalization.Scripts;
 using Kingdom;
 using Kingdom.Audio;
 using Kingdom.Audio.Procedural;
@@ -8,8 +11,10 @@ using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
+using Kingdom.Enums.Scrolls;
 using Kingdom.Level;
 using Kingdom.Player;
+using TMPro;
 using UnityEngine;
 
 public class PlayerTurnManager : MonoBehaviour
@@ -21,12 +26,22 @@ public class PlayerTurnManager : MonoBehaviour
     public GameObject pianoPortal;
     public Animator pianoPortalAnimator;
     public ParticleSystem pianoPortalParticleSystem;
+    public GameObject scrollsSucessStateContainer;
+    public GameObject scrollsSuccessStatePrefab;
     private Scroll _scrollOpen;
+    private List<(ScrollID scroll, bool accomplished)> _scrollSuccessState;
+    private List<GameObject> _scrollsSucessStateInstantiated;
 
     private bool _enemiesTakingDamage = false;
     private bool _isDead = false;
     private bool _win = false;
     private bool _alternate = false;
+
+    void Awake()
+    {
+        _scrollSuccessState = new List<(ScrollID scroll, bool accomplished)>();
+        _scrollsSucessStateInstantiated = new List<GameObject>();
+    }
 
     void Start()
     {
@@ -43,6 +58,8 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.OnVictory += HandleOnVictory;
         EventManager.OpenScroll += HandleOpenScroll;
         EventManager.DamageEffectExecuted += HandleDamageEffectDTO;
+        EventManager.ScrollAccomplished += HandleScrollAccomplished;
+        EventManager.ScrollFailed += HandleScrollFailed;
     }
 
     void OnDisable()
@@ -54,7 +71,14 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.OnVictory -= HandleOnVictory;
         EventManager.OpenScroll -= HandleOpenScroll;
         EventManager.DamageEffectExecuted -= HandleDamageEffectDTO;
+        EventManager.ScrollAccomplished -= HandleScrollAccomplished;
+        EventManager.ScrollFailed -= HandleScrollFailed;
     }
+
+    private void HandleScrollAccomplished(ScrollID scroll) =>
+        _scrollSuccessState.Add((scroll, true));
+
+    private void HandleScrollFailed(ScrollID scroll) => _scrollSuccessState.Add((scroll, false));
 
     public void SetWasOpenSheet(bool wasOpen)
     {
@@ -80,6 +104,7 @@ public class PlayerTurnManager : MonoBehaviour
     private void OnPlayerTurn()
     {
         float _ = 0f;
+        _scrollSuccessState.Clear();
 
         EffectsAndScrollsManager
             .Instance
@@ -127,6 +152,19 @@ public class PlayerTurnManager : MonoBehaviour
             )
             .ToList()
             .ForEach(obj => TheoryHandler.ValidateAndExecuteEffectAction(obj, ref _));
+
+        int sheetBarsAffectedByEffects = EffectsAndScrollsManager
+            .Instance
+            .onGoingEffects
+            .Where(
+                obj =>
+                    obj.Target == this.gameObject
+                    && obj.EffectTarget == EffectTarget.Player
+                    && obj.EffectType == EffectType.ReduceAvailableSheetBars
+            )
+            .Aggregate(0, (total, next) => total + (int)next.Modifier);
+
+        ps.ChangeAvailableSheetBars(ps.MaxSheetBars + sheetBarsAffectedByEffects);
 
         playersOptions.SetActive(true);
     }
@@ -242,21 +280,44 @@ public class PlayerTurnManager : MonoBehaviour
         while (_enemiesTakingDamage)
             yield return new WaitForSeconds(1f);
 
-        //@TO-DO
-        //DISPLAY ACCOMPLISHED SCROLLS
-        //DISPLAY FAILED SCROLLS
-
-        musicSheet.Clear();
-        musicSheetCanvas.gameObject.SetActive(false);
-        musicSheetCanvas.blocksRaycasts = true;
-        musicSheetCanvas.alpha = 1;
-
         AudioSystem.Instance.Play(FXID.Portal, FXState.End);
         pianoPortalAnimator.SetBool("Idle", false);
 
         yield return new WaitForSeconds(1.5f);
 
         pianoPortal.SetActive(false);
+
+        for (int i = 0; i < _scrollSuccessState.Count; i++)
+        {
+            GameObject scrollSuccess = Instantiate(
+                scrollsSuccessStatePrefab,
+                scrollsSucessStateContainer.transform
+            );
+            scrollSuccess.GetComponentInChildren<LocalizedTextMeshProUGUI>().LocalizationKey =
+                "Scrolls.Name." + (int)_scrollSuccessState[i].scroll;
+
+            if (!_scrollSuccessState[i].accomplished)
+                scrollSuccess.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+
+            _scrollsSucessStateInstantiated.Add(scrollSuccess);
+            Animator scrollSuccessAnim = scrollSuccess.GetComponent<Animator>();
+            scrollSuccessAnim.SetBool("FadeIn", true);
+            yield return new WaitForSeconds(3f);
+            scrollSuccessAnim.SetBool("FadeIn", false);
+            scrollSuccessAnim.SetBool("FadeOut", true);
+            yield return new WaitForSeconds(1f);
+            scrollSuccessAnim.SetBool("FadeOut", false);
+        }
+
+        for (int i = 0; i < _scrollsSucessStateInstantiated.Count; i++)
+            Destroy(_scrollsSucessStateInstantiated[i]);
+
+        _scrollsSucessStateInstantiated.Clear();
+
+        musicSheet.Clear();
+        musicSheetCanvas.gameObject.SetActive(false);
+        musicSheetCanvas.blocksRaycasts = true;
+        musicSheetCanvas.alpha = 1;
 
         yield return new WaitForSeconds(1.5f);
 

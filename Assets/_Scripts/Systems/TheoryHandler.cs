@@ -414,7 +414,7 @@ namespace Kingdom
                     //NOT APPLIED HERE, MASSIVE DAMAGE IS NOT A PERSISTED EFFECT
                     break;
                 case EffectType.Heal:
-                    //VERIFY IF THERE IS ANY HEAL PER TURN, IF SO, THEN DEAL WITH IT HERE
+                    //NOT APPLIED HERE SINCE THERE IS NO HEAL PER TURN
                     break;
                 case EffectType.AdditionalMana:
                     //NOT APPLIED HERE, ADDED ELSEWHERE
@@ -442,6 +442,9 @@ namespace Kingdom
                     //NOT APPLIED HERE
                     break;
                 case EffectType.PreventPlayerHeal:
+                    //NOT APPLIED HERE
+                    break;
+                case EffectType.ReduceAvailableSheetBars:
                     //NOT APPLIED HERE
                     break;
             }
