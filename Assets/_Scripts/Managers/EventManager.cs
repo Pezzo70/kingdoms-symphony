@@ -64,4 +64,6 @@ public static class EventManager
     public static UnityAction<Scroll> BurnScroll;
     public static UnityAction<EffectDTO> AddEffect;
     public static UnityAction<EffectDTO> RemoveEffect;
+
+    public static UnityAction<bool> MusicSheetOpen;
 }

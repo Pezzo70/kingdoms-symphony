@@ -18,12 +18,14 @@ public class PlayerScrollsUsed : MonoBehaviour
     {
         EventManager.AddScroll += HandleAddScroll;
         EventManager.ScrollRemoved += HandleScrollRemoved;
+        EventManager.MusicSheetOpen += HandleMusicSheetOpen;
     }
 
     void OnDisable()
     {
         EventManager.AddScroll -= HandleAddScroll;
         EventManager.ScrollRemoved -= HandleScrollRemoved;
+        EventManager.MusicSheetOpen -= HandleMusicSheetOpen;
     }
 
     private void HandleAddScroll(ScrollDTO scroll)
@@ -40,5 +42,17 @@ public class PlayerScrollsUsed : MonoBehaviour
         );
         _scrollUseds.Remove(target);
         Destroy(target);
+    }
+
+    private void HandleMusicSheetOpen(bool open)
+    {
+        if (open)
+        {
+            _scrollUseds.ForEach(obj => obj.SetActive(false));
+        }
+        else
+        {
+            _scrollUseds.ForEach(obj => obj.SetActive(true));
+        }
     }
 }

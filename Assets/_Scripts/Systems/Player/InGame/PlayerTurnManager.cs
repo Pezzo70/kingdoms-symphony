@@ -52,7 +52,11 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.OpenScroll -= HandleOpenScroll;
     }
 
-    public void SetWasOpenSheet(bool wasOpen) => musicSheet.wasOpen = wasOpen;
+    public void SetWasOpenSheet(bool wasOpen)
+    {
+        musicSheet.wasOpen = wasOpen;
+        EventManager.MusicSheetOpen?.Invoke(wasOpen);
+    }
 
     private void HandleOpenScroll(Scroll scroll) => _scrollOpen = scroll;
 

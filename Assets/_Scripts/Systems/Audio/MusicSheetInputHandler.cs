@@ -66,6 +66,7 @@ namespace Kingdom.Audio
                     musicSheet.playerOptions.SetActive(true);
                     musicSheet.musicSheetCanvas.SetActive(false);
                     musicSheet.wasOpen = false;
+                    EventManager.MusicSheetOpen?.Invoke(false);
                     break;
             }
             ;

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.SimpleLocalization.Scripts;
 using Kingdom.Audio;
 using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
@@ -53,13 +55,33 @@ namespace Kingdom.Effects
             if (novr > 0)
             {
                 if (scroll.validClef.Length > 0)
-                    clefs = GetRandomsTFromScroll(scroll.validClef, novr, ref names);
+                    clefs = GetRandomsTFromScroll(
+                        scroll.validClef,
+                        novr,
+                        ref names,
+                        "Theory.Clef."
+                    );
                 else if (scroll.validChords.Length > 0)
-                    chords = GetRandomsTFromScroll(scroll.validChords, novr, ref names);
+                    chords = GetRandomsTFromScroll(
+                        scroll.validChords,
+                        novr,
+                        ref names,
+                        "Theory.Chord."
+                    );
                 else if (scroll.validScales.Length > 0)
-                    scales = GetRandomsTFromScroll(scroll.validScales, novr, ref names);
+                    scales = GetRandomsTFromScroll(
+                        scroll.validScales,
+                        novr,
+                        ref names,
+                        "Theory.Scale."
+                    );
                 else if (scroll.validModes.Length > 0)
-                    modes = GetRandomsTFromScroll(scroll.validModes, novr, ref names);
+                    modes = GetRandomsTFromScroll(
+                        scroll.validModes,
+                        novr,
+                        ref names,
+                        "Theory.Modes."
+                    );
             }
 
             ScrollDTO scrollDTO = new ScrollDTO(scroll, clefs, chords, scales, modes, names);
@@ -80,7 +102,12 @@ namespace Kingdom.Effects
             burnedScrolls.Clear();
         }
 
-        private T[] GetRandomsTFromScroll<T>(T[] values, int numberOfRandom, ref string[] names)
+        private T[] GetRandomsTFromScroll<T>(
+            T[] values,
+            int numberOfRandom,
+            ref string[] names,
+            string key
+        )
         {
             List<T> listOfValues = values.ToList();
             List<T> valuesSelecteds = new List<T>();
@@ -94,7 +121,7 @@ namespace Kingdom.Effects
                 int randomIndex = UnityEngine.Random.Range(0, filtered.Count);
 
                 valuesSelecteds.Add(filtered[randomIndex]);
-                names[i] = filtered[randomIndex].ToString();
+                names[i] = LocalizationManager.Localize(key + filtered[randomIndex].ToString());
             }
 
             return valuesSelecteds.ToArray();
