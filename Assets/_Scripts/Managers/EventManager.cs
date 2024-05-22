@@ -1,4 +1,5 @@
 using System;
+using Kingdom.Effects;
 using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
@@ -35,14 +36,34 @@ public static class EventManager
 
     public static UnityAction OnPlayerMoralChange;
     public static UnityAction OnPlayerManaChange;
+    public static UnityAction OnPlayersDeath;
 
     public static UnityAction PhaseVictory;
     public static UnityAction EndGameVictory;
     public static UnityAction EndGameDefeat;
+    public static UnityAction<bool> OnVictory;
 
     public static UnityAction PauseGame;
     public static UnityAction UnpauseGame;
+    public static UnityAction<bool> CantPause;
 
     public static UnityAction<float> EnemiesDamaged;
     public static UnityAction EnemiesRegainMana;
+    public static UnityAction EnemiesEndTakingDamage;
+
+    public static UnityAction<Turn> TurnChanged;
+    public static UnityAction NextEnemy;
+    public static UnityAction NextEnemyTakesDamage;
+
+    public static UnityAction<Scroll> CastScroll;
+
+    public static UnityAction<Scroll> OpenScroll;
+    public static UnityAction<ScrollDTO> AddScroll;
+    public static UnityAction<ScrollDTO> ScrollRemoved;
+    public static UnityAction<ScrollID> ScrollObjectiveAccomplished;
+    public static UnityAction<Scroll> BurnScroll;
+    public static UnityAction<EffectDTO> AddEffect;
+    public static UnityAction<EffectDTO> RemoveEffect;
+
+    public static UnityAction<bool> MusicSheetOpen;
 }

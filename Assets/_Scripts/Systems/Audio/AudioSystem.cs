@@ -18,7 +18,10 @@ namespace Kingdom.Audio
         private AudioSource audioSource;
 
         [Range(0, 1)]
-        private float globalVolume, ambienceVolume, effectVolume, musicVolume = 1.0f;
+        private float globalVolume,
+            ambienceVolume,
+            effectVolume,
+            musicVolume = 1.0f;
         private ScriptableAudio currentAudio;
 
         [SerializeField]
@@ -56,7 +59,9 @@ namespace Kingdom.Audio
             currentAudio = audio;
             audioSource.clip = audio.AudioClip;
             audioSource.volume =
-                audio.volume * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume) * 100;
+                audio.volume
+                * (audio.StageName == "MenuScene" ? musicVolume : ambienceVolume)
+                * 100;
             audioSource.Play();
         }
 
@@ -81,9 +86,19 @@ namespace Kingdom.Audio
 
         public void Play(IList<Note> notes) => instrument.QueueKey(notes.ToKeysPlayed());
 
-        public void Play(FXID effect) =>
+        public void Play(FXID effect, FXState state) =>
             effectSource.PlayOneShot(
-                audioContainer.GetFirstByType<FXAudio>(so => so.fxID == effect).AudioClip,
+                audioContainer
+                    .GetFirstByType<FXAudio>(so => so.fxID == effect && so.fxState == state)
+                    .AudioClip,
+                effectVolume
+            );
+
+        public void Play(EndState endState) =>
+            effectSource.PlayOneShot(
+                audioContainer
+                    .GetFirstByType<EndGameAudio>(so => so.endState == endState)
+                    .AudioClip,
                 effectVolume
             );
 
@@ -104,14 +119,14 @@ namespace Kingdom.Audio
         public void SetAmbienceVolume(float volume)
         {
             ambienceVolume = volume;
-            if((currentAudio is StageAudio stage) && stage.StageName != "MenuScene")
-                audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
+            if ((currentAudio is StageAudio stage) && stage.StageName != "MenuScene") { }
+            audioSource.volume = currentAudio.volume * ambienceVolume * ambienceVolume;
         }
 
         public void SetMusicVolume(float volume)
         {
             musicVolume = volume;
-            if((currentAudio is StageAudio stage) && stage.StageName == "MenuScene")
+            if ((currentAudio is StageAudio stage) && stage.StageName == "MenuScene")
                 audioSource.volume = currentAudio.volume * musicVolume * ambienceVolume;
         }
 

@@ -18,11 +18,14 @@ MonoBehaviour:
   manaRequired: 2
   cooldown: 2
   targetMeasures: 1
+  validClef: 
   validChords: 
   validScales: 
   validModes: 
+  numberOfValidRandom: 1
   XP: 3
   xFactor: 15
   yFactor: 60
   zFactor: 0
   wFactor: 0
+  effectsSymbols: []

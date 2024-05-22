@@ -1,4 +1,5 @@
 using Kingdom.Audio;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,7 @@ namespace Kingdom.Audio
                     musicSheet.ChangeScale();
                     break;
                 case "MusicSheet":
-                    if(data.button is PointerEventData.InputButton.Left)
+                    if (data.button is PointerEventData.InputButton.Left)
                         musicSheet.InsertNote();
                     break;
                 case "Next":
@@ -52,16 +53,23 @@ namespace Kingdom.Audio
                     musicSheet.Play();
                     break;
                 case "KeySignatureArea":
-                    if(data.button is PointerEventData.InputButton.Left)
+                    if (data.button is PointerEventData.InputButton.Left)
                         musicSheet.InsertKeySignature();
                     break;
                 case "Note":
-                    if(data.button is PointerEventData.InputButton.Left)
+                    if (data.button is PointerEventData.InputButton.Left)
                         musicSheet.ChangeNote(currentObject.transform.GetComponent<Note>());
-                    else if(data.button is PointerEventData.InputButton.Right)
+                    else if (data.button is PointerEventData.InputButton.Right)
                         musicSheet.RemoveNote(currentObject.transform.GetComponent<Note>());
                     break;
-            };
+                case "Exit":
+                    musicSheet.playerOptions.SetActive(true);
+                    musicSheet.musicSheetCanvas.SetActive(false);
+                    musicSheet.wasOpen = false;
+                    EventManager.MusicSheetOpen?.Invoke(false);
+                    break;
+            }
+            ;
         }
 
         public override void OnPointerEnter(PointerEventData data)
@@ -74,7 +82,8 @@ namespace Kingdom.Audio
                     musicSheet.SetHover(true, objectTag);
                     isHovering = true;
                     break;
-            };
+            }
+            ;
         }
 
         public override void OnPointerExit(PointerEventData data)
@@ -106,6 +115,7 @@ namespace Kingdom.Audio
             if (context.performed)
                 musicSheet.RemovePage();
         }
+
         public void OnNext(InputAction.CallbackContext context)
         {
             if (context.performed)

@@ -172,7 +172,7 @@ namespace Kingdom.Extensions
 
         public static IList<Note> GetChord(this Note note, IList<Note> notes) =>
             notes
-                .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 15f && x.page == note.page)
+                .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 1f && x.page == note.page)
                 .AsReadOnlyList();
     
         public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) => note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());

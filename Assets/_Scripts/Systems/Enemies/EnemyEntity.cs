@@ -1,5 +1,11 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Kingdom.Audio;
 using Kingdom.Constants;
+using Kingdom.Enums.Enemies;
+using Kingdom.Enums.FX;
 using Kingdom.Level;
 using TMPro;
 using UnityEngine;
@@ -10,8 +16,10 @@ namespace Kingdom.Enemies
     {
         public Enemy enemyData;
         public GameObject enemyHUD;
+        public GameObject enemyActiveIndicator;
         public SpriteRenderer enemySprite;
         public SpriteRenderer shadowSprite;
+        public Animator enemyAnimator;
         public Animator pftEffectAnimator;
         public RectTransform moralBarFill;
         public TextMeshProUGUI moralText;
@@ -25,6 +33,9 @@ namespace Kingdom.Enemies
 
         private List<GameObject> _manasInstantiated;
         private bool _isDead;
+        private bool _isOnTurn;
+        private bool _isAttacking;
+        private bool _endCurrentAttackAnimation;
 
         public bool IsDead
         {
@@ -42,10 +53,13 @@ namespace Kingdom.Enemies
                     );
             _currentMoral = _maxMoral;
             _manaPerTurn = enemyData.manaPerTurn;
-            _currentMana = _manaPerTurn;
+            _currentMana = 0;
             _manasInstantiated = new List<GameObject>();
             _isDead = false;
-            EventManager.EnemyEncountered.Invoke(enemyData.enemyID);
+            _isOnTurn = false;
+            _isAttacking = true;
+            enemyActiveIndicator.SetActive(false);
+            EventManager.EnemyEncountered?.Invoke(enemyData.enemyID);
         }
 
         void Start()
@@ -54,36 +68,45 @@ namespace Kingdom.Enemies
             UpdateMana();
         }
 
-        void Update() { }
-
-        void OnEnable()
+        public void ExecuteTurn()
         {
-            EventManager.EnemiesDamaged += HandleEnemyDamaged;
-            EventManager.EnemiesRegainMana += HandleEnemyRegainMana;
+            _isOnTurn = true;
+            enemyActiveIndicator.SetActive(true);
+            Action endTurnAction = () =>
+            {
+                _isOnTurn = false;
+                enemyActiveIndicator.SetActive(false);
+                EventManager.NextEnemy?.Invoke();
+            };
+
+            HandleTurnBasedEffects();
+            if (_isDead)
+            {
+                endTurnAction?.Invoke();
+                return;
+            }
+
+            StartCoroutine(
+                AttackRoutine(() =>
+                {
+                    endTurnAction?.Invoke();
+                })
+            );
         }
 
-        void OnDisable()
+        public void HandleEndCurrentAttackAnimation()
         {
-            EventManager.EnemiesDamaged -= HandleEnemyDamaged;
-            EventManager.EnemiesRegainMana -= HandleEnemyRegainMana;
+            if (_isOnTurn)
+                _endCurrentAttackAnimation = true;
         }
 
-        private void HandleEnemyDamaged(float damage)
+        public void ReduceMoral(float damage)
         {
+            float damageUpdated = damage;
             //@TODO
             /*To-Do Advantages and Ongoing Effects*/
-            _currentMoral -= damage;
-            _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
-            UpdateMoral();
-            if (_currentMoral == 0f)
-            {
-                _isDead = true;
-                pftEffectAnimator.Play("Pft");
-                enemyHUD.SetActive(false);
-                enemySprite.enabled = false;
-                shadowSprite.enabled = false;
-                EventManager.EnemyBanished(enemyData.enemyID);
-            }
+            enemyActiveIndicator.SetActive(true);
+            StartCoroutine(TakeDamageRoutine(damageUpdated));
         }
 
         private void Heal(float quantity)
@@ -94,15 +117,74 @@ namespace Kingdom.Enemies
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
         }
 
-        private void Attack()
+        private (EnemyAttackID, bool) SelectAttack()
         {
-            //@TODO
-            /*To-Do Choose Attack*/
-            /*To-Do Advantages and Ongoing Effects*/
-            // EventManager.EnemyAttackExecuted(enemyAttack);
+            Tuple<EnemyAttackID, float>[] chances = enemyData
+                .attacks
+                .Where(obj => obj.manaRequired <= _currentMana)
+                .Select(
+                    obj =>
+                        new Tuple<EnemyAttackID, float>(obj.enemyAttackID, obj.probability / 100f)
+                )
+                .OrderByDescending(obj => obj.Item2)
+                .ToArray();
+
+            if (chances.Length == 0)
+                return (enemyData.attacks[0].enemyAttackID, false);
+
+            if (chances.Length == 1)
+                return (chances[0].Item1, true);
+
+            List<Tuple<EnemyAttackID, Tuple<float, float>>> chancesRange =
+                new List<Tuple<EnemyAttackID, Tuple<float, float>>>();
+
+            for (int i = 0; i < chances.Length; i++)
+            {
+                float minFactor = i == 0 ? 0 : chancesRange[i - 1].Item2.Item2;
+                float maxFactor = minFactor + chances[i].Item2;
+                chancesRange.Add(
+                    new(chances[i].Item1, new Tuple<float, float>(minFactor, maxFactor))
+                );
+            }
+
+            float randomFactor = UnityEngine.Random.Range(0f, 1f);
+
+            return (
+                chancesRange
+                    .First(obj => randomFactor > obj.Item2.Item1 && randomFactor <= obj.Item2.Item2)
+                    .Item1,
+                true
+            );
         }
 
-        private void HandleEnemyRegainMana()
+        private void Attack(EnemyAttackID attackID)
+        {
+            //@TODO
+            /*To-Do Advantages and Ongoing Effects*/
+            EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
+            HandleEnemySpendMana(attack.manaRequired);
+            PlaythroughContainer.Instance.PlayerStats.ReduceMoral(75f);
+            EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
+
+            /*Attack Handler Event here*/
+        }
+
+        private void HandleTurnBasedEffects()
+        {
+            //@TODO
+            /*To- Do Handle effects like bleeding here*/
+        }
+
+        private void HandleEnemySpendMana(int value)
+        {
+            if (_currentMana - value < 0)
+                return;
+
+            _currentMana -= value;
+            UpdateMana();
+        }
+
+        public void RegainMana()
         {
             _currentMana += _manaPerTurn;
             UpdateMana();
@@ -136,6 +218,69 @@ namespace Kingdom.Enemies
             );
 
             moralText.text = $"{_currentMoral}/{_maxMoral}";
+        }
+
+        private IEnumerator AttackRoutine(Action callbackPosAttack)
+        {
+            _isAttacking = true;
+            while (_isAttacking)
+            {
+                (EnemyAttackID enemyAttackID, bool willAttack) = SelectAttack();
+
+                if (willAttack == false)
+                {
+                    _isAttacking = false;
+                    break;
+                }
+
+                enemyAnimator.Play("Attack");
+
+                while (!_endCurrentAttackAnimation)
+                    yield return new WaitForSeconds(0.05f);
+
+                Attack(enemyAttackID);
+                AudioSystem.Instance.Play(this.enemyData.enemyID, Enums.ActorAudioTypes.Attack);
+                enemyAnimator.Play("Idle");
+                _isAttacking = enemyData.attacks.Any(attack => attack.manaRequired <= _currentMana);
+                _endCurrentAttackAnimation = false;
+                yield return new WaitForSeconds(2.5f);
+            }
+
+            callbackPosAttack?.Invoke();
+        }
+
+        private IEnumerator TakeDamageRoutine(float damage)
+        {
+            Color redTransparent = new Color(255, 0, 0, 0.5f);
+
+            enemyActiveIndicator.SetActive(true);
+
+            enemyAnimator.Play("Damage");
+            AudioSystem.Instance.Play(this.enemyData.enemyID, Enums.ActorAudioTypes.Damage);
+            yield return new WaitForSeconds(1f);
+            enemyAnimator.Play("Idle");
+
+            _currentMoral -= damage;
+            _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
+            UpdateMoral();
+
+            if (_currentMoral == 0f)
+            {
+                _isDead = true;
+                pftEffectAnimator.Play("Pft");
+                AudioSystem.Instance.Play(FXID.Pft, FXState.Start);
+
+                enemyHUD.SetActive(false);
+                enemySprite.enabled = false;
+                shadowSprite.enabled = false;
+                EventManager.EnemyBanished(enemyData.enemyID);
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            enemyActiveIndicator.SetActive(false);
+
+            EventManager.NextEnemyTakesDamage?.Invoke();
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Kingdom.Player
                 _currentMoral -= value;
                 _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
                 EventManager.OnPlayerMoralChange?.Invoke();
-                EventManager.EndGameDefeat?.Invoke();
+                EventManager.OnPlayersDeath?.Invoke();
             }
             else
             {

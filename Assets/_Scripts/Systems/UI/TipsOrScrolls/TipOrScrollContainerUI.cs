@@ -27,8 +27,6 @@ namespace Kingdom.UI
             }
         }
 
-        void Update() { }
-
         private void InstantiateChild(ScriptableObject so)
         {
             GameObject tipInstance = Instantiate(selectable, this.transform);

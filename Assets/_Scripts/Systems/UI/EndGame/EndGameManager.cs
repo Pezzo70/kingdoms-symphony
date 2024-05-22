@@ -1,5 +1,6 @@
 using System;
 using Assets.SimpleLocalization.Scripts;
+using Kingdom.Audio;
 using Kingdom.Level;
 using TMPro;
 using UnityEngine;
@@ -41,6 +42,7 @@ public class EndGameManager : MonoBehaviour
     private void HandleEndGameDefeat()
     {
         var endGameInfo = PlaythroughContainer.Instance.GetEndGameInfoAndUpdatePlayerData(false);
+        AudioSystem.Instance.Play(Kingdom.Enums.EndState.Defeat);
         onDefeatUI.SetActive(true);
 
         onDefeatEnemiesBanished.LocalizationKey = "InGame.Details.EnemiesDefeated";
@@ -84,7 +86,7 @@ public class EndGameManager : MonoBehaviour
     private void HandleEndGameVictory()
     {
         var endGameInfo = PlaythroughContainer.Instance.GetEndGameInfoAndUpdatePlayerData(true);
-
+        AudioSystem.Instance.Play(Kingdom.Enums.EndState.RunVictory);
         onVictoryUI.SetActive(true);
 
         onVictoryEnemiesBanished.LocalizationKey = "InGame.Details.EnemiesDefeated";
@@ -125,5 +127,9 @@ public class EndGameManager : MonoBehaviour
         onVictoryLevelUp.SetActive(endGameInfo.leveledUp);
     }
 
-    private void HandlePhaseVictory() => onPhaseVictoryUI.SetActive(true);
+    private void HandlePhaseVictory()
+    {
+        AudioSystem.Instance.Play(Kingdom.Enums.EndState.LevelVictory);
+        onPhaseVictoryUI.SetActive(true);
+    }
 }

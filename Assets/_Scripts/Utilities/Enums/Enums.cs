@@ -86,6 +86,12 @@ namespace Kingdom.Enums
         In = 0,
         Out = 1
     }
+
+    public enum Turn
+    {
+        PlayersTurn = 0,
+        EnemiesTurn = 1
+    }
 }
 
 namespace Kingdom.Enums.FX
@@ -201,7 +207,9 @@ namespace Kingdom.Enums.MusicTheory
 
     public enum KeySignature
     {
-        Natural, Sharp, Flat 
+        Natural,
+        Sharp,
+        Flat
     }
 }
 
@@ -306,5 +314,30 @@ namespace Kingdom.Enums.Tips
         SoundWatcher = 19,
         AlienCaptain = 20,
         AbyssalVisitor = 21
+    }
+}
+
+namespace Kingdom.Effects
+{
+    public enum EffectTarget
+    {
+        Player = 0,
+        Enemy = 1
+    }
+
+    public enum EffectType
+    {
+        PlayerMitigation,
+        EnemyMitigation,
+        CooldownReduction,
+        Damage,
+        DamageModifier,
+        MassiveDamage,
+        Heal,
+        AdditionalMana,
+        RemoveNegativeEffects,
+        PreventEnemyHeal,
+        CompleteMitigation,
+        Stun,
     }
 }

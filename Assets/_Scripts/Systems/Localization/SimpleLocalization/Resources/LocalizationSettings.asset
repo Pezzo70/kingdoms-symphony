@@ -32,4 +32,7 @@ MonoBehaviour:
   - Name: InGame
     Id: 1547126997
     TextAsset: {fileID: 4900000, guid: d0e358cd44c3ce14eaa9e5e7206ac39e, type: 3}
+  - Name: MusicTheory
+    Id: 1041947266
+    TextAsset: {fileID: 4900000, guid: 5717a74e45c783d488145368e57ad2ee, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

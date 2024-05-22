@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using Kingdom.Enemies;
 using Kingdom.Enums.Enemies;
@@ -29,9 +28,9 @@ public class VictoryEmitter : MonoBehaviour
             if (enemyEntities.All(obj => obj.IsDead))
             {
                 if (PlaythroughContainer.Instance.GetCurrentLevel.endGame)
-                    EventManager.EndGameVictory?.Invoke();
+                    EventManager.OnVictory?.Invoke(true);
                 else
-                    EventManager.PhaseVictory?.Invoke();
+                    EventManager.OnVictory?.Invoke(false);
             }
         }
     }

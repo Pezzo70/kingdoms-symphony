@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 4b14c94b7a513dd45a8270b9cc268e8e, type: 3}
   weight: 1
-  volume: 1
+  volume: 0.15
   stage: FlorestScene

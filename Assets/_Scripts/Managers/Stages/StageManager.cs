@@ -1,5 +1,6 @@
 using System.Collections;
 using Kingdom.Audio;
+using Kingdom.Effects;
 using Kingdom.Enums.Player;
 using Kingdom.Level;
 using UnityEngine;
@@ -20,30 +21,36 @@ public class StageManager : MonoBehaviour
             .transform
             .GetChild(0)
             .gameObject;
-        EventManager.ShowPopUp(
-            (
-                "InGame.PopUp.Message.0",
-                false,
-                true,
-                () =>
-                {
-                    pauseGameObject.SetActive(false);
-                    EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
-                    StartCoroutine(WaitToLoad(0));
-                },
-                false,
-                0f,
-                false,
-                Vector3.zero,
-                true
-            )
-        );
+        EventManager
+            .ShowPopUp
+            ?.Invoke(
+                (
+                    "InGame.PopUp.Message.0",
+                    false,
+                    true,
+                    () =>
+                    {
+                        pauseGameObject.SetActive(false);
+                        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
+                        EventManager
+                            .LevelTransition
+                            ?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
+                        StartCoroutine(WaitToLoad(0));
+                    },
+                    false,
+                    0f,
+                    false,
+                    Vector3.zero,
+                    true
+                )
+            );
     }
 
     public void StartNewRun(int characterID)
     {
         CharacterID character = (CharacterID)characterID;
         PlaythroughContainer.Instance.CreateNewPlaythrough(character);
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(1));
     }
@@ -51,12 +58,14 @@ public class StageManager : MonoBehaviour
     public void GoToNextLevel()
     {
         Level nextLevel = PlaythroughContainer.Instance.GetNextLevel();
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(nextLevel.sceneID));
     }
 
     public void EndGame()
     {
+        EffectsAndScrollsManager.Instance.ClearAllEffectsAndScrolls();
         EventManager.LevelTransition?.Invoke(Kingdom.Enums.LevelTransitionOption.In);
         StartCoroutine(WaitToLoad(0));
     }

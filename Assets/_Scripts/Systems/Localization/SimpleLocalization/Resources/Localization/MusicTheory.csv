@@ -1,0 +1,48 @@
+Key,Portuguese,English
+Theory.Chord.CMajor,Dó Maior,C Major
+Theory.Chord.CSharpMajor,Dó Sustenido Maior,C Sharp Major
+Theory.Chord.DMajor,Ré Maior,D Major
+Theory.Chord.EbMajor,Mi Bemol Maior,Eb Major
+Theory.Chord.EMajor,Mi Maior,E Major
+Theory.Chord.FMajor,Fá Maior,F Major
+Theory.Chord.FSharpMajor,Fá Sustenido Maior,F Sharp Major
+Theory.Chord.GMajor,Sol Maior,G Major
+Theory.Chord.AbMajor,Lá Bemol Maior,Ab Major
+Theory.Chord.AMajor,Lá Maior,A Major
+Theory.Chord.BbMajor,Si Bemol Maior,Bb Major
+Theory.Chord.BMajor,Si Maior,B Major
+Theory.Chord.CMinor,Dó Menor,C Minor
+Theory.Chord.CSharpMinor,Dó Sustenido Menor,C Sharp Minor
+Theory.Chord.DMinor,Ré Menor,D Minor
+Theory.Chord.EbMinor,Mi Bemol Menor,Eb Minor
+Theory.Chord.EMinor,Mi Menor,E Minor
+Theory.Chord.FMinor,Fá Menor,F Minor
+Theory.Chord.FSharpMinor,Fá Sustenido Menor,F Sharp Minor
+Theory.Chord.GMinor,Sol Menor,G Minor
+Theory.Chord.AbMinor,Lá Bemol Menor,Ab Minor
+Theory.Chord.AMinor,Lá Menor,A Minor
+Theory.Chord.BbMinor,Si Bemol Menor,Bb Minor
+Theory.Chord.BMinor,Si Menor,B Minor
+Theory.Scale.MajorC,Dó Maior,C Major
+Theory.Scale.MajorD,Ré Maior,D Major
+Theory.Scale.MajorE,Mi Maior,E Major
+Theory.Scale.MajorF,Fá Maior,F Major
+Theory.Scale.MajorG,Sol Maior,G Major
+Theory.Scale.MajorA,Lá Maior,A Major
+Theory.Scale.MajorB,Si Maior,B Major
+Theory.Scale.MinorC,Dó Menor,C Minor
+Theory.Scale.MinorD,Ré Menor,D Minor
+Theory.Scale.MinorE,Mi Menor,E Minor
+Theory.Scale.MinorF,Fá Menor,F Minor
+Theory.Scale.MinorG,Sol Menor,G Minor
+Theory.Scale.MinorA,Lá Menor,A Minor
+Theory.Scale.MinorB,Si Menor,B Minor
+Theory.Modes.Ionian,Jônio,Ionian
+Theory.Modes.Dorian,Dórico,Dorian
+Theory.Modes.Phrygian,Frígio,Phrygian
+Theory.Modes.Lydian,Lídio,Lydian
+Theory.Modes.Mixolydian,Mixolidio,Mixolydian
+Theory.Modes.Aeolian,Eólio,Aeolian
+Theory.Modes.Locrian,Lócrio,Locrian
+Theory.Clef.G,Clave de Sol,G Clef
+Theory.Clef.F,Clave de Fá,F Clef

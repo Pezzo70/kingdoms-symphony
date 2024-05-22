@@ -22,6 +22,8 @@ TagManager:
   - KeySignatureArea
   - PageCounter
   - Enemy
+  - PlayerPrefab
+  - InstrumentSource
   layers:
   - Default
   - TransparentFX
