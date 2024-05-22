@@ -73,8 +73,8 @@ public class TurnManager : MonoBehaviour
             aliveEnemies[i].RegainMana();
     }
 
-    private void HandleEnemiesDamaged(float damage) =>
-        StartCoroutine(WaitTillEachEnemyTakeDamage(damage));
+    private void HandleEnemiesDamaged(float damage, float massiveDamage) =>
+        StartCoroutine(WaitTillEachEnemyTakeDamage(damage, massiveDamage));
 
     private void OnNextEnemy() => _currentEnemyIndex++;
 
@@ -100,11 +100,11 @@ public class TurnManager : MonoBehaviour
         EndEnemiesTurn();
     }
 
-    private IEnumerator WaitTillEachEnemyTakeDamage(float damage)
+    private IEnumerator WaitTillEachEnemyTakeDamage(float damage, float massiveDamage)
     {
         for (int i = 0; i < aliveEnemies.Count; i++)
         {
-            aliveEnemies[_currentEnemyTakingDamageIndex].ReduceMoral(damage);
+            aliveEnemies[_currentEnemyTakingDamageIndex].ReduceMoral(damage, massiveDamage);
             while (i == _currentEnemyTakingDamageIndex)
                 yield return new WaitForSeconds(1f);
         }

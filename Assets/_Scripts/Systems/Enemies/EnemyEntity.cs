@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Kingdom.Audio;
 using Kingdom.Constants;
+using Kingdom.Effects;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
 using Kingdom.Level;
@@ -80,6 +81,7 @@ namespace Kingdom.Enemies
             };
 
             HandleTurnBasedEffects();
+
             if (_isDead)
             {
                 endTurnAction?.Invoke();
@@ -100,28 +102,96 @@ namespace Kingdom.Enemies
                 _endCurrentAttackAnimation = true;
         }
 
-        public void ReduceMoral(float damage)
+        public void ReduceMoral(float damage, float massiveDamage)
         {
             float damageUpdated = damage;
-            //@TODO
-            /*To-Do Advantages and Ongoing Effects*/
+
+            if (
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Find(
+                        obj =>
+                            obj.EffectType == EffectType.CompleteMitigation
+                            && obj.Target == this.gameObject
+                    ) != null
+            )
+            {
+                damageUpdated = 0f;
+            }
+            else
+            {
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Where(
+                        obj =>
+                            obj.EffectType == EffectType.EnemyMitigation
+                            && obj.Target == this.gameObject
+                    )
+                    .ToList()
+                    .ForEach(effect =>
+                    {
+                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage);
+                    });
+            }
+
+            TheoryHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+                this,
+                this.enemyData.enemyID,
+                false,
+                ref damage
+            );
+
+            TheoryHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+                this,
+                this.enemyData.enemyID,
+                true,
+                ref damage
+            );
+
+            damageUpdated += massiveDamage;
+
             enemyActiveIndicator.SetActive(true);
             StartCoroutine(TakeDamageRoutine(damageUpdated));
         }
 
-        private void Heal(float quantity)
+        public void Heal(float quantity)
         {
-            //@TODO
-            /*To-Do Advantages and Ongoing Effects*/
+            if (
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Find(
+                        obj =>
+                            obj.EffectType == EffectType.PreventEnemyHeal
+                            && obj.Target == this.gameObject
+                    ) != null
+            )
+            {
+                return;
+            }
+
             _currentMoral += quantity;
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
         }
 
         private (EnemyAttackID, bool) SelectAttack()
         {
+            EnemyAttackID[] stunnedAttacks = EffectsAndScrollsManager
+                .Instance
+                .onGoingEffects
+                .Where(obj => obj.Target == this.gameObject && obj.EffectType == EffectType.Stun)
+                .Select(obj => (EnemyAttackID)(int)obj.Modifier)
+                .ToArray();
+
             Tuple<EnemyAttackID, float>[] chances = enemyData
                 .attacks
-                .Where(obj => obj.manaRequired <= _currentMana)
+                .Where(
+                    obj =>
+                        obj.manaRequired <= _currentMana
+                        && !stunnedAttacks.Contains(obj.enemyAttackID)
+                )
                 .Select(
                     obj =>
                         new Tuple<EnemyAttackID, float>(obj.enemyAttackID, obj.probability / 100f)
@@ -159,20 +229,41 @@ namespace Kingdom.Enemies
 
         private void Attack(EnemyAttackID attackID)
         {
-            //@TODO
-            /*To-Do Advantages and Ongoing Effects*/
             EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
-            HandleEnemySpendMana(attack.manaRequired);
-            PlaythroughContainer.Instance.PlayerStats.ReduceMoral(75f);
-            EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
+            float damage = TheoryHandler.ExecuteEnemyAttack(attack);
+            EffectsAndScrollsManager
+                .Instance
+                .onGoingEffects
+                .Where(
+                    obj =>
+                        obj.EffectType == EffectType.DamageModifier && obj.Target == this.gameObject
+                )
+                .ToList()
+                .ForEach(effect =>
+                {
+                    TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage);
+                });
 
-            /*Attack Handler Event here*/
+            PlaythroughContainer.Instance.PlayerStats.ReduceMoral(damage);
+            HandleEnemySpendMana(attack.manaRequired);
+            EventManager.EnemyAttackExecuted(enemyData.enemyID, attackID);
         }
 
         private void HandleTurnBasedEffects()
         {
-            //@TODO
-            /*To- Do Handle effects like bleeding here*/
+            float _ = 0f;
+            EffectsAndScrollsManager
+                .Instance
+                .onGoingEffects
+                .Where(obj => obj.TriggerOnTurnStart && obj.Target == this.gameObject)
+                .ToList()
+                .ForEach(effect =>
+                {
+                    if (!_isDead)
+                    {
+                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref _);
+                    }
+                });
         }
 
         private void HandleEnemySpendMana(int value)

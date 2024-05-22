@@ -102,16 +102,17 @@ public class PlayerTurnManager : MonoBehaviour
 
     public void EndPlayersTurn() => StartCoroutine(EndPlayersTurnRoutine());
 
-    private float GetAttackDamage()
+    private (float damage, float massiveDamage) GetAttackDamage()
     {
         float damage = 10f;
+        float massiveDamage = 0f;
         //@TODO
         /*To-Do Advantages and Ongoing Effects*/
         EffectsAndScrollsManager
             .Instance
             .onGoingScrolls
             .ForEach(obj => EventManager.BurnScroll(obj.Scroll));
-        return damage;
+        return (damage, massiveDamage);
     }
 
     private void HandlePlayersDeath()
@@ -173,9 +174,9 @@ public class PlayerTurnManager : MonoBehaviour
         playerAnimator.Play("Idle");
         pianoPortalParticleSystem.Stop();
 
-        float damage = GetAttackDamage();
+        (float damage, float massiveDamage) = GetAttackDamage();
 
-        EventManager.EnemiesDamaged(damage);
+        EventManager.EnemiesDamaged(damage, massiveDamage);
 
         _enemiesTakingDamage = true;
         while (_enemiesTakingDamage)

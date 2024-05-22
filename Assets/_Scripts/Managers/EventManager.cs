@@ -47,7 +47,7 @@ public static class EventManager
     public static UnityAction UnpauseGame;
     public static UnityAction<bool> CantPause;
 
-    public static UnityAction<float> EnemiesDamaged;
+    public static UnityAction<float, float> EnemiesDamaged;
     public static UnityAction EnemiesRegainMana;
     public static UnityAction EnemiesEndTakingDamage;
 

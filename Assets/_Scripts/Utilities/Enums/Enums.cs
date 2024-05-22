@@ -334,7 +334,9 @@ namespace Kingdom.Effects
         DamageModifier,
         MassiveDamage,
         Heal,
-        AdditionalMana,
+        AdditionalMana /*SET PLAYER'S MANA PER TURN*/
+        ,
+        AdditionalManaCost,
         RemoveNegativeEffects,
         PreventEnemyHeal,
         CompleteMitigation,

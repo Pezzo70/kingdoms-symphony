@@ -37,7 +37,11 @@ public class DisplayScrollData : MonoBehaviour
         int additionalMana = EffectsAndScrollsManager
             .Instance
             .onGoingEffects
-            .Where(obj => obj.EffectTarget == EffectTarget.Player)
+            .Where(
+                obj =>
+                    obj.EffectTarget == EffectTarget.Player
+                    && obj.EffectType == EffectType.AdditionalManaCost
+            )
             .Aggregate(0, (total, next) => total + (int)next.Modifier);
 
         int manaCost = scroll.manaRequired + additionalMana;

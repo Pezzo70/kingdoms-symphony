@@ -14,7 +14,11 @@ namespace Kingdom
 {
     public static class TheoryHandler
     {
-        public static void ValidateAndExecuteScrollAction(ScrollDTO scrollDTO)
+        public static void ValidateAndExecuteScrollAction(
+            ScrollDTO scrollDTO,
+            ref float damage,
+            ref float massiveDamage
+        )
         {
             //@TODO: OBJECTIVE, SCALE AND MODES TARGET
             KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
@@ -379,6 +383,80 @@ namespace Kingdom
             //     return effectInfos;
         }
 
-        public static void ValidateAndExecuteEffectAction(EffectDTO effectDTO) { }
+        public static void ValidateAndExecuteEffectAction(EffectDTO effectDTO, ref float damage) { }
+
+        public static void ValidateAndExecuteAdvantageDisadvantageAction(
+            EnemyEntity enemyEntity,
+            EnemyID enemyID,
+            bool isAdvantage,
+            ref float damage
+        )
+        {
+            //IF IS IS ADVANTAGE, DEAL WITH ADVANTAGE STUFF, IF IT IS DISADVANTAGE, DEAL WITH DISADVANTAGE STUFF
+            //IN ORDER TO GET THE NOTES EffectsAndScrollsManager.Instance.playedNotes
+
+            switch (enemyID)
+            {
+                case EnemyID.OutOfTuneGoblin:
+                    break;
+                case EnemyID.SteplessWerewolf:
+                    break;
+                case EnemyID.UnshakenBones:
+                    break;
+                case EnemyID.SoundlessShadows:
+                    break;
+                case EnemyID.SilencedClaws:
+                    break;
+                case EnemyID.SoundWatcher:
+                    break;
+                case EnemyID.AlienCaptain:
+                    break;
+                case EnemyID.AbyssalVisitor:
+                    break;
+            }
+        }
+
+        public static float ExecuteEnemyAttack(EnemyAttack enemyAttack)
+        {
+            float damage = 0f;
+            //DOES NOT NEED TO UPDATE ENEMIES MANA, JUST SPAWN EFFECTS AND RETURN DAMAGE
+            switch (enemyAttack.enemyAttackID)
+            {
+                case EnemyAttackID.Shove:
+                    break;
+                case EnemyAttackID.RythmlessClaps:
+                    break;
+                case EnemyAttackID.RythmlessClaws:
+                    break;
+                case EnemyAttackID.WaywardSteps:
+                    break;
+                case EnemyAttackID.UncontrollableGloves:
+                    break;
+                case EnemyAttackID.AirheadHeadbutt:
+                    break;
+                case EnemyAttackID.SilenceTheMind:
+                    break;
+                case EnemyAttackID.PoisonedFingers:
+                    break;
+                case EnemyAttackID.CuttingStrings:
+                    break;
+                case EnemyAttackID.ScratchingAndControlling:
+                    break;
+                case EnemyAttackID.StickyTentacles:
+                    break;
+                case EnemyAttackID.JudgeEyes:
+                    break;
+                case EnemyAttackID.SonicCrush:
+                    break;
+                case EnemyAttackID.HarmonicNullification:
+                    break;
+                case EnemyAttackID.AbysmalForce:
+                    break;
+                case EnemyAttackID.TroubledMind:
+                    break;
+            }
+
+            return damage;
+        }
     }
 }
