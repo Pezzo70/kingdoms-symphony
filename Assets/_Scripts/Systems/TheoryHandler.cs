@@ -20,7 +20,8 @@ namespace Kingdom
             ref float massiveDamage
         )
         {
-            //IF A SCROLL OBJECTIVE WAS ACCOMPLISHED
+            //IF A SCROLL OBJECTIVE WAS ACCOMPLISHED INVOKE EventManager.ScrollAccomplished
+            //AND IF FAILED EventManager.ScrollFailed
 
             //@TODO: OBJECTIVE, SCALE AND MODES TARGET
             KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
@@ -397,10 +398,14 @@ namespace Kingdom
                     //APPLIED HERE
                     break;
                 case EffectType.CooldownReduction:
-                    //NOT APPLIED HERE, APPLIED ON CAST BY MODIFYING burnedScrolls.internalCounter += VALUE
+                    /*
+                        NOT APPLIED HERE, APPLIED ON CAST BY MODIFYING burnedScrolls.internalCounter += VALUE
+                        Apply directly on Burned Scrolls right after the scroll objective is accomplished
+                    */
                     break;
                 case EffectType.Damage:
                     //APPLIED HERE FOR DMG P/ TURN AND THINGS LIKE THAT
+                    //MUST INVOKE EventManager.DamageEffectExecuted after
                     break;
                 case EffectType.DamageModifier:
                     //APPLIED HERE
@@ -417,7 +422,7 @@ namespace Kingdom
                 case EffectType.AdditionalManaScrollCost:
                     //NOT APPLIED HERE, VERIFIED ELSEWHERE
                     break;
-                case EffectType.RemoveNegativeEffects:
+                case EffectType.RemoveAllEffects:
                     //NOT APPLIED HERE, APPLIED ON CAST BY CALLING
                     break;
                 case EffectType.PreventEnemyHeal:
@@ -429,6 +434,15 @@ namespace Kingdom
                 case EffectType.Stun:
                     //NOT APPLIED HERE, ALTER ON MUSIC SHEET OR WHEN NOTES ARE PLAYER
                     //IN CASE OF ENEMIES, ALREADY VERIFYING IT ON ENEMY ENTITY
+                    break;
+                case EffectType.ReduceMana:
+                    //NOT APPLIED HERE
+                    break;
+                case EffectType.SpendMana:
+                    //NOT APPLIED HERE
+                    break;
+                case EffectType.PreventPlayerHeal:
+                    //NOT APPLIED HERE
                     break;
             }
         }

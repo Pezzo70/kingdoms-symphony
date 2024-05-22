@@ -24,9 +24,9 @@ MonoBehaviour:
   validModes: 
   numberOfValidRandom: 3
   XP: 6
-  xFactor: 10
-  yFactor: 2
-  zFactor: 25
+  xFactor: 30
+  yFactor: 0
+  zFactor: 0
   wFactor: 0
   effectsSymbols:
   - {fileID: 496723824, guid: 5461780dce80bc44581d277e78797569, type: 3}

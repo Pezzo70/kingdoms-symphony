@@ -18,7 +18,7 @@ MonoBehaviour:
   probability: 50
   xFactor: 3
   yFactor: 50
-  zFactor: 0
+  zFactor: 1
   wFactor: 0
   jFactor: 0
   mFactor: 0

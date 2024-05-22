@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Kingdom.Effects;
 using Kingdom.Enums.Player;
 using UnityEngine;
 
@@ -74,6 +76,36 @@ namespace Kingdom.Player
 
         public void ReduceMoral(float value)
         {
+            if (
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Find(
+                        obj =>
+                            obj.EffectType == EffectType.CompleteMitigation
+                            && obj.EffectTarget == EffectTarget.Player
+                    ) != null
+            )
+            {
+                value = 0f;
+            }
+            else
+            {
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Where(
+                        obj =>
+                            obj.EffectType == EffectType.PlayerMitigation
+                            && obj.EffectTarget == EffectTarget.Player
+                    )
+                    .ToList()
+                    .ForEach(effect =>
+                    {
+                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref value);
+                    });
+            }
+
             if (_currentMoral - value <= 0f)
             {
                 _currentMoral -= value;
@@ -90,6 +122,20 @@ namespace Kingdom.Player
 
         public void GainMoral(float value)
         {
+            if (
+                EffectsAndScrollsManager
+                    .Instance
+                    .onGoingEffects
+                    .Find(
+                        obj =>
+                            obj.EffectType == EffectType.PreventPlayerHeal
+                            && obj.EffectTarget == EffectTarget.Player
+                    ) != null
+            )
+            {
+                return;
+            }
+
             _currentMoral += value;
             _currentMoral = Mathf.Clamp(_currentMoral, 0f, _maxMoral);
             EventManager.OnPlayerMoralChange?.Invoke();

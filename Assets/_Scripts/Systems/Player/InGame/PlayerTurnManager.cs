@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Kingdom;
 using Kingdom.Audio;
 using Kingdom.Audio.Procedural;
 using Kingdom.Effects;
@@ -41,6 +42,7 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.OnPlayersDeath += HandlePlayersDeath;
         EventManager.OnVictory += HandleOnVictory;
         EventManager.OpenScroll += HandleOpenScroll;
+        EventManager.DamageEffectExecuted += HandleDamageEffectDTO;
     }
 
     void OnDisable()
@@ -51,6 +53,7 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.OnPlayersDeath -= HandlePlayersDeath;
         EventManager.OnVictory -= HandleOnVictory;
         EventManager.OpenScroll -= HandleOpenScroll;
+        EventManager.DamageEffectExecuted -= HandleDamageEffectDTO;
     }
 
     public void SetWasOpenSheet(bool wasOpen)
@@ -76,12 +79,55 @@ public class PlayerTurnManager : MonoBehaviour
 
     private void OnPlayerTurn()
     {
+        float _ = 0f;
+
+        EffectsAndScrollsManager
+            .Instance
+            .onGoingEffects
+            .Where(
+                obj =>
+                    obj.Target == this.gameObject
+                    && obj.EffectTarget == EffectTarget.Player
+                    && obj.TriggerOnTurnStart == true
+            )
+            .ToList()
+            .ForEach(obj => TheoryHandler.ValidateAndExecuteEffectAction(obj, ref _));
+
         if (_isDead || _win)
             return;
 
         EventManager.CantPause?.Invoke(false);
         PlayerStats ps = PlaythroughContainer.Instance.PlayerStats;
+
+        int manaAffectedByEffects = EffectsAndScrollsManager
+            .Instance
+            .onGoingEffects
+            .Where(
+                obj =>
+                    obj.Target == this.gameObject
+                    && obj.EffectTarget == EffectTarget.Player
+                    && (
+                        obj.EffectType == EffectType.AdditionalMana
+                        || obj.EffectType == EffectType.ReduceMana
+                    )
+            )
+            .Aggregate(0, (total, next) => total + (int)next.Modifier);
+
+        ps.ChangeManaPerTurn(ps.MaxMana + manaAffectedByEffects);
         ps.GainMana(ps.ManaPerTurn, false);
+
+        EffectsAndScrollsManager
+            .Instance
+            .onGoingEffects
+            .Where(
+                obj =>
+                    obj.Target == this.gameObject
+                    && obj.EffectTarget == EffectTarget.Player
+                    && obj.EffectType == EffectType.SpendMana
+            )
+            .ToList()
+            .ForEach(obj => TheoryHandler.ValidateAndExecuteEffectAction(obj, ref _));
+
         playersOptions.SetActive(true);
     }
 
@@ -92,10 +138,7 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.CastScroll?.Invoke(_scrollOpen);
     }
 
-    private void OnEnemyTurn()
-    {
-        playersOptions.SetActive(false);
-    }
+    private void OnEnemyTurn() => playersOptions.SetActive(false);
 
     private void HandleOnVictory(bool endGame) => StartCoroutine(OnVictoryCoroutine(endGame));
 
@@ -105,14 +148,30 @@ public class PlayerTurnManager : MonoBehaviour
 
     private (float damage, float massiveDamage) GetAttackDamage()
     {
-        float damage = 10f;
+        float damage = 0f;
         float massiveDamage = 0f;
-        //@TODO
-        /*To-Do Advantages and Ongoing Effects*/
+
         EffectsAndScrollsManager
             .Instance
             .onGoingScrolls
-            .ForEach(obj => EventManager.BurnScroll?.Invoke(obj.Scroll));
+            .ForEach(obj =>
+            {
+                TheoryHandler.ValidateAndExecuteScrollAction(obj, ref damage, ref massiveDamage);
+                EventManager.BurnScroll?.Invoke(obj.Scroll);
+            });
+
+        EffectsAndScrollsManager
+            .Instance
+            .onGoingEffects
+            .Where(
+                obj =>
+                    obj.EffectTarget == EffectTarget.Player
+                    && obj.EffectType == EffectType.DamageModifier
+                    && obj.Target == this.gameObject
+            )
+            .ToList()
+            .ForEach(effect => TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage));
+
         return (damage, massiveDamage);
     }
 
@@ -183,6 +242,10 @@ public class PlayerTurnManager : MonoBehaviour
         while (_enemiesTakingDamage)
             yield return new WaitForSeconds(1f);
 
+        //@TO-DO
+        //DISPLAY ACCOMPLISHED SCROLLS
+        //DISPLAY FAILED SCROLLS
+
         musicSheet.Clear();
         musicSheetCanvas.gameObject.SetActive(false);
         musicSheetCanvas.blocksRaycasts = true;
@@ -212,13 +275,16 @@ public class PlayerTurnManager : MonoBehaviour
             .attacks
             .First(attack => attack.enemyAttackID == enemyAttackID);
 
-        StartCoroutine(AttackEffectCoroutine(enemyAttack));
+        StartCoroutine(DamageCoroutine(enemyAttack.attackSymbol));
     }
 
-    private IEnumerator AttackEffectCoroutine(EnemyAttack enemyAttack)
+    private void HandleDamageEffectDTO(EffectDTO effect) =>
+        StartCoroutine(DamageCoroutine(effect.EffectIcon));
+
+    private IEnumerator DamageCoroutine(Sprite icon)
     {
         SpriteRenderer spr = playerEffectIcon.GetComponent<SpriteRenderer>();
-        spr.sprite = enemyAttack.attackSymbol;
+        spr.sprite = icon;
         Animator playerEffectIconAnimator = playerEffectIcon.GetComponent<Animator>();
         playerEffectIconAnimator.SetBool("EffectIconShow", true);
         playerAnimator.Play("Damage");

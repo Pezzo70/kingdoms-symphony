@@ -334,12 +334,14 @@ namespace Kingdom.Effects
         DamageModifier,
         MassiveDamage,
         Heal,
-        AdditionalMana /*SET PLAYER'S MANA PER TURN*/
-        ,
+        AdditionalMana,
+        ReduceMana,
         AdditionalManaScrollCost,
-        RemoveNegativeEffects,
+        SpendMana,
+        RemoveAllEffects,
         PreventEnemyHeal,
+        PreventPlayerHeal,
         CompleteMitigation,
-        Stun,
+        Stun, /*FOR ENEMIES MODIFIER == ATTACK ID*/
     }
 }

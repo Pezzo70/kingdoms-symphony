@@ -1,10 +1,8 @@
 using System;
 using Kingdom.Effects;
-using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.Scrolls;
-using Kingdom.Level;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,6 +31,7 @@ public static class EventManager
     public static UnityAction<EnemyID, EnemyDisadvantageID> EnemyDisadvantageTriggered;
     public static UnityAction<ScrollID> ScrollUsed;
     public static UnityAction<ScrollID> ScrollAccomplished;
+    public static UnityAction<ScrollID> ScrollFailed;
 
     public static UnityAction OnPlayerMoralChange;
     public static UnityAction OnPlayerManaChange;
@@ -60,10 +59,11 @@ public static class EventManager
     public static UnityAction<Scroll> OpenScroll;
     public static UnityAction<ScrollDTO> AddScroll;
     public static UnityAction<ScrollDTO> ScrollRemoved;
-    public static UnityAction<ScrollID> ScrollObjectiveAccomplished;
     public static UnityAction<Scroll> BurnScroll;
     public static UnityAction<EffectDTO> AddEffect;
     public static UnityAction<EffectDTO> RemoveEffect;
+
+    public static UnityAction<EffectDTO> DamageEffectExecuted;
 
     public static UnityAction<bool> MusicSheetOpen;
 }
