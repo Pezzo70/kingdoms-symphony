@@ -35,4 +35,7 @@ MonoBehaviour:
   - Name: MusicTheory
     Id: 1041947266
     TextAsset: {fileID: 4900000, guid: 5717a74e45c783d488145368e57ad2ee, type: 3}
+  - Name: HowToPlay
+    Id: 2030110913
+    TextAsset: {fileID: 4900000, guid: e440548985926df4b846590cb18e67b1, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

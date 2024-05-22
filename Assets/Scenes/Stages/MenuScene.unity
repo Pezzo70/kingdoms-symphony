@@ -10115,9 +10115,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 412766643}
     m_Modifications:
+    - target: {fileID: 1187127662424884666, guid: e0d5c37ae14daeb4a9956c4d7069928d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3563901639863702645, guid: e0d5c37ae14daeb4a9956c4d7069928d, type: 3}
       propertyPath: m_Name
       value: HowToPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498029128727897733, guid: e0d5c37ae14daeb4a9956c4d7069928d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5509816593380261355, guid: e0d5c37ae14daeb4a9956c4d7069928d, type: 3}
       propertyPath: m_Pivot.x
@@ -10207,6 +10215,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1021889913}
+    - target: {fileID: 7554543290998572761, guid: e0d5c37ae14daeb4a9956c4d7069928d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

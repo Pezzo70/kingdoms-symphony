@@ -138,6 +138,7 @@
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAdvantage.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\EndGame\EndGameManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizationManager.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\HowToPlay\HowToPlayHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyEntity.cs" />
     <Compile Include="Assets\_Scripts\Managers\Stages\EffectsAndScrollsManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\Constants.cs" />
