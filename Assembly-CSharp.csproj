@@ -87,8 +87,8 @@
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\NotationScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ScriptableClasses\ClefScriptable.cs" />
     <Compile Include="Assets\_Scripts\Systems\Systems.cs" />
-    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\ScrollUsed.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerUI.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\Disclaimer\DisclaimerHandler.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerScrollsUsed.cs" />
     <Compile Include="Assets\_Scripts\Managers\CursorManager.cs" />
@@ -153,8 +153,8 @@
     <Compile Include="Assets\_Scripts\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Enemies\EnemyAttack.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\AudioSystem.cs" />
-    <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\EffectApplied.cs" />
+    <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Scripts\LocalizedText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
