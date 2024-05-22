@@ -236,7 +236,7 @@ namespace Kingdom.Level
 
             PlayerData playerData = PlayerContainer.Instance.PlayerData;
             int previousLevel = playerData.GetLevel(currentCharacterID);
-            playerData.AddXP(100, currentCharacterID);
+            playerData.AddXP(totalXP, currentCharacterID);
             int currentLevel = playerData.GetLevel(currentCharacterID);
 
             if (currentLevel > previousLevel)

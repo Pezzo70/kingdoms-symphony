@@ -8,6 +8,7 @@ using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
 using Kingdom.Level;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 public class PlayerTurnManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerTurnManager : MonoBehaviour
     public GameObject pianoPortal;
     public Animator pianoPortalAnimator;
     public ParticleSystem pianoPortalParticleSystem;
+    private Scroll _scrollOpen;
 
     private bool _enemiesTakingDamage = false;
     private bool _isDead = false;
@@ -37,6 +39,7 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.EnemiesEndTakingDamage += HandleEnemiesEndTakingDamage;
         EventManager.OnPlayersDeath += HandlePlayersDeath;
         EventManager.OnVictory += HandleOnVictory;
+        EventManager.OpenScroll += HandleOpenScroll;
     }
 
     void OnDisable()
@@ -46,9 +49,12 @@ public class PlayerTurnManager : MonoBehaviour
         EventManager.EnemiesEndTakingDamage -= HandleEnemiesEndTakingDamage;
         EventManager.OnPlayersDeath -= HandlePlayersDeath;
         EventManager.OnVictory -= HandleOnVictory;
+        EventManager.OpenScroll -= HandleOpenScroll;
     }
 
     public void SetWasOpenSheet(bool wasOpen) => musicSheet.wasOpen = wasOpen;
+
+    private void HandleOpenScroll(Scroll scroll) => _scrollOpen = scroll;
 
     private void OnTurnChanged(Turn turn)
     {
@@ -70,6 +76,12 @@ public class PlayerTurnManager : MonoBehaviour
 
         EventManager.CantPause?.Invoke(false);
         playersOptions.SetActive(true);
+    }
+
+    public void CastScroll()
+    {
+        PlaythroughContainer.Instance.PlayerStats.SpendMana(_scrollOpen.manaRequired);
+        EventManager.CastScroll(_scrollOpen);
     }
 
     private void OnEnemyTurn()

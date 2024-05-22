@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using Kingdom.Audio;
+using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
 using UnityEngine;
@@ -25,17 +25,86 @@ namespace Kingdom.Effects
             burnedScrolls = new List<BurnedScrollDTO>();
         }
 
+        void OnEnable()
+        {
+            EventManager.CastScroll += HandleCastScroll;
+            EventManager.BurnScroll += HandleBurnScroll;
+            EventManager.AddEffect += HandleAddEffect;
+            EventManager.TurnChanged += HandleTurnChanged;
+        }
+
+        void OnDisable()
+        {
+            EventManager.CastScroll -= HandleCastScroll;
+            EventManager.BurnScroll -= HandleBurnScroll;
+            EventManager.AddEffect -= HandleAddEffect;
+            EventManager.TurnChanged -= HandleTurnChanged;
+        }
+
+        private void HandleCastScroll(Scroll scroll)
+        {
+            Clef[] clefs = new Clef[] { };
+            Chords[] chords = new Chords[] { };
+            Scale[] scales = new Scale[] { };
+            Modes[] modes = new Modes[] { };
+            int novr = scroll.numberOfValidRandom;
+            string[] names = new string[novr];
+
+            if (novr > 0)
+            {
+                if (scroll.validClef.Length > 0)
+                    clefs = GetRandomsTFromScroll(scroll.validClef, novr, ref names);
+                else if (scroll.validChords.Length > 0)
+                    chords = GetRandomsTFromScroll(scroll.validChords, novr, ref names);
+                else if (scroll.validScales.Length > 0)
+                    scales = GetRandomsTFromScroll(scroll.validScales, novr, ref names);
+                else if (scroll.validModes.Length > 0)
+                    modes = GetRandomsTFromScroll(scroll.validModes, novr, ref names);
+            }
+
+            ScrollDTO scrollDTO = new ScrollDTO(scroll, clefs, chords, scales, modes, names);
+            onGoingScrolls.Add(scrollDTO);
+            EventManager.AddScroll?.Invoke(scrollDTO);
+        }
+
+        private void HandleBurnScroll(Scroll scroll) { }
+
+        private void HandleAddEffect(EffectDTO effect) { }
+
+        private void HandleTurnChanged(Turn turn) { }
+
         public void ClearAllEffectsAndScrolls()
         {
             onGoingEffects.Clear();
             onGoingScrolls.Clear();
             burnedScrolls.Clear();
         }
+
+        private T[] GetRandomsTFromScroll<T>(T[] values, int numberOfRandom, ref string[] names)
+        {
+            List<T> listOfValues = values.ToList();
+            List<T> valuesSelecteds = new List<T>();
+
+            for (int i = 0; i < numberOfRandom; i++)
+            {
+                List<T> filtered = listOfValues
+                    .Where(obj => !valuesSelecteds.Contains(obj))
+                    .ToList();
+
+                int randomIndex = UnityEngine.Random.Range(0, filtered.Count);
+
+                valuesSelecteds.Add(filtered[randomIndex]);
+                names[i] = filtered[randomIndex].ToString();
+            }
+
+            return valuesSelecteds.ToArray();
+        }
     }
 
     public class EffectDTO
     {
         private string _gameObjectName;
+        private GameObject _target;
         private EffectTarget _effectTarget;
         private bool _triggerOnTurnStart;
         private EffectType _effectType;
@@ -48,6 +117,12 @@ namespace Kingdom.Effects
         {
             get => _gameObjectName;
         }
+
+        public GameObject Target
+        {
+            get => _target;
+        }
+
         public EffectTarget EffectTarget
         {
             get => _effectTarget;
@@ -79,6 +154,7 @@ namespace Kingdom.Effects
 
         public EffectDTO(
             string gameObjectName,
+            GameObject target,
             EffectTarget effectTarget,
             bool triggerOnTurnStart,
             EffectType effectType,
@@ -89,6 +165,7 @@ namespace Kingdom.Effects
         )
         {
             _gameObjectName = gameObjectName;
+            _target = target;
             _effectTarget = effectTarget;
             _triggerOnTurnStart = triggerOnTurnStart;
             _effectType = effectType;
@@ -113,29 +190,29 @@ namespace Kingdom.Effects
             get => _scroll;
         }
 
-        public ReadOnlyCollection<Clef> TargetClefs
+        public Clef[] TargetClefs
         {
-            get => Array.AsReadOnly(_targetClefs);
+            get => _targetClefs;
         }
 
-        public ReadOnlyCollection<Chords> TargetChords
+        public Chords[] TargetChords
         {
-            get => Array.AsReadOnly(_targetChords);
+            get => _targetChords;
         }
 
-        public ReadOnlyCollection<Scale> TargetScales
+        public Scale[] TargetScales
         {
-            get => Array.AsReadOnly(_targetScales);
+            get => _targetScales;
         }
 
-        public ReadOnlyCollection<Modes> TargetModes
+        public Modes[] TargetModes
         {
-            get => Array.AsReadOnly(_targetModes);
+            get => _targetModes;
         }
 
-        public ReadOnlyCollection<string> RandomTargetsNames
+        public string[] RandomTargetsNames
         {
-            get => Array.AsReadOnly(_randomTargetsNames);
+            get => _randomTargetsNames;
         }
 
         public ScrollDTO(

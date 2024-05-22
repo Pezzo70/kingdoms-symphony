@@ -63,7 +63,7 @@ public class DisplayScrollData : MonoBehaviour
                 .Find(obj => obj.Scroll == scroll.scrollID);
 
             bool notEnoughManaToCast =
-                PlaythroughContainer.Instance.PlayerStats.CurrentMana < manaCost;
+                manaCost > PlaythroughContainer.Instance.PlayerStats.CurrentMana;
 
             if (used != null || burned != null || notEnoughManaToCast)
             {
@@ -82,6 +82,11 @@ public class DisplayScrollData : MonoBehaviour
                     new Tuple<string, string>[] { new Tuple<string, string>("-X", turn.ToString()) }
                 );
             }
+            else if (notEnoughManaToCast == false)
+            {
+                castButton.GetComponent<Selectable>().interactable = true;
+            }
+
             castButton.SetActive(true);
         }
         else
@@ -106,5 +111,7 @@ public class DisplayScrollData : MonoBehaviour
             GameObject manaInstance = Instantiate(playerManaPrefab, manaContainer.transform);
             _instantiadedMana.Add(manaInstance);
         }
+
+        EventManager.OpenScroll?.Invoke(scroll);
     }
 }

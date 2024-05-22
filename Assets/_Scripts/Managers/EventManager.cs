@@ -55,8 +55,13 @@ public static class EventManager
     public static UnityAction NextEnemy;
     public static UnityAction NextEnemyTakesDamage;
 
-    public static UnityAction<(Scroll scroll, string[] randomTargets)> AddScroll;
+    public static UnityAction<Scroll> CastScroll;
+
+    public static UnityAction<Scroll> OpenScroll;
+    public static UnityAction<ScrollDTO> AddScroll;
+    public static UnityAction<Scroll> ScrollRemoved;
     public static UnityAction<ScrollID> ScrollObjectiveAccomplished;
     public static UnityAction<Scroll> BurnScroll;
-    public static UnityAction<(EffectDTO effect, GameObject target)> AddEffect;
+    public static UnityAction<EffectDTO> AddEffect;
+    public static UnityAction<EffectDTO> RemoveEffect;
 }

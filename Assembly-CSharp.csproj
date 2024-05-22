@@ -141,6 +141,7 @@
     <Compile Include="Assets\_Scripts\Managers\Stages\LevelSetupManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerMana.cs" />
     <Compile Include="Assets\_Scripts\Systems\Localization\SimpleLocalization\Example.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\TipOrScrollContainerPauseHandler.cs" />
     <Compile Include="Assets\_Scripts\Utilities\Persistence\ToOrFromJSON.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\MusicSheet.cs" />
     <Compile Include="Assets\_Scripts\Systems\Audio\ProceduralAudio\WaveAttributes.cs" />
