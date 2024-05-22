@@ -560,6 +560,7 @@ MonoBehaviour:
   icon: {fileID: 579671434365258114}
   description: {fileID: 7285569171610426114}
   expireIn: {fileID: 4234203693408721244}
+  pointPrefab: {fileID: 5788851914344387021, guid: 0136a62c292a6344fa22d0087d70b74f, type: 3}
 --- !u!114 &5996455248436292909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +602,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 5598827771488746125}
+          m_TargetAssemblyTypeName: EffectApplied, Assembly-CSharp
+          m_MethodName: SpawnPointOnTarget
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -609,6 +622,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 5598827771488746125}
+          m_TargetAssemblyTypeName: EffectApplied, Assembly-CSharp
+          m_MethodName: HidePointOnTarget
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -6,7 +6,6 @@ using Kingdom.Enums;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
 using Kingdom.Level;
-using TMPro;
 using UnityEngine;
 
 namespace Kingdom.Effects
