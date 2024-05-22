@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3396719449347377892}
   - component: {fileID: 4093375688867587406}
   - component: {fileID: 1738524201245049028}
+  - component: {fileID: 5453786107564424285}
   m_Layer: 0
   m_Name: PlayerUsedScrolls
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -76,3 +77,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5453786107564424285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3925749007500213191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5dd79ef40822494db286b04e744979c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

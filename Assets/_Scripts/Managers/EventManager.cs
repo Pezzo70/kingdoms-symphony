@@ -59,7 +59,7 @@ public static class EventManager
 
     public static UnityAction<Scroll> OpenScroll;
     public static UnityAction<ScrollDTO> AddScroll;
-    public static UnityAction<Scroll> ScrollRemoved;
+    public static UnityAction<ScrollDTO> ScrollRemoved;
     public static UnityAction<ScrollID> ScrollObjectiveAccomplished;
     public static UnityAction<Scroll> BurnScroll;
     public static UnityAction<EffectDTO> AddEffect;
