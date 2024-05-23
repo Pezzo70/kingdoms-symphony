@@ -216,6 +216,7 @@ namespace Kingdom.Extensions
 
         public static KeyName ToKey(this Note note)
         {
+            if(note.note.NoteBehaviour is NotationBehaviour.Pause) return KeyName.Pause;
             int index = note.line;
             var array = note.clef.Clef == Clef.G ? GClefKeysNatural : FCLefKeysNatural;
             var arrayComplete = note.clef.Clef == Clef.G ? GClefKeys : FClefKeys;
