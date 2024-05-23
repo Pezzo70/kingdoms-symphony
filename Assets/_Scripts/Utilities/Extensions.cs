@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,6 +103,116 @@ namespace Kingdom.Extensions
             KeyName.B3,
             KeyName.C4
         };
+
+        public enum ModeOrderKey
+        {
+            Tone = 0,
+            Semitone = 1
+        }
+
+        private static Dictionary<Modes, ModeOrderKey[]> ModeOrder = new Dictionary<
+            Modes,
+            ModeOrderKey[]
+        >()
+        {
+            {
+                Modes.Ionian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone
+                }
+            },
+            {
+                Modes.Dorian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone
+                }
+            },
+            {
+                Modes.Lydian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone
+                }
+            },
+            {
+                Modes.Mixolydian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone
+                }
+            },
+            {
+                Modes.Aeolian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone
+                }
+            },
+            {
+                Modes.Locrian,
+                new ModeOrderKey[]
+                {
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Semitone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone,
+                    ModeOrderKey.Tone
+                }
+            },
+        };
+
+        public static KeyName[] GetKeysFromMode(Modes mode, KeyName key)
+        {
+            var order = ModeOrder[mode];
+            List<KeyName> keys = new List<KeyName>();
+            KeyName[] array = (KeyName[])Enum.GetValues(typeof(KeyName));
+            int startIndex = array.ToList().FindIndex(obj => obj == key);
+            keys.Add(array[startIndex]);
+            int outsiderIndex = 1;
+            for (int i = 0; i < order.Length; i++)
+            {
+                int alter = order[i] == ModeOrderKey.Tone ? 2 : 1;
+                int current = array.ToList().FindIndex(obj => obj == keys[outsiderIndex - 1]);
+                keys.Add(array[current + alter]);
+                outsiderIndex++;
+            }
+
+            return keys.ToArray();
+        }
 
         public static KeyName ToKey(this Note note)
         {
