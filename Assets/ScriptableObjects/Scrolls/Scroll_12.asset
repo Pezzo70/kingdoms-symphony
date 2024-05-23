@@ -22,7 +22,7 @@ MonoBehaviour:
   validChords: 
   validScales: 00000000010000000200000003000000040000000500000006000000
   validModes: 
-  numberOfValidRandom: 4
+  numberOfValidRandom: 2
   XP: 8
   xFactor: 4
   yFactor: 0

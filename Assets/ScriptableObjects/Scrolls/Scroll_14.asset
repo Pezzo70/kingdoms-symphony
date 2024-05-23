@@ -20,8 +20,8 @@ MonoBehaviour:
   targetMeasures: 0
   validClef: 
   validChords: 
-  validScales: 
-  validModes: 00000000010000000200000003000000040000000500000006000000
+  validScales: 00000000010000000200000003000000040000000500000006000000
+  validModes: 00000000
   numberOfValidRandom: 1
   XP: 10
   xFactor: 200

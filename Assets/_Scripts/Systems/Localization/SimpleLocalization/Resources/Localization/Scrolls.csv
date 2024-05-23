@@ -41,10 +41,10 @@ Scrolls.Objective.7,"Em pelo menos um compasso, adicione uma semibreve tônica d
 Scrolls.Objective.8,"Em compassos diferentes, adicione notas enarmônicas.","In different measures, add enharmonic notes."
 Scrolls.Objective.9,No quarto compasso adicione as notas subdominantes e dominantes de uma escala maior aleatória.,Add the subdominant and dominant notes of a random major scale in the fourth measure.
 Scrolls.Objective.10,No primeiro compasso realize a progressões de acorde I-iv-V partindo de um acorde aleatório (I).,"In the first measure, perform the chord progressions I-iv-V  starting from a random chord (I)."
-Scrolls.Objective.11,Realize o arpejo de três acordes acordes aleatórios em três compassos distintos na ordem designada.,"Play out as an arpeggio three random chords in three separate measures, following the designated sequence."
-Scrolls.Objective.12,"Em quatro compassos distintos, adicione somente notas de quatro escalas maiores aleatórias.","In four distinct measures, add only notes from four random major scales."
-Scrolls.Objective.13,Utilize metade de seus compassos disponíveis para compor uma melodia - não pode haver sobreposição de notas e a soma da duração de todas as notas devem equivaler ao tempo do compasso.,"Use half of your available measures to compose a melody - ensure that there are no overlapping notes, and the total duration of all notes equals the measure's duration."
-Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota tônica de um acorde maior aleatório.","In all available measures, compose using only notes following a random Mode from a tonic note from a random chord."
+Scrolls.Objective.11,Realize o arpejo de um acorde aleatório em três compassos distintos.,Play out as an arpeggio of a random chord  in three separate measures.
+Scrolls.Objective.12,Adicione somente notas de duas escalas maiores aleatórias.,Add only notes from two rando major scales.
+Scrolls.Objective.13,Componha uma melodia com todos os compassos disponíveis - não pode haver sobreposição de notas.,Use all available measures to compose a melody.
+Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo o Modo Jônio a partir de uma nota tônica de uma escala maior.","In all available measures, compose using only notes following Ionian Mode from a tonic note from a random scale."
 Scrolls.Menu.Cooldown,Tempo de Espera: -X (turno).,Cooldown: -X (turn).
 Scrolls.Menu.Available,Disponível em -X (turno).,Available in -X (turn).
 Scrolls.Menu.Cast,Usar Pergaminho,Cast Scroll

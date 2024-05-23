@@ -147,6 +147,21 @@ namespace Kingdom.Effects
             burnedScrolls.Clear();
         }
 
+        public void ClearAllPlayersEffects()
+        {
+            var filteredEffects = onGoingEffects
+                .Where(obj => obj.EffectTarget != EffectTarget.Player)
+                .ToList();
+            onGoingEffects.ForEach(obj =>
+            {
+                if (!filteredEffects.Contains(obj))
+                {
+                    EventManager.RemoveEffect(obj);
+                }
+            });
+            onGoingEffects = filteredEffects;
+        }
+
         private T[] GetRandomsTFromScroll<T>(
             T[] values,
             int numberOfRandom,

@@ -1,5 +1,6 @@
 using Assets.SimpleLocalization.Scripts;
 using Kingdom.Effects;
+using Kingdom.Enums.Enemies;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,7 +61,20 @@ public class EffectApplied : MonoBehaviour
         icon.sprite = effectDTO.EffectIcon;
         description.text = effectDTO.DisplayText;
         if (effectDTO.Modifier != 0)
-            description.text += $" | ({effectDTO.Modifier})";
+        {
+            if (
+                effectDTO.EffectTarget == EffectTarget.Enemy
+                && effectDTO.EffectType == EffectType.Stun
+            )
+            {
+                description.text +=
+                    $" | ({LocalizationManager.Localize("Enemies.Attack.Name." + effectDTO.Modifier)})";
+            }
+            else
+            {
+                description.text += $" | ({effectDTO.Modifier})";
+            }
+        }
         expireIn.LocalizationKey = "InGame.Effect.Expire";
         expireIn.Replace(
             new System.Tuple<string, string>[]

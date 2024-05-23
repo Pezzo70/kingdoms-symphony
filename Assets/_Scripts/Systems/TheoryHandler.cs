@@ -264,16 +264,85 @@ namespace Kingdom
                     }
                     break;
                 case ScrollID.HealingThroughArpeggios:
-                    // validatorResult =
+                    validatorResult = ScrollValidator.CheckArpeggioOnDifferentMeasure(
+                        notes,
+                        scrollDTO.TargetChords[0],
+                        3
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        ps.GainMoral(scrollDTO.Scroll.xFactor);
+                        EffectsAndScrollsManager.Instance.ClearAllPlayersEffects();
+                    }
                     break;
                 case ScrollID.BetweenScales:
-                    // validatorResult =
+                    validatorResult = ScrollValidator.CheckNotesFromMajorScale(
+                        notes,
+                        scrollDTO.TargetScales
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        enemies
+                            .ToList()
+                            .ForEach(enemy =>
+                            {
+                                var attacks = enemy.GetComponent<EnemyEntity>().enemyData.attacks;
+                                effectDTO = new EffectDTO(
+                                    enemy.name,
+                                    GetScrollEffectDescription(scrollDTO.Scroll),
+                                    enemy,
+                                    scrollDTO.Scroll.effectsSymbols[0],
+                                    EffectTarget.Enemy,
+                                    false,
+                                    EffectType.Stun,
+                                    true,
+                                    turn.Item2,
+                                    turn.Item2 + (int)scrollDTO.Scroll.xFactor,
+                                    (int)
+                                        attacks[
+                                            UnityEngine.Random.Range(0, attacks.Count())
+                                        ].enemyAttackID
+                                );
+                                EventManager.AddEffect?.Invoke(effectDTO);
+                            });
+                    }
                     break;
                 case ScrollID.Melodic:
-                    // validatorResult =
+                    validatorResult = ScrollValidator.CheckMelodyComposition(notes);
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += notes.Count() / 2f * (0.1f * (scrollDTO.Scroll.xFactor / 100f));
+                    }
                     break;
                 case ScrollID.PianistWithModes:
-                    // validatorResult =
+                    validatorResult = ScrollValidator.CheckMode(
+                        notes,
+                        Modes.Ionian,
+                        NotationExtensions.ScaleTonics[scrollDTO.TargetScales[0]]
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        massiveDamage += scrollDTO.Scroll.xFactor;
+                        ps.GainMoral(scrollDTO.Scroll.yFactor);
+                        effectDTO = new EffectDTO(
+                            playerPrefab.name,
+                            GetScrollEffectDescription(scrollDTO.Scroll),
+                            playerPrefab,
+                            scrollDTO.Scroll.effectsSymbols[0],
+                            EffectTarget.Player,
+                            false,
+                            EffectType.PlayerMitigation,
+                            true,
+                            turn.Item2,
+                            (int)scrollDTO.Scroll.zFactor + turn.Item2,
+                            scrollDTO.Scroll.wFactor
+                        );
+                        EventManager.AddEffect?.Invoke(effectDTO);
+                    }
                     break;
             }
 

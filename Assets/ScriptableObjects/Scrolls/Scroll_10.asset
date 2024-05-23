@@ -17,14 +17,14 @@ MonoBehaviour:
   unlockedFor: 00000000
   manaRequired: 3
   cooldown: 4
-  targetMeasures: 3
+  targetMeasures: 1
   validClef: 
   validChords: 0000000002000000040000000500000007000000090000000b000000
   validScales: 
   validModes: 
-  numberOfValidRandom: 3
+  numberOfValidRandom: 1
   XP: 6
-  xFactor: 30
+  xFactor: 60
   yFactor: 0
   zFactor: 0
   wFactor: 0

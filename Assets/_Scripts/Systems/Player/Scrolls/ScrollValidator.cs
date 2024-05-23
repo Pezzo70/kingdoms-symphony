@@ -226,68 +226,87 @@ namespace Kingdom
             return new ValidatorResult(chordsPlayed.All(r => r == true), 0);
         }
 
-        //11
-        public static bool CheckArpeggioByCompass(IEnumerable<Note> notes, KeyName[,] chords)
+        public static ValidatorResult CheckArpeggioOnDifferentMeasure(
+            IEnumerable<Note> notes,
+            Chords targetChord,
+            int times
+        )
         {
-            var notesByCompass = notes.AsReadOnlyList().GroupByCompass();
-            if (notesByCompass.Count < chords.GetLength(0))
-                return false;
-
-            for (int i = 0; i < chords.GetLength(0); i++)
+            var pages = notes.Select(obj => obj.page).Distinct().ToList();
+            int counter = 0;
+            for (int i = 0; i < pages.Count(); i++)
             {
-                if (!notesByCompass.ContainsKey(i + 1))
-                    return false;
-
-                var notesInCompass = notesByCompass[i + 1];
-                var arpeggio = chords.GetLength(1);
-
-                if (notesInCompass.Count < arpeggio)
-                    return false;
-
-                for (int j = 0; j < arpeggio; j++)
-                {
-                    if (notesInCompass[j].ToKey() != chords[i, j])
-                        return false;
-                }
+                bool res = CheckArpeggioByMeasure(notes, targetChord, pages[i]);
+                if (res)
+                    counter++;
             }
 
-            return true;
+            return new ValidatorResult(counter >= times, 0f);
         }
 
-        //12
-        public static bool CheckBetweenScales(IEnumerable<Note> notes, KeyName[,] keys)
+        public static bool CheckArpeggioByMeasure(
+            IEnumerable<Note> notes,
+            Chords targetChord,
+            int targetMeasure
+        )
         {
-            if (notes.Select(n => n.page).Distinct().Count() < 4)
+            var notesByMeasures = notes.Where(obj => obj.page == targetMeasure).ToList();
+            var targetNotes = Extensions.NotationExtensions.ChordsNote[targetChord].ToList();
+            bool[] checkNote = { false, false, false };
+            int times = 0;
+
+            var initIndex = notesByMeasures.FindIndex(
+                obj => KeyToSimpleNote(obj.ToKey()) == targetNotes[0]
+            );
+
+            if (initIndex == -1)
                 return false;
 
-            return true;
+            int chordCounter = 0;
+            for (int j = initIndex; j < notesByMeasures.Count; j++)
+            {
+                if (chordCounter > targetNotes.Count() - 1)
+                    break;
+                checkNote[times] =
+                    KeyToSimpleNote(notesByMeasures[j].ToKey()) == targetNotes[chordCounter];
+                chordCounter++;
+                times++;
+            }
+
+            return checkNote.All(obj => obj == true);
         }
 
-        //13
-        public static bool CheckMelodyComposition(IEnumerable<Note> notes, int totalCompasses)
+        public static ValidatorResult CheckNotesFromMajorScale(
+            IEnumerable<Note> notes,
+            Scale[] scales
+        )
         {
-            var notesList = notes.ToList();
-            int compasses = notes.Select(n => n.page).Distinct().Count();
-            if (compasses > (totalCompasses / 2.0f))
-                return false;
+            List<KeyName> keys = new List<KeyName>();
+            foreach (var scale in scales)
+            {
+                keys.AddRange(
+                    NotationExtensions.GetKeysFromMode(
+                        Modes.Ionian,
+                        NotationExtensions.ScaleTonics[scale]
+                    )
+                );
+            }
 
-            float sumTempoPerCompass = notes.Sum(n => n.note.Tempo.ToFloat());
-            if (sumTempoPerCompass > compasses)
-                return false;
-
-            return !notesList.Any(n => n.GetChord(notesList).Count() > 1);
+            return new ValidatorResult(notes.All(obj => keys.Contains(obj.ToKey())), 0f);
         }
 
-        //14
-        public static bool CheckKeys(IEnumerable<Note> notes, KeyName[] keys) =>
-            notes.All(n => keys.Contains(n.ToKey()));
-
-        //15
-        //Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota tônica de um acorde maior aleatório.
-        public static bool CheckMode(IEnumerable<Note> note, Modes mode, KeyName[] chord)
+        public static ValidatorResult CheckMelodyComposition(IEnumerable<Note> notes)
         {
-            var modeNotes = NotationExtensions.GetKeysFromMode(mode, chord[0]);
-            return note.All(n => modeNotes.Contains(n.ToKey()));
+            return new ValidatorResult(
+                notes.All(obj => obj.GetChord(notes.ToList()).Count == 0),
+                0f
+            );
+        }
+
+        public static ValidatorResult CheckMode(IEnumerable<Note> notes, Modes mode, KeyName note)
+        {
+            var modeNotes = NotationExtensions.GetKeysFromMode(mode, note);
+            return new ValidatorResult(notes.All(n => modeNotes.Contains(n.ToKey())), 0f);
         }
     }
 

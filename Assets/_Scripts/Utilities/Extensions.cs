@@ -460,7 +460,7 @@ namespace Kingdom.Extensions
                 .ToList();
         }
 
-        public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) =>
+        public static Dictionary<int, List<Note>> NotesByMeasure(this IList<Note> note) =>
             note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());
 
         public static int GetKeyIndexInClef(this KeyName key, Clef clef)
