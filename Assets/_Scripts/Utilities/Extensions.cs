@@ -110,6 +110,105 @@ namespace Kingdom.Extensions
             Semitone = 1
         }
 
+        private static Dictionary<Chords, Chords[]> ChordsProgressionIivV = new Dictionary<
+            Chords,
+            Chords[]
+        >
+        {
+            { Chords.CMajor, new Chords[] { Chords.CMajor, Chords.FMajor, Chords.GMajor } },
+            { Chords.DMajor, new Chords[] { Chords.DMajor, Chords.GMajor, Chords.AMajor } },
+            { Chords.EMajor, new Chords[] { Chords.EMajor, Chords.AMajor, Chords.BMajor } },
+            { Chords.FMajor, new Chords[] { Chords.FMajor, Chords.BbMinor, Chords.CMajor } },
+            { Chords.GMajor, new Chords[] { Chords.GMajor, Chords.CMajor, Chords.DMajor } },
+            { Chords.AMajor, new Chords[] { Chords.AMajor, Chords.DMajor, Chords.EMajor } },
+            { Chords.BMajor, new Chords[] { Chords.BMajor, Chords.EMajor, Chords.FSharpMajor } }
+        };
+
+        private static Dictionary<Chords, SimpleNotes[]> ChordsNote = new Dictionary<
+            Chords,
+            SimpleNotes[]
+        >()
+        {
+            { Chords.CMajor, new SimpleNotes[] { SimpleNotes.C, SimpleNotes.E, SimpleNotes.G } },
+            {
+                Chords.CSharpMajor,
+                new SimpleNotes[] { SimpleNotes.CSharp, SimpleNotes.F, SimpleNotes.GSharp }
+            },
+            {
+                Chords.DMajor,
+                new SimpleNotes[] { SimpleNotes.D, SimpleNotes.FSharp, SimpleNotes.A }
+            },
+            {
+                Chords.EbMajor,
+                new SimpleNotes[] { SimpleNotes.DSharp, SimpleNotes.G, SimpleNotes.ASharp }
+            },
+            {
+                Chords.EMajor,
+                new SimpleNotes[] { SimpleNotes.E, SimpleNotes.GSharp, SimpleNotes.B }
+            },
+            { Chords.FMajor, new SimpleNotes[] { SimpleNotes.F, SimpleNotes.A, SimpleNotes.C } },
+            {
+                Chords.FSharpMajor,
+                new SimpleNotes[] { SimpleNotes.FSharp, SimpleNotes.ASharp, SimpleNotes.CSharp }
+            },
+            { Chords.GMajor, new SimpleNotes[] { SimpleNotes.G, SimpleNotes.B, SimpleNotes.D } },
+            {
+                Chords.AbMajor,
+                new SimpleNotes[] { SimpleNotes.GSharp, SimpleNotes.C, SimpleNotes.DSharp }
+            },
+            {
+                Chords.AMajor,
+                new SimpleNotes[] { SimpleNotes.A, SimpleNotes.CSharp, SimpleNotes.E }
+            },
+            {
+                Chords.BbMajor,
+                new SimpleNotes[] { SimpleNotes.ASharp, SimpleNotes.D, SimpleNotes.F }
+            },
+            {
+                Chords.BMajor,
+                new SimpleNotes[] { SimpleNotes.B, SimpleNotes.DSharp, SimpleNotes.FSharp }
+            },
+            {
+                Chords.CMinor,
+                new SimpleNotes[] { SimpleNotes.C, SimpleNotes.DSharp, SimpleNotes.G }
+            },
+            {
+                Chords.CSharpMinor,
+                new SimpleNotes[] { SimpleNotes.CSharp, SimpleNotes.E, SimpleNotes.GSharp }
+            },
+            { Chords.DMinor, new SimpleNotes[] { SimpleNotes.D, SimpleNotes.F, SimpleNotes.A } },
+            {
+                Chords.EbMinor,
+                new SimpleNotes[] { SimpleNotes.DSharp, SimpleNotes.FSharp, SimpleNotes.ASharp }
+            },
+            { Chords.EMinor, new SimpleNotes[] { SimpleNotes.E, SimpleNotes.G, SimpleNotes.B } },
+            {
+                Chords.FMinor,
+                new SimpleNotes[] { SimpleNotes.F, SimpleNotes.GSharp, SimpleNotes.C }
+            },
+            {
+                Chords.FSharpMinor,
+                new SimpleNotes[] { SimpleNotes.FSharp, SimpleNotes.A, SimpleNotes.CSharp }
+            },
+            {
+                Chords.GMinor,
+                new SimpleNotes[] { SimpleNotes.G, SimpleNotes.ASharp, SimpleNotes.D }
+            },
+            {
+                Chords.AbMinor,
+                new SimpleNotes[] { SimpleNotes.GSharp, SimpleNotes.B, SimpleNotes.DSharp }
+            },
+            { Chords.AMinor, new SimpleNotes[] { SimpleNotes.A, SimpleNotes.C, SimpleNotes.E } },
+            {
+                Chords.BbMinor,
+                new SimpleNotes[] { SimpleNotes.ASharp, SimpleNotes.CSharp, SimpleNotes.F }
+            },
+            {
+                Chords.BMinor,
+                new SimpleNotes[] { SimpleNotes.B, SimpleNotes.D, SimpleNotes.FSharp }
+            }
+        };
+
         private static Dictionary<Modes, ModeOrderKey[]> ModeOrder = new Dictionary<
             Modes,
             ModeOrderKey[]
@@ -216,7 +315,8 @@ namespace Kingdom.Extensions
 
         public static KeyName ToKey(this Note note)
         {
-            if(note.note.NoteBehaviour is NotationBehaviour.Pause) return KeyName.Pause;
+            if (note.note.NoteBehaviour is NotationBehaviour.Pause)
+                return KeyName.Pause;
             int index = note.line;
             var array = note.clef.Clef == Clef.G ? GClefKeysNatural : FCLefKeysNatural;
             var arrayComplete = note.clef.Clef == Clef.G ? GClefKeys : FClefKeys;
