@@ -594,18 +594,56 @@ namespace Kingdom
             ref float damage
         )
         {
-            //IF IS IS ADVANTAGE, DEAL WITH ADVANTAGE STUFF, IF IT IS DISADVANTAGE, DEAL WITH DISADVANTAGE STUFF
-            //IN ORDER TO GET THE NOTES EffectsAndScrollsManager.Instance.playedNotes
-            //MODIFY DAMAGE VALUE FOR EACH ADVANTAGE AND FOR EACH DISADVANTAGE
-            //INVOKE THE FOLLOWING EVENTS WHEN THE ADVANTAGE OR DISADVANTAGE TRIGGER
-            //public static UnityAction<EnemyID, EnemyAdvantageID> EnemyAdvantageTriggered;
-            //public static UnityAction<EnemyID, EnemyDisadvantageID> EnemyDisadvantageTriggered;
-
+            EnemyAdvantageID eAtriggered = EnemyAdvantageID.GoblinsWill;
+            EnemyDisadvantageID eDtriggered = EnemyDisadvantageID.HatefulMelodies;
+            bool trigger = false;
+            List<Note> notes = EffectsAndScrollsManager.Instance.playedNotes;
             switch (enemyID)
             {
                 case EnemyID.OutOfTuneGoblin:
+                    if (isAdvantage)
+                    {
+                        if (notes.All(obj => obj.GetChord(notes).Count > 1))
+                        {
+                            eAtriggered = EnemyAdvantageID.GoblinsWill;
+                            damage -= damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
+                            trigger = true;
+                        }
+                    }
+                    else
+                    {
+                        if (notes.All(obj => obj.GetChord(notes).Count < 1))
+                        {
+                            eDtriggered = EnemyDisadvantageID.HatefulMelodies;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
+                            trigger = true;
+                        }
+                    }
                     break;
                 case EnemyID.SteplessWerewolf:
+                    if (isAdvantage)
+                    {
+                        if (notes.Any(obj => obj.note.Tempo == Tempo.Whole))
+                        {
+                            eAtriggered = EnemyAdvantageID.WerewolfsWill;
+                            damage -= damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
+                            trigger = true;
+                        }
+                    }
+                    else
+                    {
+                        if (
+                            notes.All(obj => obj.GetChord(notes).Count < 1)
+                            && notes.Any(obj => obj.note.NoteBehaviour == NotationBehaviour.Note)
+                        )
+                        {
+                            eDtriggered = EnemyDisadvantageID.CantPauseHowls;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
+                            trigger = true;
+                        }
+                    }
                     break;
                 case EnemyID.UnshakenBones:
                     break;
@@ -619,6 +657,14 @@ namespace Kingdom
                     break;
                 case EnemyID.AbyssalVisitor:
                     break;
+            }
+
+            if (trigger)
+            {
+                if (isAdvantage)
+                    EventManager.EnemyAdvantageTriggered?.Invoke(enemyID, eAtriggered);
+                else
+                    EventManager.EnemyDisadvantageTriggered?.Invoke(enemyID, eDtriggered);
             }
         }
 
