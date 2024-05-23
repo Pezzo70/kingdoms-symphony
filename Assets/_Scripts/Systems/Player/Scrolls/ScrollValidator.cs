@@ -45,7 +45,7 @@ namespace Kingdom
         public static bool CheckClef(IEnumerable<Note> notes, Clef clef) => notes.Any(n => n.clef.Clef == clef);
 
         //5 & 6
-        public static ValidatorResult CheckSemiTones(IEnumerable<Note> notes, bool semi)
+        public static ValidatorResult CheckSemiTones(IEnumerable<Note> notes, bool tone)
         {
             var notesByCompass = notes.GroupBy(n => n.page);
             bool result = true;
@@ -58,7 +58,7 @@ namespace Kingdom
                 {
                     var prevNote = sortedNotes[i - 1];
                     var currNote = sortedNotes[i];
-                    if (Math.Abs(currNote.ToKey().GetKeyIndexInClef(currNote.clef.Clef) - prevNote.ToKey().GetKeyIndexInClef(prevNote.clef.Clef)) != (1 + Convert.ToInt32(semi)))
+                    if (Math.Abs(currNote.ToKey().GetKeyIndexInClef(currNote.clef.Clef) - prevNote.ToKey().GetKeyIndexInClef(prevNote.clef.Clef)) != (1 + Convert.ToInt32(tone)))
                         {
                             result = false;
                             factor= 0;
@@ -74,10 +74,16 @@ namespace Kingdom
         //7
         public static ValidatorResult CheckWholeTonic(IEnumerable<Note> notes)
         {
+
+        
             return new ValidatorResult(false, 0);
         }
 
         //8
+        public static bool CheckEnarmonics(IEnumerable<Note> notes)
+        {
+            return notes.Any(note => notes.Any(n => n.ToKey() != KeyName.C4 && n.line != note.line && n.ToKey() == note.ToKey()));
+        }
 
         //9
 
@@ -86,6 +92,7 @@ namespace Kingdom
         //11
         public static bool CheckArpeggioByCompass(IEnumerable<Note> notes, KeyName[,] chords)
         {
+            
             var notesByCompass = notes.AsReadOnlyList().GroupByCompass();
             if (notesByCompass.Count < chords.GetLength(0))
                 return false;
