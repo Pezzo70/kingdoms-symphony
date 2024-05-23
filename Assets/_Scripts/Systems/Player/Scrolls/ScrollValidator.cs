@@ -72,11 +72,10 @@ namespace Kingdom
         }
 
         //7
-        public static ValidatorResult CheckWholeTonic(IEnumerable<Note> notes)
-        {
-
-        
-            return new ValidatorResult(false, 0);
+        public static bool CheckWholeTonic(IEnumerable<Note> notes, KeyName[] keyNames)
+        {      
+            return notes.Any(n => n.note.Tempo is Tempo.Whole && n.ToKey() == keyNames[0]);
+     
         }
 
         //8
@@ -86,8 +85,15 @@ namespace Kingdom
         }
 
         //9
-
+        public static bool CheckDominants(IEnumerable<Note> note, KeyName[,] keyNames)
+        {
+            return true;
+        }
         //10
+        public static bool CheckProgressions(IEnumerable<Note> note, KeyName[] keyNames)
+        {
+            return true;
+        }
         
         //11
         public static bool CheckArpeggioByCompass(IEnumerable<Note> notes, KeyName[,] chords)
@@ -122,7 +128,10 @@ namespace Kingdom
         //12
         public static bool CheckBetweenScales(IEnumerable<Note> notes, KeyName[,] keys)
         {
-            return false;
+            if(notes.Select(n => n.page).Distinct().Count() < 4)
+                 return false;
+
+            return true;
         }
 
         //13
