@@ -88,10 +88,10 @@ namespace Kingdom.Audio
 
         public override void OnPointerExit(PointerEventData data)
         {
-            if(isHovering)
+            if (isHovering)
             {
                 isHovering = false;
-                musicSheet.SetHover(isHovering, objectTag)
+                musicSheet.SetHover(isHovering, objectTag);
             }
         }
 
