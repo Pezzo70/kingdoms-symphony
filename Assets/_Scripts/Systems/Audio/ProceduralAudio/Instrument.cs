@@ -24,6 +24,8 @@ namespace Kingdom.Audio.Procedural
         [SerializeField]
         protected float _sampleRate;
 
+        protected float _userVolume;
+
         public ReadOnlyCollection<KeyPlayed> KeysPlayed
         {
             get => _keysPlayed.AsReadOnly();
@@ -68,7 +70,11 @@ namespace Kingdom.Audio.Procedural
             _keysPlayed.AddRange(keys);
         }
 
-        public virtual void SetVolume(float volume) => _gain = volume / 2;
+        public virtual void SetVolume(float volume)
+        {
+            _userVolume = volume;
+            this.GetComponent<AudioSource>().volume = volume;
+        }
 
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
     }

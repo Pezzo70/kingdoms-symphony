@@ -1,7 +1,6 @@
 using UnityEngine;
 using static Kingdom.Audio.Procedural.Frequencies;
 
-
 namespace Kingdom.Audio.Procedural
 {
     [System.Serializable]
@@ -60,7 +59,8 @@ namespace Kingdom.Audio.Procedural
                 for (int i = 0; i < data.Length; i += channels)
                 {
                     float value =
-                        WaveFunction(i / channels, key.TimePlayed, key.Name) * volumeModifier * _gain;
+                        WaveFunction(i / channels, key.TimePlayed, key.Name)
+                        * (volumeModifier * _gain * _userVolume);
                     for (int channel = 0; channel < channels; channel++)
                         data[i + channel] += value;
                 }

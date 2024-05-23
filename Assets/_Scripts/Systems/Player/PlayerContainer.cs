@@ -75,11 +75,6 @@ namespace Kingdom.Player
 
         protected override void OnApplicationQuit()
         {
-            if (PlayerData is not null || PlayerConfig is not null)
-            {
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerDataPath, PlayerData);
-                _ = ToOrFromJSON.SerializeToJSON(PathConstants.PlayerConfigPath, PlayerConfig);
-            }
             base.OnApplicationQuit();
         }
     }
