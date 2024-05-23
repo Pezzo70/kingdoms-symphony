@@ -59,10 +59,10 @@ namespace Kingdom
                     var prevNote = sortedNotes[i - 1];
                     var currNote = sortedNotes[i];
                     if (Math.Abs(currNote.ToKey().GetKeyIndexInClef(currNote.clef.Clef) - prevNote.ToKey().GetKeyIndexInClef(prevNote.clef.Clef)) != (1 + Convert.ToInt32(tone)))
-                        {
-                            result = false;
-                            factor= 0;
-                        }
+                    {
+                        result = false;
+                        factor= 0;
+                    }
                     else
                         factor++;
                 }
@@ -74,8 +74,7 @@ namespace Kingdom
         //7
         public static bool CheckWholeTonic(IEnumerable<Note> notes, KeyName[] keyNames)
         {      
-            return notes.Any(n => n.note.Tempo is Tempo.Whole && n.ToKey() == keyNames[0]);
-     
+            return notes.Any(n => n.note.Tempo is Tempo.Whole && n.ToKey() == keyNames[0]);  
         }
 
         //8
@@ -150,6 +149,14 @@ namespace Kingdom
         }
         //14
         public static bool CheckKeys(IEnumerable<Note> notes, KeyName[] keys) => notes.All(n => keys.Contains(n.ToKey()));
+
+        //15
+        //Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota tônica de um acorde maior aleatório.
+        public static bool CheckMode(IEnumerable<Note> note, Modes mode, KeyName[] chord)
+        {
+            var modeNotes = NotationExtensions.GetKeysFromMode(mode, chord[0]);
+            return note.All(n=> modeNotes.Contains(n.ToKey()));
+        }
     }
 
     public struct ValidatorResult
