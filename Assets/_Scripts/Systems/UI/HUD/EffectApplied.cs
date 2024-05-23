@@ -49,11 +49,18 @@ public class EffectApplied : MonoBehaviour
         _pointInstance.SetActive(false);
     }
 
+    void OnDestroy()
+    {
+        Destroy(_pointInstance);
+    }
+
     public void SetData(EffectDTO effectDTO)
     {
         this.effectDTO = effectDTO;
         icon.sprite = effectDTO.EffectIcon;
         description.text = effectDTO.DisplayText;
+        if (effectDTO.Modifier != 0)
+            description.text += $" | ({effectDTO.Modifier})";
         expireIn.LocalizationKey = "InGame.Effect.Expire";
         expireIn.Replace(
             new System.Tuple<string, string>[]

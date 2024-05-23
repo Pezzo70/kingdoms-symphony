@@ -1,18 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.SimpleLocalization.Scripts;
 using Kingdom.Audio;
 using Kingdom.Effects;
 using Kingdom.Enemies;
+using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
 using Kingdom.Extensions;
-using static Kingdom.Audio.Procedural.Frequencies;
+using Kingdom.Level;
+using Kingdom.Player;
+using Kingdom.Scrolls;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Kingdom
 {
-    public static class TheoryHandler
+    public static class ScrollsAndEffectsHandler
     {
         public static void ValidateAndExecuteScrollAction(
             ScrollDTO scrollDTO,
@@ -20,370 +26,261 @@ namespace Kingdom
             ref float massiveDamage
         )
         {
-            //IF A SCROLL OBJECTIVE WAS ACCOMPLISHED INVOKE EventManager.ScrollAccomplished
-            //AND IF FAILED EventManager.ScrollFailed
+            bool accomplished = false;
+            ValidatorResult validatorResult;
+            EffectDTO effectDTO;
+            ScrollsContainer allScrolls = ScrollsContainer.Instance;
+            IEnumerable<Note> notes = EffectsAndScrollsManager.Instance.playedNotes;
+            GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+            GameObject[] enemies = GameObject
+                .FindGameObjectsWithTag("Enemy")
+                .ToList()
+                .Where(obj => !obj.GetComponent<EnemyEntity>().IsDead)
+                .ToArray();
+            (Turn, int) turn = PlaythroughContainer.Instance.currentTurn;
+            PlayerStats ps = PlaythroughContainer.Instance.PlayerStats;
 
-            //@TODO: OBJECTIVE, SCALE AND MODES TARGET
-            KeyName[] keyNamesScaleMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
-            KeyName[] keyNameToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
-            KeyName[] keyNameSemiToneMock = new KeyName[] { KeyName.C0, KeyName.CSharp0 };
+            switch (scrollDTO.Scroll.scrollID)
+            {
+                case ScrollID.FirstMajorNotes:
+                    validatorResult = ScrollValidator.CheckTargetScale(
+                        notes,
+                        NotationExtensions.GetKeysFromMode(
+                            Modes.Ionian,
+                            NotationExtensions.ScaleTonics[scrollDTO.TargetScales[0]]
+                        )
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        effectDTO = new EffectDTO(
+                            playerPrefab.name,
+                            GetScrollEffectDescription(scrollDTO.Scroll),
+                            playerPrefab,
+                            scrollDTO.Scroll.effectsSymbols[0],
+                            EffectTarget.Player,
+                            false,
+                            EffectType.PlayerMitigation,
+                            true,
+                            turn.Item2,
+                            (int)scrollDTO.Scroll.zFactor + turn.Item2,
+                            Mathf.Clamp(
+                                validatorResult.Factor * scrollDTO.Scroll.xFactor,
+                                0,
+                                scrollDTO.Scroll.yFactor
+                            )
+                        );
+                        EventManager.AddEffect?.Invoke(effectDTO);
+                    }
+                    break;
+                case ScrollID.ExploringMajorMelodies:
+                    validatorResult = ScrollValidator.CheckTargetScaleInFirstMeasure(
+                        notes,
+                        NotationExtensions.GetKeysFromMode(
+                            Modes.Ionian,
+                            NotationExtensions.ScaleTonics[scrollDTO.TargetScales[0]]
+                        )
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += Mathf.Clamp(
+                            validatorResult.Factor * scrollDTO.Scroll.xFactor,
+                            0f,
+                            scrollDTO.Scroll.yFactor
+                        );
+                    }
+                    break;
+                case ScrollID.PausesToRest:
+                    validatorResult = ScrollValidator.CheckPausePerMeasure(notes, Tempo.Quarter);
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                        ps.GainMoral(ps.MaxMoral * scrollDTO.Scroll.xFactor / 100f);
 
-            //     IList<EffectInfo> effectInfos = new List<EffectInfo>();
-            //     var notes = EffectsAndScrollsManager.Instance.playedNotes;
+                    break;
+                case ScrollID.ChangingStrategies:
+                    validatorResult = ScrollValidator.CheckClef(notes, Clef.F);
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        EffectsAndScrollsManager
+                            .Instance
+                            .burnedScrolls
+                            .ForEach(obj => obj.internalCounter += (int)scrollDTO.Scroll.xFactor);
+                    }
+                    break;
+                case ScrollID.BetweenTones:
+                    validatorResult = ScrollValidator.CheckToneAndSemitoneMajorScale(
+                        notes,
+                        scrollDTO.TargetScales[0],
+                        NotationExtensions.ModeOrderKey.Semitone
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += Mathf.Clamp(
+                            validatorResult.Factor * scrollDTO.Scroll.xFactor,
+                            0,
+                            scrollDTO.Scroll.yFactor
+                        );
+                    }
+                    break;
+                case ScrollID.BetweenSemitones:
+                    validatorResult = ScrollValidator.CheckToneAndSemitoneMajorScale(
+                        notes,
+                        scrollDTO.TargetScales[0],
+                        NotationExtensions.ModeOrderKey.Tone
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += Mathf.Clamp(
+                            validatorResult.Factor * scrollDTO.Scroll.xFactor,
+                            0,
+                            scrollDTO.Scroll.yFactor
+                        );
+                    }
+                    break;
+                case ScrollID.MoreChords:
+                    int finalFactor = 0;
+                    for (int i = 0; i < scrollDTO.TargetChords.Length; i++)
+                    {
+                        validatorResult = ScrollValidator.CheckChordsOnTargetMeasure(
+                            notes,
+                            scrollDTO.TargetChords[i],
+                            2
+                        );
+                        if (accomplished == false && validatorResult.Result)
+                            accomplished = true;
+                        finalFactor += (int)validatorResult.Factor;
+                    }
 
-            //     switch (scrollDTO.Scroll.scrollID)
-            //     {
-            //         case ScrollID.FirstMajorNotes:
-            //             float mitigationIncrease =
-            //                 notes.Count(n => keyNamesScaleMock.Contains(n.ToKey()))
-            //                 * effectDTO.Scroll.xFactor;
-            //             mitigationIncrease = Math.Min(mitigationIncrease, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.PlayerMitigation,
-            //                     Turns = 1,
-            //                     Function = (value) => value + (value * (mitigationIncrease / 100))
-            //                 }
-            //             );
-            //             break;
+                    if (accomplished)
+                    {
+                        effectDTO = new EffectDTO(
+                            playerPrefab.name,
+                            GetScrollEffectDescription(scrollDTO.Scroll),
+                            playerPrefab,
+                            scrollDTO.Scroll.effectsSymbols[0],
+                            EffectTarget.Player,
+                            false,
+                            EffectType.DamageModifier,
+                            true,
+                            turn.Item2,
+                            (int)scrollDTO.Scroll.yFactor + turn.Item2,
+                            finalFactor * (scrollDTO.Scroll.xFactor / 100)
+                        );
+                        EventManager.AddEffect?.Invoke(effectDTO);
+                    }
 
-            //         case ScrollID.ExploringMajorMelodies:
-            //             float damageIncrease =
-            //                 notes.Count(n => keyNamesScaleMock.Contains(n.ToKey()))
-            //                 * effectDTO.Scroll.xFactor;
-            //             damageIncrease = Math.Min(damageIncrease, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = 1,
-            //                     Function = (damage) => damage + (damage * (damageIncrease / 100))
-            //                 }
-            //             );
-            //             break;
+                    break;
+                case ScrollID.KeynoteStrength:
+                    validatorResult = ScrollValidator.CheckWholeTonic(
+                        notes,
+                        NotationExtensions.ChordsNote[scrollDTO.TargetChords[0]][0]
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        massiveDamage += scrollDTO.Scroll.xFactor;
+                    }
+                    break;
+                case ScrollID.Ambiguity:
+                    validatorResult = ScrollValidator.CheckEnarmonics(notes, true);
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        ps.GainMoral(
+                            Mathf.Clamp(
+                                scrollDTO.Scroll.xFactor * validatorResult.Factor,
+                                0,
+                                scrollDTO.Scroll.yFactor
+                            )
+                        );
 
-            //         case ScrollID.PausesToRest:
-            //             float healAmount = effectDTO.Scroll.xFactor;
-            //             healAmount = Math.Min(healAmount, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Heal,
-            //                     Turns = 3,
-            //                     Function = (value) => value + (value * (healAmount / 100))
-            //                 }
-            //             );
-            //             break;
+                        enemies
+                            .ToList()
+                            .ForEach(enemy =>
+                            {
+                                effectDTO = new EffectDTO(
+                                    enemy.name,
+                                    GetScrollEffectDescription(scrollDTO.Scroll),
+                                    enemy,
+                                    scrollDTO.Scroll.effectsSymbols[0],
+                                    EffectTarget.Enemy,
+                                    false,
+                                    EffectType.PreventEnemyHeal,
+                                    true,
+                                    turn.Item2,
+                                    turn.Item2 + 1,
+                                    0f
+                                );
+                                EventManager.AddEffect?.Invoke(effectDTO);
+                            });
+                    }
+                    break;
+                case ScrollID.PassageAndControl:
+                    validatorResult = ScrollValidator.CheckDominantAndSubdominant(
+                        notes,
+                        NotationExtensions.GetKeysFromMode(
+                            Modes.Ionian,
+                            NotationExtensions.ScaleTonics[scrollDTO.TargetScales[0]]
+                        ),
+                        3
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        effectDTO = new EffectDTO(
+                            playerPrefab.name,
+                            GetScrollEffectDescription(scrollDTO.Scroll),
+                            playerPrefab,
+                            scrollDTO.Scroll.effectsSymbols[0],
+                            EffectTarget.Player,
+                            true,
+                            EffectType.AdditionalMana,
+                            true,
+                            turn.Item2,
+                            turn.Item2 + 1,
+                            Mathf.Clamp(
+                                validatorResult.Factor * scrollDTO.Scroll.xFactor,
+                                0f,
+                                scrollDTO.Scroll.yFactor
+                            )
+                        );
+                        EventManager.AddEffect?.Invoke(effectDTO);
+                    }
+                    break;
+                case ScrollID.CommonProgress:
+                    validatorResult = ScrollValidator.CheckProgressions(
+                        notes,
+                        scrollDTO.TargetChords[0],
+                        0
+                    );
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += scrollDTO.Scroll.xFactor;
+                    }
+                    break;
+                case ScrollID.HealingThroughArpeggios:
+                    // validatorResult =
+                    break;
+                case ScrollID.BetweenScales:
+                    // validatorResult =
+                    break;
+                case ScrollID.Melodic:
+                    // validatorResult =
+                    break;
+                case ScrollID.PianistWithModes:
+                    // validatorResult =
+                    break;
+            }
 
-            //         case ScrollID.ChangingStrategies:
-            //             float cooldownReduction = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.CooldownReduction,
-            //                     Turns = 3,
-            //                     Function = (cooldown) => cooldown - cooldownReduction
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.BetweenTones:
-
-            //             int numberOfSemiTones = 0;
-            //             float toneDamage = numberOfSemiTones * effectDTO.Scroll.xFactor;
-            //             toneDamage = Math.Min(toneDamage, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = 2,
-            //                     Function = (value) => value + toneDamage
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.BetweenSemitones:
-            //             int numberOfTones = 0;
-            //             float semitoneDamage = numberOfTones * effectDTO.Scroll.xFactor;
-            //             semitoneDamage = Math.Min(semitoneDamage, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = 2,
-            //                     Function = (value) => value + semitoneDamage
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.MoreChords:
-            //             float chordDamage = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = (int)effectDTO.Scroll.yFactor,
-            //                     Function = (value) => value + chordDamage
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.KeynoteStrength:
-            //             float massiveDamage = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.MassiveDamage,
-            //                     Turns = 5,
-            //                     Function = (value) => value + massiveDamage
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.Ambiguity:
-            //             float enarmonicHealing = notes.Count * effectDTO.Scroll.xFactor;
-            //             enarmonicHealing = Math.Min(enarmonicHealing, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Heal,
-            //                     Turns = 1,
-            //                     Function = (value) => value + enarmonicHealing
-            //                 }
-            //             );
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.PreventEnemyHeal,
-            //                     Turns = 1,
-            //                     Function = (value) => value
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.PassageAndControl:
-            //             float additionalMana = notes.Count * effectDTO.Scroll.xFactor;
-            //             additionalMana = Math.Min(additionalMana, effectDTO.Scroll.yFactor);
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.AdditionalMana,
-            //                     Turns = 1,
-            //                     Function = (value) => value + additionalMana
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.CommonProgress:
-            //             float mitigationDecrease = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.EnemyMitigation,
-            //                     Turns = (int)effectDTO.Scroll.yFactor,
-            //                     Function = (value) => value - mitigationDecrease
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.HealingThroughArpeggios:
-            //             float arpeggioHealing = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.RemoveNegativeEffects,
-            //                     Turns = 1,
-            //                     Function = (value) => value
-            //                 }
-            //             );
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Heal,
-            //                     Turns = 8,
-            //                     Function = (value) => value + arpeggioHealing
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.BetweenScales:
-            //             float stunTurns = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Stun,
-            //                     Turns = (int)stunTurns,
-            //                     Function = (value) => value + stunTurns
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.Melodic:
-            //             float melodicDamageMultiplier = effectDTO.Scroll.xFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = 1,
-            //                     Function = (value) => value * melodicDamageMultiplier
-            //                 }
-            //             );
-            //             break;
-
-            //         case ScrollID.PianistWithModes:
-            //             float pianistDamage = effectDTO.Scroll.xFactor;
-            //             float pianistHealing = effectDTO.Scroll.yFactor;
-            //             float pianistMitigation = effectDTO.Scroll.wFactor;
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.MassiveDamage,
-            //                     Turns = 1,
-            //                     Function = (value) => pianistDamage
-            //                 }
-            //             );
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Heal,
-            //                     Turns = 1,
-            //                     Function = (value) => value + pianistHealing
-            //                 }
-            //             );
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.PlayerMitigation,
-            //                     Turns = (int)effectDTO.Scroll.zFactor,
-            //                     Function = (value) => value + pianistMitigation
-            //                 }
-            //             );
-            //             break;
-            //     }
-
-            //     return effectInfos;
-            // }
-
-            // public static IEnumerable<EffectInfo> GetAction(EnemyAdvantage enemyAdvantage)
-            // {
-            //     IList<EffectInfo> effectInfos = new List<EffectInfo>();
-
-            //     switch (enemyAdvantage.enemyAdvantageID)
-            //     {
-            //         case EnemyAdvantageID.WerewolfsWill:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.PlayerMitigation,
-            //                     Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyAdvantageID.MindsWill:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.CompleteMitigation,
-            //                     Function = (value) => value,
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyAdvantageID.HealingEyes:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Heal,
-            //                     Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyAdvantageID.WatchersWill:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.PlayerMitigation,
-            //                     Function = (value) => value + (value * (enemyAdvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyAdvantageID.PhngluiMglwNafhCthulhuRlyehWgahNaglFhtagn:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Turns = (int)enemyAdvantage.yFactor,
-            //                     Function = (value) => value + (value * (enemyAdvantage.xFactor / 100))
-            //                 }
-            //             );
-            //             break;
-            //     }
-
-            //     return effectInfos;
-            // }
-
-            // public static IEnumerable<EffectInfo> GetAction(EnemyDisadvantage enemyDisadvantage)
-            // {
-            //     IList<EffectInfo> effectInfos = new List<EffectInfo>();
-
-            //     switch (enemyDisadvantage.enemyDisadvantageID)
-            //     {
-            //         case EnemyDisadvantageID.CantPauseHowls:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Function = (dano) => dano + (dano * (enemyDisadvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyDisadvantageID.Headaches:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Function = (dano) => dano + (dano * (enemyDisadvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyDisadvantageID.RightAtTheEyes:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Function = (value) =>
-            //                         value + (value * (enemyDisadvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-
-            //         case EnemyDisadvantageID.ImNotMyFather:
-            //             effectInfos.Add(
-            //                 new EffectInfo()
-            //                 {
-            //                     EffectType = EffectType.Damage,
-            //                     Function = (value) =>
-            //                         value + (value * (enemyDisadvantage.xFactor / 100)),
-            //                     Turns = 1
-            //                 }
-            //             );
-            //             break;
-            //     }
-
-            //     return effectInfos;
+            if (accomplished)
+                EventManager.ScrollAccomplished?.Invoke(scrollDTO.Scroll.scrollID);
+            else
+                EventManager.ScrollFailed?.Invoke(scrollDTO.Scroll.scrollID);
         }
 
         public static void ValidateAndExecuteEffectAction(EffectDTO effectDTO, ref float damage)
@@ -526,6 +423,18 @@ namespace Kingdom
             }
 
             return damage;
+        }
+
+        private static string GetScrollEffectDescription(Scroll scroll)
+        {
+            string effect = LocalizationManager.Localize("Scrolls.Effect." + (int)scroll.scrollID);
+
+            effect = effect.Replace("-X", scroll.xFactor.ToString());
+            effect = effect.Replace("-Y", scroll.yFactor.ToString());
+            effect = effect.Replace("-Z", scroll.zFactor.ToString());
+            effect = effect.Replace("-W", scroll.wFactor.ToString());
+
+            return effect;
         }
     }
 }

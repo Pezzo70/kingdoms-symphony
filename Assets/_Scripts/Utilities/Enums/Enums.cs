@@ -74,8 +74,6 @@ namespace Kingdom.Enums
         Sixteenth = 16
     }
 
-    public enum Chord { }
-
     public static class MusicEnumExtensionMethods
     {
         public static float ToFloat(this Tempo tempo) => 1.0f / (float)tempo;
@@ -142,12 +140,22 @@ namespace Kingdom.Enums.Scrolls
 
 namespace Kingdom.Enums.MusicTheory
 {
-
     public enum SimpleNotes
     {
-        C, CSharp, D, DSharp, E, F, FSharp, G, GSharp, A, ASharp, B
+        C,
+        CSharp,
+        D,
+        DSharp,
+        E,
+        F,
+        FSharp,
+        G,
+        GSharp,
+        A,
+        ASharp,
+        B
     }
-    
+
     public enum Chords
     {
         CMajor = 0,

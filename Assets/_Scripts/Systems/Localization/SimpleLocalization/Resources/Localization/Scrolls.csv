@@ -21,30 +21,30 @@ Scrolls.Effect.2,Cura a moral do musicista em -X%. ,Heal musician's morale by -X
 Scrolls.Effect.3,Reduz o tempo de espera em -X turnos de todos os pergaminhos queimados do musicista.,Reduce the cooldown by -X turns of all the musician's burned scrolls.
 Scrolls.Effect.4,"Para cada semitom, adiciona -X de dano ao total no fim do turno do musicista. Máximo(-Y).","For each semitone, add -X damage to the total at the end of the musician's turn. Max(-Y)."
 Scrolls.Effect.5,"Para cada tom, adiciona -X de dano ao total no fim do turno do musicista. Máximo(-Y).","For each whole tone, add -X damage to the total at the end of the musician's turn.  Max(-Y)."
-Scrolls.Effect.6,"Para cada acorde adicionado pelo musicista, cause -X de dano adicional por turno durante -Y turnos.","For each chord added by the musician, inflict an additional -X damage per turn for -Y turns."
+Scrolls.Effect.6,"Para cada acorde adicionado pelo musicista, cause -X% de dano adicional por turno durante -Y turnos.","For each chord added by the musician, inflict an additional -X% damage per turn for -Y turns."
 Scrolls.Effect.7,Causa -X de dano massivo.,Inflict -X massive damage.
 Scrolls.Effect.8,Cura a moral do musicista em -X para cada nota adicionada e impede qualquer cura dos inimigos no próximo turno. Máximo(-Y).,Heal the musician's moral by -X for each note added and prevent any healing from enemies next turn. Max(-Y).
 Scrolls.Effect.9,"Para cada nota adicionada, o musicista recebe -X de mana adicional no próximo turno. Máximo(-Y).","For each note added, the musician receives an additional -X mana next turn.  Max(-Y)."
-Scrolls.Effect.10,"Para cada progressão realizada, adicione -X de dano ao total no fim do turno do musicista.","For each progression performed, add -X damage to the total at the end of the musician's turn."
+Scrolls.Effect.10,Adicione -X de dano ao total no fim do turno do musicista.,Add -X damage to the total at the end of the musician's turn.
 Scrolls.Effect.11,Elimina todos os efeitos aplicados no musicista e cura a moral em -X. ,Eliminate all musician's effects and heal morale by -X .
 Scrolls.Effect.12,Causa atordoamento nos inimigos - um dos ataques deste fica desabilitado por -X turnos.,Cause enemies to be stunned - one of their attacks is disabled for -X turns.
 Scrolls.Effect.13,O dano de cada nota do musicista é multiplicado em -X%.,The damage of each note played by the musician is multiplied by -X%.
 Scrolls.Effect.14,"Causa -X de dano massivo, cura a moral em -Y e por -Z turnos aplica -W% de migitação de dano no musicista.","Inflict -X massive damage, heal morale by -Y, and for -Z turns apply -W% damage mitigation tp the musician."
 Scrolls.Objective.0,Reproduza notas de uma escala maior aleatória.,Reproduce notes from a random major scale.
-Scrolls.Objective.1,"Em um compasso, improvise uma melodia em uma escala maior aleatória.","In one measure, improvise a melody in a random major scale."
+Scrolls.Objective.1,Improvise uma melodia em uma escala maior aleatória no primeiro compasso.,Improvise a melody in a random major scale in the first measure.
 Scrolls.Objective.2,"Para cada compasso disponível, adicione pausas equivalentes à uma batida completa (1/4).","For each available measure, add rests equivalent to a full beat (1/4)."
 Scrolls.Objective.3,Utilize a Clave de Fá.,Use the F clef.
-Scrolls.Objective.4,"Em uma escala maior aleatória, adicione somente os semitons em um compasso.","In a random major scale, add only the semitones in one measure."
-Scrolls.Objective.5,"Em uma escala maior aleatória, adicione somente os tons em um compasso.","In a random major scale, add only the tones in one measure."
-Scrolls.Objective.6,Adicione em um único compasso até três acordes tríades aleatórios.,Add up to three random triad chords in a single measure.
-Scrolls.Objective.7,"Em um único compasso, adicione uma semibreve tônica de um acorde aleatório.","In a single measure, add a whole note that is a tonic of a random chord."
+Scrolls.Objective.4,"Em uma escala maior aleatória, adicione somente os semitons  no primeiro compasso.","In a random major scale, add only the semitones in the first measure."
+Scrolls.Objective.5,"Em uma escala maior aleatória, adicione somente os tons  no primeiro compasso.","In a random major scale, add only the tones in the first measure."
+Scrolls.Objective.6,Adicione no terceiro compasso até três acordes tríades aleatórios.,Add up to three random triad chords in the third measure.
+Scrolls.Objective.7,"Em pelo menos um compasso, adicione uma semibreve tônica de um acorde aleatório.","Add a whole note that is a tonic of a random chord on, at least, one measure."
 Scrolls.Objective.8,"Em compassos diferentes, adicione notas enarmônicas.","In different measures, add enharmonic notes."
-Scrolls.Objective.9,Em um único compasso adicione as notas subdominantes e dominantes de uma escala maior aleatória.,"In a single measure, add the subdominant and dominant notes of a random major scale."
-Scrolls.Objective.10,"Em três diferentes compassos, realize as progressões de acorde I-iv-V-I partindo de três acordes (I) aleatórios.","In three different measures, perform the chord progressions I-iv-V-I starting from three random chords (I)."
+Scrolls.Objective.9,No quarto compasso adicione as notas subdominantes e dominantes de uma escala maior aleatória.,Add the subdominant and dominant notes of a random major scale in the fourth measure.
+Scrolls.Objective.10,No primeiro compasso realize a progressões de acorde I-iv-V partindo de um acorde aleatório (I).,"In the first measure, perform the chord progressions I-iv-V  starting from a random chord (I)."
 Scrolls.Objective.11,Realize o arpejo de três acordes acordes aleatórios em três compassos distintos na ordem designada.,"Play out as an arpeggio three random chords in three separate measures, following the designated sequence."
 Scrolls.Objective.12,"Em quatro compassos distintos, adicione somente notas de quatro escalas maiores aleatórias.","In four distinct measures, add only notes from four random major scales."
 Scrolls.Objective.13,Utilize metade de seus compassos disponíveis para compor uma melodia - não pode haver sobreposição de notas e a soma da duração de todas as notas devem equivaler ao tempo do compasso.,"Use half of your available measures to compose a melody - ensure that there are no overlapping notes, and the total duration of all notes equals the measure's duration."
-Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota musical aleatória.","In all available measures, compose using only notes following a random Mode from a random musical note."
+Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo um Modo aleatório a partir de uma nota tônica de um acorde maior aleatório.","In all available measures, compose using only notes following a random Mode from a tonic note from a random chord."
 Scrolls.Menu.Cooldown,Tempo de Espera: -X (turno).,Cooldown: -X (turn).
 Scrolls.Menu.Available,Disponível em -X (turno).,Available in -X (turn).
 Scrolls.Menu.Cast,Usar Pergaminho,Cast Scroll

@@ -132,18 +132,18 @@ namespace Kingdom.Enemies
                     .ToList()
                     .ForEach(effect =>
                     {
-                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage);
+                        ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref damage);
                     });
             }
 
-            TheoryHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
                 this,
                 this.enemyData.enemyID,
                 false,
                 ref damage
             );
 
-            TheoryHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
                 this,
                 this.enemyData.enemyID,
                 true,
@@ -230,7 +230,7 @@ namespace Kingdom.Enemies
         private void Attack(EnemyAttackID attackID)
         {
             EnemyAttack attack = enemyData.attacks.First(obj => obj.enemyAttackID == attackID);
-            float damage = TheoryHandler.SpawnEnemyAttackEffectsAndGetDamage(attack);
+            float damage = ScrollsAndEffectsHandler.SpawnEnemyAttackEffectsAndGetDamage(attack);
             EffectsAndScrollsManager
                 .Instance
                 .onGoingEffects
@@ -241,7 +241,7 @@ namespace Kingdom.Enemies
                 .ToList()
                 .ForEach(effect =>
                 {
-                    TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage);
+                    ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref damage);
                 });
 
             PlaythroughContainer.Instance.PlayerStats.ReduceMoral(damage);
@@ -261,7 +261,7 @@ namespace Kingdom.Enemies
                 {
                     if (!_isDead)
                     {
-                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref _);
+                        ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref _);
                     }
                 });
         }

@@ -110,7 +110,7 @@ namespace Kingdom.Extensions
             Semitone = 1
         }
 
-        private static Dictionary<Chords, Chords[]> ChordsProgressionIivV = new Dictionary<
+        public static Dictionary<Chords, Chords[]> ChordsProgressionIivV = new Dictionary<
             Chords,
             Chords[]
         >
@@ -124,7 +124,7 @@ namespace Kingdom.Extensions
             { Chords.BMajor, new Chords[] { Chords.BMajor, Chords.EMajor, Chords.FSharpMajor } }
         };
 
-        private static Dictionary<Chords, SimpleNotes[]> ChordsNote = new Dictionary<
+        public static Dictionary<Chords, SimpleNotes[]> ChordsNote = new Dictionary<
             Chords,
             SimpleNotes[]
         >()
@@ -209,7 +209,7 @@ namespace Kingdom.Extensions
             }
         };
 
-        private static Dictionary<Modes, ModeOrderKey[]> ModeOrder = new Dictionary<
+        public static Dictionary<Modes, ModeOrderKey[]> ModeOrder = new Dictionary<
             Modes,
             ModeOrderKey[]
         >()
@@ -294,6 +294,17 @@ namespace Kingdom.Extensions
             },
         };
 
+        public static Dictionary<Scale, KeyName> ScaleTonics = new Dictionary<Scale, KeyName>()
+        {
+            { Scale.MajorC, KeyName.C4 },
+            { Scale.MajorD, KeyName.D4 },
+            { Scale.MajorE, KeyName.E4 },
+            { Scale.MajorF, KeyName.F4 },
+            { Scale.MajorG, KeyName.G4 },
+            { Scale.MajorA, KeyName.A4 },
+            { Scale.MajorB, KeyName.B4 },
+        };
+
         public static KeyName[] GetKeysFromMode(Modes mode, KeyName key)
         {
             var order = ModeOrder[mode];
@@ -351,10 +362,11 @@ namespace Kingdom.Extensions
                 var note = orderedNotes[i];
                 KeyName name;
                 KeyPlayed key;
-                var chords = note.GetChord(orderedNotes);
+                var chords = note.GetChord(orderedNotes, false);
                 if (chords.Count > 1)
                 {
                     int iAux = i - 1;
+
                     KeyPlayed biggestRelease =
                         i == 0
                             ? new KeyPlayed()
@@ -364,6 +376,7 @@ namespace Kingdom.Extensions
                                 TimeReleased = 0
                             }
                             : keysPlayed[i - 1];
+
                     foreach (var chord in chords)
                     {
                         var activePause =
@@ -376,7 +389,6 @@ namespace Kingdom.Extensions
 
                     foreach (var chord in chords)
                     {
-                        iAux++;
                         name = chord.ToKey();
                         key = new KeyPlayed
                         {
@@ -386,6 +398,7 @@ namespace Kingdom.Extensions
                         key.TimeReleased =
                             key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                         keysPlayed.Add(key);
+                        iAux++;
                     }
                     i = iAux;
                     continue;
@@ -424,10 +437,28 @@ namespace Kingdom.Extensions
             return key is null ? null : keysPlayed[orderedNotes.IndexOf(key)];
         }
 
-        public static IList<Note> GetChord(this Note note, IList<Note> notes) =>
-            notes
+        public static List<Note> GetChord(
+            this Note note,
+            IList<Note> notes,
+            bool considerLine = true
+        )
+        {
+            if (considerLine)
+            {
+                return notes
+                    .Where(
+                        x =>
+                            Mathf.Abs(x.xPos - note.xPos) <= 1f
+                            && x.page == note.page
+                            && note.line != x.line
+                    )
+                    .ToList();
+            }
+
+            return notes
                 .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 1f && x.page == note.page)
-                .AsReadOnlyList();
+                .ToList();
+        }
 
         public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) =>
             note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());
@@ -437,6 +468,10 @@ namespace Kingdom.Extensions
             KeyName[] keys = clef is Clef.G ? GClefKeys : FClefKeys;
             return keys.AsReadOnlyList().IndexOf(key);
         }
+
+        public static SimpleNotes KeyToSimpleNote(KeyName key) =>
+            (SimpleNotes)
+                Enum.Parse(typeof(SimpleNotes), string.Concat(key.ToString().Where(char.IsLetter)));
     }
 
     public static class SpriteExtensions

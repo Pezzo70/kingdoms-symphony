@@ -1,6 +1,7 @@
 using System;
 using Assets.SimpleLocalization.Scripts;
 using Kingdom.Effects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScrollUsed : MonoBehaviour

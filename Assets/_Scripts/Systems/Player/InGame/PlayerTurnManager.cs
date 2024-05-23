@@ -116,7 +116,7 @@ public class PlayerTurnManager : MonoBehaviour
                     && obj.TriggerOnTurnStart == true
             )
             .ToList()
-            .ForEach(obj => TheoryHandler.ValidateAndExecuteEffectAction(obj, ref _));
+            .ForEach(obj => ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(obj, ref _));
 
         if (_isDead || _win)
             return;
@@ -151,7 +151,7 @@ public class PlayerTurnManager : MonoBehaviour
                     && obj.EffectType == EffectType.SpendMana
             )
             .ToList()
-            .ForEach(obj => TheoryHandler.ValidateAndExecuteEffectAction(obj, ref _));
+            .ForEach(obj => ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(obj, ref _));
 
         int sheetBarsAffectedByEffects = EffectsAndScrollsManager
             .Instance
@@ -186,7 +186,12 @@ public class PlayerTurnManager : MonoBehaviour
 
     private (float damage, float massiveDamage) GetAttackDamage()
     {
-        float damage = 0f;
+        float damage =
+            EffectsAndScrollsManager
+                .Instance
+                .playedNotes
+                .Where(obj => obj.note.NoteBehaviour != NotationBehaviour.Pause)
+                .Count() * 0.1f;
         float massiveDamage = 0f;
 
         EffectsAndScrollsManager
@@ -194,7 +199,11 @@ public class PlayerTurnManager : MonoBehaviour
             .onGoingScrolls
             .ForEach(obj =>
             {
-                TheoryHandler.ValidateAndExecuteScrollAction(obj, ref damage, ref massiveDamage);
+                ScrollsAndEffectsHandler.ValidateAndExecuteScrollAction(
+                    obj,
+                    ref damage,
+                    ref massiveDamage
+                );
                 EventManager.BurnScroll?.Invoke(obj.Scroll);
             });
 
@@ -208,7 +217,10 @@ public class PlayerTurnManager : MonoBehaviour
                     && obj.Target == this.gameObject
             )
             .ToList()
-            .ForEach(effect => TheoryHandler.ValidateAndExecuteEffectAction(effect, ref damage));
+            .ForEach(
+                effect =>
+                    ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref damage)
+            );
 
         return (damage, massiveDamage);
     }

@@ -102,7 +102,7 @@ namespace Kingdom.Player
                     .ToList()
                     .ForEach(effect =>
                     {
-                        TheoryHandler.ValidateAndExecuteEffectAction(effect, ref value);
+                        ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref value);
                     });
             }
 
