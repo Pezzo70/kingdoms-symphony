@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Kingdom.Audio;
 using Kingdom.Audio.Procedural;
 using Kingdom.Enums;
@@ -40,6 +41,24 @@ namespace Kingdom.Extensions
             KeyName.A5,
             KeyName.ASharp5,
         };
+
+        private static KeyName[] GClefKeysNatural = new KeyName[]
+        {
+            KeyName.C4,
+            KeyName.D4,
+            KeyName.E4,
+            KeyName.F4,
+            KeyName.G4,
+            KeyName.A4,
+            KeyName.B4,
+            KeyName.C5,
+            KeyName.D5,
+            KeyName.E5,
+            KeyName.F5,
+            KeyName.G5,
+            KeyName.A5,
+        };
+
         private static KeyName[] FClefKeys = new KeyName[]
         {
             KeyName.DSharp2,
@@ -67,17 +86,40 @@ namespace Kingdom.Extensions
             KeyName.D4
         };
 
+        private static KeyName[] FCLefKeysNatural = new KeyName[]
+        {
+            KeyName.E2,
+            KeyName.F2,
+            KeyName.G2,
+            KeyName.A2,
+            KeyName.B2,
+            KeyName.C3,
+            KeyName.D3,
+            KeyName.E3,
+            KeyName.F3,
+            KeyName.G3,
+            KeyName.A3,
+            KeyName.B3,
+            KeyName.C4
+        };
+
         public static KeyName ToKey(this Note note)
         {
             int index = note.line;
-            var array = note.clef.Clef == Clef.G ? GClefKeys : FClefKeys;
+            var array = note.clef.Clef == Clef.G ? GClefKeysNatural : FCLefKeysNatural;
+            var arrayComplete = note.clef.Clef == Clef.G ? GClefKeys : FClefKeys;
             var signature = note.GetSignature();
 
-            index++;
             if (signature == KeySignature.Sharp)
-                index--;
+            {
+                int targetIndex = arrayComplete.ToList().FindIndex(obj => obj == array[index]) + 1;
+                return arrayComplete[targetIndex];
+            }
             else if (signature == KeySignature.Flat)
-                index++;
+            {
+                int targetIndex = arrayComplete.ToList().FindIndex(obj => obj == array[index]) - 1;
+                return arrayComplete[targetIndex];
+            }
 
             if (index >= 0 && index < array.Length)
                 return array[index == array.Length - 1 ? --index : index];
@@ -174,9 +216,10 @@ namespace Kingdom.Extensions
             notes
                 .Where(x => Mathf.Abs(x.xPos - note.xPos) <= 1f && x.page == note.page)
                 .AsReadOnlyList();
-    
-        public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) => note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());
-    
+
+        public static Dictionary<int, List<Note>> GroupByCompass(this IList<Note> note) =>
+            note.GroupBy(n => n.page).ToDictionary(g => g.Key, g => g.ToList());
+
         public static int GetKeyIndexInClef(this KeyName key, Clef clef)
         {
             KeyName[] keys = clef is Clef.G ? GClefKeys : FClefKeys;
