@@ -358,10 +358,8 @@ namespace Kingdom
             switch (effectDTO.EffectType)
             {
                 case EffectType.PlayerMitigation:
-                    //APPLIED HERE
-                    break;
                 case EffectType.EnemyMitigation:
-                    //APPLIED HERE
+                    damage -= damage * (effectDTO.Modifier / 100f);
                     break;
                 case EffectType.CooldownReduction:
                     /*
@@ -370,11 +368,25 @@ namespace Kingdom
                     */
                     break;
                 case EffectType.Damage:
-                    //APPLIED HERE FOR DMG P/ TURN AND THINGS LIKE THAT
-                    //MUST INVOKE EventManager.DamageEffectExecuted after
+                    switch (effectDTO.EffectTarget)
+                    {
+                        case EffectTarget.Player:
+                            PlaythroughContainer
+                                .Instance
+                                .PlayerStats
+                                .ReduceMoral(effectDTO.Modifier);
+                            EventManager.DamageEffectExecuted?.Invoke(effectDTO);
+                            break;
+                        case EffectTarget.Enemy:
+                            effectDTO
+                                .Target
+                                .GetComponent<EnemyEntity>()
+                                .ReduceMoral(effectDTO.Modifier, 0f);
+                            break;
+                    }
                     break;
                 case EffectType.DamageModifier:
-                    //APPLIED HERE
+                    damage += damage * effectDTO.Modifier;
                     break;
                 case EffectType.MassiveDamage:
                     //NOT APPLIED HERE, MASSIVE DAMAGE IS NOT A PERSISTED EFFECT
@@ -416,6 +428,165 @@ namespace Kingdom
             }
         }
 
+        public static float SpawnEnemyAttackEffectsAndGetDamage(EnemyAttack enemyAttack)
+        {
+            float damage = 0f;
+            EffectDTO effectDTO;
+            GameObject playerPrefab = GameObject.FindGameObjectWithTag("PlayerPrefab");
+            (Turn, int) turn = PlaythroughContainer.Instance.currentTurn;
+            switch (enemyAttack.enemyAttackID)
+            {
+                case EnemyAttackID.Shove:
+                case EnemyAttackID.RythmlessClaps:
+                case EnemyAttackID.WaywardSteps:
+                case EnemyAttackID.UncontrollableGloves:
+                case EnemyAttackID.CuttingStrings:
+                case EnemyAttackID.StickyTentacles:
+                case EnemyAttackID.HarmonicNullification:
+                case EnemyAttackID.AbysmalForce:
+                    damage = enemyAttack.xFactor;
+                    break;
+                case EnemyAttackID.RythmlessClaws:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.Damage,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.wFactor + turn.Item2,
+                        enemyAttack.zFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.AirheadHeadbutt:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.DamageModifier,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.wFactor + turn.Item2,
+                        -enemyAttack.zFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.SilenceTheMind:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.AdditionalManaScrollCost,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.yFactor + turn.Item2,
+                        enemyAttack.xFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.PoisonedFingers:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.Damage,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.wFactor + turn.Item2,
+                        enemyAttack.zFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.ScratchingAndControlling:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.ReduceMana,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.wFactor + turn.Item2,
+                        enemyAttack.zFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.JudgeEyes:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.AdditionalManaScrollCost,
+                        true,
+                        turn.Item2,
+                        (int)enemyAttack.zFactor + turn.Item2,
+                        enemyAttack.yFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.SonicCrush:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.PreventPlayerHeal,
+                        true,
+                        turn.Item2,
+                        turn.Item2 + 1,
+                        0f
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+                case EnemyAttackID.TroubledMind:
+                    damage = enemyAttack.xFactor;
+                    effectDTO = new EffectDTO(
+                        playerPrefab.name,
+                        GetEnemyAttackDescription(enemyAttack),
+                        playerPrefab,
+                        enemyAttack.effectsSymbols[0],
+                        EffectTarget.Player,
+                        true,
+                        EffectType.PreventPlayerHeal,
+                        true,
+                        turn.Item2,
+                        turn.Item2 + 1,
+                        enemyAttack.wFactor
+                    );
+                    EventManager.AddEffect?.Invoke(effectDTO);
+                    break;
+            }
+
+            return damage;
+        }
+
         public static void ValidateAndExecuteAdvantageDisadvantageAction(
             EnemyEntity enemyEntity,
             EnemyID enemyID,
@@ -451,49 +622,6 @@ namespace Kingdom
             }
         }
 
-        public static float SpawnEnemyAttackEffectsAndGetDamage(EnemyAttack enemyAttack)
-        {
-            float damage = 0f;
-            //DOES NOT NEED TO UPDATE ENEMIES MANA, JUST SPAWN EFFECTS AND RETURN DAMAGE
-            switch (enemyAttack.enemyAttackID)
-            {
-                case EnemyAttackID.Shove:
-                    break;
-                case EnemyAttackID.RythmlessClaps:
-                    break;
-                case EnemyAttackID.RythmlessClaws:
-                    break;
-                case EnemyAttackID.WaywardSteps:
-                    break;
-                case EnemyAttackID.UncontrollableGloves:
-                    break;
-                case EnemyAttackID.AirheadHeadbutt:
-                    break;
-                case EnemyAttackID.SilenceTheMind:
-                    break;
-                case EnemyAttackID.PoisonedFingers:
-                    break;
-                case EnemyAttackID.CuttingStrings:
-                    break;
-                case EnemyAttackID.ScratchingAndControlling:
-                    break;
-                case EnemyAttackID.StickyTentacles:
-                    break;
-                case EnemyAttackID.JudgeEyes:
-                    break;
-                case EnemyAttackID.SonicCrush:
-                    break;
-                case EnemyAttackID.HarmonicNullification:
-                    break;
-                case EnemyAttackID.AbysmalForce:
-                    break;
-                case EnemyAttackID.TroubledMind:
-                    break;
-            }
-
-            return damage;
-        }
-
         private static string GetScrollEffectDescription(Scroll scroll)
         {
             string effect = LocalizationManager.Localize("Scrolls.Effect." + (int)scroll.scrollID);
@@ -504,6 +632,23 @@ namespace Kingdom
             effect = effect.Replace("-W", scroll.wFactor.ToString());
 
             return effect;
+        }
+
+        private static string GetEnemyAttackDescription(EnemyAttack enemyAttack)
+        {
+            string description = LocalizationManager.Localize(
+                "Enemies.Attack.Description." + (int)enemyAttack.enemyAttackID
+            );
+
+            description = description.Replace("-X", enemyAttack.xFactor.ToString());
+            description = description.Replace("-Y", enemyAttack.yFactor.ToString());
+            description = description.Replace("-Z", enemyAttack.zFactor.ToString());
+            description = description.Replace("-W", enemyAttack.wFactor.ToString());
+            description = description.Replace("-J", enemyAttack.jFactor.ToString());
+            description = description.Replace("-M", enemyAttack.mFactor.ToString());
+            description = description.Replace("-L", enemyAttack.lFactor.ToString());
+
+            return description;
         }
     }
 }

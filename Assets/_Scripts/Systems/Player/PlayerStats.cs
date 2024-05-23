@@ -173,6 +173,7 @@ namespace Kingdom.Player
 
         public void ChangeManaPerTurn(int value) => _manaPerTurn = value;
 
-        public void ChangeAvailableSheetBars(int quantity) => _availableSheetBars = quantity;
+        public void ChangeAvailableSheetBars(int quantity) =>
+            _availableSheetBars = Math.Clamp(quantity, 1, MaxSheetBars);
     }
 }

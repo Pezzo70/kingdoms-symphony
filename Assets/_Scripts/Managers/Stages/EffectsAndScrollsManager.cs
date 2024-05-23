@@ -99,7 +99,28 @@ namespace Kingdom.Effects
             burnedScrolls.Add(burnedScrollDTO);
         }
 
-        private void HandleAddEffect(EffectDTO effect) => onGoingEffects.Add(effect);
+        private void HandleAddEffect(EffectDTO effect)
+        {
+            if (
+                onGoingEffects
+                    .Where(
+                        obj => obj.Target == effect.Target && obj.EffectType == effect.EffectType
+                    )
+                    .Count() > 0
+                && new EffectType[]
+                {
+                    EffectType.ReduceAvailableSheetBars,
+                    EffectType.CompleteMitigation,
+                    EffectType.PreventPlayerHeal,
+                    EffectType.PreventEnemyHeal,
+                    EffectType.AdditionalManaScrollCost,
+                    EffectType.ReduceMana
+                }.Contains(effect.EffectType)
+            )
+                return;
+
+            onGoingEffects.Add(effect);
+        }
 
         private void HandleTurnChanged(Turn turn)
         {

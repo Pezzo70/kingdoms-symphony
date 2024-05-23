@@ -25,5 +25,4 @@ MonoBehaviour:
   lFactor: 0
   attackSymbol: {fileID: -293046522, guid: 5461780dce80bc44581d277e78797569, type: 3}
   effectsSymbols:
-  - {fileID: -293046522, guid: 5461780dce80bc44581d277e78797569, type: 3}
   - {fileID: 1415895816, guid: 5461780dce80bc44581d277e78797569, type: 3}

@@ -141,7 +141,7 @@ public class PlayerTurnManager : MonoBehaviour
         ps.ChangeManaPerTurn(ps.MaxMana + manaAffectedByEffects);
         ps.GainMana(ps.ManaPerTurn, false);
 
-        EffectsAndScrollsManager
+        var manaToSpend = EffectsAndScrollsManager
             .Instance
             .onGoingEffects
             .Where(
@@ -150,8 +150,9 @@ public class PlayerTurnManager : MonoBehaviour
                     && obj.EffectTarget == EffectTarget.Player
                     && obj.EffectType == EffectType.SpendMana
             )
-            .ToList()
-            .ForEach(obj => ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(obj, ref _));
+            .Aggregate(0, (total, next) => total + (int)next.Modifier);
+
+        ps.SpendMana(manaToSpend);
 
         int sheetBarsAffectedByEffects = EffectsAndScrollsManager
             .Instance

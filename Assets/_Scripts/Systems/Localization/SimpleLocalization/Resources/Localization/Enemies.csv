@@ -16,21 +16,21 @@ Enemies.Attack.Name.13,Anulação Harmônica,Harmonic Nullification
 Enemies.Attack.Name.14,Força Abissal,Abysmal Force
 Enemies.Attack.Name.15,Mente Atormentada,Troubled Mind
 Enemies.Attack.Description.0,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
-Enemies.Attack.Description.1,Reduz a moral do musicista em -X e o faz perder -Y compassos por -Z turnos.,Reduce the musician's morale by -X and lose -Y measures for -Z turns.
-Enemies.Attack.Description.2,Reduz a moral do musicista em -X e tem uma chance de -Y% de reduzir a moral do musicista no início de cada turno em -Z por -W turnos.,Reduce the musician's morale by -X and have a -Y% chance to reduce the musician's morale at the start of each turn by -Z for -W turns.
+Enemies.Attack.Description.1,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
+Enemies.Attack.Description.2,Reduz a moral do musicista em -X e reduz a moral do musicista no início de cada turno em -Z por -W turnos.,Reduce the musician's morale by -X and reduce the musician's morale at the start of each turn by -Z for -W turns.
 Enemies.Attack.Description.3,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
-Enemies.Attack.Description.4,Reduz a moral do musicista em -X e possui chance de -Y% de causar atordoamento onde o número de notas afetadas será de -Z.,Reduce the musician's morale by -X and have a -Y% chance to cause stun where the number of affected notes will be -Z.
-Enemies.Attack.Description.5,Reduz a moral do musicista em -X e possui -Y% de chance de diminuir em -Z% o dano causado por ele durante -W turnos.,Reduce the musician's morale by -X and have a -Y% chance to decrease the damage by -Z% for -W turns.
-Enemies.Attack.Description.6,Aumenta o custo de mana de todos os pergaminhos em -X por -Y turnos. Chance de -Z% de obrigar a utilização de -W notas de pausa por -J turnos do musicista.,Increase the mana cost of all scrolls by -X for -Y turns. -Z% chance to force the use of -W rest notes for -J turns by the musician.
-Enemies.Attack.Description.7,Reduz a moral do musicista em -X e tem uma chance de -Y% de reduzir a moral do musicista no início de cada turno em -Z por -W turnos.,Reduce the musician's morale by -X and have a -Y% chance to reduce the musician's morale at the start of each turn by -Z for -W turns.
-Enemies.Attack.Description.8,Reduz a moral do musicista em -X e impede do jogador utilizar -Y linhas da partitura.,Reduce the musician's morale by -X and prevent the player from using -Y lines of the sheet.
-Enemies.Attack.Description.9,Reduz a moral do musicista em -X e tem -Y% de chance de reduzir -Z de mana por -W turnos.,Reduce the musician's morale by -X and have a -Y% chance to reduce -Z mana for -W turns.
-Enemies.Attack.Description.10,Impede o musicista de utilizar -X linhas de partitura e possui -Y% de chance de forçar a utilizar apenas notações 1/4 e 2/4 por -Z turnos.,Prevent the musician from using -X lines of the sheet and have a -Y% chance to force the use of notations only 1/4 and 2/4 for -Z turns.
+Enemies.Attack.Description.4,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
+Enemies.Attack.Description.5,Reduz a moral do musicista em -X e diminui em -Z% o dano causado por ele durante -W turnos.,Reduce the musician's morale by -X and decrease the damage by -Z% for -W turns.
+Enemies.Attack.Description.6,Aumenta o custo de mana de todos os pergaminhos em -X por -Y turnos.,Increase the mana cost of all scrolls by -X for -Y turns.
+Enemies.Attack.Description.7,Reduz a moral do musicista em -X e reduz a moral do musicista no início de cada turno em -Z por -W turnos.,Reduce the musician's morale by -X and reduce the musician's morale at the start of each turn by -Z for -W turns.
+Enemies.Attack.Description.8,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
+Enemies.Attack.Description.9,Reduz a moral do musicista em -X e reduz -Z de mana por -W turnos.,Reduce the musician's morale by -X an reduce -Z mana for -W turns.
+Enemies.Attack.Description.10,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
 Enemies.Attack.Description.11,Reduz a moral do musicista em -X e aumenta o custo de mana de todos os pergaminhos em -Y por -Z turnos.,Reduce the musician's morale by -X and increase the mana cost of all scrolls by -Y for -Z turns.
 Enemies.Attack.Description.12,Reduz a moral do musicista em -X e impede qualquer tipo de cura no próximo turno.,Reduce the musician's morale by -X and prevent any type of healing on the next turn.
-Enemies.Attack.Description.13,Reduz a moral do musicista em -X e altera a posição de algumas notas ao serem tocadas.,Reduce the musician's morale by -X and alter the position of some notes when played.
-Enemies.Attack.Description.14,"Reduz a moral do musicista em -X, possui uma chance de -Y% de aplicar Desgaste Moral e possui -J% de chance de queimar -M pergaminhos.","Reduce the musician's morale by -X, have a -Y% chance to apply Moral Decay, and have a -J% chance to burn -M scrolls."
-Enemies.Attack.Description.15,Reduz a moral do musicista em -X e possui chance de -Z% de gastar -W manas automaticamente no próximo turno.,Reduce the musician's morale by -X and have a -Z% chance to automatically spend -W mana on the next turn.
+Enemies.Attack.Description.13,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
+Enemies.Attack.Description.14,Reduz a moral do musicista em -X.,Reduce the musician's morale by -X.
+Enemies.Attack.Description.15,Reduz a moral do musicista em -X e gasta -W manas automaticamente no próximo turno.,Reduce the musician's morale by -X and automatically spend -W mana on the next turn.
 Enemies.Advantages.Name.0,Determinação do Goblin,Goblin's Will
 Enemies.Advantages.Name.1,Determinação do Lobisomem,Werewolf's Will
 Enemies.Advantages.Name.2,Determinação dos Ossos,Bones's Will
@@ -57,14 +57,14 @@ Enemies.Disadvantages.Name.4,Lixando as Garras,Smoothing the Claws
 Enemies.Disadvantages.Name.5,Bem nos Olhos,Right At the Eyes
 Enemies.Disadvantages.Name.6,Modos Odiosos,Hateful Modes
 Enemies.Disadvantages.Name.7,Eu não sou meu Pai,I'm not my Father
-Enemies.Disadvantages.Description.0,Melodias criadas pelo musicista com notas adjacentes causam -X% de dano final adicional.,Melodies created by the musician using adjacent notes cause an additional -X% of final damage.
-Enemies.Disadvantages.Description.1,Melodias criadas pelo musicista com pausas entre as notas causam -X% de dano final adicional.,Melodies created by the musician with rests between the notes cause an additional -X% of final damage.
-Enemies.Disadvantages.Description.2,"Utilização de notas do acorde de -Lá Bmol causa -X% de dano final adicional. Caso ocorra um Arpejo, a % do dano adicional será incrementada em -Y.","Use of notes from the A-flat Major chord causes an additional -X% of final damage. If an Arpeggio occurs, the % of additional damage will be incremented by -Y."
-Enemies.Disadvantages.Description.3,Utilização de notas da escala de Si Menor causa -X% de dano final adicional.,Use of notes from the B Minor scale causes an additional -X% of final damage.
+Enemies.Disadvantages.Description.0,Melodias criadas pelo musicista causam -X% de dano final adicional.,Melodies created by the musician cause an additional -X% of final damage.
+Enemies.Disadvantages.Description.1,Melodias criadas pelo musicista com pausas causam -X% de dano final adicional.,Melodies created by the musician with rests cause an additional -X% of final damage.
+Enemies.Disadvantages.Description.2,Utilização de notas do acorde de Dó Maior causa -X% de dano final adicional. ,Use of notes from the C Major chord causes an additional -X% of final damage
+Enemies.Disadvantages.Description.3,Utilização de notas da escala de Ré Maior causa -X% de dano final adicional.,Use of notes from the D Major scale causes an additional -X% of final damage.
 Enemies.Disadvantages.Description.4,Utilização da Clave de Fá causa -X% de dano final adicional.,Use of the F-Clef causes an additional -X% of final damage.
 Enemies.Disadvantages.Description.5,Utilização da Clave de Sol causa -X% de dano final adicional.,Use of the G-Clef causes an additional -X% of final damage.
-Enemies.Disadvantages.Description.6,A criatura receberá -X% de dano final adicional caso o musicista toque o modo Dórico a partir de uma nota qualquer.,The creature will receive an additional -X% of final damage if the musician plays the Dorian mode starting from any note.
-Enemies.Disadvantages.Description.7,Criatura receberá -X% de dano final adicional caso o musicista utilize o modo Frígio.,The creature will receive an additional -X% of final damage if the musician uses the Phrygian mode.
+Enemies.Disadvantages.Description.6,A criatura receberá -X% de dano final adicional caso o musicista utilize pausas.,The creature will receive an additional -X% of final damage if the musician use pauses.
+Enemies.Disadvantages.Description.7,Criatura receberá -X% de dano final adicional caso o musicista utilize acordes.,The creature will receive an additional -X% of final damage if the musician uses chords.
 Enemies.Entity.Name.0,Goblin Desafinado,Out of Tune Goblin
 Enemies.Entity.Name.1,Lobisomem Sem Ritmo,Stepless Werewolf
 Enemies.Entity.Name.2,Ossos Paralizados,Unshaken Bones

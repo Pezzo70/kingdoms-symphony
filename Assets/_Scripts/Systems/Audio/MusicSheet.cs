@@ -280,7 +280,6 @@ namespace Kingdom.Audio
                     }
                 }
             }
-
             AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
         }
 
@@ -541,7 +540,8 @@ namespace Kingdom.Audio
             return -1;
         }
 
-        private int GetMaxPage() => PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars;
+        private int GetMaxPage() =>
+            PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars + 1;
 
         private void UpdatePageCounter()
         {
