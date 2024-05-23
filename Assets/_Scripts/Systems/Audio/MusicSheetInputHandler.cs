@@ -91,7 +91,7 @@ namespace Kingdom.Audio
             if(isHovering)
             {
                 isHovering = false;
-                musicSheet.SetHover(isHovering)
+                musicSheet.SetHover(isHovering, objectTag)
             }
         }
 
