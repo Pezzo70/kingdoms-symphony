@@ -192,7 +192,7 @@ public class PlayerTurnManager : MonoBehaviour
                 .Instance
                 .playedNotes
                 .Where(obj => obj.note.NoteBehaviour != NotationBehaviour.Pause)
-                .Count() * 0.1f;
+                .Count() * 1f;
         float massiveDamage = 0f;
 
         EffectsAndScrollsManager

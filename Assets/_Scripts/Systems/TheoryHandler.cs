@@ -315,7 +315,7 @@ namespace Kingdom
                     accomplished = validatorResult.Result;
                     if (accomplished)
                     {
-                        damage += notes.Count() / 2f * (0.1f * (scrollDTO.Scroll.xFactor / 100f));
+                        damage += notes.Count() / 2f * (1f * (scrollDTO.Scroll.xFactor / 100f));
                     }
                     break;
                 case ScrollID.PianistWithModes:
