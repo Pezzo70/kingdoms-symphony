@@ -177,10 +177,12 @@ namespace Kingdom.Audio
         public void Clear()
         {
             while (actionStack.Count != 0)
+            { 
                 if (actionStack.Peek().IsDestroyed())
                     actionStack.Pop();
                 else
                     Destroy(actionStack.Pop().gameObject);
+            }
             SetActivePage(0);
         }
 
@@ -188,14 +190,14 @@ namespace Kingdom.Audio
         {
             if (actionStack.Count > 0)
             {
-                MonoBehaviour lastAction = actionStack.Pop();
+                MonoBehaviour lastAction = null;
 
-                while (lastAction.IsDestroyed() && actionStack.Count > 0)
+                while (actionStack.Peek().IsDestroyed() && actionStack.Count > 0)
                 {
                     lastAction = actionStack.Pop();
                 }
 
-                if (!lastAction.IsDestroyed())
+                if (!lastAction?.IsDestroyed() ?? false)
                 {
                     var lastActionPage = lastAction.transform.parent;
                     var lastActionPageIndex = lastActionPage.GetSiblingIndex();
