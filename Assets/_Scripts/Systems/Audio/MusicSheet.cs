@@ -310,7 +310,7 @@ namespace Kingdom.Audio
 
             Note noteOnNearX = actionStack
                 .OfType<Note>()
-                .FirstOrDefault(n => Mathf.Abs(n.xPos - newNote.transform.position.x) <= 1f);
+                .FirstOrDefault(n => n.page == aPage && Mathf.Abs(n.xPos - newNote.transform.position.x) <= 1f);
             if (noteOnNearX != null)
             {
                 newNote.transform.position = new Vector3(
