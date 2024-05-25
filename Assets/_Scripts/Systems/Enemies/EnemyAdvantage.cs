@@ -17,6 +17,7 @@ namespace Kingdom.Enemies
         public Chords[] validChords;
         public Scale[] validScales;
         public Modes[] validModes;
+        public Sprite efffectIcon;
 
         [Header(
             "Factors (Applied on Scroll effect) - Must check GDD\nPercentage values does not use the 0-1 floating point interval."
