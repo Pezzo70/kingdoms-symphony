@@ -2812,7 +2812,7 @@ GameObject:
   - component: {fileID: 710436068}
   m_Layer: 0
   m_Name: InstrumentSource
-  m_TagString: Untagged
+  m_TagString: InstrumentSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
