@@ -197,6 +197,8 @@ namespace Kingdom.Audio
                     lastAction = actionStack.Pop();
                 }
 
+                if(actionStack.Count > 0) lastAction = actionStack.Pop();
+
                 if (!lastAction?.IsDestroyed() ?? false)
                 {
                     var lastActionPage = lastAction.transform.parent;
