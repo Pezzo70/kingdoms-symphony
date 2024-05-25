@@ -835,7 +835,7 @@ namespace Kingdom
                             EffectType.DamageModifier,
                             true,
                             PlaythroughContainer.Instance.currentTurn.Item2,
-                            (int)enemyEntity.enemyData.advantages[0].yFactor,
+                            (int)enemyEntity.enemyData.advantages[0].yFactor + PlaythroughContainer.Instance.currentTurn.Item2,
                             (int)enemyEntity.enemyData.advantages[0].xFactor
                         );
                             EventManager.AddEffect?.Invoke(effectDTO);

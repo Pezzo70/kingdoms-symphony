@@ -41,8 +41,8 @@ Enemies.Advantages.Name.6,Determinação do Observador,Watcher's Will
 Enemies.Advantages.Name.7,Determinação do Capitão,Captain's Will
 Enemies.Advantages.Name.8,Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn,Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn
 Enemies.Advantages.Description.0,Mitigação em -X% do dano final quando o musicista utiliza acordes em quaisquer compassos.,Mitigation of -X% of the final damage when the musician uses chords in any measures.
-Enemies.Advantages.Description.1,Mitigação em -X% do dano final quando o musicista utiliza notas adjacentes em quaisquer compassos.,Mitigation of -X% of the final damage when the musician uses adjacent notes in any measures.
-Enemies.Advantages.Description.2,Mitigação em -X% do dano final por nota do acorde de Sol Maior. Máximo de -Y% de mitigação.,Mitigation of -X% of the final damage per note of the G Major chord. Maximum of -Y% mitigation.
+Enemies.Advantages.Description.1,Mitigação em -X% do dano final quando o musicista utiliza notas cheias em quaisquer compassos.,Mitigation of -X% of the final damage when the musician uses whole notes in any measures.
+Enemies.Advantages.Description.2,Mitigação em -X% do dano final quando o musicista utilizar notas do acorde de Sol Maior.,Mitigation of -X% of the final damage if the musician uses notes of the G Major chord. 
 Enemies.Advantages.Description.3,Mitigação completa de dano final caso tenha ao menos -X notas de pausa na partitura. Soma de todos os compassos.,Complete mitigation of final damage if there are at least -X rests in the score. Sum of all measures.
 Enemies.Advantages.Description.4,Mitigação em -X% de dano final ao utilizar a Clave de Sol.,Mitigation of -X% of final damage when using the G-Clef.
 Enemies.Advantages.Description.5,Criatura irá se curar em -X% caso o jogador utilize notações até 1/2.,Creature will heal by -X% if the player uses notations up to 1/2.
