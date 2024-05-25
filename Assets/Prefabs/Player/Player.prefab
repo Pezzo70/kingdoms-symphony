@@ -1889,12 +1889,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133941281408810621, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5938805136458317503, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: playerOptions
       value: 
       objectReference: {fileID: 8641265254253031813}
+    - target: {fileID: 6976560395199447099, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7268493426356637564, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_SizeDelta.x
       value: 124.2567
@@ -1906,6 +1910,10 @@ PrefabInstance:
     - target: {fileID: 8502724424415990646, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_Name
       value: MusicSheet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502724424415990646, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5500521387712544200, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
