@@ -23,9 +23,9 @@ MonoBehaviour:
   validScales: 00000000010000000200000003000000040000000500000006000000
   validModes: 
   numberOfValidRandom: 1
-  XP: 1
-  xFactor: 0.5
-  yFactor: 10
+  XP: 20
+  xFactor: 1
+  yFactor: 20
   zFactor: 0
   wFactor: 0
   effectsSymbols: []

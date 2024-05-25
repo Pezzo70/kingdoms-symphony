@@ -23,7 +23,7 @@ MonoBehaviour:
   validScales: 00000000010000000200000003000000040000000500000006000000
   validModes: 
   numberOfValidRandom: 1
-  XP: 10
+  XP: 1
   xFactor: 200
   yFactor: 300
   zFactor: 3

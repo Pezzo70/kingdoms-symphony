@@ -125,7 +125,7 @@ namespace Kingdom.Player
                 return 0;
 
             float total = 0;
-            float baseExperiencePerLevel = 522;
+            float baseExperiencePerLevel = 400;
 
             for (int i = 1; i <= targetLevel; i++)
                 total += (float)Math.Floor(i + baseExperiencePerLevel * Math.Pow(2, i / 7.0));

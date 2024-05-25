@@ -1,3 +1,4 @@
+using System.Linq;
 using Kingdom.Enums;
 using Kingdom.Enums.Tips;
 using Kingdom.Scrolls;
@@ -21,7 +22,12 @@ namespace Kingdom.UI
                         InstantiateChild(tip);
                     break;
                 case UIScriptableObjectDisplayed.Scroll:
-                    foreach (var scroll in ScrollsContainer.Instance.scrolls)
+                    var scrolls = ScrollsContainer
+                        .Instance
+                        .scrolls
+                        .ToList()
+                        .OrderBy(obj => obj.levelRequired);
+                    foreach (var scroll in scrolls)
                         InstantiateChild(scroll);
                     break;
             }

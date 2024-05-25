@@ -189,15 +189,13 @@ namespace Kingdom.Level
             EnemiesContainer enemiesContainer = EnemiesContainer.Instance;
             ScrollsContainer scrollsContainer = ScrollsContainer.Instance;
 
-            float factor = victory ? 1f : Constants.EndGameConstants.DEFEAT_XP_FACTOR;
-
             endGameInfo.enemiesBanished = _enemiesBanished.Aggregate(
                 0,
                 (total, next) => total + next.Value
             );
 
             endGameInfo.enemiesXP = (int)
-                Mathf.Floor(
+                Mathf.CeilToInt(
                     _enemiesBanished.Aggregate(
                         0,
                         (total, next) =>
@@ -206,7 +204,7 @@ namespace Kingdom.Level
                                 enemiesContainer.enemies.First(obj => obj.enemyID == next.Key).XP
                                 * next.Value
                             )
-                    ) * factor
+                    )
                 );
 
             endGameInfo.scrollsUsed = _scrollsUsed.Aggregate(
@@ -220,7 +218,7 @@ namespace Kingdom.Level
             );
 
             endGameInfo.scrollsXP = (int)
-                Mathf.Floor(
+                Mathf.CeilToInt(
                     _scrollsAccomplished.Aggregate(
                         0,
                         (total, next) =>
@@ -229,7 +227,7 @@ namespace Kingdom.Level
                                 scrollsContainer.scrolls.First(obj => obj.scrollID == next.Key).XP
                                 * next.Value
                             )
-                    ) * factor
+                    )
                 );
 
             int totalXP = endGameInfo.enemiesXP + endGameInfo.scrollsXP;

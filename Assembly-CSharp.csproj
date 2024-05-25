@@ -93,6 +93,7 @@
     <Compile Include="Assets\_Scripts\Systems\UI\HUD\PlayerScrollsUsed.cs" />
     <Compile Include="Assets\_Scripts\Managers\CursorManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlaythroughContainer.cs" />
+    <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\Exit.cs" />
     <Compile Include="Assets\_Scripts\Managers\Stages\StageManager.cs" />
     <Compile Include="Assets\_Scripts\Systems\UI\TipsOrScrolls\DisplayScrollData.cs" />
     <Compile Include="Assets\_Scripts\Systems\Player\PlayerContainer.cs" />

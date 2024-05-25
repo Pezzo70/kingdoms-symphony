@@ -106,6 +106,9 @@ public class PlayerTurnManager : MonoBehaviour
         float _ = 0f;
         _scrollSuccessState.Clear();
 
+        if (_win)
+            return;
+
         EffectsAndScrollsManager
             .Instance
             .onGoingEffects
@@ -118,7 +121,7 @@ public class PlayerTurnManager : MonoBehaviour
             .ToList()
             .ForEach(obj => ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(obj, ref _));
 
-        if (_isDead || _win)
+        if (_isDead)
             return;
 
         EventManager.CantPause?.Invoke(false);
