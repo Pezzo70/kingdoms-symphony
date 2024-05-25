@@ -1831,6 +1831,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8274698761327107264}
     m_Modifications:
+    - target: {fileID: 2241948070751722277, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 94.1636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241948070751722277, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -688.72266
+      objectReference: {fileID: 0}
+    - target: {fileID: 3564913892446151600, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4192967220790643504, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1877,12 +1889,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133941281408810621, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5938805136458317503, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: playerOptions
       value: 
       objectReference: {fileID: 8641265254253031813}
+    - target: {fileID: 7268493426356637564, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 124.2567
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268493426356637564, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -575.9849
+      objectReference: {fileID: 0}
     - target: {fileID: 8502724424415990646, guid: 1650e092273c5b94990f33176dbe628a, type: 3}
       propertyPath: m_Name
       value: MusicSheet
