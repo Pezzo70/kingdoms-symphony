@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using Kingdom.Audio.Procedural;
+using Kingdom.Enums.Audio.Procedural;
 using UnityEngine;
 using static Kingdom.Audio.Procedural.Frequencies;
 
 namespace Kingdom.Audio.Procedural
 {
+    
     public abstract class Instrument : MonoBehaviour
     {
         public event EventHandler InstrumentEnd;
@@ -100,7 +102,7 @@ namespace Kingdom.Audio.Procedural
                 if(status == value)
                     return;
                 status = value;
-                OnPropertyChanged("Status");
+                OnPropertyChanged(new KeyStatusEventArgs(status));
             }
         }
 
@@ -112,13 +114,21 @@ namespace Kingdom.Audio.Procedural
         public double TimeReleased { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        public enum KeyStatus
-        { Waiting, Attack, Decay, Sustain, Release }
+        protected void OnPropertyChanged(PropertyChangedEventArgs args) => PropertyChanged?.Invoke(this, args);
 
         public Key()
         {
             Status = KeyStatus.Waiting;
         }
+    }
+
+    public class KeyStatusEventArgs : PropertyChangedEventArgs
+    {
+        public KeyStatusEventArgs(KeyStatus keyStatusEventArgs) : base("Status")
+        {
+            KeyStatus = keyStatusEventArgs;
+        }
+
+        public KeyStatus KeyStatus { get; }
     }
 }

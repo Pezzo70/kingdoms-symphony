@@ -1,3 +1,4 @@
+using Kingdom.Enums.Audio.Procedural;
 using UnityEngine;
 using static Kingdom.Audio.Procedural.Frequencies;
 
@@ -33,12 +34,12 @@ namespace Kingdom.Audio.Procedural
                 var isReleased = key.TimeReleased != 0 && currentTime >= key.TimeReleased;
                 if (timeElapsed <= ADSR.Attack) // It is in the Attack phase, the sound is still rising form 0 top to maximum (1)
                 {
-                        key.Status = Key.KeyStatus.Attack;
+                        key.Status = KeyStatus.Attack;
                         volumeModifier = Mathf.InverseLerp(0.0f, ADSR.Attack, timeElapsed);
                 }
                 else if (timeElapsed < ADSR.Decay + ADSR.Attack) // The sound is in the decay phase meaning it is going from the maximum to the sustained level
                 {
-                    key.Status = Key.KeyStatus.Decay;
+                    key.Status = KeyStatus.Decay;
                     volumeModifier = Mathf.InverseLerp(
                         ADSR.Attack,
                         ADSR.Attack + ADSR.Decay,
@@ -47,11 +48,11 @@ namespace Kingdom.Audio.Procedural
                     volumeModifier = Mathf.Lerp(1.0f, ADSR.Sustain, volumeModifier);
                 }
                 else if(!isReleased)
-                    key.Status = Key.KeyStatus.Sustain;
+                    key.Status = KeyStatus.Sustain;
 
                 if (isReleased) // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key!
                 {
-                    key.Status = Key.KeyStatus.Release;
+                    key.Status = KeyStatus.Release;
                     timeElapsed = (float)(currentTime - key.TimeReleased);
 
                     if (timeElapsed > ADSR.Release)

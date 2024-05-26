@@ -360,3 +360,10 @@ namespace Kingdom.Effects
         Stun, /*FOR ENEMIES MODIFIER == ATTACK ID*/
     }
 }
+
+
+namespace Kingdom.Enums.Audio.Procedural
+{
+        public enum KeyStatus
+        { Waiting, Attack, Decay, Sustain, Release }
+}
