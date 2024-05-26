@@ -301,7 +301,7 @@ namespace Kingdom.Audio
                         foreach(Transform noteT in page)
                         {
                             noteT.TryGetComponent<Note>(out Note note);
-                            if(note != null) note.setColor(new Color32(255, 255, 255, 100));
+                            if(note != null) note.setColor(new Color32(255, 255, 255, 255));
                         }                    
                     }
                 }
