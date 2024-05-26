@@ -25,7 +25,7 @@ namespace Kingdom.Audio
         private ScriptableAudio currentAudio;
 
         [SerializeField]
-        private Instrument instrument;
+        public Instrument instrument;
 
         [SerializeField]
         private AudioSource effectSource;

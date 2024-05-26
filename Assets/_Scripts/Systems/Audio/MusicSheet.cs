@@ -24,6 +24,8 @@ namespace Kingdom.Audio
         public GameObject musicSheetCanvas;
         public GameObject playerOptions;
         public bool wasOpen;
+        private Queue<System.Action> mainThreadActions;
+
 
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
@@ -84,6 +86,7 @@ namespace Kingdom.Audio
 
             currentSpriteArray = upNotations;
             UpdatePageCounter();
+            mainThreadActions = new Queue<System.Action>();
         }
 
         void OnDestroy()
@@ -114,6 +117,11 @@ namespace Kingdom.Audio
             if (isHover)
                 SpriteFollowMouse();
             UpdatePageCounter();
+
+            while(mainThreadActions.Count > 0)
+            {
+                mainThreadActions.Dequeue().Invoke();
+            }
         }
 
         public void SetHover(bool val, string tag = "MusicSheet")
@@ -285,7 +293,20 @@ namespace Kingdom.Audio
                 }
             }
             AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
-        }
+            AudioSystem.Instance.instrument.InstrumentEnd += delegate {
+            mainThreadActions.Enqueue(()=>
+                {
+                    foreach(Transform page in pageParent.transform)
+                    {
+                        foreach(Transform noteT in page)
+                        {
+                            noteT.TryGetComponent<Note>(out Note note);
+                            if(note != null) note.setColor(new Color32(255, 255, 255, 100));
+                        }                    
+                    }
+                }
+            );
+            };}
 
         public void InsertNote()
         {

@@ -398,6 +398,7 @@ namespace Kingdom.Extensions
                         key.TimeReleased =
                             key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                         keysPlayed.Add(key);
+                        key.PropertyChanged += chord.OnKeyStatusChanged;
                         iAux++;
                     }
                     i = iAux;
@@ -412,6 +413,7 @@ namespace Kingdom.Extensions
                     key = new Key() { Name = name };
                     key.TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased;
                     key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
+                    key.PropertyChanged += note.OnKeyStatusChanged;
                     keysPlayed.Add(key);
                 }
             }
