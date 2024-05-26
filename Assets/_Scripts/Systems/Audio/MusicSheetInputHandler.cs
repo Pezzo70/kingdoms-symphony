@@ -24,33 +24,12 @@ namespace Kingdom.Audio
             objectTag = currentObject.tag;
             switch (objectTag)
             {
-                case "Undo":
-                    musicSheet.Undo();
-                    break;
-                case "Clear":
-                    musicSheet.Clear();
-                    break;
                 case "ChangeScale":
                     musicSheet.ChangeScale();
                     break;
                 case "MusicSheet":
                     if (data.button is PointerEventData.InputButton.Left)
                         musicSheet.InsertNote();
-                    break;
-                case "Next":
-                    musicSheet.NavigatePage(true);
-                    break;
-                case "Previous":
-                    musicSheet.NavigatePage(false);
-                    break;
-                case "Add":
-                    musicSheet.CreatePage();
-                    break;
-                case "Remove":
-                    musicSheet.RemovePage();
-                    break;
-                case "Play":
-                    musicSheet.Play();
                     break;
                 case "KeySignatureArea":
                     if (data.button is PointerEventData.InputButton.Left)
@@ -61,12 +40,6 @@ namespace Kingdom.Audio
                         musicSheet.ChangeNote(currentObject.transform.GetComponent<Note>());
                     else if (data.button is PointerEventData.InputButton.Right)
                         musicSheet.RemoveNote(currentObject.transform.GetComponent<Note>());
-                    break;
-                case "Exit":
-                    musicSheet.playerOptions.SetActive(true);
-                    musicSheet.musicSheetCanvas.SetActive(false);
-                    musicSheet.wasOpen = false;
-                    EventManager.MusicSheetOpen?.Invoke(false);
                     break;
             }
             ;

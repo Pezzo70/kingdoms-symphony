@@ -146,6 +146,14 @@ namespace Kingdom.Audio
             ].Sprite;
         }
 
+        public void Exit()
+        {
+            this.playerOptions.SetActive(true);
+            this.musicSheetCanvas.SetActive(false);
+            this.wasOpen = false;
+            EventManager.MusicSheetOpen?.Invoke(false);
+        }
+
         void SpriteFollowMouse()
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -293,6 +301,7 @@ namespace Kingdom.Audio
                 }
             }
             AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
+            GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = false;
             AudioSystem.Instance.instrument.InstrumentEnd += delegate {
             mainThreadActions.Enqueue(()=>
                 {
@@ -304,6 +313,7 @@ namespace Kingdom.Audio
                             if(note != null) note.setColor(new Color32(255, 255, 255, 255));
                         }                    
                     }
+                    GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
                 }
             );
             };}

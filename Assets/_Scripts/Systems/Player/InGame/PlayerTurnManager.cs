@@ -11,6 +11,7 @@ using Kingdom.Enemies;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
 using Kingdom.Enums.FX;
+using Kingdom.Enums.Player;
 using Kingdom.Enums.Scrolls;
 using Kingdom.Level;
 using Kingdom.Player;
@@ -365,6 +366,7 @@ public class PlayerTurnManager : MonoBehaviour
         Animator playerEffectIconAnimator = playerEffectIcon.GetComponent<Animator>();
         playerEffectIconAnimator.SetBool("EffectIconShow", true);
         playerAnimator.Play("Damage");
+        /*@TODO: Make player damage dynamic*/AudioSystem.Instance.Play(CharacterID.Roddie, ActorAudioTypes.Damage);
         yield return new WaitForSeconds(1f);
         playerAnimator.Play("Idle");
         playerEffectIconAnimator.SetBool("EffectIconShow", false);
