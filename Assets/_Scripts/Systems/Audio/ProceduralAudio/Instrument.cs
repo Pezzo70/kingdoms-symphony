@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Kingdom.Audio.Procedural;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Kingdom.Audio.Procedural
     public abstract class Instrument : MonoBehaviour
     {
         [SerializeField]
-        protected List<KeyPlayed> _keysPlayed;
+        protected List<Key> _keysPlayed;
 
         [SerializeField]
         protected ADSREnvelope ADSR;
@@ -26,7 +28,7 @@ namespace Kingdom.Audio.Procedural
 
         protected float _userVolume;
 
-        public ReadOnlyCollection<KeyPlayed> KeysPlayed
+        public ReadOnlyCollection<Key> KeysPlayed
         {
             get => _keysPlayed.AsReadOnly();
         }
@@ -42,7 +44,7 @@ namespace Kingdom.Audio.Procedural
                 key.TimePlayed = AudioSettings.dspTime;
             else
                 _keysPlayed.Add(
-                    new KeyPlayed { Name = keyName, TimePlayed = AudioSettings.dspTime }
+                    new Key { Name = keyName, TimePlayed = AudioSettings.dspTime }
                 );
         }
 
@@ -53,14 +55,14 @@ namespace Kingdom.Audio.Procedural
                 keyToUpdate.TimeReleased = AudioSettings.dspTime;
         }
 
-        public virtual void QueueKey(KeyPlayed key)
+        public virtual void QueueKey(Key key)
         {
             key.TimeReleased += AudioSettings.dspTime;
             key.TimePlayed += AudioSettings.dspTime;
             _keysPlayed.Add(key);
         }
 
-        public virtual void QueueKey(IList<KeyPlayed> keys)
+        public virtual void QueueKey(IList<Key> keys)
         {
             foreach (var key in keys)
             {
@@ -79,11 +81,39 @@ namespace Kingdom.Audio.Procedural
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
     }
 
-    [System.Serializable]
-    public class KeyPlayed
+    [Serializable]
+    public class Key : INotifyPropertyChanged
     {
-        public KeyName Name;
-        public double TimePlayed;
-        public double TimeReleased;
+        [SerializeField]
+        private KeyStatus status;
+
+        public KeyStatus Status
+        {
+            get => status;
+            set
+            {
+                if(status == value)
+                    return;
+                status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+
+        [field: SerializeField]
+        public KeyName Name { get; set; }
+        [field: SerializeField]
+        public double TimePlayed { get; set; }
+        [field: SerializeField]
+        public double TimeReleased { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public enum KeyStatus
+        { Waiting, Attack, Decay, Sustain, Release }
+
+        public Key()
+        {
+            Status = KeyStatus.Waiting;
+        }
     }
 }

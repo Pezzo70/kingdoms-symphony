@@ -350,9 +350,9 @@ namespace Kingdom.Extensions
             return KeyName.CSharp4;
         }
 
-        public static IList<KeyPlayed> ToKeysPlayed(this IList<Note> notes)
+        public static IList<Key> ToKeysPlayed(this IList<Note> notes)
         {
-            IList<KeyPlayed> keysPlayed = new List<KeyPlayed>();
+            IList<Key> keysPlayed = new List<Key>();
 
             var orderedNotes = notes.OrderBy(n => n.page).ThenBy(n => n.xPos).AsReadOnlyList();
             float beatDuration = 60.0f / 30;
@@ -361,15 +361,15 @@ namespace Kingdom.Extensions
             {
                 var note = orderedNotes[i];
                 KeyName name;
-                KeyPlayed key;
+                Key key;
                 var chords = note.GetChord(orderedNotes, false);
                 if (chords.Count > 1)
                 {
                     int iAux = i - 1;
 
-                    KeyPlayed biggestRelease =
+                    Key biggestRelease =
                         i == 0
-                            ? new KeyPlayed()
+                            ? new Key()
                             {
                                 Name = KeyName.Pause,
                                 TimePlayed = 0,
@@ -390,7 +390,7 @@ namespace Kingdom.Extensions
                     foreach (var chord in chords)
                     {
                         name = chord.ToKey();
-                        key = new KeyPlayed
+                        key = new Key
                         {
                             Name = name,
                             TimePlayed = biggestRelease.TimeReleased,
@@ -409,7 +409,7 @@ namespace Kingdom.Extensions
                         note.note.NoteBehaviour is NotationBehaviour.Pause
                             ? KeyName.Pause
                             : note.ToKey();
-                    key = new KeyPlayed() { Name = name };
+                    key = new Key() { Name = name };
                     key.TimePlayed = i == 0 ? 0 : keysPlayed[i - 1].TimeReleased;
                     key.TimeReleased = key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                     keysPlayed.Add(key);
@@ -419,10 +419,10 @@ namespace Kingdom.Extensions
             return keysPlayed;
         }
 
-        public static KeyPlayed GetActivePause(
+        public static Key GetActivePause(
             this Note note,
             IList<Note> orderedNotes,
-            IList<KeyPlayed> keysPlayed
+            IList<Key> keysPlayed
         )
         {
             var key = orderedNotes
