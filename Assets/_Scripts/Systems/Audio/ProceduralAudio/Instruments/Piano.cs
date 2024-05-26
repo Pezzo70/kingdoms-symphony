@@ -57,6 +57,8 @@ namespace Kingdom.Audio.Procedural
                     if (timeElapsed > ADSR.Release)
                     {
                         this._keysPlayed.Remove(key);
+                        if(_keysPlayed.Count == 0)
+                           OnInstrumentEnd(this, new System.EventArgs());
                         continue;
                     }
 

@@ -11,6 +11,7 @@ namespace Kingdom.Audio.Procedural
 {
     public abstract class Instrument : MonoBehaviour
     {
+        public event EventHandler InstrumentEnd;
         [SerializeField]
         protected List<Key> _keysPlayed;
 
@@ -78,6 +79,10 @@ namespace Kingdom.Audio.Procedural
             this.GetComponent<AudioSource>().volume = volume;
         }
 
+        protected void OnInstrumentEnd(object sender, EventArgs e)
+        {
+            InstrumentEnd?.Invoke(this, e);
+        }
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
     }
 
