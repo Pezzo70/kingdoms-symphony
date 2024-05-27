@@ -62,5 +62,10 @@ namespace Assets.SimpleLocalization.Scripts
             GetComponent<TextMeshProUGUI>().text = target;
             _wasReplaced = true;
         }
+
+        public void Clear()
+        {
+            GetComponent<TextMeshProUGUI>().text = "";
+        }
     }
 }

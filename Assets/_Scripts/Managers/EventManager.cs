@@ -1,7 +1,9 @@
 using System;
+using Kingdom.Audio;
 using Kingdom.Effects;
 using Kingdom.Enums;
 using Kingdom.Enums.Enemies;
+using Kingdom.Enums.MusicTheory;
 using Kingdom.Enums.Scrolls;
 using UnityEngine;
 using UnityEngine.Events;
@@ -66,4 +68,5 @@ public static class EventManager
     public static UnityAction<EffectDTO> DamageEffectExecuted;
 
     public static UnityAction<bool> MusicSheetOpen;
+    public static UnityAction<Note> NoteCurrentlyPlaying;
 }

@@ -10,10 +10,10 @@ using static Kingdom.Audio.Procedural.Frequencies;
 
 namespace Kingdom.Audio.Procedural
 {
-    
     public abstract class Instrument : MonoBehaviour
     {
         public event EventHandler InstrumentEnd;
+
         [SerializeField]
         protected List<Key> _keysPlayed;
 
@@ -46,9 +46,7 @@ namespace Kingdom.Audio.Procedural
             if (key != null)
                 key.TimePlayed = AudioSettings.dspTime;
             else
-                _keysPlayed.Add(
-                    new Key { Name = keyName, TimePlayed = AudioSettings.dspTime }
-                );
+                _keysPlayed.Add(new Key { Name = keyName, TimePlayed = AudioSettings.dspTime });
         }
 
         public virtual void KeyUp(KeyName keyName)
@@ -85,6 +83,7 @@ namespace Kingdom.Audio.Procedural
         {
             InstrumentEnd?.Invoke(this, e);
         }
+
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
     }
 
@@ -99,7 +98,7 @@ namespace Kingdom.Audio.Procedural
             get => status;
             set
             {
-                if(status == value)
+                if (status == value)
                     return;
                 status = value;
                 OnPropertyChanged(new KeyStatusEventArgs(status));
@@ -108,13 +107,17 @@ namespace Kingdom.Audio.Procedural
 
         [field: SerializeField]
         public KeyName Name { get; set; }
+
         [field: SerializeField]
         public double TimePlayed { get; set; }
+
         [field: SerializeField]
         public double TimeReleased { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(PropertyChangedEventArgs args) => PropertyChanged?.Invoke(this, args);
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs args) =>
+            PropertyChanged?.Invoke(this, args);
 
         public Key()
         {
@@ -124,7 +127,8 @@ namespace Kingdom.Audio.Procedural
 
     public class KeyStatusEventArgs : PropertyChangedEventArgs
     {
-        public KeyStatusEventArgs(KeyStatus keyStatusEventArgs) : base("Status")
+        public KeyStatusEventArgs(KeyStatus keyStatusEventArgs)
+            : base("Status")
         {
             KeyStatus = keyStatusEventArgs;
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets.SimpleLocalization.Scripts;
 using Kingdom.Audio.Procedural;
 using Kingdom.Effects;
 using Kingdom.Enums;
@@ -47,11 +48,30 @@ namespace Kingdom.Audio
         private string currentHoverTag;
         public TextMeshProUGUI pageCounterText;
         public TMP_InputField pageLabelInput;
+        public LocalizedTextMeshProUGUI currentNoteText;
 
         void Awake()
         {
             EventManager.PauseGame += HandlePause;
             EventManager.UnpauseGame += HandleUnpause;
+            EventManager.NoteCurrentlyPlaying += HandleCurrentNotePlaying;
+        }
+
+        private void HandleCurrentNotePlaying(Note note)
+        {
+            if (note == null)
+            {
+                currentNoteText.Clear();
+                return;
+            }
+
+            if (note.GetChord(EffectsAndScrollsManager.Instance.playedNotes).Count() > 1)
+            {
+                currentNoteText.LocalizationKey = "Theory.Chord";
+                return;
+            }
+
+            currentNoteText.LocalizationKey = "Theory.Notes." + note.ToKeyText();
         }
 
         void Start()
@@ -92,6 +112,7 @@ namespace Kingdom.Audio
         {
             EventManager.PauseGame -= HandlePause;
             EventManager.UnpauseGame -= HandleUnpause;
+            EventManager.NoteCurrentlyPlaying -= HandleCurrentNotePlaying;
         }
 
         private void HandlePause()
@@ -316,6 +337,7 @@ namespace Kingdom.Audio
                         }
                     }
                     GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
+                    EventManager.NoteCurrentlyPlaying?.Invoke(null);
                 });
             };
         }

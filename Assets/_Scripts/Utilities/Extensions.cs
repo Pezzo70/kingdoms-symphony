@@ -350,6 +350,25 @@ namespace Kingdom.Extensions
             return KeyName.CSharp4;
         }
 
+        public static string ToKeyText(this Note note)
+        {
+            if (note.note.NoteBehaviour is NotationBehaviour.Pause)
+                return KeyName.Pause.ToString();
+
+            int index = note.line;
+            var array = note.clef.Clef == Clef.G ? GClefKeysNatural : FCLefKeysNatural;
+            var signature = note.GetSignature();
+
+            string additional = "";
+
+            if (signature == KeySignature.Sharp)
+                additional = "Sharp";
+            else if (signature == KeySignature.Flat)
+                additional = "Flat";
+
+            return KeyToSimpleNote(array[index]).ToString() + additional;
+        }
+
         public static IList<Key> ToKeysPlayed(this IList<Note> notes)
         {
             IList<Key> keysPlayed = new List<Key>();
@@ -390,11 +409,7 @@ namespace Kingdom.Extensions
                     foreach (var chord in chords)
                     {
                         name = chord.ToKey();
-                        key = new Key
-                        {
-                            Name = name,
-                            TimePlayed = biggestRelease.TimeReleased,
-                        };
+                        key = new Key { Name = name, TimePlayed = biggestRelease.TimeReleased, };
                         key.TimeReleased =
                             key.TimePlayed + note.note.Tempo.ToFloat() * beatDuration;
                         keysPlayed.Add(key);
