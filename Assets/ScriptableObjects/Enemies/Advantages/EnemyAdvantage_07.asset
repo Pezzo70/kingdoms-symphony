@@ -18,7 +18,7 @@ MonoBehaviour:
   validChords: 
   validScales: 
   validModes: 
-  efffectIcon: {fileID: 496723824, guid: 5461780dce80bc44581d277e78797569, type: 3}
-  xFactor: 80
+  effectIcon: {fileID: 0}
+  xFactor: 40
   yFactor: 0
   zFactor: 0

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDisadvantageID: 7
   targetMeasures: 0
+  validClef: 
   validChords: 
   validScales: 
   validModes: 02000000
-  xFactor: 30
+  xFactor: 35
   yFactor: 0
   zFactor: 0

@@ -19,6 +19,6 @@ MonoBehaviour:
   validScales: 
   validModes: 
   effectIcon: {fileID: -191481231, guid: 5461780dce80bc44581d277e78797569, type: 3}
-  xFactor: 15
+  xFactor: 20
   yFactor: 0
   zFactor: 0

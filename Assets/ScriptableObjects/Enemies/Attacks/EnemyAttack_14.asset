@@ -17,12 +17,12 @@ MonoBehaviour:
   manaRequired: 5
   probability: 40
   xFactor: 50
-  yFactor: 40
-  zFactor: 25
-  wFactor: 2
-  jFactor: 30
-  mFactor: 3
-  lFactor: 2
+  yFactor: 0
+  zFactor: 0
+  wFactor: 0
+  jFactor: 0
+  mFactor: 0
+  lFactor: 0
   attackSymbol: {fileID: -191481231, guid: 5461780dce80bc44581d277e78797569, type: 3}
   effectsSymbols:
   - {fileID: 408098670, guid: 5461780dce80bc44581d277e78797569, type: 3}

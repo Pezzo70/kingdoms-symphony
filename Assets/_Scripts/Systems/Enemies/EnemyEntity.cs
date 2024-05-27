@@ -43,6 +43,11 @@ namespace Kingdom.Enemies
             get => _isDead;
         }
 
+        public float MaxMoral
+        {
+            get => _maxMoral;
+        }
+
         void Awake()
         {
             _maxMoral =
@@ -106,6 +111,20 @@ namespace Kingdom.Enemies
         {
             float damageUpdated = damage;
 
+            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+                this,
+                this.enemyData.enemyID,
+                false,
+                ref damage
+            );
+
+            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
+                this,
+                this.enemyData.enemyID,
+                true,
+                ref damage
+            );
+
             if (
                 EffectsAndScrollsManager
                     .Instance
@@ -135,20 +154,6 @@ namespace Kingdom.Enemies
                         ScrollsAndEffectsHandler.ValidateAndExecuteEffectAction(effect, ref damage);
                     });
             }
-
-            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
-                this,
-                this.enemyData.enemyID,
-                false,
-                ref damage
-            );
-
-            ScrollsAndEffectsHandler.ValidateAndExecuteAdvantageDisadvantageAction(
-                this,
-                this.enemyData.enemyID,
-                true,
-                ref damage
-            );
 
             damageUpdated += massiveDamage;
 

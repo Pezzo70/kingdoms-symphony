@@ -6,6 +6,7 @@ using Assets.SimpleLocalization.Scripts;
 using Kingdom;
 using Kingdom.Audio;
 using Kingdom.Audio.Procedural;
+using Kingdom.Constants;
 using Kingdom.Effects;
 using Kingdom.Enemies;
 using Kingdom.Enums;
@@ -191,12 +192,14 @@ public class PlayerTurnManager : MonoBehaviour
 
     private (float damage, float massiveDamage) GetAttackDamage()
     {
-        float damage =
-            EffectsAndScrollsManager
-                .Instance
-                .playedNotes
-                .Where(obj => obj.note.NoteBehaviour != NotationBehaviour.Pause)
-                .Count() * 1f;
+        float damage = EffectsAndScrollsManager
+            .Instance
+            .playedNotes
+            .Where(obj => obj.note.NoteBehaviour != NotationBehaviour.Pause)
+            .Aggregate(
+                0f,
+                (total, next) => total + next.note.Tempo.ToFloat() * NotesContants.DAMAGE_WHOLE_NOTE
+            );
         float massiveDamage = 0f;
 
         EffectsAndScrollsManager

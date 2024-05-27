@@ -22,5 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f24aa9c4c8259bb4d9a61d096f870388, type: 2}
   disadvantages:
   - {fileID: 11400000, guid: a9bceb5dbd7170c4284a48038d9015a2, type: 2}
-  XP: 125
-  effectsSymbols: []
+  XP: 200

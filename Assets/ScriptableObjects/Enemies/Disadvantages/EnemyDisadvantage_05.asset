@@ -18,6 +18,6 @@ MonoBehaviour:
   validChords: 
   validScales: 
   validModes: 
-  xFactor: 20
+  xFactor: 30
   yFactor: 0
   zFactor: 0

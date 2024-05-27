@@ -144,16 +144,25 @@ namespace Kingdom.Enums.MusicTheory
     {
         C,
         CSharp,
+        CFlat,
         D,
         DSharp,
+        DFlat,
         E,
+        ESharp,
+        EFlat,
         F,
         FSharp,
+        FFlat,
         G,
         GSharp,
+        GFlat,
         A,
         ASharp,
-        B
+        AFlat,
+        B,
+        BSharp,
+        BFlat
     }
 
     public enum Chords
@@ -361,9 +370,14 @@ namespace Kingdom.Effects
     }
 }
 
-
 namespace Kingdom.Enums.Audio.Procedural
 {
-        public enum KeyStatus
-        { Waiting, Attack, Decay, Sustain, Release }
+    public enum KeyStatus
+    {
+        Waiting,
+        Attack,
+        Decay,
+        Sustain,
+        Release
+    }
 }

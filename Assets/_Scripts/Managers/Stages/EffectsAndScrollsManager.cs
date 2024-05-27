@@ -101,23 +101,35 @@ namespace Kingdom.Effects
 
         private void HandleAddEffect(EffectDTO effect)
         {
+            var effectTypesShouldAddTurns = new EffectType[]
+            {
+                EffectType.ReduceAvailableSheetBars,
+                EffectType.CompleteMitigation,
+                EffectType.PreventPlayerHeal,
+                EffectType.PreventEnemyHeal,
+                EffectType.AdditionalManaScrollCost,
+                EffectType.ReduceMana,
+                EffectType.Damage,
+            };
+
             if (
                 onGoingEffects
                     .Where(
                         obj => obj.Target == effect.Target && obj.EffectType == effect.EffectType
                     )
                     .Count() > 0
-                && new EffectType[]
-                {
-                    EffectType.ReduceAvailableSheetBars,
-                    EffectType.CompleteMitigation,
-                    EffectType.PreventPlayerHeal,
-                    EffectType.PreventEnemyHeal,
-                    EffectType.AdditionalManaScrollCost,
-                    EffectType.ReduceMana
-                }.Contains(effect.EffectType)
+                && effectTypesShouldAddTurns.Contains(effect.EffectType)
             )
+            {
+                var effectsThatShouldAddTurns = onGoingEffects.Where(
+                    obj => obj.Target == effect.Target && obj.EffectType == effect.EffectType
+                );
+
+                effectsThatShouldAddTurns
+                    .ToList()
+                    .ForEach(obj => obj.EffectExpireOnTurn = effect.EffectExpireOnTurn + 1);
                 return;
+            }
 
             onGoingEffects.Add(effect);
         }
@@ -262,6 +274,7 @@ namespace Kingdom.Effects
         public int EffectExpireOnTurn
         {
             get => _effectExpireOnTurn;
+            set => _effectExpireOnTurn = value;
         }
         public float Modifier
         {

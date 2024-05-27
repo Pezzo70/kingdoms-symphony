@@ -17,7 +17,7 @@ MonoBehaviour:
   manaRequired: 3
   probability: 50
   xFactor: 30
-  yFactor: 2
+  yFactor: 3
   zFactor: 2
   wFactor: 0
   jFactor: 0

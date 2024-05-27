@@ -15,10 +15,10 @@ MonoBehaviour:
   enemyAttackID: 2
   attackType: 1
   manaRequired: 2
-  probability: 50
-  xFactor: 20
-  yFactor: 50
-  zFactor: 5
+  probability: 40
+  xFactor: 15
+  yFactor: 0
+  zFactor: 10
   wFactor: 3
   jFactor: 0
   mFactor: 0

@@ -16,9 +16,9 @@ MonoBehaviour:
   attackType: 3
   manaRequired: 3
   probability: 50
-  xFactor: 50
-  yFactor: 1
-  zFactor: 1
+  xFactor: 60
+  yFactor: 0
+  zFactor: 0
   wFactor: 0
   jFactor: 0
   mFactor: 0

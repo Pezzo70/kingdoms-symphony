@@ -18,9 +18,9 @@ MonoBehaviour:
   probability: 40
   xFactor: 2
   yFactor: 2
-  zFactor: 30
-  wFactor: 3
-  jFactor: 3
+  zFactor: 0
+  wFactor: 0
+  jFactor: 0
   mFactor: 0
   lFactor: 0
   attackSymbol: {fileID: -293046522, guid: 5461780dce80bc44581d277e78797569, type: 3}

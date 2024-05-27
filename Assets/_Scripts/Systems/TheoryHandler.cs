@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.SimpleLocalization.Scripts;
 using Kingdom.Audio;
+using Kingdom.Constants;
 using Kingdom.Effects;
 using Kingdom.Enemies;
 using Kingdom.Enums;
@@ -315,7 +316,18 @@ namespace Kingdom
                     accomplished = validatorResult.Result;
                     if (accomplished)
                     {
-                        damage += notes.Count() / 2f * (1f * (scrollDTO.Scroll.xFactor / 100f));
+                        damage +=
+                            EffectsAndScrollsManager
+                                .Instance
+                                .playedNotes
+                                .Where(obj => obj.note.NoteBehaviour != NotationBehaviour.Pause)
+                                .Aggregate(
+                                    0f,
+                                    (total, next) =>
+                                        total
+                                        + next.note.Tempo.ToFloat()
+                                            * NotesContants.DAMAGE_WHOLE_NOTE
+                                ) * (scrollDTO.Scroll.xFactor / 100f);
                     }
                     break;
                 case ScrollID.PianistWithModes:
@@ -482,7 +494,6 @@ namespace Kingdom
                     EventManager.AddEffect?.Invoke(effectDTO);
                     break;
                 case EnemyAttackID.SilenceTheMind:
-                    damage = enemyAttack.xFactor;
                     effectDTO = new EffectDTO(
                         playerPrefab.name,
                         GetEnemyAttackDescription(enemyAttack),
@@ -575,7 +586,7 @@ namespace Kingdom
                         enemyAttack.effectsSymbols[0],
                         EffectTarget.Player,
                         true,
-                        EffectType.PreventPlayerHeal,
+                        EffectType.SpendMana,
                         true,
                         turn.Item2,
                         turn.Item2 + 1,
@@ -649,35 +660,41 @@ namespace Kingdom
                 case EnemyID.UnshakenBones:
                     if (isAdvantage)
                     {
-                        NotationExtensions.ChordsNote.TryGetValue(Chords.DMajor, out var simpleNotes);
-                        int count = notes.Where(n => simpleNotes.Contains(NotationExtensions.KeyToSimpleNote(n.ToKey()))).Count();
+                        NotationExtensions
+                            .ChordsNote
+                            .TryGetValue(Chords.GMajor, out var simpleNotes);
+                        int count = notes
+                            .Where(
+                                n =>
+                                    simpleNotes.Contains(
+                                        NotationExtensions.KeyToSimpleNote(n.ToKey())
+                                    )
+                            )
+                            .Count();
                         if (count > 0)
                         {
                             if (notes.Any(n => n.clef.Clef == Clef.G))
                             {
-                                eAtriggered = EnemyAdvantageID.BonesWill;
-                                var effectDTO = new EffectDTO(
-                                enemyEntity.name,
-                                GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
-                                enemyEntity.gameObject,
-                                enemyEntity.enemyData.advantages[0].effectIcon,
-                                EffectTarget.Enemy,
-                                true,
-                                EffectType.EnemyMitigation,
-                                false,
-                                PlaythroughContainer.Instance.currentTurn.Item2,
-                                PlaythroughContainer.Instance.currentTurn.Item2 + 1,
-                                (int)enemyEntity.enemyData.advantages[0].xFactor * count
-                            );
-                                EventManager.AddEffect?.Invoke(effectDTO);
+                                eAtriggered = EnemyAdvantageID.WerewolfsWill;
+                                damage -=
+                                    damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
                                 trigger = true;
                             }
                         }
                     }
                     else
                     {
-                        NotationExtensions.ChordsNote.TryGetValue(Chords.DMajor, out var simpleNotes);
-                        if (notes.All(nt => simpleNotes.Contains(NotationExtensions.KeyToSimpleNote(nt.ToKey()))))
+                        NotationExtensions
+                            .ChordsNote
+                            .TryGetValue(Chords.CMajor, out var simpleNotes);
+                        if (
+                            notes.All(
+                                nt =>
+                                    simpleNotes.Contains(
+                                        NotationExtensions.KeyToSimpleNote(nt.ToKey())
+                                    )
+                            )
+                        )
                         {
                             eDtriggered = EnemyDisadvantageID.ShakesTooMuch;
                             damage +=
@@ -693,18 +710,18 @@ namespace Kingdom
                         {
                             eAtriggered = EnemyAdvantageID.MindsWill;
                             var effectDTO = new EffectDTO(
-                            enemyEntity.name,
-                            GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
-                            enemyEntity.gameObject,
-                            enemyEntity.enemyData.advantages[0].effectIcon,
-                            EffectTarget.Enemy,
-                            true,
-                            EffectType.CompleteMitigation,
-                            false,
-                            PlaythroughContainer.Instance.currentTurn.Item2,
-                            PlaythroughContainer.Instance.currentTurn.Item2 + 1,
-                            (int)enemyEntity.enemyData.advantages[0].xFactor
-                        );
+                                enemyEntity.name,
+                                GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
+                                enemyEntity.gameObject,
+                                enemyEntity.enemyData.advantages[0].effectIcon,
+                                EffectTarget.Enemy,
+                                true,
+                                EffectType.CompleteMitigation,
+                                false,
+                                PlaythroughContainer.Instance.currentTurn.Item2,
+                                PlaythroughContainer.Instance.currentTurn.Item2 + 1,
+                                (int)enemyEntity.enemyData.advantages[0].xFactor
+                            );
                             EventManager.AddEffect?.Invoke(effectDTO);
                             trigger = true;
                         }
@@ -719,7 +736,8 @@ namespace Kingdom
                         {
                             eDtriggered = EnemyDisadvantageID.Headaches;
                             trigger = true;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
                         }
                     }
                     break;
@@ -729,20 +747,7 @@ namespace Kingdom
                         if (notes.Any(n => n.clef.Clef == Clef.G))
                         {
                             eAtriggered = EnemyAdvantageID.ClawsWill;
-                            var effectDTO = new EffectDTO(
-                            enemyEntity.name,
-                            GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
-                            enemyEntity.gameObject,
-                            enemyEntity.enemyData.advantages[0].effectIcon,
-                            EffectTarget.Enemy,
-                            true,
-                            EffectType.EnemyMitigation,
-                            false,
-                            PlaythroughContainer.Instance.currentTurn.Item2,
-                            PlaythroughContainer.Instance.currentTurn.Item2 + 1,
-                            (int)enemyEntity.enemyData.advantages[0].xFactor
-                        );
-                            EventManager.AddEffect?.Invoke(effectDTO);
+                            damage -= damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
                             trigger = true;
                         }
                     }
@@ -751,8 +756,9 @@ namespace Kingdom
                         if (notes.Any(n => n.clef.Clef == Clef.F))
                         {
                             eDtriggered = EnemyDisadvantageID.RightAtTheEyes;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
                             trigger = true;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
                         }
                     }
                     break;
@@ -762,27 +768,20 @@ namespace Kingdom
                         if (notes.Any(nt => nt.clef.Clef == Clef.F))
                         {
                             eAtriggered = EnemyAdvantageID.WatchersWill;
+                            damage -= damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
                             trigger = true;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
                         }
+
                         if (notes.Any(nt => nt.note.Tempo.ToFloat() <= 0.25f))
                         {
-                            eAtriggered = EnemyAdvantageID.HealingEyes;
-                            var effectDTO = new EffectDTO(
-                            enemyEntity.name,
-                            GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
-                            enemyEntity.gameObject,
-                            enemyEntity.enemyData.advantages[0].effectIcon,
-                            EffectTarget.Enemy,
-                            true,
-                            EffectType.Heal,
-                            false,
-                            PlaythroughContainer.Instance.currentTurn.Item2,
-                            PlaythroughContainer.Instance.currentTurn.Item2 + 1,
-                            (int)enemyEntity.enemyData.advantages[0].xFactor
-                        );
-                            EventManager.AddEffect?.Invoke(effectDTO);
-                            trigger = true;
+                            enemyEntity.Heal(
+                                enemyEntity.MaxMoral
+                                    * enemyEntity.enemyData.advantages[1].xFactor
+                                    / 100f
+                            );
+                            EventManager
+                                .EnemyAdvantageTriggered
+                                ?.Invoke(enemyID, EnemyAdvantageID.HealingEyes);
                         }
                     }
                     else
@@ -791,28 +790,26 @@ namespace Kingdom
                         {
                             eDtriggered = EnemyDisadvantageID.SmoothingTheClaws;
                             trigger = true;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
                         }
                     }
                     break;
                 case EnemyID.AlienCaptain:
                     if (isAdvantage)
                     {
-                        if (!notes.Any(n => n.note.Tempo.ToFloat() > 0.25))
+                        if (notes.Any(n => n.note.Tempo.ToFloat() == 0.25f))
                         {
                             eAtriggered = EnemyAdvantageID.CaptainsWill;
+                            damage -= damage * (enemyEntity.enemyData.advantages[0].xFactor / 100f);
                             trigger = true;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
                         }
                     }
                     else
                     {
-                        if (
-                            notes.All(obj => obj.GetChord(notes).Count < 1)
-                            && notes.Any(obj => obj.note.NoteBehaviour == NotationBehaviour.Note)
-                        )
+                        if (notes.Any(obj => obj.note.NoteBehaviour == NotationBehaviour.Pause))
                         {
-                            eDtriggered = EnemyDisadvantageID.CantPauseHowls;
+                            eDtriggered = EnemyDisadvantageID.HatefulModes;
                             damage +=
                                 damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
                             trigger = true;
@@ -822,22 +819,27 @@ namespace Kingdom
                 case EnemyID.AbyssalVisitor:
                     if (isAdvantage)
                     {
-                        if (PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars == notes.Select(s => s.page).Distinct().Count())
+                        if (
+                            PlaythroughContainer.Instance.PlayerStats.AvailableSheetBars
+                            == notes.Select(s => s.page).Distinct().Count()
+                        )
                         {
-                            eAtriggered = EnemyAdvantageID.PhngluiMglwNafhCthulhuRlyehWgahNaglFhtagn;
+                            eAtriggered =
+                                EnemyAdvantageID.PhngluiMglwNafhCthulhuRlyehWgahNaglFhtagn;
                             var effectDTO = new EffectDTO(
-                            enemyEntity.name,
-                            GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
-                            enemyEntity.gameObject,
-                            enemyEntity.enemyData.advantages[0].effectIcon,
-                            EffectTarget.Enemy,
-                            false,
-                            EffectType.DamageModifier,
-                            true,
-                            PlaythroughContainer.Instance.currentTurn.Item2,
-                            (int)enemyEntity.enemyData.advantages[0].yFactor + PlaythroughContainer.Instance.currentTurn.Item2,
-                            (int)enemyEntity.enemyData.advantages[0].xFactor
-                        );
+                                enemyEntity.name,
+                                GetAdvantageDescription(enemyEntity.enemyData.advantages[0]),
+                                enemyEntity.gameObject,
+                                enemyEntity.enemyData.advantages[0].effectIcon,
+                                EffectTarget.Enemy,
+                                false,
+                                EffectType.DamageModifier,
+                                true,
+                                PlaythroughContainer.Instance.currentTurn.Item2,
+                                (int)enemyEntity.enemyData.advantages[0].yFactor
+                                    + PlaythroughContainer.Instance.currentTurn.Item2,
+                                (int)enemyEntity.enemyData.advantages[0].xFactor
+                            );
                             EventManager.AddEffect?.Invoke(effectDTO);
                             trigger = true;
                         }
@@ -847,7 +849,9 @@ namespace Kingdom
                         if (notes.Any(n => n.GetChord(notes).Count > 1))
                         {
                             eDtriggered = EnemyDisadvantageID.ImNotMyFather;
-                            damage *= 100 + enemyEntity.enemyData.disadvantages[0].xFactor;
+                            damage +=
+                                damage * (enemyEntity.enemyData.disadvantages[0].xFactor / 100f);
+                            trigger = true;
                         }
                     }
                     break;
@@ -894,8 +898,8 @@ namespace Kingdom
         private static string GetAdvantageDescription(EnemyAdvantage id)
         {
             string description = LocalizationManager.Localize(
-    "Enemies.Attack.Description." + (int)id.enemyAdvantageID
-);
+                "Enemies.Attack.Description." + (int)id.enemyAdvantageID
+            );
 
             description = description.Replace("-X", id.xFactor.ToString());
             description = description.Replace("-Y", id.yFactor.ToString());

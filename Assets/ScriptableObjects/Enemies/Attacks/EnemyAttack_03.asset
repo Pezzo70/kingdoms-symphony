@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyAttackID: 3
   attackType: 0
   manaRequired: 2
-  probability: 50
-  xFactor: 15
+  probability: 60
+  xFactor: 25
   yFactor: 0
   zFactor: 0
   wFactor: 0

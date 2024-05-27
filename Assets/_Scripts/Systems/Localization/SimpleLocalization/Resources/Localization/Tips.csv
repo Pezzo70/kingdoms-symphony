@@ -2,8 +2,8 @@ Key,Portuguese,English
 Tips.Name.0,Notações,Notations
 Tips.Name.1,Métrica,Metre 
 Tips.Name.2,Melodia,Melody
-Tips.Name.3,Tom,Key 
-Tips.Name.4,Semitom,Semitone
+Tips.Name.3,Tom,Whole Step (Key)
+Tips.Name.4,Semitom,Halft Step (Semitone)
 Tips.Name.5,Notas Enarmônicas,Enharmonic Notes
 Tips.Name.6,Acordes,Chords
 Tips.Name.7,Progressão de Acordes,Chords Progression
@@ -14,25 +14,39 @@ Tips.Name.11,Escalas,Scales
 Tips.Name.12,Modos,Modes
 Tips.Name.13,Arpejo,Arpeggio
 Tips.Description.0,"Notações musicais são símbolos utilizados para representar sons e elementos musicais em partituras. Existem diferentes tipos de notações musicais, cada uma com sua função específica. Algumas das notações musicais mais comuns incluem:
-- Notas: altura e duração dos sons.
+- Notas: duração dos sons.
 - Pausas: indicam os momentos de silêncio na música, correspondendo às durações das notas.
 - Claves: são símbolos colocados no início de uma pauta para indicar a altura das notas, exemplos: Clave de Sol e Clave de Fá.
-- Sinais de alteração: alteram a altura de uma nota em um semitom para cima (sustenido) ou para baixo (bemol).","Musical notations are symbols used to represent sounds and musical elements in sheet music. There are different types of musical notations, each with its specific function. Some of the most common musical notations include:
-- Notes: indicating the pitch and duration of sounds.
+- Sinais de alteração: alteram a altura de uma nota em um semitom para cima (sustenido - #) ou para baixo (bemo - bl).","Musical notations are symbols used to represent sounds and musical elements in sheet music. There are different types of musical notations, each with its specific function. Some of the most common musical notations include:
+- Notes: duration of sounds.
 - Rests:  indicating moments of silence in the music, corresponding to the durations of the notes.
 - Clefs: symbols placed at the beginning of a staff to indicate the pitch of the notes, examples: G Clef and F Clef.
-- Accidentals: altering the pitch of a note by a half step up (sharp) or down (flat)."
-Tips.Description.1,"É o padrão de agrupamento de batidas em compassos na música. Cada compasso tem um número definido de batidas, determinado pelo denominador de uma fração de compasso (como 4/4, 3/4, 6/8, etc.)","It's the standard grouping of beats into measures in music. Each measure has a defined number of beats, determined by the denominator of a time signature fraction (such as 4/4, 3/4, 6/8, etc.)."
-Tips.Description.2,"É a parte da música que se destaca acima dos acordes e do ritmo, variando em seu tamanho, forma, altura, timbre e intensidade. Lembre-se que uma das características mais importantes da melodia é que as notas são tocadas individualmente e sequencialmente. Ao escutar uma música, tente assoviar ou cantarolar aquilo que você acha que se destaca, provavelmente, será a melodia.","It's the part of the music that stands out above the chords and rhythm, varying in its size, shape, pitch, timbre, and intensity. Remember that one of the most important characteristics of melody is that the notes are played individually and sequentially. When listening to a piece of music, try to whistle or hum what you think stands out; it's likely the melody."
+- Accidentals: altering the pitch of a note by a half step up (sharp - #) or down (flat - b)."
+Tips.Description.1,"Número de batidas em cada compasso (página). Em Kingdom's Symphony, cada linha de um compasso (página) possui 4 tempos, ou seja, você pode colocar notas que, ao somar, devem dar 4.","Number of beats in each measure (page). In Kingdom's Symphony, each line of a measure (page) has 4 beats, meaning you can place notes that, when added together, must total 4."
+Tips.Description.2,"Uma melodia é a parte que se destaca de uma música. É a parte que você assobia ou canta junto. Imagine um monte de notas musicais de mãos dadas uma após a outra em diversas linhas da partitura - isso é uma melodia! Para criar uma melodia, coloque as notas de forma sequencial e individual (sem acordes).","A melody is like the main tune of a song. It's the part you hum or sing along to. Imagine a bunch of musical notes holding hands and walking in a line - that's a melody! To create a melody, place notes sequentially and individually (without chords)."
 Tips.Description.3,"Um tom é uma unidade de medida que representa a altura de um som - na escala musical ocidental, um tom corresponde a uma distância de dois semitons.","A key is a unit of measurement that represents the pitch of a sound - in the Western musical scale, a key corresponds to a distance of two semitones."
-Tips.Description.4,Um semitom corresponde à menor distância entre dois sons consecutivos em uma escala cromática.,A semitone corresponds to the smallest distance between two consecutive sounds in a chromatic scale.
+Tips.Description.4,Um semitom corresponde à menor distância entre dois sons consecutivos em uma escala.,A semitone corresponds to the smallest distance between two consecutive sounds in a scale.
 Tips.Description.5,"Duas notas que possuem o mesmo som mas nomes diferentes, como Dó sustenido (C#) e Ré bemol (Db), estão separadas por um semitom.","Two notes that have the same sound but different names, such as C sharp (C#) and D flat (Db), are separated by a semitone."
-Tips.Description.6,"Um acorde é um conjunto de três ou mais notas diferentes tocadas simultaneamente, fornecem a base para a harmonia e a estrutura tonal em músicas de todos os tipos. Os acordes mais básicos são tríades, que consistem em três notas: a tônica, a terça e a quinta.","A chord is a set of three or more different notes played simultaneously, providing the foundation for harmony and tonal structure in music of all kinds. The most basic chords are triads, which consist of three notes: the tonic, the third, and the fifth."
-Tips.Description.7,"Uma progressão de acordes é uma sequência de acordes que ocorre em uma música, as progressões de acordes são uma parte fundamental da composição musical e são responsáveis por criar tensão, resolução e uma sensação de movimento na música. Existem muitas progressões de acordes comuns que são amplamente utilizadas em músicas de diversos gêneros, por exemplo, a progressão I-IV-V-I (tônica, subdominante, dominante, tônica).","A chord progression is a sequence of chords that occurs in a piece of music. Chord progressions are a fundamental part of musical composition and are responsible for creating tension, resolution, and a sense of movement in the music. There are many common chord progressions that are widely used in music of various genres. For example, the I-iv-V-I progression (tonic, subdominant, dominant, tonic)."
-Tips.Description.8,A tônica é o grau tonal principal e central em uma tonalidade ou progressão de acordes proporciona uma sensação de estabilidade e repouso.,"The tonic is the principal and central tonal degree in a key or chord progression, providing a sense of stability and rest."
-Tips.Description.9,"Possui sentido de suspensão com pouca tensão, criar uma sensação de movimento em direção à tônica e adiciona interesse harmônico sem criar a mesma tensão que a dominante.","It has a sense of suspension with little tension, creating a feeling of movement towards the tonic and adding harmonic interest without creating the same tension as the dominant."
-Tips.Description.10,"Possui sentido de suspensão com mais tensão, crucial para criar tensão e preparar a resolução de volta à tônica.","It has a sense of suspension with more tension, crucial for creating tension and preparing the resolution back to the tonic."
-Tips.Description.11,"Uma escala musical é uma sequência ordenada de notas musicais que segue um padrão específico de intervalos entre as notas - onde tais intervalos entre as notas em uma escala determinam o seu padrão tonal, por exemplo, na escala maior, o padrão de intervalos é tom-tom-semitom-tom-tom-tom-semitom.","A musical scale is an ordered sequence of musical notes that follows a specific pattern of intervals between the notes - where these intervals between the notes in a scale determine its tonal pattern, for example, in the major scale, the interval pattern is whole-whole-half-whole-whole-whole-half."
+Tips.Description.6,"Um acorde é um conjunto de três ou mais notas diferentes tocadas simultaneamente. Os acordes mais básicos são tríades, que consistem em três notas: a tônica, a terça e a quinta.","A chord is a set of three or more different notes played simultaneously. The most basic chords are triads, which consist of three notes: the tonic, the third, and the fifth."
+Tips.Description.7,"Uma progressão de acordes é uma sequência de acordes que ocorre em uma música. Existem muitas progressões de acordes comuns que são amplamente utilizadas em músicas de diversos gêneros, por exemplo, a progressão I-IV-V-I (tônica, subdominante, dominante, tônica) - para o acorde de Dó maior, a progressão seria, Dó Maior (Tônica), Fá Maior (Subdominante), Sol (Dominante), Dó Maior (Tônica). Para conseguir realizar tal progressão, lembre-se da escala maior da tônica.","A chord progression is a sequence of chords that occurs in a song. There are many common chord progressions widely used in music of various genres, for example, the I-IV-V-I progression (tonic, subdominant, dominant, tonic) - for the C major chord, the progression would be C Major (Tonic), F Major (Subdominant), G Major (Dominant), C Major (Tonic). To achieve such a progression, remember the major scale of the tonic."
+Tips.Description.8,"A tônica é o grau tonal principal e central em uma tonalidade ou progressão de acordes proporciona uma sensação de estabilidade e repouso. A tônica de Dó maior, é o Dó; de Fá Maior, é o Fá...","The tonic is the principal and central tonal degree in a key or chord progression, providing a sense of stability and rest. The tonic of C Major, is C; of F Major, is F..."
+Tips.Description.9,É a quarta nota de uma escala. A Subdominante de Dó Maior é Fá.,It is the fourth note of a scale. The Subdominant of C Major is F.
+Tips.Description.10,É a quinta nota de uma escala. A Dominante de Dó Maior é Sol.,It is the fifth note of a scale. The Dominant of C Major is G.
+Tips.Description.11,"Uma escala musical é uma sequência ordenada de notas musicais que segue um padrão de intervalos entre as notas - por exemplo, na escala maior, o padrão de intervalos é tom-tom-semitom-tom-tom-tom-semitom. Exemplos de escalas maiores:
+- Dó Maior: Dó (Tom), Ré (Tom), Mi (Semitom), Fá (Tom), Sol (Tom), Lá (Tom), Si (Semitom).
+- Ré Maior: Ré (Tom), Mi (Tom), Fá Sustenido (Semitom), Sol (Tom), Lá (Tom), Si (Tom), Dó Sustenido (Semitom).
+- Mi Maior:  Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Semitom), Lá (Tom), Si (Tom), Dó Sustenido (Tom), Ré Sustenido (Semitom).
+- Fá Maior: Fá (Tom), Sol (Tom), Lá (Semitom), Si Bemol (Tom), Dó (Tom), Ré (Tom), Mi (Semitom).
+- Sol Maior: Sol (Tom), Lá (Tom), Si (Semitom), Dó (Tom), Ré (Tom), Mi (Tom), Fá Sustenido (Semitom).
+- Lá Maior: Lá (Tom), Si (Tom), Dó Sustenido (Semitom), Ré(Tom), Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Semitom).
+- Si Maior: Si (Tom), Dó Sustenido (Tom), Ré Sustenido (Semitom), Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Tom), Lá Sustenido (Semitom).","A musical scale is an ordered sequence of musical notes that follows a pattern of intervals between the notes - for example, in the major scale, the pattern of intervals is whole step(WH), whole step, half step(HS), whole step, whole step, whole step, half step. Major scales examples:
+- C Major: C (WS), D (WS), E (HS), F (WS), G (WS), A (WS), B (HS).
+- D Major: D (WS), E (WS), F# (HS), G (WS), A (WS), B (WS), C# (HS).
+- E Major: E (WS), F# (WS), G# (HS), A (WS), B (WS), C# (WS), D# (HS).
+- F Major: F (WS), G (WS), A (HS), Bb (WS), C (WS), D (WS), E (HS).
+- G Major: G (WS), A (WS), B (HS), C (WS), D (WS), E (WS), F# (HS).
+- A Major: A (WS), B (WS), C# (HS), D (WS), E (WS), F# (WS), G# (HS).
+- B Major: B (WS), C# (WS), D# (HS), E (WS), F# (WS), G# (WS), A# (HS)."
 Tips.Description.12,"Os modos musicais são escalas que derivam da escala diatônica, mas começam em diferentes graus dessa escala, resultando em padrões de intervalos únicos e sonoridades distintas.
 - Jônio (Modo Maior): é o primeiro modo da escala diatônica e começa na tônica;
 - Dórico: começa no segundo grau da escala diatônica e tem um padrão de intervalos de tom-semitom-tom-tom-tom-semitom-tom;

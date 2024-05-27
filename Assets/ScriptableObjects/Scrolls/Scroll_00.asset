@@ -25,7 +25,7 @@ MonoBehaviour:
   numberOfValidRandom: 1
   XP: 20
   xFactor: 0.5
-  yFactor: 15
+  yFactor: 20
   zFactor: 1
   wFactor: 0
   effectsSymbols:

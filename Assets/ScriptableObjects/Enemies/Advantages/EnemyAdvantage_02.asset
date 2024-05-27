@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAdvantageID: 2
   targetMeasures: 0
+  validClef: 
   validChords: 07000000
   validScales: 
   validModes: 
-  xFactor: 10
-  yFactor: 50
+  effectIcon: {fileID: 0}
+  xFactor: 20
+  yFactor: 0
   zFactor: 0

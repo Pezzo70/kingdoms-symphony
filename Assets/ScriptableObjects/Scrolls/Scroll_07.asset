@@ -24,7 +24,7 @@ MonoBehaviour:
   validModes: 
   numberOfValidRandom: 1
   XP: 80
-  xFactor: 100
+  xFactor: 125
   yFactor: 0
   zFactor: 0
   wFactor: 0

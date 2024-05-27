@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_00
   m_EditorClassIdentifier: 
   enemyID: 0
-  moral: 150
+  moral: 125
   manaPerTurn: 3
   attacks:
   - {fileID: 11400000, guid: 9be6a68c272046642abb42142d79cd0c, type: 2}
