@@ -36,14 +36,14 @@ Tips.Description.11,"Uma escala musical é uma sequência ordenada de notas musi
 - Dó Maior: Dó (Tom), Ré (Tom), Mi (Semitom), Fá (Tom), Sol (Tom), Lá (Tom), Si (Semitom).
 - Ré Maior: Ré (Tom), Mi (Tom), Fá Sustenido (Semitom), Sol (Tom), Lá (Tom), Si (Tom), Dó Sustenido (Semitom).
 - Mi Maior:  Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Semitom), Lá (Tom), Si (Tom), Dó Sustenido (Tom), Ré Sustenido (Semitom).
-- Fá Maior: Fá (Tom), Sol (Tom), Lá (Semitom), Si Bemol (Tom), Dó (Tom), Ré (Tom), Mi (Semitom).
+- Fá Maior: Fá (Tom), Sol (Tom), Lá (Semitom), Lá Sustenido (Tom), Dó (Tom), Ré (Tom), Mi (Semitom).
 - Sol Maior: Sol (Tom), Lá (Tom), Si (Semitom), Dó (Tom), Ré (Tom), Mi (Tom), Fá Sustenido (Semitom).
 - Lá Maior: Lá (Tom), Si (Tom), Dó Sustenido (Semitom), Ré(Tom), Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Semitom).
 - Si Maior: Si (Tom), Dó Sustenido (Tom), Ré Sustenido (Semitom), Mi (Tom), Fá Sustenido (Tom), Sol Sustenido (Tom), Lá Sustenido (Semitom).","A musical scale is an ordered sequence of musical notes that follows a pattern of intervals between the notes - for example, in the major scale, the pattern of intervals is whole step(WH), whole step, half step(HS), whole step, whole step, whole step, half step. Major scales examples:
 - C Major: C (WS), D (WS), E (HS), F (WS), G (WS), A (WS), B (HS).
 - D Major: D (WS), E (WS), F# (HS), G (WS), A (WS), B (WS), C# (HS).
 - E Major: E (WS), F# (WS), G# (HS), A (WS), B (WS), C# (WS), D# (HS).
-- F Major: F (WS), G (WS), A (HS), Bb (WS), C (WS), D (WS), E (HS).
+- F Major: F (WS), G (WS), A (HS), A# (WS), C (WS), D (WS), E (HS).
 - G Major: G (WS), A (WS), B (HS), C (WS), D (WS), E (WS), F# (HS).
 - A Major: A (WS), B (WS), C# (HS), D (WS), E (WS), F# (WS), G# (HS).
 - B Major: B (WS), C# (WS), D# (HS), E (WS), F# (WS), G# (WS), A# (HS)."
