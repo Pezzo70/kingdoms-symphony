@@ -106,6 +106,8 @@ namespace Kingdom.Player
                     });
             }
 
+            value = Mathf.CeilToInt(value);
+
             if (_currentMoral - value <= 0f)
             {
                 _currentMoral -= value;

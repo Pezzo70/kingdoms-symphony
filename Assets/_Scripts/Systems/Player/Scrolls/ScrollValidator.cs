@@ -17,12 +17,20 @@ namespace Kingdom
 {
     public static class ScrollValidator
     {
+        public static ValidatorResult CheckNote(IEnumerable<Note> notes, SimpleNotes[] targetNotes)
+        {
+            bool result = notes.Any(n => targetNotes.Contains(KeyToSimpleNote(n.ToKey())));
+            return new ValidatorResult(result, 0f);
+        }
+
         public static ValidatorResult CheckTargetScale(
             IEnumerable<Note> notes,
             KeyName[] targetScaleArray
         )
         {
-            bool result = notes.All(n => targetScaleArray.Contains(n.ToKey()));
+            var transposed = targetScaleArray.Select(obj => KeyToSimpleNote(obj)).ToList();
+            bool result = notes.All(n => transposed.Contains(KeyToSimpleNote(n.ToKey())));
+            Debug.Log(string.Join(",", transposed));
             return new ValidatorResult(
                 result,
                 result ? notes.Count(obj => targetScaleArray.Contains(obj.ToKey())) : 0
@@ -36,11 +44,12 @@ namespace Kingdom
         {
             List<Note> firstCompassNotes = notes.Where(obj => obj.page == 0).ToList();
 
-            Debug.Log(firstCompassNotes.Any(n => n.GetChord(notes.ToList()).Count() > 0));
             if (firstCompassNotes.Any(n => n.GetChord(notes.ToList()).Count() > 0))
                 return new ValidatorResult(false, 0);
 
-            bool result = firstCompassNotes.All(n => targetScaleArray.Contains(n.ToKey()));
+            var transposed = targetScaleArray.Select(obj => KeyToSimpleNote(obj)).ToList();
+            Debug.Log(string.Join(",", transposed));
+            bool result = notes.All(n => transposed.Contains(KeyToSimpleNote(n.ToKey())));
             return new ValidatorResult(
                 result,
                 result ? notes.Count(obj => targetScaleArray.Contains(obj.ToKey())) : 0
@@ -94,7 +103,9 @@ namespace Kingdom
                     targets.Add(arr[i]);
             }
 
-            result = notes.All(obj => targets.Contains(obj.ToKey()));
+            var transposed = targets.Select(obj => KeyToSimpleNote(obj)).ToList();
+
+            result = notes.All(obj => transposed.Contains(KeyToSimpleNote(obj.ToKey())));
 
             return new ValidatorResult(result, result ? notes.Count() : 0);
         }
@@ -185,8 +196,11 @@ namespace Kingdom
         )
         {
             var filterScale = new KeyName[] { scale[3], scale[4] };
+            var filterScaleTransposed = filterScale.Select(obj => KeyToSimpleNote(obj)).ToList();
             var result = notes.Where(
-                obj => obj.page == targetMeasure && filterScale.Contains(obj.ToKey())
+                obj =>
+                    obj.page == targetMeasure
+                    && filterScaleTransposed.Contains(KeyToSimpleNote(obj.ToKey()))
             );
             bool found = result.Count() > 0;
             return new ValidatorResult(found, result.Count());
@@ -291,8 +305,11 @@ namespace Kingdom
                     )
                 );
             }
-
-            return new ValidatorResult(notes.All(obj => keys.Contains(obj.ToKey())), 0f);
+            var keysTransposed = keys.Select(obj => KeyToSimpleNote(obj));
+            return new ValidatorResult(
+                notes.All(obj => keysTransposed.Contains(KeyToSimpleNote(obj.ToKey()))),
+                0f
+            );
         }
 
         public static ValidatorResult CheckMelodyComposition(IEnumerable<Note> notes)
@@ -306,7 +323,11 @@ namespace Kingdom
         public static ValidatorResult CheckMode(IEnumerable<Note> notes, Modes mode, KeyName note)
         {
             var modeNotes = NotationExtensions.GetKeysFromMode(mode, note);
-            return new ValidatorResult(notes.All(n => modeNotes.Contains(n.ToKey())), 0f);
+            var modeNotesTransposed = modeNotes.Select(obj => KeyToSimpleNote(obj));
+            return new ValidatorResult(
+                notes.All(n => modeNotesTransposed.Contains(KeyToSimpleNote(n.ToKey()))),
+                0f
+            );
         }
     }
 

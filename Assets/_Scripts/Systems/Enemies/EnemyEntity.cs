@@ -158,7 +158,7 @@ namespace Kingdom.Enemies
             damageUpdated += massiveDamage;
 
             enemyActiveIndicator.SetActive(true);
-            StartCoroutine(TakeDamageRoutine(damageUpdated));
+            StartCoroutine(TakeDamageRoutine(Mathf.CeilToInt(damageUpdated)));
         }
 
         public void Heal(float quantity)

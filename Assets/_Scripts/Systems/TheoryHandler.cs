@@ -357,6 +357,15 @@ namespace Kingdom
                         EventManager.AddEffect?.Invoke(effectDTO);
                     }
                     break;
+                case ScrollID.FirstNotes:
+                case ScrollID.FirstSharpNotes:
+                    validatorResult = ScrollValidator.CheckNote(notes, scrollDTO.TargetNotes);
+                    accomplished = validatorResult.Result;
+                    if (accomplished)
+                    {
+                        damage += scrollDTO.Scroll.xFactor;
+                    }
+                    break;
             }
 
             if (accomplished)

@@ -42,10 +42,16 @@ Scrolls.Objective.8,"Em compassos diferentes, adicione notas enarmônicas.","In 
 Scrolls.Objective.9,No quarto compasso adicione as notas subdominantes e dominantes de uma escala maior aleatória.,Add the subdominant and dominant notes of a random major scale in the fourth measure.
 Scrolls.Objective.10,No primeiro compasso realize a progressões de acorde I-iv-V partindo de um acorde aleatório (I).,"In the first measure, perform the chord progressions I-iv-V  starting from a random chord (I)."
 Scrolls.Objective.11,Realize o arpejo de um acorde aleatório em três compassos distintos.,Play out as an arpeggio of a random chord  in three separate measures.
-Scrolls.Objective.12,Adicione somente notas de duas escalas maiores aleatórias.,Add only notes from two rando major scales.
+Scrolls.Objective.12,Adicione somente notas de duas escalas maiores aleatórias.,Add only notes from two random major scales.
 Scrolls.Objective.13,Componha uma melodia com todos os compassos disponíveis - não pode haver sobreposição de notas.,Use all available measures to compose a melody.
 Scrolls.Objective.14,"Em todos os compassos disponíveis, componha utilizando apenas as notas seguindo o Modo Jônio a partir de uma nota tônica de uma escala maior.","In all available measures, compose using only notes following Ionian Mode from a tonic note from a random scale."
 Scrolls.Menu.Cooldown,Tempo de Espera: -X (turno).,Cooldown: -X (turn).
 Scrolls.Menu.Available,Disponível em -X (turno).,Available in -X (turn).
 Scrolls.Menu.Cast,Usar Pergaminho,Cast Scroll
 Scrolls.Menu.Targets,Aleatórios: -X .,Random: -X .
+Scrolls.Name.15,Primeiras Notas,First Notes
+Scrolls.Effect.15,Adicione -X de dano ao total no fim do turno do musicista.,Add -X damage to the total at the end of the musician's turn.
+Scrolls.Objective.15,Adicione em qualquer compasso a nota escolhida aleatoriamente.,Add in any measure the target random note.
+Scrolls.Name.16,Primeiras Notas Sustenidas,First Sharp Notes
+Scrolls.Effect.16,Adicione -X de dano ao total no fim do turno do musicista.,Add -X damage to the total at the end of the musician's turn.
+Scrolls.Objective.16,Adicione em qualquer compasso a nota sustenida escolhida aleatoriamente.,Add in any measure the target random sharp note.

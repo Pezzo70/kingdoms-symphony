@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scroll_06
   m_EditorClassIdentifier: 
   scrollID: 6
-  levelRequired: 1
+  levelRequired: 2
   unlockedFor: 00000000
   manaRequired: 3
   cooldown: 3
@@ -22,6 +22,7 @@ MonoBehaviour:
   validChords: 0000000002000000040000000500000007000000090000000b000000
   validScales: 
   validModes: 
+  targetNotes: 
   numberOfValidRandom: 3
   XP: 80
   xFactor: 25

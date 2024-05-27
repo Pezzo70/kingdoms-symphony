@@ -134,7 +134,9 @@ namespace Kingdom.Enums.Scrolls
         HealingThroughArpeggios = 11,
         BetweenScales = 12,
         Melodic = 13,
-        PianistWithModes = 14
+        PianistWithModes = 14,
+        FirstNotes = 15,
+        FirstSharpNotes = 16,
     }
 }
 

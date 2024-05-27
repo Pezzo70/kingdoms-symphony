@@ -15,13 +15,14 @@ MonoBehaviour:
   scrollID: 2
   levelRequired: 1
   unlockedFor: 00000000
-  manaRequired: 3
-  cooldown: 3
+  manaRequired: 2
+  cooldown: 2
   targetMeasures: 0
   validClef: 
   validChords: 
   validScales: 
   validModes: 
+  targetNotes: 
   numberOfValidRandom: 0
   XP: 20
   xFactor: 20

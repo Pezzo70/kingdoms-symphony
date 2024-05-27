@@ -49,6 +49,7 @@ namespace Kingdom.Effects
             Chords[] chords = new Chords[] { };
             Scale[] scales = new Scale[] { };
             Modes[] modes = new Modes[] { };
+            SimpleNotes[] notes = new SimpleNotes[] { };
             int novr = scroll.numberOfValidRandom;
             string[] names = new string[novr];
 
@@ -60,6 +61,13 @@ namespace Kingdom.Effects
                         novr,
                         ref names,
                         "Theory.Clef."
+                    );
+                else if (scroll.targetNotes.Length > 0)
+                    notes = GetRandomsTFromScroll(
+                        scroll.targetNotes,
+                        novr,
+                        ref names,
+                        "Theory.Notes."
                     );
                 else if (scroll.validChords.Length > 0)
                     chords = GetRandomsTFromScroll(
@@ -84,7 +92,7 @@ namespace Kingdom.Effects
                     );
             }
 
-            ScrollDTO scrollDTO = new ScrollDTO(scroll, clefs, chords, scales, modes, names);
+            ScrollDTO scrollDTO = new ScrollDTO(scroll, clefs, chords, scales, modes, notes, names);
             onGoingScrolls.Add(scrollDTO);
             EventManager.AddScroll?.Invoke(scrollDTO);
         }
@@ -316,6 +324,7 @@ namespace Kingdom.Effects
         private Chords[] _targetChords;
         private Scale[] _targetScales;
         private Modes[] _targetModes;
+        private SimpleNotes[] _targetNotes;
         private string[] _randomTargetsNames;
 
         public Scroll Scroll
@@ -348,12 +357,18 @@ namespace Kingdom.Effects
             get => _randomTargetsNames;
         }
 
+        public SimpleNotes[] TargetNotes
+        {
+            get => _targetNotes;
+        }
+
         public ScrollDTO(
             Scroll scroll,
             Clef[] targetClef,
             Chords[] targetChords,
             Scale[] targetScales,
             Modes[] targetModes,
+            SimpleNotes[] targetNotes,
             string[] targetNames
         )
         {
@@ -362,6 +377,7 @@ namespace Kingdom.Effects
             _targetChords = targetChords;
             _targetScales = targetScales;
             _targetModes = targetModes;
+            _targetNotes = targetNotes;
             _randomTargetsNames = targetNames;
         }
     }

@@ -18,6 +18,7 @@ public class Scroll : ScriptableObject
     public Chords[] validChords;
     public Scale[] validScales;
     public Modes[] validModes;
+    public SimpleNotes[] targetNotes;
     public int numberOfValidRandom;
     public int XP;
 
