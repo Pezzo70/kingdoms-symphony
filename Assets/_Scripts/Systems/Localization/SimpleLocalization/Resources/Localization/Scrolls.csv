@@ -54,4 +54,4 @@ Scrolls.Effect.15,Adicione -X de dano ao total no fim do turno do musicista.,Add
 Scrolls.Objective.15,Adicione em qualquer compasso a nota escolhida aleatoriamente.,Add in any measure the target random note.
 Scrolls.Name.16,Primeiras Notas Sustenidas,First Sharp Notes
 Scrolls.Effect.16,Adicione -X de dano ao total no fim do turno do musicista.,Add -X damage to the total at the end of the musician's turn.
-Scrolls.Objective.16,Adicione em qualquer compasso a nota sustenida escolhida aleatoriamente.,Add in any measure the target random sharp note.
+Scrolls.Objective.16,Adicione em qualquer compasso a nota sustenida (#) escolhida aleatoriamente.,Add in any measure the target random sharp (#) note.

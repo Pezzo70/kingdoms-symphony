@@ -26,7 +26,6 @@ namespace Kingdom.Audio
         public bool wasOpen;
         private Queue<System.Action> mainThreadActions;
 
-
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
         private int currentIndex;
@@ -118,7 +117,7 @@ namespace Kingdom.Audio
                 SpriteFollowMouse();
             UpdatePageCounter();
 
-            while(mainThreadActions.Count > 0)
+            while (mainThreadActions.Count > 0)
             {
                 mainThreadActions.Dequeue().Invoke();
             }
@@ -193,7 +192,7 @@ namespace Kingdom.Audio
         public void Clear()
         {
             while (actionStack.Count != 0)
-            { 
+            {
                 if (actionStack.Peek().IsDestroyed())
                     actionStack.Pop();
                 else
@@ -213,7 +212,8 @@ namespace Kingdom.Audio
                     lastAction = actionStack.Pop();
                 }
 
-                if(actionStack.Count > 0) lastAction = actionStack.Pop();
+                if (actionStack.Count > 0)
+                    lastAction = actionStack.Pop();
 
                 if (!lastAction?.IsDestroyed() ?? false)
                 {
@@ -302,21 +302,23 @@ namespace Kingdom.Audio
             }
             AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
             GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = false;
-            AudioSystem.Instance.instrument.InstrumentEnd += delegate {
-            mainThreadActions.Enqueue(()=>
+            AudioSystem.Instance.instrument.InstrumentEnd += delegate
+            {
+                mainThreadActions.Enqueue(() =>
                 {
-                    foreach(Transform page in pageParent.transform)
+                    foreach (Transform page in pageParent.transform)
                     {
-                        foreach(Transform noteT in page)
+                        foreach (Transform noteT in page)
                         {
                             noteT.TryGetComponent<Note>(out Note note);
-                            if(note != null) note.setColor(new Color32(255, 255, 255, 255));
-                        }                    
+                            if (note != null)
+                                note.setColor(new Color32(255, 255, 255, 255));
+                        }
                     }
                     GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
-                }
-            );
-            };}
+                });
+            };
+        }
 
         public void InsertNote()
         {
@@ -341,7 +343,9 @@ namespace Kingdom.Audio
 
             Note noteOnNearX = actionStack
                 .OfType<Note>()
-                .FirstOrDefault(n => n.page == aPage && Mathf.Abs(n.xPos - newNote.transform.position.x) <= 1f);
+                .FirstOrDefault(
+                    n => n.page == aPage && Mathf.Abs(n.xPos - newNote.transform.position.x) <= 1f
+                );
             if (noteOnNearX != null)
             {
                 newNote.transform.position = new Vector3(
@@ -602,6 +606,11 @@ namespace Kingdom.Audio
             var spriteArray = line.index > 6 ? upNotations : downNotations;
             NotationScriptable currentNote = spriteArray[currentIndex];
 
+            if (note.note.Tempo > currentNote.Tempo)
+            {
+                return;
+            }
+
             if (
                 note.note.Tempo != currentNote.Tempo
                 || note.note.NoteBehaviour != currentNote.NoteBehaviour
@@ -612,11 +621,17 @@ namespace Kingdom.Audio
                 note.GetComponent<RectTransform>().pivot = note.GetComponent<Image>()
                     .GetSpriteRelativePivot();
             }
-            else { }
         }
 
         public void RemoveNote(Note note)
         {
+            var newActionStack = new Stack<MonoBehaviour>();
+            foreach (MonoBehaviour action in actionStack.Reverse())
+            {
+                if (action != note)
+                    newActionStack.Push(action);
+            }
+            actionStack = newActionStack;
             Destroy(note.gameObject);
         }
     }

@@ -47,23 +47,23 @@ Theory.Modes.Locrian,Lócrio,Locrian
 Theory.Clef.G,Clave de Sol,G Clef
 Theory.Clef.F,Clave de Fá,F Clef
 Theory.Notes.C,Dó,C
-Theory.Notes.CSharp,Dó Sustenido,C#
-Theory.Notes.CFlat,Dó Bemol,Cb
+Theory.Notes.CSharp,Dó Sustenido (#),C#
+Theory.Notes.CFlat,Dó Bemol (b),Cb
 Theory.Notes.D,Ré,D
-Theory.Notes.DSharp,Ré Sustenido,D#
-Theory.Notes.DFlat,Ré Bemol,Db
+Theory.Notes.DSharp,Ré Sustenido (#),D#
+Theory.Notes.DFlat,Ré Bemol (b),Db
 Theory.Notes.E,Mi,E
-Theory.Notes.ESharp,Mi Sustenido,E#
-Theory.Notes.EFlat,Mi Bemol,Eb
+Theory.Notes.ESharp,Mi Sustenido (#),E#
+Theory.Notes.EFlat,Mi Bemol (b),Eb
 Theory.Notes.F,Fá,F
-Theory.Notes.FSharp,Fá Sustenido,F#
-Theory.Notes.FFlat,Fá Bemol,Fb
+Theory.Notes.FSharp,Fá Sustenido (#),F#
+Theory.Notes.FFlat,Fá Bemol (b),Fb
 Theory.Notes.G,Sol,G
-Theory.Notes.GSharp,Sol Sustenido,G#
-Theory.Notes.GFlat,Sol Bemol,Gb
+Theory.Notes.GSharp,Sol Sustenido (#),G#
+Theory.Notes.GFlat,Sol Bemol (b),Gb
 Theory.Notes.A,Lá,A
-Theory.Notes.ASharp,Lá Sustenido,A#
-Theory.Notes.AFlat,Lá Bemol,Ab
+Theory.Notes.ASharp,Lá Sustenido (#),A#
+Theory.Notes.AFlat,Lá Bemol (b),Ab
 Theory.Notes.B,Si,B
-Theory.Notes.BSharp,Si Sustenido,B#
-Theory.Notes.BFlat,Si Bemol,Bb
+Theory.Notes.BSharp,Si Sustenido (#),B#
+Theory.Notes.BFlat,Si Bemol (b),Bb
