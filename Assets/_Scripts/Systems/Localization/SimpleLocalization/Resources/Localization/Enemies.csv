@@ -47,7 +47,7 @@ Enemies.Advantages.Description.3,Mitigação completa de dano final caso tenha a
 Enemies.Advantages.Description.4,Mitigação em -X% de dano final ao utilizar a Clave de Sol.,Mitigation of -X% of final damage when using the G-Clef.
 Enemies.Advantages.Description.5,Criatura irá se curar em -X% caso o jogador utilize notações até 1/2.,Creature will heal by -X% if the player uses notations up to 1/2.
 Enemies.Advantages.Description.6,Mitigação em -X% de dano final ao utilizar a Clave de Fá.,Mitigation of -X% of final damage when using the F-Clef.
-Enemies.Advantages.Description.7,A criatura mitigará o dano em -X% de notas até 1/4.,The creature will mitigate damage by -X% of notes up to 1/4.
+Enemies.Advantages.Description.7,A criatura mitigará o dano em -X% caso tenha notas de duração 1/4.,The creature will mitigate damage by -X% if there are notes with 1/4 tempo.
 Enemies.Advantages.Description.8,"Ao utilizar todos os compassos disponíveis, o Visitante Abissal ficará enfurecido aumentado o dano em -X% por -Y turnos.","When using all available measures, the Abyssal Visitor will become enraged, increasing damage by -X% for -Y turns."
 Enemies.Disadvantages.Name.0,Melodias Odiosas,Hateful Melodies
 Enemies.Disadvantages.Name.1,Não há Pausa para os Uivos,Can't Pause Howls
@@ -55,7 +55,7 @@ Enemies.Disadvantages.Name.2,Balança Demais,Shakes Too Much
 Enemies.Disadvantages.Name.3,Dores de Cabeça,Headaches
 Enemies.Disadvantages.Name.4,Lixando as Garras,Smoothing the Claws
 Enemies.Disadvantages.Name.5,Bem nos Olhos,Right At the Eyes
-Enemies.Disadvantages.Name.6,Modos Odiosos,Hateful Modes
+Enemies.Disadvantages.Name.6,Pausas Odiosas,Hateful Pauses
 Enemies.Disadvantages.Name.7,Eu não sou meu Pai,I'm not my Father
 Enemies.Disadvantages.Description.0,Melodias criadas pelo musicista causam -X% de dano final adicional.,Melodies created by the musician cause an additional -X% of final damage.
 Enemies.Disadvantages.Description.1,Melodias criadas pelo musicista com pausas causam -X% de dano final adicional.,Melodies created by the musician with rests cause an additional -X% of final damage.
