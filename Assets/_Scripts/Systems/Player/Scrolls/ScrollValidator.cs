@@ -19,7 +19,8 @@ namespace Kingdom
     {
         public static ValidatorResult CheckNote(IEnumerable<Note> notes, SimpleNotes[] targetNotes)
         {
-            bool result = notes.Any(n => targetNotes.Contains(KeyToSimpleNote(n.ToKey())));
+            var notesAsText = targetNotes.Select(obj => obj.ToString());
+            bool result = notes.Any(n => notesAsText.Contains(n.ToKeyText()));
             return new ValidatorResult(result, 0f);
         }
 
@@ -48,7 +49,6 @@ namespace Kingdom
                 return new ValidatorResult(false, 0);
 
             var transposed = targetScaleArray.Select(obj => KeyToSimpleNote(obj)).ToList();
-            Debug.Log(string.Join(",", transposed));
             bool result = notes.All(n => transposed.Contains(KeyToSimpleNote(n.ToKey())));
             return new ValidatorResult(
                 result,
