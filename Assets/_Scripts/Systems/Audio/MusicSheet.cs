@@ -16,7 +16,7 @@ namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
-        public enum HoverType { Notation, Signature,}
+        public enum HoverType { Notation, Signature, }
         private const float DEFAULT_SPRITE_SIZE = 70f;
 
         [SerializeField]
@@ -56,8 +56,13 @@ namespace Kingdom.Audio
             EventManager.PauseGame += HandlePause;
             EventManager.UnpauseGame += HandleUnpause;
             EventManager.NoteCurrentlyPlaying += HandleCurrentNotePlaying;
+            AudioSystem.Instance.instrument.InstrumentEnd += HandleInstrumentEnd;
         }
 
+
+        void OnEnable()
+        {
+        }
         private void HandleCurrentNotePlaying(Note note)
         {
             if (note == null)
@@ -73,6 +78,25 @@ namespace Kingdom.Audio
             }
 
             currentNoteText.LocalizationKey = "Theory.Notes." + note.ToKeyText();
+        }
+
+        private void HandleInstrumentEnd(object sender, System.EventArgs e)
+        {
+            var pageParent = GameObject.FindWithTag("Page");
+            mainThreadActions.Enqueue(() =>
+            {
+                foreach (Transform page in pageParent.transform)
+                {
+                    foreach (Transform noteT in page)
+                    {
+                        noteT.TryGetComponent<Note>(out Note note);
+                        if (note != null)
+                            note.SetColor(new Color32(255, 255, 255, 255));
+                    }
+                }
+                GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
+                EventManager.NoteCurrentlyPlaying?.Invoke(null);
+            });
         }
 
         void Start()
@@ -107,6 +131,7 @@ namespace Kingdom.Audio
             currentSpriteArray = upNotations;
             UpdatePageCounter();
             mainThreadActions = new Queue<System.Action>();
+
         }
 
         void OnDestroy()
@@ -114,6 +139,7 @@ namespace Kingdom.Audio
             EventManager.PauseGame -= HandlePause;
             EventManager.UnpauseGame -= HandleUnpause;
             EventManager.NoteCurrentlyPlaying -= HandleCurrentNotePlaying;
+            AudioSystem.Instance.instrument.InstrumentEnd -= HandleInstrumentEnd;
         }
 
         private void HandlePause()
@@ -144,7 +170,6 @@ namespace Kingdom.Audio
                 mainThreadActions.Dequeue().Invoke();
             }
         }
-        public void Teste(HoverType type){}
         public void SetHover(int hoverType)
         {
             isHover = true;
@@ -324,24 +349,8 @@ namespace Kingdom.Audio
                 }
             }
             AudioSystem.Instance.Play(notesToPlay.AsReadOnlyList());
-            GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = false;
-            AudioSystem.Instance.instrument.InstrumentEnd += delegate
-            {
-                mainThreadActions.Enqueue(() =>
-                {
-                    foreach (Transform page in pageParent.transform)
-                    {
-                        foreach (Transform noteT in page)
-                        {
-                            noteT.TryGetComponent<Note>(out Note note);
-                            if (note != null)
-                                note.SetColor(new Color32(255, 255, 255, 255));
-                        }
-                    }
-                    GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
-                    EventManager.NoteCurrentlyPlaying?.Invoke(null);
-                });
-            };
+            if (notesToPlay.Count > 0)
+                GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = false;
         }
 
         public void InsertNote()
@@ -673,14 +682,14 @@ namespace Kingdom.Audio
 
         internal void ChangeSignature(MonoKeySignature monoKeySignature)
         {
-             var line = GetClosestLine();
+            var line = GetClosestLine();
             var spriteArray = currentSpriteArray;
             KeySignatureScriptable currentNote = (KeySignatureScriptable)spriteArray[currentIndex];
 
-                monoKeySignature.keySignature = currentNote;
-                monoKeySignature.GetComponent<Image>().sprite = currentNote.Sprite;
-                monoKeySignature.GetComponent<RectTransform>().pivot = monoKeySignature.GetComponent<Image>()
-                    .GetSpriteRelativePivot();
+            monoKeySignature.keySignature = currentNote;
+            monoKeySignature.GetComponent<Image>().sprite = currentNote.Sprite;
+            monoKeySignature.GetComponent<RectTransform>().pivot = monoKeySignature.GetComponent<Image>()
+                .GetSpriteRelativePivot();
         }
     }
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Kingdom.Enums.Audio.Procedural;
 using UnityEngine;
 using static Kingdom.Audio.Procedural.Frequencies;
@@ -10,14 +13,21 @@ namespace Kingdom.Audio.Procedural
         [SerializeField, Min(0.0001f)]
         private float[] harmonics = new float[12];
 
+        Queue<Action> events;
+
         public void Start()
         {
             this._sampleRate = AudioSettings.outputSampleRate;
             ADSR = new ADSREnvelope();
             _keysPlayed = new();
+            events = new Queue<Action>();
         }
 
-        public void Update() { }
+        public void Update() 
+        { 
+            while(events.Any())
+              events.Dequeue()?.Invoke();
+        }
 
         public void OnAudioFilterRead(float[] data, int channels)
         {
@@ -34,12 +44,12 @@ namespace Kingdom.Audio.Procedural
                 var isReleased = key.TimeReleased != 0 && currentTime >= key.TimeReleased;
                 if (timeElapsed <= ADSR.Attack) // It is in the Attack phase, the sound is still rising form 0 top to maximum (1)
                 {
-                        key.Status = KeyStatus.Attack;
+                        events.Enqueue(() => key.Status = KeyStatus.Attack);
                         volumeModifier = Mathf.InverseLerp(0.0f, ADSR.Attack, timeElapsed);
                 }
                 else if (timeElapsed < ADSR.Decay + ADSR.Attack) // The sound is in the decay phase meaning it is going from the maximum to the sustained level
                 {
-                    key.Status = KeyStatus.Decay;
+                    events.Enqueue(() =>key.Status = KeyStatus.Decay);
                     volumeModifier = Mathf.InverseLerp(
                         ADSR.Attack,
                         ADSR.Attack + ADSR.Decay,
@@ -52,14 +62,14 @@ namespace Kingdom.Audio.Procedural
 
                 if (isReleased) // The key is not being held any more, this is not a realistic piano as it can hold a note on sustain forever, it only goes to release when you release a key!
                 {
-                    key.Status = KeyStatus.Release;
+                    events.Enqueue(() => key.Status = KeyStatus.Release);
                     timeElapsed = (float)(currentTime - key.TimeReleased);
 
                     if (timeElapsed > ADSR.Release)
                     {
                         this._keysPlayed.Remove(key);
                         if(_keysPlayed.Count == 0)
-                           OnInstrumentEnd(this, new System.EventArgs());
+                           events.Enqueue(() => OnInstrumentEnd(this, new System.EventArgs()));
                         continue;
                     }
 
