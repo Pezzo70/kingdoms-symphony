@@ -121,23 +121,29 @@ namespace Kingdom.Effects
             };
 
             if (
-                onGoingEffects
-                    .Where(
-                        obj => obj.Target == effect.Target && obj.EffectType == effect.EffectType
-                    )
-                    .Count() > 0
-                && effectTypesShouldAddTurns.Contains(effect.EffectType)
+                onGoingEffects.Any(
+                    obj =>
+                        obj.GameObjectName == effect.GameObjectName
+                        && obj.EffectType == effect.EffectType
+                ) && effectTypesShouldAddTurns.Contains(effect.EffectType)
             )
             {
                 var effectsThatShouldAddTurns = onGoingEffects.Where(
-                    obj => obj.Target == effect.Target && obj.EffectType == effect.EffectType
+                    obj =>
+                        obj.GameObjectName == effect.GameObjectName
+                        && obj.EffectType == effect.EffectType
                 );
 
                 effectsThatShouldAddTurns
                     .ToList()
                     .ForEach(obj => obj.EffectExpireOnTurn = effect.EffectExpireOnTurn + 1);
+
                 return;
-            }else onGoingEffects.Add(effect);
+            }
+            else
+            {
+                onGoingEffects.Add(effect);
+            }
         }
 
         private void HandleTurnChanged(Turn turn)

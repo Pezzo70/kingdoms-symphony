@@ -108,7 +108,7 @@ public class PlayerTurnManager : MonoBehaviour
         float _ = 0f;
         _scrollSuccessState.Clear();
 
-        if (_win)
+        if (_win || _isDead)
             return;
 
         EffectsAndScrollsManager
@@ -307,30 +307,33 @@ public class PlayerTurnManager : MonoBehaviour
 
         pianoPortal.SetActive(false);
 
-        for (int i = 0; i < _scrollSuccessState.Count; i++)
+        if (!_win)
         {
-            GameObject scrollSuccess = Instantiate(
-                scrollsSuccessStatePrefab,
-                scrollsSucessStateContainer.transform
-            );
-            scrollSuccess.GetComponentInChildren<LocalizedTextMeshProUGUI>().LocalizationKey =
-                "Scrolls.Name." + (int)_scrollSuccessState[i].scroll;
+            for (int i = 0; i < _scrollSuccessState.Count; i++)
+            {
+                GameObject scrollSuccess = Instantiate(
+                    scrollsSuccessStatePrefab,
+                    scrollsSucessStateContainer.transform
+                );
+                scrollSuccess.GetComponentInChildren<LocalizedTextMeshProUGUI>().LocalizationKey =
+                    "Scrolls.Name." + (int)_scrollSuccessState[i].scroll;
 
-            if (!_scrollSuccessState[i].accomplished)
-                scrollSuccess.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                if (!_scrollSuccessState[i].accomplished)
+                    scrollSuccess.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
 
-            _scrollsSucessStateInstantiated.Add(scrollSuccess);
-            Animator scrollSuccessAnim = scrollSuccess.GetComponent<Animator>();
-            scrollSuccessAnim.SetBool("FadeIn", true);
-            yield return new WaitForSeconds(3f);
-            scrollSuccessAnim.SetBool("FadeIn", false);
-            scrollSuccessAnim.SetBool("FadeOut", true);
-            yield return new WaitForSeconds(1f);
-            scrollSuccessAnim.SetBool("FadeOut", false);
+                _scrollsSucessStateInstantiated.Add(scrollSuccess);
+                Animator scrollSuccessAnim = scrollSuccess.GetComponent<Animator>();
+                scrollSuccessAnim.SetBool("FadeIn", true);
+                yield return new WaitForSeconds(3f);
+                scrollSuccessAnim.SetBool("FadeIn", false);
+                scrollSuccessAnim.SetBool("FadeOut", true);
+                yield return new WaitForSeconds(1f);
+                scrollSuccessAnim.SetBool("FadeOut", false);
+            }
+
+            for (int i = 0; i < _scrollsSucessStateInstantiated.Count; i++)
+                Destroy(_scrollsSucessStateInstantiated[i]);
         }
-
-        for (int i = 0; i < _scrollsSucessStateInstantiated.Count; i++)
-            Destroy(_scrollsSucessStateInstantiated[i]);
 
         _scrollsSucessStateInstantiated.Clear();
 

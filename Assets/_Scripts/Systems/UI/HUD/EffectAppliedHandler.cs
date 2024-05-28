@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kingdom.Effects;
 using UnityEngine;
 
@@ -31,8 +32,29 @@ public class EffectAppliedHandler : MonoBehaviour
 
     private void HandleAddEffect(EffectDTO dto)
     {
-        if (dto.EffectTarget != effectTarget || !dto.ShouldAppearOnHUD)
+        var effectTypesShouldAddTurns = new EffectType[]
+        {
+            EffectType.ReduceAvailableSheetBars,
+            EffectType.CompleteMitigation,
+            EffectType.PreventPlayerHeal,
+            EffectType.PreventEnemyHeal,
+            EffectType.AdditionalManaScrollCost,
+            EffectType.ReduceMana,
+            EffectType.Damage,
+        };
+
+        if (
+            EffectsAndScrollsManager
+                .Instance
+                .onGoingEffects
+                .Any(
+                    obj =>
+                        obj.GameObjectName == dto.GameObjectName && obj.EffectType == dto.EffectType
+                ) && effectTypesShouldAddTurns.Contains(dto.EffectType)
+        )
+        {
             return;
+        }
 
         GameObject prefab = Instantiate(effectPrefab, effectTargetContainer.transform);
         prefab.GetComponent<EffectApplied>().SetData(dto);
