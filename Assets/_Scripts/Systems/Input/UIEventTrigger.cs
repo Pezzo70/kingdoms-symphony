@@ -14,7 +14,7 @@ public class UIEventTrigger : EventTrigger
     private Coroutine _waitUserStayOnButton = null;
 
     [SerializeField]
-    private UIAction[] supportedActionsAudio = new UIAction[]
+    protected UIAction[] supportedActionsAudio = new UIAction[]
     {
         UIAction.Hover,
         UIAction.Submit,

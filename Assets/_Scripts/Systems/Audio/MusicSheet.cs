@@ -16,6 +16,7 @@ namespace Kingdom.Audio
 {
     public class MusicSheet : MonoBehaviour
     {
+        public enum HoverType { Notation, Signature,}
         private const float DEFAULT_SPRITE_SIZE = 70f;
 
         [SerializeField]
@@ -45,7 +46,7 @@ namespace Kingdom.Audio
         [SerializeField]
         private Vector2 offsetPosition;
         private bool isHover = false;
-        private string currentHoverTag;
+        private HoverType currentHoverTag;
         public TextMeshProUGUI pageCounterText;
         public TMP_InputField pageLabelInput;
         public LocalizedTextMeshProUGUI currentNoteText;
@@ -143,18 +144,18 @@ namespace Kingdom.Audio
                 mainThreadActions.Dequeue().Invoke();
             }
         }
-
-        public void SetHover(bool val, string tag = "MusicSheet")
+        public void Teste(HoverType type){}
+        public void SetHover(int hoverType)
         {
-            isHover = val;
-            currentHoverTag = tag;
+            isHover = true;
+            currentHoverTag = (HoverType)hoverType;
 
             switch (currentHoverTag)
             {
-                case "MusicSheet":
+                case HoverType.Notation:
                     currentSpriteArray = upNotations;
                     break;
-                case "KeySignatureArea":
+                case HoverType.Signature:
                     currentSpriteArray = keySignatures;
                     break;
             }
@@ -166,6 +167,7 @@ namespace Kingdom.Audio
             ].Sprite;
         }
 
+        public void ExitHover() => isHover = false;
         public void Exit()
         {
             this.playerOptions.SetActive(true);
@@ -333,7 +335,7 @@ namespace Kingdom.Audio
                         {
                             noteT.TryGetComponent<Note>(out Note note);
                             if (note != null)
-                                note.setColor(new Color32(255, 255, 255, 255));
+                                note.SetColor(new Color32(255, 255, 255, 255));
                         }
                     }
                     GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
@@ -655,6 +657,30 @@ namespace Kingdom.Audio
             }
             actionStack = newActionStack;
             Destroy(note.gameObject);
+        }
+
+        internal void RemoveSignature(MonoKeySignature monoKeySignature)
+        {
+            var newActionStack = new Stack<MonoBehaviour>();
+            foreach (MonoBehaviour action in actionStack.Reverse())
+            {
+                if (action != monoKeySignature)
+                    newActionStack.Push(action);
+            }
+            actionStack = newActionStack;
+            Destroy(monoKeySignature.gameObject);
+        }
+
+        internal void ChangeSignature(MonoKeySignature monoKeySignature)
+        {
+             var line = GetClosestLine();
+            var spriteArray = currentSpriteArray;
+            KeySignatureScriptable currentNote = (KeySignatureScriptable)spriteArray[currentIndex];
+
+                monoKeySignature.keySignature = currentNote;
+                monoKeySignature.GetComponent<Image>().sprite = currentNote.Sprite;
+                monoKeySignature.GetComponent<RectTransform>().pivot = monoKeySignature.GetComponent<Image>()
+                    .GetSpriteRelativePivot();
         }
     }
 }

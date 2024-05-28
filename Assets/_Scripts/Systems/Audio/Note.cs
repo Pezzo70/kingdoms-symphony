@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Kingdom.Audio.Procedural;
+using Kingdom.Enums;
 using Kingdom.Enums.Audio.Procedural;
 using Kingdom.Enums.MusicTheory;
 using Kingdom.Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Kingdom.Audio
 {
-    public class Note : MonoBehaviour
+    public class Note : UIEventTrigger
     {
+        public MusicSheet musicSheet;
         public NotationScriptable note;
         public ClefScriptable clef;
         public KeySignatureScriptable signature;
@@ -27,6 +31,9 @@ namespace Kingdom.Audio
         {
             imageComponent = GetComponent<Image>();
             mainThreadActions = new Queue<Action>();
+            musicSheet = GameObject.FindAnyObjectByType<MusicSheet>();
+            this.AddComponent<Selectable>();
+            supportedActionsAudio = new UIAction[] { UIAction.Submit};
         }
 
         public void Update()
@@ -49,23 +56,23 @@ namespace Kingdom.Audio
                         mainThreadActions.Enqueue(() =>
                         {
                             EventManager.NoteCurrentlyPlaying?.Invoke(this);
-                            setColor(new Color32(0, 0, 0, 100));
+                            SetColor(new Color32(0, 0, 0, 100));
                         });
                         break;
                     case KeyStatus.Decay:
-                        mainThreadActions.Enqueue(() => setColor(new Color32(210, 238, 130, 100)));
+                        mainThreadActions.Enqueue(() => SetColor(new Color32(210, 238, 130, 100)));
                         break;
                     case KeyStatus.Sustain:
-                        mainThreadActions.Enqueue(() => setColor(new Color32(210, 238, 130, 100)));
+                        mainThreadActions.Enqueue(() => SetColor(new Color32(210, 238, 130, 100)));
                         break;
                     case KeyStatus.Release:
-                        mainThreadActions.Enqueue(() => setColor(new Color32(255, 255, 225, 100)));
+                        mainThreadActions.Enqueue(() => SetColor(new Color32(255, 255, 225, 100)));
                         break;
                 }
             }
         }
 
-        public void setColor(Color32 color)
+        public void SetColor(Color32 color)
         {
             imageComponent.color = color;
         }
@@ -115,5 +122,18 @@ namespace Kingdom.Audio
         {
             return $"NOTE {note.Tempo} - LINE {line} / PAGE {page} / CLEF {clef.Clef}";
         }
+
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            if(eventData.button  == PointerEventData.InputButton.Left)
+               musicSheet.ChangeNote(this);
+            else if(eventData.button == PointerEventData.InputButton.Right)
+               musicSheet.RemoveNote(this);
+
+            base.OnPointerClick(eventData);
+        }
+
+        public override void OnPointerEnter(PointerEventData data) => musicSheet.SetHover(0);
+        
     }
 }

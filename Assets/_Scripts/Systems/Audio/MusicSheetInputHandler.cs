@@ -27,44 +27,6 @@ namespace Kingdom.Audio
                 case "ChangeScale":
                     musicSheet.ChangeScale();
                     break;
-                case "MusicSheet":
-                    if (data.button is PointerEventData.InputButton.Left)
-                        musicSheet.InsertNote();
-                    break;
-                case "KeySignatureArea":
-                    if (data.button is PointerEventData.InputButton.Left)
-                        musicSheet.InsertKeySignature();
-                    break;
-                case "Note":
-                    if (data.button is PointerEventData.InputButton.Left)
-                        musicSheet.ChangeNote(currentObject.transform.GetComponent<Note>());
-                    else if (data.button is PointerEventData.InputButton.Right)
-                        musicSheet.RemoveNote(currentObject.transform.GetComponent<Note>());
-                    break;
-            }
-            ;
-        }
-
-        public override void OnPointerEnter(PointerEventData data)
-        {
-            objectTag = data.pointerEnter.tag;
-            switch (objectTag)
-            {
-                case "MusicSheet":
-                case "KeySignatureArea":
-                    musicSheet.SetHover(true, objectTag);
-                    isHovering = true;
-                    break;
-            }
-            ;
-        }
-
-        public override void OnPointerExit(PointerEventData data)
-        {
-            if (isHovering)
-            {
-                isHovering = false;
-                musicSheet.SetHover(isHovering, objectTag);
             }
         }
 
@@ -102,6 +64,19 @@ namespace Kingdom.Audio
         {
             if (context.performed)
                 musicSheet.NavigatePage(false);
+        }
+
+        public void OnNoteInsert(BaseEventData baseEventData)
+        {
+            if (baseEventData is PointerEventData point)
+                if (point.button is PointerEventData.InputButton.Left)
+                    musicSheet.InsertNote();
+        }
+
+        public void OnSignatureInsert(BaseEventData baseEventData)
+        {
+            if (baseEventData is PointerEventData point && point.button is PointerEventData.InputButton.Left)
+                musicSheet.InsertKeySignature();
         }
     }
 }
