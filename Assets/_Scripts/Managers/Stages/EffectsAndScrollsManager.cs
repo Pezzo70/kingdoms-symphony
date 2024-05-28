@@ -137,9 +137,7 @@ namespace Kingdom.Effects
                     .ToList()
                     .ForEach(obj => obj.EffectExpireOnTurn = effect.EffectExpireOnTurn + 1);
                 return;
-            }
-
-            onGoingEffects.Add(effect);
+            }else onGoingEffects.Add(effect);
         }
 
         private void HandleTurnChanged(Turn turn)
