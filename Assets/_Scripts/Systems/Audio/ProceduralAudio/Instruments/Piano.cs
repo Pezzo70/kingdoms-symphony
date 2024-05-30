@@ -10,9 +10,6 @@ namespace Kingdom.Audio.Procedural
     [System.Serializable]
     public class Piano : Instrument
     {
-        [SerializeField, Min(0.0001f)]
-        private float[] harmonics = new float[12];
-
         Queue<Action> events;
 
         public void Start()

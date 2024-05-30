@@ -25,12 +25,9 @@ namespace Kingdom.Audio
         public int page;
         private Image imageComponent;
 
-        private Queue<Action> mainThreadActions;
-
         public void Start()
         {
             imageComponent = GetComponent<Image>();
-            mainThreadActions = new Queue<Action>();
             musicSheet = GameObject.FindAnyObjectByType<MusicSheet>();
             this.AddComponent<Selectable>();
             supportedActionsAudio = new UIAction[] { UIAction.Submit};
@@ -38,10 +35,6 @@ namespace Kingdom.Audio
 
         public void Update()
         {
-            while (mainThreadActions.Count > 0)
-            {
-                mainThreadActions.Dequeue().Invoke();
-            }
         }
 
         public void OnKeyStatusChanged(object sender, PropertyChangedEventArgs e)
@@ -53,20 +46,17 @@ namespace Kingdom.Audio
                     case KeyStatus.Waiting:
                         break;
                     case KeyStatus.Attack:
-                        mainThreadActions.Enqueue(() =>
-                        {
                             EventManager.NoteCurrentlyPlaying?.Invoke(this);
                             SetColor(new Color32(0, 0, 0, 100));
-                        });
                         break;
                     case KeyStatus.Decay:
-                        mainThreadActions.Enqueue(() => SetColor(new Color32(210, 238, 130, 100)));
+                       SetColor(new Color32(210, 238, 130, 100));
                         break;
                     case KeyStatus.Sustain:
-                        mainThreadActions.Enqueue(() => SetColor(new Color32(210, 238, 130, 100)));
+                        SetColor(new Color32(210, 238, 130, 100));
                         break;
                     case KeyStatus.Release:
-                        mainThreadActions.Enqueue(() => SetColor(new Color32(255, 255, 225, 100)));
+                        SetColor(new Color32(255, 255, 225, 100));
                         break;
                 }
             }
@@ -133,7 +123,15 @@ namespace Kingdom.Audio
             base.OnPointerClick(eventData);
         }
 
-        public override void OnPointerEnter(PointerEventData data) => musicSheet.SetHover(0);
-        
+        public override void OnPointerEnter(PointerEventData data) {
+            this.SetColor(new Color32(255,215,0, 255));
+            musicSheet.SetHover(0);
+        }
+
+        public override void OnPointerExit(PointerEventData data)
+        {
+           this.SetColor(new Color32(0,0,0, 255));
+        }
+
     }
 }

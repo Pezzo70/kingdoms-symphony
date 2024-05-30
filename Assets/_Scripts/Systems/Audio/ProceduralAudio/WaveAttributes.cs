@@ -9,10 +9,10 @@ namespace Kingdom.Audio.Procedural
     [System.Serializable]
     public class ADSREnvelope
     {
-        public float Attack;
-        public float Decay;
-        public float Sustain;
-        public float Release;
+        public float Attack {get; private set; }
+        public float Decay {get; private set; }
+        public float Sustain {get; private set; }
+        public float Release {get; private set; }
 
         public ADSREnvelope()
         {
@@ -29,6 +29,7 @@ namespace Kingdom.Audio.Procedural
             this.Sustain = sustain;
             this.Release = release;
         }
+
     }
 
     [System.Serializable]

@@ -26,7 +26,6 @@ namespace Kingdom.Audio
         public GameObject musicSheetCanvas;
         public GameObject playerOptions;
         public bool wasOpen;
-        private Queue<System.Action> mainThreadActions;
 
         /********************Notation Arrays***************************/
         private ISprite[] currentSpriteArray;
@@ -83,20 +82,17 @@ namespace Kingdom.Audio
         private void HandleInstrumentEnd(object sender, System.EventArgs e)
         {
             var pageParent = GameObject.FindWithTag("Page");
-            mainThreadActions.Enqueue(() =>
+            foreach (Transform page in pageParent.transform)
             {
-                foreach (Transform page in pageParent.transform)
+                foreach (Transform noteT in page)
                 {
-                    foreach (Transform noteT in page)
-                    {
-                        noteT.TryGetComponent<Note>(out Note note);
-                        if (note != null)
-                            note.SetColor(new Color32(255, 255, 255, 255));
-                    }
+                    noteT.TryGetComponent<Note>(out Note note);
+                    if (note != null)
+                        note.SetColor(new Color32(0, 0, 0, 255));
                 }
-                GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
-                EventManager.NoteCurrentlyPlaying?.Invoke(null);
-            });
+            }
+            GameObject.FindWithTag("Play").GetComponent<Selectable>().interactable = true;
+            EventManager.NoteCurrentlyPlaying?.Invoke(null);
         }
 
         void Start()
@@ -130,7 +126,6 @@ namespace Kingdom.Audio
 
             currentSpriteArray = upNotations;
             UpdatePageCounter();
-            mainThreadActions = new Queue<System.Action>();
 
         }
 
@@ -165,10 +160,6 @@ namespace Kingdom.Audio
                 SpriteFollowMouse();
             UpdatePageCounter();
 
-            while (mainThreadActions.Count > 0)
-            {
-                mainThreadActions.Dequeue().Invoke();
-            }
         }
         public void SetHover(int hoverType)
         {
@@ -478,6 +469,7 @@ namespace Kingdom.Audio
             renderer.raycastTarget = true;
             renderer.preserveAspect = true;
             renderer.sprite = sprite;
+            renderer.color = new Color32(0, 0, 0, 255);
             newNote.GetComponent<RectTransform>().sizeDelta = notationSpriteObject
                 .GetComponent<RectTransform>()
                 .sizeDelta;

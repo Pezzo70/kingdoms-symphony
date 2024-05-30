@@ -29,6 +29,9 @@ namespace Kingdom.Audio.Procedural
         [SerializeField]
         protected float _sampleRate;
 
+        [SerializeField, Min(0.0001f)]
+        protected float[] harmonics = new float[12];
+
         protected float _userVolume;
 
         public ReadOnlyCollection<Key> KeysPlayed
@@ -85,6 +88,25 @@ namespace Kingdom.Audio.Procedural
         }
 
         public abstract float WaveFunction(int dataIndex, double time, KeyName key);
+
+        public virtual void SetHarmonics(float[] harmonics)
+        {
+            if(harmonics.Length == 0)
+               return;
+            this.harmonics = harmonics;
+        }
+
+        public virtual float[] GetHarmonics() => this.harmonics;
+
+        public virtual void SetADSR(ADSREnvelope adsr)
+        {
+            if(adsr.Attack == 0 || adsr.Sustain == 0 || adsr.Decay == 0 || adsr.Release == 0)
+                return;
+            
+            this.ADSR = adsr;
+        }
+
+        public virtual ADSREnvelope GetADSR() => this.ADSR;
     }
 
     [Serializable]
